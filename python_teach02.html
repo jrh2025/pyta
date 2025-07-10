@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 基礎核心語法指南-02</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        .code-fstring-brace { color: var(--operator-color); }
+        .code-fstring-var { color: #fd971f; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python 基礎核心語法指南-02</h1>
+    </header>
+
+    <nav>
+        <a href="#indentation">縮排</a>
+        <a href="#comments">註解</a>
+        <a href="#print">輸出 (Print)</a>
+        <a href="#input">輸入 (Input)</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="indentation">
+            <h2>主題一：縮排 (Indentation)</h2>
+            <p>在 Python 中，縮排並非風格建議，而是<strong>強制性的語法規則</strong>，用以定義程式碼的邏輯區塊與層級結構。</p>
+
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>功能：</strong> 替代了其他程式語言中的大括號 <code>{}</code>，用來劃分 <code>if-else</code>、<code>for</code>、<code>while</code>、<code>def</code>、<code>class</code> 等結構的程式碼主體。</li>
+                <li><strong>標準：</strong> 根據 PEP 8 (Python 風格指南)，官方推薦使用 <strong>4 個空格</strong> 作為單一縮排層級。</li>
+                <li><strong>一致性：</strong> 整個專案檔案中必須保持一致，嚴禁混用 Tab 與空格，否則將引發 <code>IndentationError</code> 或 <code>TabError</code>。</li>
+                <li><strong>時機：</strong> 當一行程式碼以冒號 <code>:</code> 結尾時，其後的程式碼區塊就必須增加一個縮排層級。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">age</span> <span class="code-operator">=</span> <span class="code-number">20</span>
+<span class="code-function">print</span>(<span class="code-string">"程式開始"</span>)
+
+<span class="code-comment"># if 條件判斷式的開始</span>
+<span class="code-keyword">if</span> <span class="code-variable">age</span> <span class="code-operator">&gt;=</span> <span class="code-number">18</span>:
+    <span class="code-function">print</span>(<span class="code-string">"您是成年人。"</span>)
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">3</span>):
+        <span class="code-function">print</span>(<span class="code-string">f"這是第 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">i</span><span class="code-operator">+</span><span class="code-number">1</span><span class="code-fstring-brace">}</span><span class="code-string"> 次的歡迎訊息。"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">"您是未成年人。"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">"程式結束"</span>)</code></pre>
+            </div>
+
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>age = 20</code>：宣告變數 <code>age</code> 並賦值 <code>20</code>。</li>
+                <li><code>print("程式開始")</code>：執行輸出，表示程式主要邏輯開始。</li>
+                <li><code>if age >= 18:</code>：條件判斷，<code>20 >= 18</code> 結果為 <code>True</code>，準備執行縮排區塊。</li>
+                <li><code>print("您是成年人。")</code>：此行有第一層縮排，屬於 <code>if</code> 區塊，被執行。</li>
+                <li><code>for i in range(3):</code>：此行同樣在 <code>if</code> 區塊內，啟動一個迴圈。</li>
+                <li><code>print(...)</code>：此行有第二層縮排，屬於 <code>for</code> 迴圈，會被執行三次。</li>
+                <li><code>else:</code>：由於 <code>if</code> 條件為 <code>True</code>，整個 <code>else</code> 區塊將被完全跳過。</li>
+                <li><code>print("程式結束")</code>：此行縮排回到最外層，在 <code>if-else</code> 結構執行完畢後，必定會執行。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>強制縮排確保了所有 Python 程式碼在視覺上都具有清晰的結構。在處理複雜的AI演算法或多層嵌套的資料處理邏輯時，這種可讀性是快速理解和除錯的關鍵。</blockquote>
+        </section>
+
+        <section id="comments">
+            <h2>主題二：註解 (Comments)</h2>
+            <p>註解是為程式碼增加說明的文字，供人類閱讀，Python 解釋器會完全忽略它們。</p>
+            
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>單行註解：</strong> 使用井字號 <code>#</code>，從 <code>#</code> 到該行結尾的內容均為註解。</li>
+                <li><strong>多行註解/文件字串 (Docstring)：</strong> 使用三個連續的雙引號 <code>"""</code> 或單引號 <code>'''</code> 包圍。當其作為模組、函數、類別或方法定義後的第一個敘述時，它會成為該物件的 <code>__doc__</code> 屬性，是極為重要的官方文件。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 這是一個單行註解，用於解釋下方常數的用途</span>
+<span class="code-variable">PI</span> <span class="code-operator">=</span> <span class="code-number">3.14159</span>   <span class="code-comment"># 行尾註解，用於補充說明</span>
+
+<span class="code-keyword">def</span> <span class="code-function">calculate_area</span>(<span class="code-variable">radius</span>):
+    <span class="code-string">"""
+    這是一個文件字串 (Docstring)，用於解釋整個函數的功能。
+
+    Args:
+        radius (int or float): 圓的半徑。
+
+    Returns:
+        float: 計算出的圓面積。
+    """</span>
+    <span class="code-keyword">return</span> <span class="code-variable">PI</span> <span class="code-operator">*</span> <span class="code-variable">radius</span> <span class="code-operator">**</span> <span class="code-number">2</span>
+
+<span class="code-variable">circle_area</span> <span class="code-operator">=</span> <span class="code-function">calculate_area</span>(<span class="code-number">10</span>)
+<span class="code-function">print</span>(<span class="code-string">f"半徑為 10 的圓面積是: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">circle_area</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code># 這是一個單行註解...</code>：整行被解釋器忽略，用於說明。</li>
+                <li><code>PI = 3.14159 # ...</code>：解釋器執行 <code>PI = 3.14159</code>，然後忽略 <code>#</code> 之後的內容。</li>
+                <li><code>def calculate_area(radius):</code>：定義一個名為 <code>calculate_area</code> 的函數。</li>
+                <li><code>""" ... """</code>：文件字串 (Docstring)。它不執行任何操作，但提供了關於函數用途、參數 (Args) 和返回值 (Returns) 的標準化文檔。</li>
+                <li><code>return PI * radius ** 2</code>：函數的核心，計算面積並將結果返回。</li>
+                <li><code>circle_area = calculate_area(10)</code>：呼叫函數，傳入 <code>10</code>。函數返回的 <code>314.159</code> 被賦值給 <code>circle_area</code>。</li>
+            </ol>
+
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>良好的註解與文件字串是專業軟體開發的標誌。在團隊協作與長期專案維護中，清晰的註解能夠大幅降低溝通成本，並加速新成員對程式碼庫的理解。</blockquote>
+        </section>
+
+        <section id="print">
+            <h2>主題三：輸出 (<code>print()</code> 函數)</h2>
+            <p><code>print()</code> 是一個內建函數，用於將資料和物件的狀態輸出到控制台，是程式與開發者溝通最直接的橋樑。</p>
+            
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>基本功能：</strong> 輸出一個或多個物件。</li>
+                <li><strong><code>sep</code> 參數：</strong> <code>separator</code> 的縮寫，用來自訂多個輸出物件之間的<strong>分隔符號</strong>，預設為一個空格 (<code>' '</code>)。</li>
+                <li><strong><code>end</code> 參數：</strong> 用來自訂輸出結束時的<strong>結尾符號</strong>，預設為換行符 (<code>'\n'</code>)。</li>
+                <li><strong>f-string (格式化字串)：</strong> Python 3.6+ 推薦使用的字串格式化方法，語法為 <code>f"..."</code>，可以直接在字串中嵌入變數和表達式，極為高效和直觀。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">name</span> <span class="code-operator">=</span> <span class="code-string">"Gemini"</span>
+<span class="code-variable">version</span> <span class="code-operator">=</span> <span class="code-string">"1.5 Pro"</span>
+
+<span class="code-function">print</span>(<span class="code-string">"名稱:"</span>, <span class="code-variable">name</span>, <span class="code-string">"版本:"</span>, <span class="code-variable">version</span>)
+<span class="code-function">print</span>(<span class="code-string">"名稱:"</span>, <span class="code-variable">name</span>, <span class="code-string">"版本:"</span>, <span class="code-variable">version</span>, <span class="code-variable">sep</span><span class="code-operator">=</span><span class="code-string">" | "</span>)
+<span class="code-function">print</span>(<span class="code-string">"狀態: 運作中"</span>, <span class="code-variable">end</span><span class="code-operator">=</span><span class="code-string">"...")</span>
+<span class="code-function">print</span>(<span class="code-string">"一切正常"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"詳細資料 -&gt; 名稱: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">name</span><span class="code-fstring-brace">}</span><span class="code-string">, 版本: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">version</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+            
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li>第一個 <code>print</code>：依序輸出物件，並在它們之間自動插入預設的<strong>空格</strong>。</li>
+                <li>第二個 <code>print</code>：<code>sep=" | "</code> 將預設的空格分隔符覆寫為 <code>" | "</code>。</li>
+                <li>第三個 <code>print</code>：<code>end="..."</code> 將預設的換行符覆寫為 <code>...</code>，因此輸出後游標停留在同一行。</li>
+                <li>第四個 <code>print</code>：此行的輸出會緊跟在上一行的 <code>...</code> 之後。</li>
+                <li>第五個 <code>print</code>：f-string 將 <code>{name}</code> 和 <code>{version}</code> 的位置直接替換為其對應變數的值。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>在機器學習中，<code>print()</code> 不僅用於顯示最終結果，更常用於在訓練過程中輸出損失函數 (loss)、準確率 (accuracy) 等關鍵指標，是監控模型狀態不可或缺的工具。</blockquote>
+        </section>
+
+        <section id="input">
+            <h2>主題四：輸入 (<code>input()</code> 函數)</h2>
+            <p><code>input()</code> 是一個內建函數，用於暫停程式執行並接收來自使用者的鍵盤輸入，是實現人機互動的基礎。</p>
+            
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>返回值：</strong> <code>input()</code> 函數的返回值<strong>永遠都是字串 (<code>str</code>) 型別</strong>，無論使用者輸入的是數字還是文字。</li>
+                <li><strong>提示文字：</strong> 可以在括號中提供一個字串參數，作為給使用者的輸入提示。</li>
+                <li><strong>型別轉換：</strong> 若要對使用者輸入的內容進行數學運算，必須使用 <code>int()</code>、<code>float()</code> 等函數手動將其從字串轉換為所需的數值型別。</li>
+                <li><strong>錯誤處理：</strong> 由於無法保證使用者輸入的格式正確，使用 <code>try-except</code> 區塊來處理可能發生的 <code>ValueError</code> 是非常重要的穩健程式設計實踐。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-function">print</span>(<span class="code-string">"--- 互動式年齡預測 ---"</span>)
+<span class="code-keyword">try</span>:
+    <span class="code-variable">current_age_str</span> <span class="code-operator">=</span> <span class="code-function">input</span>(<span class="code-string">"請輸入您目前的年齡： "</span>)
+    <span class="code-variable">current_age_int</span> <span class="code-operator">=</span> <span class="code-function">int</span>(<span class="code-variable">current_age_str</span>)
+    <span class="code-variable">age_in_5_years</span> <span class="code-operator">=</span> <span class="code-variable">current_age_int</span> <span class="code-operator">+</span> <span class="code-number">5</span>
+    <span class="code-function">print</span>(<span class="code-string">f"太好了！在五年後，您將是 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">age_in_5_years</span><span class="code-fstring-brace">}</span><span class="code-string"> 歲。"</span>)
+<span class="code-keyword">except</span> <span class="code-variable">ValueError</span>:
+    <span class="code-function">print</span>(<span class="code-string">"輸入錯誤：您提供的不是一個有效的數字。請重新執行程式。"</span>)</code></pre>
+            </div>
+            
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>try:</code>：啟動錯誤處理監控區塊。</li>
+                <li><code>current_age_str = input(...)</code>：顯示提示文字，並等待使用者輸入。<code>input()</code> 會返回<strong>字串</strong>。</li>
+                <li><code>current_age_int = int(...)</code>：<strong>關鍵步驟</strong>。<code>int()</code> 函數嘗試將字串轉換為整數。</li>
+                <li><code>age_in_5_years = ...</code>：執行整數加法。</li>
+                <li><code>except ValueError:</code>：此區塊是安全網。若在第 3 步時，使用者輸入非數字字串，<code>int()</code> 會轉換失敗並引發 <code>ValueError</code>，程式會立即跳到此處，執行內部的 <code>print</code> 語句，從而避免程式崩潰。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote><code>input()</code> 是所有互動式應用的基礎，從簡單的命令列工具 (CLI) 到複雜的生成式 AI 對話系統。在真實世界的應用中，對使用者輸入進行嚴格的驗證 (Validation) 和清晰的錯誤處理，是區分玩具程式與專業軟體的關鍵。</blockquote>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>由 Gemini 根據您的文件生成</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                const text = pre.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerText = '已複製!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = '複製';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('無法複製程式碼: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
