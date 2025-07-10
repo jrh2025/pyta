@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JRH's Python 基礎學習講義索引</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; background-color: #f8f9fa; color: #212529; margin: 0; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); padding: 2rem; }
+        h1 { color: #343a40; border-bottom: 2px solid #dee2e6; padding-bottom: 0.5rem; margin-top: 0; }
+        .sort-controls { margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .sort-controls button { background-color: #e9ecef; border: 1px solid #dee2e6; color: #495057; padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; font-size: 0.9rem; transition: background-color 0.2s, color 0.2s; }
+        .sort-controls button.active { background-color: #007bff; color: white; border-color: #007bff; }
+        .sort-controls button:hover:not(.active) { background-color: #dee2e6; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 0.75rem; }
+        a { text-decoration: none; color: #007bff; font-size: 1.1rem; transition: color 0.2s; }
+        a:hover, a:focus { color: #0056b3; }
+        .footer { margin-top: 2rem; text-align: center; font-size: 0.9rem; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>JRH's Python 基礎學習講義索引</h1>
+        
+        <div class="sort-controls">
+            <span>排序方式：</span>
+            <button id="sort-title-asc">標題 (A-Z)</button>
+            <button id="sort-title-desc">標題 (Z-A)</button>
+            <button id="sort-date-desc">日期 (新到舊)</button>
+            <button id="sort-date-asc">日期 (舊到新)</button>
+        </div>
+
+        <ul id="file-list"></ul>
+        
+        <div class="footer">
+            此頁面由 Python 腳本於 2025-07-10 11:35:32 自動生成。
+        </div>
+    </div>
+
+    <script>
+        // --- 步驟 1: Python 注入的資料 ---
+        const fileData = [{"href": "install_python_vscode.html", "title": "Python 與 VS Code 安裝設定指南 (Windows篇)", "mtime": "2025-06-30T11:54:24.595916"}, {"href": "python_teach01.html", "title": "Python-01 核心資料型態詳解", "mtime": "2025-07-10T11:34:39.439882"}, {"href": "python_teach02.html", "title": "Python-02 基礎核心語法指南", "mtime": "2025-07-10T11:35:11.196476"}];
+
+        // --- 步驟 2: 渲染與互動邏輯 ---
+        const fileListElement = document.getElementById('file-list');
+        const sortButtons = document.querySelectorAll('.sort-controls button');
+        let currentActiveButton = null;
+
+        function renderList(data) {
+            fileListElement.innerHTML = ''; // 清空現有列表
+            if (data.length === 0) {
+                fileListElement.innerHTML = '<li>此目錄中未找到其他 HTML 檔案。</li>';
+                return;
+            }
+            data.forEach(item => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = item.href;
+                a.textContent = item.title;
+                li.appendChild(a);
+                fileListElement.appendChild(li);
+            });
+        }
+        
+        function setActiveButton(button) {
+            if (currentActiveButton) {
+                currentActiveButton.classList.remove('active');
+            }
+            button.classList.add('active');
+            currentActiveButton = button;
+        }
+
+        // --- 步驟 3: 排序事件監聽 ---
+        document.getElementById('sort-title-asc').addEventListener('click', (e) => {
+            fileData.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hant'));
+            renderList(fileData);
+            setActiveButton(e.target);
+        });
+
+        document.getElementById('sort-title-desc').addEventListener('click', (e) => {
+            fileData.sort((a, b) => b.title.localeCompare(a.title, 'zh-Hant'));
+            renderList(fileData);
+            setActiveButton(e.target);
+        });
+        
+        document.getElementById('sort-date-desc').addEventListener('click', (e) => {
+            fileData.sort((a, b) => new Date(b.mtime) - new Date(a.mtime));
+            renderList(fileData);
+            setActiveButton(e.target);
+        });
+
+        document.getElementById('sort-date-asc').addEventListener('click', (e) => {
+            fileData.sort((a, b) => new Date(a.mtime) - new Date(b.mtime));
+            renderList(fileData);
+            setActiveButton(e.target);
+        });
+
+        // --- 步驟 4: 初始載入 ---
+        // 預設以標題升冪排序並顯示
+        document.getElementById('sort-title-asc').click();
+
+    </script>
+</body>
+</html>
