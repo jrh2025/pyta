@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 核心資料型態詳解-01</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #555;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 0.95rem;
+        }
+        code {
+            font-family: inherit;
+        }
+        .comment {
+            color: #7e8a9e; /* Light grey for comments */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python 核心資料型態詳解-01</h1>
+    </header>
+
+    <nav>
+        <a href="#basic">基本型態</a>
+        <a href="#list">列表 (List)</a>
+        <a href="#tuple">元組 (Tuple)</a>
+        <a href="#dict">字典 (Dict)</a>
+        <a href="#set">集合 (Set)</a>
+        <a href="#none">None</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="basic">
+            <h2>基本資料型態</h2>
+            <p>構成程式的最基本元素。</p>
+            
+            <h3>整數 (Integer)</h3>
+            <pre><code><span class="comment"># 用於儲存沒有小數點的數字。</span>
+age = 25
+print(f"這是一個整數 (age): {age}")</code></pre>
+
+            <h3>浮點數 (Float)</h3>
+            <pre><code><span class="comment"># 用於儲存有小數點的數字。</span>
+price = 199.99
+print(f"這是一個浮點數 (price): {price}")</code></pre>
+
+            <h3>字串 (String)</h3>
+            <pre><code><span class="comment"># 用於儲存文字資料。</span>
+name = "王大明"
+print(f"這是一個字串 (name): {name}")</code></pre>
+
+            <h3>布林值 (Boolean)</h3>
+            <pre><code><span class="comment"># 只有兩種值：True (真) 或 False (假)。</span>
+is_student = True
+print(f"這是一個布林值 (is_student): {is_student}")</code></pre>
+        </section>
+
+        <section id="list">
+            <h2>列表 (List)</h2>
+            <blockquote>一個有序(ordered)且可變(mutable)的集合，可以包含不同類型的元素。</blockquote>
+
+            <h3>基礎操作</h3>
+            <pre><code>fruits = ["蘋果", "香蕉", "橘子", 100, False]
+print(f"原始列表: {fruits}")
+
+<span class="comment"># 新增元素</span>
+fruits.append("西瓜")
+fruits.insert(1, "藍莓")
+print(f"新增後: {fruits}")
+
+<span class="comment"># 修改元素</span>
+fruits[1] = "黑莓"
+print(f"修改後: {fruits}")
+
+<span class="comment"># 刪除元素</span>
+fruits.remove(100)
+popped_fruit = fruits.pop(2)
+print(f"刪除後: {fruits}")</code></pre>
+
+            <h3>切片 (Slicing)</h3>
+            <blockquote>使用 [start:stop:step] 語法，像切蛋糕一樣輕鬆取得子列表。</blockquote>
+            <pre><code>numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(f"索引 2 到 5: {numbers[2:6]}")
+print(f"從頭到索引 3: {numbers[:4]}")
+print(f"反轉列表: {numbers[::-1]}")</code></pre>
+
+            <h3>高維列表 (二維列表)</h3>
+            <blockquote>列表可以包含其他列表，形成二維、三維的結構。</blockquote>
+            <pre><code>matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+<span class="comment"># 存取第一行第二列的元素 (索引從 0 開始)</span>
+element = matrix[0][1]  <span class="comment"># 結果會是 2</span>
+print(f"matrix[0][1] 的值是: {element}")
+
+<span class="comment"># 修改元素</span>
+matrix[1][1] = 99
+print(f"修改後的 matrix: {matrix}")</code></pre>
+        </section>
+
+        <section id="tuple">
+            <h2>元組 (Tuple)</h2>
+            <blockquote>一個有序(ordered)但不可變(immutable)的集合。像是「刻在石頭上的資料」，一旦建立就無法修改。</blockquote>
+            <pre><code><span class="comment"># 常用於儲存不應被改變的資料</span>
+coordinates = (10.0, 20.5, "地點A")
+print(f"原始元組: {coordinates}")
+
+<span class="comment"># 存取元素</span>
+print(f"第一個元素: {coordinates[0]}")
+
+<span class="comment"># 元組是不可變的，以下操作會導致錯誤 (TypeError)</span>
+<span class="comment"># coordinates[0] = 5.0</span>
+
+<span class="comment"># 如需修改，只能建立一個新的元組</span>
+new_coordinates = coordinates + (30.0,)
+print(f"建立的新元組: {new_coordinates}")</code></pre>
+        </section>
+
+        <section id="dict">
+            <h2>字典 (Dictionary)</h2>
+            <blockquote>一個由鍵(key)和值(value)組成的集合，透過獨一無二的「鍵」來存取對應的「值」。</blockquote>
+            <h3>基礎操作</h3>
+            <pre><code>person = {
+    "name": "陳大文",
+    "age": 30,
+    "city": "台北"
+}
+print(f"原始字典: {person}")
+
+<span class="comment"># 新增/修改鍵值對</span>
+person["job"] = "工程師" <span class="comment"># 新增</span>
+person["age"] = 31      <span class="comment"># 修改</span>
+print(f"更新後: {person}")
+
+<span class="comment"># 刪除鍵值對</span>
+removed_value = person.pop("city")
+print(f"刪除 'city' 後: {person}")</code></pre>
+            
+            <h3>安全的存取值</h3>
+            <pre><code><span class="comment"># 使用 .get() 方法更安全，如果鍵不存在不會報錯</span>
+job = person.get('job')
+print(f"工作: {job}")
+
+<span class="comment"># .get() 可以提供預設值</span>
+country = person.get('country', '台灣')
+print(f"國家: {country}")</code></pre>
+        </section>
+
+        <section id="set">
+            <h2>集合 (Set)</h2>
+            <blockquote>一個無序(unordered)且不含重複元素的集合。</blockquote>
+            <h3>基礎操作</h3>
+            <pre><code><span class="comment"># 重複的元素會被自動移除</span>
+unique_numbers = {1, 2, 3, 2, 1, 4}
+print(f"原始集合: {unique_numbers}")
+
+<span class="comment"># 新增元素</span>
+unique_numbers.add(5)
+print(f"新增 5 後: {unique_numbers}")
+
+<span class="comment"># 刪除元素</span>
+unique_numbers.remove(3) <span class="comment"># 如果元素不存在會報錯</span>
+unique_numbers.discard(10) <span class="comment"># 元素不存在也不會報錯</span>
+print(f"刪除後: {unique_numbers}")</code></pre>
+
+            <h3>集合運算</h3>
+            <pre><code>set_a = {1, 2, 3, 4}
+set_b = {3, 4, 5, 6}
+print(f"集合 A: {set_a}")
+print(f"集合 B: {set_b}")
+
+print(f"聯集 (A | B): {set_a | set_b}")
+print(f"交集 (A & B): {set_a & set_b}")
+print(f"差集 (A - B): {set_a - set_b}")
+print(f"對稱差集 (A ^ B): {set_a ^ set_b}")</code></pre>
+        </section>
+
+        <section id="none">
+            <h2>NoneType (空值)</h2>
+            <blockquote>`None` 是 Python 中的一個特殊常數，用來表示「沒有值」或「空值」的狀態。</blockquote>
+            <pre><code><span class="comment"># 當一個變數被宣告但尚未被賦予有意義的值時</span>
+no_value = None
+print(f"變數 no_value 的值是: {no_value}")
+
+<span class="comment"># 檢查變數是否為 None</span>
+if no_value is None:
+    print("這個變數是空的！")</code></pre>
+        </section>
+        
+        <section>
+            <h2>總結</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>資料型態</th>
+                        <th>主要特性</th>
+                        <th>可變性</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>List</strong></td>
+                        <td>有序、可重複</td>
+                        <td><strong>可變 (Mutable)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tuple</strong></td>
+                        <td>有序、可重複</td>
+                        <td><strong>不可變 (Immutable)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dictionary</strong></td>
+                        <td>鍵值對、Python 3.7+ 有序</td>
+                        <td><strong>可變 (Mutable)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Set</strong></td>
+                        <td><strong>無序</strong>、<strong>不重複</strong></td>
+                        <td><strong>可變 (Mutable)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>由 Gemini 根據 variable_examples.py 生成</p>
+    </footer>
+
+</body>
+</html>
