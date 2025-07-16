@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-03 運算子 (Operators) 詳解</title>
+    <style>
+        :root {
+            --primary-color: #0d96d5; /* sky-500 */
+            --secondary-color: #2c3e50; /* blue-800 */
+            --background-color: #f8fafc; /* slate-50 */
+            --text-color: #1e293b; /* slate-800 */
+            --card-bg-color: #ffffff;
+            --code-bg-color: #1e293b; /* slate-800 */
+            --code-text-color: #f8fafc; /* slate-50 */
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --border-color: #e2e8f0; /* slate-200 */
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Noto Sans TC", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 6px;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 25px 0;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 80px; /* Offset for sticky nav */
+            border: 1px solid var(--border-color);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 15px;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.6rem;
+            margin-top: 35px;
+            font-weight: 600;
+        }
+        p, li {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        blockquote {
+            border-left: 5px solid var(--primary-color);
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #f0f9ff; /* sky-50 */
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #0c4a6e; /* sky-900 */
+        }
+        .code-block-wrapper {
+            position: relative;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #475569; /* slate-600 */
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+            opacity: 0.7;
+        }
+        .copy-btn:hover {
+            background-color: #334155; /* slate-700 */
+            opacity: 1;
+        }
+        .copy-btn:active {
+            background-color: #1e293b;
+        }
+        .code-explanation {
+            background-color: #f1f5f9; /* slate-100 */
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: -10px;
+            border-top: 3px solid var(--border-color);
+            font-size: 1rem;
+        }
+        .code-explanation p {
+            margin: 0.5rem 0;
+        }
+        .token.comment { color: #94a3b8; } /* slate-400 */
+        .token.keyword { color: #f472b6; } /* pink-400 */
+        .token.function { color: #60a5fa; } /* blue-400 */
+        .token.string { color: #a5b4fc; } /* indigo-300 */
+        .token.number { color: #818cf8; } /* indigo-400 */
+        .token.operator { color: #f472b6; } /* pink-400 */
+        .token.punctuation { color: #94a3b8; } /* slate-400 */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+        th {
+            background-color: #f1f5f9; /* slate-100 */
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            color: #64748b; /* slate-500 */
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-03 運算子詳解</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#arithmetic">算術</a>
+        <a href="#comparison">比較</a>
+        <a href="#logical">邏輯</a>
+        <a href="#bitwise">位元</a>
+        <a href="#assignment">指派</a>
+        <a href="#identity">身分</a>
+        <a href="#membership">成員</a>
+        <a href="#precedence">優先順序</a>
+    </nav>
+
+    <div class="container">
+        
+        <section id="intro">
+            <h2>前言</h2>
+            <p>在 Python 以及任何程式語言中，「運算子」是執行各種運算的核心符號。它們是語言的動詞，讓我們能夠操作變數和值。無論是進行簡單的數學計算、比較數據的大小，還是進行複雜的邏輯判斷，運算子都扮演著不可或缺的角色。</p>
+            <blockquote>掌握運算子的使用是您程式設計旅程的第一個重要里程碑。本指南將深入探討 Python 中最核心的七大類運算子，並透過詳細的程式碼解說，幫助您建立穩固的基礎。</blockquote>
+        </section>
+
+        <section id="arithmetic">
+            <h2>1. 算術運算子 (Arithmetic)</h2>
+            <p>算術運算子用於執行你我所熟知的基本數學運算，例如加、減、乘、除等。</p>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">a <span class="token operator">=</span> <span class="token number">10</span>
+b <span class="token operator">=</span> <span class="token number">3</span>
+
+<span class="token comment"># 加法 (+)</span>
+result_add <span class="token operator">=</span> a <span class="token operator">+</span> b
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"a + b = {result_add}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 除法 (/)</span>
+result_div <span class="token operator">=</span> a <span class="token operator">/</span> b
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"a / b = {result_div}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 整數除法 (//)</span>
+result_floor_div <span class="token operator">=</span> a <span class="token operator">//</span> b
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"a // b = {result_floor_div}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 餘數 (%)</span>
+result_mod <span class="token operator">=</span> a <span class="token operator">%</span> b
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"a % b = {result_mod}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 次方 (**)</span>
+result_pow <span class="token operator">=</span> a <span class="token operator">**</span> b
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"a ** b = {result_pow}"</span><span class="token punctuation">)</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+            <div class="code-explanation">
+                <p><strong>第 1-2 行:</strong> 我們宣告了兩個整數變數 `a` 和 `b`，它們將作為我們運算的基礎。</p>
+                <p><strong>第 5 行:</strong> 使用加法運算子 `+`，將 `a` 和 `b` 的值相加，結果為 `13`。</p>
+                <p><strong>第 9 行:</strong> 使用除法運算子 `/`，`10` 除以 `3` 的結果是一個浮點數 `3.333...`。</p>
+                <p><strong>第 13 行:</strong> 使用整數除法 `//`，它只會保留商的整數部分，所以結果是 `3`。</p>
+                <p><strong>第 17 行:</strong> 使用餘數運算子 `%`，`10` 除以 `3` 餘 `1`。</p>
+                <p><strong>第 21 行:</strong> 使用次方運算子 `**`，計算 `10` 的 `3` 次方，即 `10 * 10 * 10`，結果為 `1000`。</p>
+            </div>
+        </section>
+
+        <section id="comparison">
+            <h2>2. 比較運算子 (Comparison)</h2>
+            <p>比較運算子用於比較兩個值，其運算結果永遠是一個布林值 (`True` 或 `False`)。這在流程控制（例如 `if` 語句）中至關重要。</p>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">x <span class="token operator">=</span> <span class="token number">5</span>
+y <span class="token operator">=</span> <span class="token number">10</span>
+
+<span class="token comment"># 等於 (==)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"x 是否等於 y? {x == y}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 不等於 (!=)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"x 是否不等於 y? {x != y}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 大於 (>)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"x 是否大於 y? {x > y}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 小於等於 (<=)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"y 是否小於等於 10? {y <= 10}"</span><span class="token punctuation">)</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+            <div class="code-explanation">
+                <p><strong>第 1-2 行:</strong> 宣告兩個變數 `x` 和 `y` 用於比較。</p>
+                <p><strong>第 5 行:</strong> 使用 `==` 檢查 `x` 和 `y` 的值是否相等。因為 `5` 不等於 `10`，所以結果為 `False`。</p>
+                <p><strong>第 8 行:</strong> 使用 `!=` 檢查 `x` 和 `y` 是否不相等。因為 `5` 的確不等於 `10`，所以結果為 `True`。</p>
+                <p><strong>第 11 行:</strong> 使用 `>` 檢查 `x` 是否大於 `y`。`5` 並沒有大於 `10`，結果為 `False`。</p>
+                <p><strong>第 14 行:</strong> 使用 `<=` 檢查 `y` 是否小於或等於 `10`。`10` 等於 `10`，條件成立，所以結果為 `True`。</p>
+            </div>
+        </section>
+
+        <section id="logical">
+            <h2>3. 邏輯運算子 (Logical)</h2>
+            <p>邏輯運算子 `and`, `or`, `not` 用於組合多個布林表達式，常用於複雜的條件判斷。</p>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">has_ticket <span class="token operator">=</span> <span class="token boolean">True</span>
+is_vip <span class="token operator">=</span> <span class="token boolean">False</span>
+
+<span class="token comment"># and: 必須同時滿足兩個條件</span>
+can_enter <span class="token operator">=</span> has_ticket <span class="token keyword">and</span> is_vip
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"是 VIP 且有票嗎? {can_enter}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># or: 滿足任一條件即可</span>
+can_get_discount <span class="token operator">=</span> has_ticket <span class="token keyword">or</span> is_vip
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"有票或是 VIP 嗎? {can_get_discount}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># not: 反轉條件</span>
+is_not_vip <span class="token operator">=</span> <span class="token keyword">not</span> is_vip
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"不是 VIP 嗎? {is_not_vip}"</span><span class="token punctuation">)</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+             <div class="code-explanation">
+                <p><strong>第 1-2 行:</strong> 設定兩個布林變數，`has_ticket` 為 `True` (有票)，`is_vip` 為 `False` (不是VIP)。</p>
+                <p><strong>第 5 行:</strong> 使用 `and` 運算子。必須兩個條件都為 `True`，結果才會是 `True`。因為 `is_vip` 是 `False`，所以 `can_enter` 結果為 `False`。</p>
+                <p><strong>第 9 行:</strong> 使用 `or` 運算子。只要其中一個條件為 `True`，結果就是 `True`。因為 `has_ticket` 是 `True`，所以 `can_get_discount` 結果為 `True`。</p>
+                <p><strong>第 13 行:</strong> 使用 `not` 運算子。它會將布林值反轉。`not is_vip` (即 `not False`) 的結果為 `True`。</p>
+            </div>
+        </section>
+
+        <section id="bitwise">
+            <h2>4. 位元運算子 (Bitwise)</h2>
+            <p>位元運算子直接對整數的二進位表示法進行操作。這在低階系統程式設計、演算法優化或處理硬體封包時非常有用。</p>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">m <span class="token operator">=</span> <span class="token number">60</span>  <span class="token comment"># 二進位: 0011 1100</span>
+n <span class="token operator">=</span> <span class="token number">13</span>  <span class="token comment"># 二進位: 0000 1101</span>
+
+<span class="token comment"># & (AND): 對應位元皆為 1，結果才為 1</span>
+result_and <span class="token operator">=</span> m <span class="token operator">&</span> n
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"m & n = {result_and}"</span><span class="token punctuation">)</span> <span class="token comment"># 0000 1100 -> 12</span>
+
+<span class="token comment"># | (OR): 對應位元只要有 1，結果就為 1</span>
+result_or <span class="token operator">=</span> m <span class="token operator">|</span> n
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"m | n = {result_or}"</span><span class="token punctuation">)</span> <span class="token comment"># 0011 1101 -> 61</span>
+
+<span class="token comment"># << (左移): 將二進位碼向左移動，右邊補 0</span>
+result_left_shift <span class="token operator">=</span> m <span class="token operator">&lt;&lt;</span> <span class="token number">2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"m << 2 = {result_left_shift}"</span><span class="token punctuation">)</span> <span class="token comment"># 1111 0000 -> 240</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+             <div class="code-explanation">
+                <p><strong>第 1-2 行:</strong> 宣告 `m` 和 `n`。`m` 的二進位是 `00111100`，`n` 是 `00001101`。</p>
+                <p><strong>第 5 行:</strong> `&` (AND) 運算。比較 `m` 和 `n` 的每個位元，只有當兩個位元都是 `1` 時，結果的對應位元才是 `1`。結果是 `00001100`，即十進位的 `12`。</p>
+                <p><strong>第 9 行:</strong> `|` (OR) 運算。只要兩個位元中有一個是 `1`，結果的對應位元就是 `1`。結果是 `00111101`，即十進位的 `61`。</p>
+                <p><strong>第 13 行:</strong> `&lt;&lt;` (左移) 運算。將 `m` 的二進位表示向左移動 `2` 位，右側空出的位置補 `0`。這相當於將原數值乘以 `2` 的 `2` 次方。結果是 `11110000`，即十進位的 `240`。</p>
+            </div>
+        </section>
+
+        <section id="assignment">
+            <h2>5. 指派運算子 (Assignment)</h2>
+            <p>指派運算子用於將值賦予變數。除了基本的 `=`，還有結合算術運算子的複合指派運算子，可讓程式碼更簡潔。</p>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">counter <span class="token operator">=</span> <span class="token number">100</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"起始 counter: {counter}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 加法指派 (+=)</span>
+counter <span class="token operator">+=</span> <span class="token number">10</span>  <span class="token comment"># 等同於 counter = counter + 10</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"執行 += 10 後: {counter}"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 乘法指派 (*=)</span>
+counter <span class="token operator">*=</span> <span class="token number">2</span>   <span class="token comment"># 等同於 counter = counter * 2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"執行 *= 2 後: {counter}"</span><span class="token punctuation">)</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+            <div class="code-explanation">
+                <p><strong>第 1 行:</strong> 初始化變數 `counter` 的值為 `100`。</p>
+                <p><strong>第 5 行:</strong> `counter += 10` 是一個複合指派。它會先執行 `counter + 10` (即 `100 + 10`)，然後將結果 `110` 重新指派給 `counter`。</p>
+                <p><strong>第 9 行:</strong> `counter *= 2` 同樣是複合指派。此時 `counter` 的值是 `110`，執行 `110 * 2` 後，將結果 `220` 重新指派給 `counter`。</p>
+            </div>
+        </section>
+        
+        <section id="identity">
+            <h2>6. 身分運算子 (Identity)</h2>
+            <p>身分運算子 `is` 和 `is not` 用於比較兩個變數是否指向記憶體中**同一個物件**，而不僅僅是它們的值相等。</p>
+            <blockquote>`==` 檢查的是「值」是否相等 (value equality)。<br>`is` 檢查的是「身分」是否相同 (identity equality)，即記憶體位址是否相同。</blockquote>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">list_a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+list_b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+list_c <span class="token operator">=</span> list_a
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"list_a == list_b: {list_a == list_b}"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"list_a is list_b: {list_a is list_b}"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"list_a is list_c: {list_a is list_c}"</span><span class="token punctuation">)</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+            <div class="code-explanation">
+                <p><strong>第 1-3 行:</strong> `list_a` 和 `list_b` 是兩個獨立的列表物件，它們的內容恰好相同。`list_c` 則是 `list_a` 的一個引用，它們指向同一個物件。</p>
+                <p><strong>第 5 行:</strong> `list_a == list_b` 比較的是「值」。因為兩個列表的內容完全相同，所以結果為 `True`。</p>
+                <p><strong>第 6 行:</strong> `list_a is list_b` 比較的是「身分」。儘管內容相同，但它們是儲存在記憶體中不同位置的兩個物件，所以結果為 `False`。</p>
+                <p><strong>第 7 行:</strong> `list_a is list_c` 的結果為 `True`，因為 `list_c` 只是 `list_a` 的另一個名字，它們指向的是記憶體中完全相同的物件。</p>
+            </div>
+        </section>
+
+        <section id="membership">
+            <h2>7. 成員運算子 (Membership)</h2>
+            <p>成員運算子 `in` 和 `not in` 用於測試一個值是否存在於一個序列（如 `list`, `tuple`, `string`）中。</p>
+            
+            <h3>範例程式碼與解說</h3>
+            <div class="code-block-wrapper">
+                <pre><code class="language-python">courses <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Math"</span><span class="token punctuation">,</span> <span class="token string">"Physics"</span><span class="token punctuation">,</span> <span class="token string">"Computer Science"</span><span class="token punctuation">]</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"'Physics' in courses: {'Physics' in courses}"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">f"'History' not in courses: {'History' not in courses}"</span><span class="token punctuation">)</span>
+</code></pre>
+                <button class="copy-btn" onclick="copyCode(this)">複製</button>
+            </div>
+            <div class="code-explanation">
+                <p><strong>第 1 行:</strong> 建立一個包含三個課程名稱的列表 `courses`。</p>
+                <p><strong>第 3 行:</strong> 使用 `in` 運算子檢查字串 `"Physics"` 是否是 `courses` 列表中的一個成員。因為它存在，所以結果為 `True`。</p>
+                <p><strong>第 4 行:</strong> 使用 `not in` 運算子檢查字串 `"History"` 是否「不」在 `courses` 列表中。因為它的確不存在，所以結果為 `True`。</p>
+            </div>
+        </section>
+        
+        <section id="precedence">
+            <h2>8. 運算子優先順序</h2>
+            <p>當一個表達式中有多個運算子時，Python 會依照固定的優先順序來決定計算的先後。下表從高到低排列了常見運算子的優先級。</p>
+            <blockquote>最佳實踐：當您不確定優先順序或希望讓程式碼更清晰易讀時，**永遠使用括號 ()** 來明確指定運算順序。</blockquote>
+            <table>
+                <thead>
+                    <tr><th>優先級</th><th>運算子</th><th>描述</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>最高</td><td><code>()</code></td><td>括號</td></tr>
+                    <tr><td></td><td><code>**</code></td><td>次方</td></tr>
+                    <tr><td></td><td><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code></td><td>乘、除、整數除、餘數</td></tr>
+                    <tr><td></td><td><code>+</code>, <code>-</code></td><td>加、減</td></tr>
+                    <tr><td></td><td><code>&lt;&lt;</code>, <code>&gt;&gt;</code></td><td>位元左右移</td></tr>
+                    <tr><td></td><td><code>&amp;</code>, <code>^</code>, <code>|</code></td><td>位元 AND, XOR, OR</td></tr>
+                    <tr><td></td><td><code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;=</code>, etc.</td><td>比較運算子</td></tr>
+                    <tr><td></td><td><code>is</code>, <code>is not</code></td><td>身分運算子</td></tr>
+                    <tr><td></td><td><code>in</code>, <code>not in</code></td><td>成員運算子</td></tr>
+                    <tr><td></td><td><code>not</code>, <code>and</code>, <code>or</code></td><td>邏輯運算子</td></tr>
+                    <tr><td>最低</td><td>(邏輯 or)</td><td></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
+        <p>由 Gemini 根據您的文件與需求生成</p>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const pre = button.previousElementSibling;
+            const code = pre.querySelector('code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = '已複製!';
+                setTimeout(() => {
+                    button.innerText = '複製';
+                }, 2000);
+            }).catch(err => {
+                console.error('無法複製程式碼: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
