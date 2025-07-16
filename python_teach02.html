@@ -65,6 +65,14 @@
             color: var(--card-bg-color);
             background-color: var(--primary-color);
         }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
         section {
             background-color: var(--card-bg-color);
             margin: 20px 0;
@@ -152,6 +160,14 @@
             margin-top: 40px;
             color: #777;
         }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -161,6 +177,7 @@
     </header>
 
     <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
         <a href="#indentation">縮排</a>
         <a href="#comments">註解</a>
         <a href="#print">輸出 (Print)</a>
@@ -339,6 +356,7 @@
     </div>
 
     <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
         <p>由 Gemini 根據您的文件生成</p>
     </footer>
 
