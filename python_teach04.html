@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-04 程式設計核心：邏輯判斷與流程控制</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        .code-fstring-brace { color: var(--operator-color); }
+        .code-fstring-var { color: #fd971f; }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-04 程式設計核心：邏輯判斷與流程控制</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#conditionals">條件判斷</a>
+        <a href="#operators">邏輯運算子</a>
+        <a href="#best-practices">最佳實踐</a>
+    </nav>
+
+    <div class="container">
+        
+        <p>在程式設計的領域中，程式碼很少是從頭到尾線性執行的。更常見的情況是，程式需要根據不同的條件、輸入或狀態，來決定下一步該執行哪一段程式碼。這種依據條件做出決策的能力，是所有複雜應用程式的基石。Python 透過一組簡潔而強大的關鍵字 <code>if</code>、<code>elif</code>、<code>else</code> 來實現此功能，並利用邏輯運算子 <code>and</code> 與 <code>or</code> 來組合更複雜的判斷條件。</p>
+
+        <section id="conditionals">
+            <h2>第一部分：條件判斷結構 (if, elif, else)</h2>
+            <p>條件判斷結構允許您的程式走上不同的執行路徑。其核心思想是：「如果 (if) 某個條件成立，就做某件事；否則如果 (elif) 另一個條件成立，就做另一件事；最後如果所有條件都不成立，就做最後那件事 (else)。」</p>
+            
+            <h3>1. if：單一條件判斷</h3>
+            <p><code>if</code> 是最基本的條件判斷。如果 <code>if</code> 後方的條件表達式 (conditional expression) 的結果為 <code>True</code>，其下方的縮排程式碼區塊 (indented code block) 就會被執行。如果結果為 <code>False</code>，則該區塊會被完全跳過。</p>
+            <blockquote>語法重點：<br>
+                <ul>
+                    <li><strong>冒號 (<code>:</code>)</strong>：<code>if</code> 語句的結尾必須有冒號。</li>
+                    <li><strong>縮排 (Indentation)</strong>：Python 使用縮排（通常是 4 個空格）來定義程式碼區塊的範圍。這是 Python 的強制語法。</li>
+                </ul>
+            </blockquote>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 定義一個變數來儲存溫度</span>
+<span class="code-variable">temperature</span> <span class="code-operator">=</span> <span class="code-number">25</span>
+
+<span class="code-comment"># 判斷式：檢查溫度是否大於 0</span>
+<span class="code-keyword">if</span> <span class="code-variable">temperature</span> <span class="code-operator">&gt;</span> <span class="code-number">0</span>:
+    <span class="code-comment"># 如果條件為 True，則印出以下訊息</span>
+    <span class="code-function">print</span>(<span class="code-string">f"目前的溫度是 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">temperature</span><span class="code-fstring-brace">}</span><span class="code-string">°C，是個溫暖的日子。"</span>)
+    <span class="code-function">print</span>(<span class="code-string">"適合進行戶外活動。"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">"程式執行結束。"</span>) <span class="code-comment"># 這行沒有縮排，所以無論 if 條件是否成立，都會執行。</span>
+</code></pre>
+            </div>
+
+            <h3>2. if-else：二選一的判斷</h3>
+            <p>當我們需要在條件不成立時執行另一段程式碼，就可以使用 <code>else</code>。<code>else</code> 提供了一個「預設」或「備用」的執行路徑。程式會檢查 <code>if</code> 的條件。若成立，則執行 <code>if</code> 區塊並跳過 <code>else</code> 區塊；若不成立，則跳過 <code>if</code> 區塊並執行 <code>else</code> 區塊。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 從使用者獲取一個數字輸入，並轉換為整數</span>
+<span class="code-keyword">try</span>:
+    <span class="code-variable">user_input_number</span> <span class="code-operator">=</span> <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"請輸入一個整數："</span>))
+
+    <span class="code-comment"># 使用模數運算子 (%) 判斷是否能被 2 整除</span>
+    <span class="code-keyword">if</span> <span class="code-variable">user_input_number</span> <span class="code-operator">%</span> <span class="code-number">2</span> <span class="code-operator">==</span> <span class="code-number">0</span>:
+        <span class="code-comment"># 條件成立 (餘數為 0)，執行此區塊</span>
+        <span class="code-function">print</span>(<span class="code-string">f"您輸入的數字 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">user_input_number</span><span class="code-fstring-brace">}</span><span class="code-string"> 是偶數。"</span>)
+    <span class="code-keyword">else</span>:
+        <span class="code-comment"># 條件不成立 (餘數不為 0)，執行此區塊</span>
+        <span class="code-function">print</span>(<span class="code-string">f"您輸入的數字 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">user_input_number</span><span class="code-fstring-brace">}</span><span class="code-string"> 是奇數。"</span>)
+<span class="code-keyword">except</span> <span class="code-variable">ValueError</span>:
+    <span class="code-function">print</span>(<span class="code-string">"輸入錯誤，請確保您輸入的是一個有效的整數。"</span>)
+</code></pre>
+            </div>
+
+            <h3>3. if-elif-else：多重條件判斷</h3>
+            <p>當我們需要從多個條件中選擇一個來執行時，就輪到 <code>elif</code>（else if 的縮寫）登場了。Python 會依序檢查 <code>if</code> 和每一個 <code>elif</code> 的條件，一旦找到第一個為 <code>True</code> 的條件，便執行其對應的程式碼區塊，然後跳出整個判斷結構。如果所有 <code>if</code> 和 <code>elif</code> 的條件都為 <code>False</code>，才會執行 <code>else</code> 區塊。</p>
+            <blockquote>關鍵觀念：<code>if-elif-else</code> 結構的執行順序至關重要。Python 只會執行<strong>第一個</strong>滿足條件的區塊。</blockquote>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 設定一個分數</span>
+<span class="code-variable">score</span> <span class="code-operator">=</span> <span class="code-number">85</span>
+<span class="code-function">print</span>(<span class="code-string">f"您的分數是：</span><span class="code-fstring-brace">{</span><span class="code-fstring-var">score</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 開始進行多重條件判斷</span>
+<span class="code-keyword">if</span> <span class="code-variable">score</span> <span class="code-operator">&gt;=</span> <span class="code-number">90</span>:
+    <span class="code-variable">grade</span> <span class="code-operator">=</span> <span class="code-string">"A"</span>
+    <span class="code-function">print</span>(<span class="code-string">"表現卓越！"</span>)
+<span class="code-keyword">elif</span> <span class="code-variable">score</span> <span class="code-operator">&gt;=</span> <span class="code-number">80</span>:  <span class="code-comment"># 條件成立 (85 >= 80)，執行此區塊後，整個結構結束</span>
+    <span class="code-variable">grade</span> <span class="code-operator">=</span> <span class="code-string">"B"</span>
+    <span class="code-function">print</span>(<span class="code-string">"表現良好。"</span>)
+<span class="code-keyword">elif</span> <span class="code-variable">score</span> <span class="code-operator">&gt;=</span> <span class="code-number">70</span>:
+    <span class="code-variable">grade</span> <span class="code-operator">=</span> <span class="code-string">"C"</span>
+    <span class="code-function">print</span>(<span class="code-string">"表現尚可。"</span>)
+<span class="code-keyword">elif</span> <span class="code-variable">score</span> <span class="code-operator">&gt;=</span> <span class="code-number">60</span>:
+    <span class="code-variable">grade</span> <span class="code-operator">=</span> <span class="code-string">"D"</span>
+    <span class="code-function">print</span>(<span class="code-string">"需要更多努力。"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-variable">grade</span> <span class="code-operator">=</span> <span class="code-string">"F"</span>
+    <span class="code-function">print</span>(<span class="code-string">"不及格，請加油。"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">f"您的等級是：</span><span class="code-fstring-brace">{</span><span class="code-fstring-var">grade</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+</code></pre>
+            </div>
+        </section>
+
+        <section id="operators">
+            <h2>第二部分：邏輯運算子 (and, or)</h2>
+            <p>當單一條件不足以描述複雜的邏輯時，我們需要組合多個條件。<code>and</code> 和 <code>or</code> 就是用來組合布林 (Boolean) 值的邏輯運算子。</p>
+
+            <h3>1. and (且)</h3>
+            <p><code>and</code> 運算子要求其<strong>兩側</strong>的條件都必須為 <code>True</code>，整個表達式的結果才會是 <code>True</code>。只要其中有一個為 <code>False</code>，結果就是 <code>False</code>。</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>條件 A</th><th>條件 B</th><th>A and B</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>True</td><td>True</td><td>True</td></tr>
+                        <tr><td>True</td><td>False</td><td>False</td></tr>
+                        <tr><td>False</td><td>True</td><td>False</td></tr>
+                        <tr><td>False</td><td>False</td><td>False</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 模擬使用者狀態</span>
+<span class="code-variable">is_logged_in</span> <span class="code-operator">=</span> <span class="code-keyword">True</span>
+<span class="code-variable">user_role</span> <span class="code-operator">=</span> <span class="code-string">"admin"</span>
+
+<span class="code-comment"># 判斷式：使用者必須已登入 "且" 角色必須是 'admin'</span>
+<span class="code-keyword">if</span> <span class="code-variable">is_logged_in</span> <span class="code-keyword">and</span> <span class="code-variable">user_role</span> <span class="code-operator">==</span> <span class="code-string">"admin"</span>:
+    <span class="code-function">print</span>(<span class="code-string">"權限驗證成功。歡迎進入後台管理系統！"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">"權限不足。您無法存取此頁面。"</span>)
+</code></pre>
+            </div>
+
+            <h3>2. or (或)</h3>
+            <p><code>or</code> 運算子要求其兩側的條件中<strong>至少有一個</strong>為 <code>True</code>，整個表達式的結果就是 <code>True</code>。只有在兩側條件都為 <code>False</code> 的情況下，結果才會是 <code>False</code>。</p>
+            <div class="table-container">
+                 <table>
+                    <thead>
+                        <tr><th>條件 A</th><th>條件 B</th><th>A or B</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>True</td><td>True</td><td>True</td></tr>
+                        <tr><td>True</td><td>False</td><td>True</td></tr>
+                        <tr><td>False</td><td>True</td><td>True</td></tr>
+                        <tr><td>False</td><td>False</td><td>False</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 取得今天的星期 (在實際應用中，您可能會使用 datetime 模組)</span>
+<span class="code-variable">today</span> <span class="code-operator">=</span> <span class="code-string">"Sunday"</span>
+
+<span class="code-comment"># 判斷式：今天是否為 "Saturday" "或" "Sunday"</span>
+<span class="code-keyword">if</span> <span class="code-variable">today</span> <span class="code-operator">==</span> <span class="code-string">"Saturday"</span> <span class="code-keyword">or</span> <span class="code-variable">today</span> <span class="code-operator">==</span> <span class="code-string">"Sunday"</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"今天是 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">today</span><span class="code-fstring-brace">}</span><span class="code-string">，是假日，好好放鬆一下！"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"今天是 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">today</span><span class="code-fstring-brace">}</span><span class="code-string">，是工作日，繼續努力！"</span>)
+</code></pre>
+            </div>
+
+            <h3>3. and 與 or 的組合與優先級</h3>
+            <p>在複雜的條件中，<code>and</code> 和 <code>or</code> 可以一起使用。<code>and</code> 的優先級高於 <code>or</code>，類似於數學中的乘法優先於加法。然而，為了程式碼的清晰性和可讀性，<strong>強烈建議使用括號 <code>()</code> 來明確指定運算順序</strong>。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 候選人資料</span>
+<span class="code-variable">gpa</span> <span class="code-operator">=</span> <span class="code-number">3.2</span>
+<span class="code-variable">has_programming_award</span> <span class="code-operator">=</span> <span class="code-keyword">True</span>
+<span class="code-variable">years_of_experience</span> <span class="code-operator">=</span> <span class="code-number">3</span>
+
+<span class="code-comment"># 使用括號明確定義邏輯</span>
+<span class="code-comment"># 條件一：gpa > 3.5</span>
+<span class="code-comment"># 條件二：(has_programming_award and years_of_experience >= 2)</span>
+<span class="code-keyword">if</span> <span class="code-variable">gpa</span> <span class="code-operator">&gt;</span> <span class="code-number">3.5</span> <span class="code-keyword">or</span> (<span class="code-variable">has_programming_award</span> <span class="code-keyword">and</span> <span class="code-variable">years_of_experience</span> <span class="code-operator">&gt;=</span> <span class="code-number">2</span>):
+    <span class="code-comment"># 檢查內部條件二：True and True -> True</span>
+    <span class="code-comment"># 檢查整體條件：False or True -> True</span>
+    <span class="code-function">print</span>(<span class="code-string">"恭喜！您已通過初步篩選，獲得面試資格。"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">"很遺憾，您未通過初步篩選。感謝您的申請。"</span>)
+</code></pre>
+            </div>
+        </section>
+
+        <section id="best-practices">
+            <h2>前瞻性觀點與最佳實踐</h2>
+            <p>作為一位追求專業的開發者，僅僅掌握語法是不夠的。以下是您在實務中應該考量的觀點：</p>
+            
+            <h3>A. 可讀性至上 (Readability Counts)</h3>
+            <blockquote>盡量避免過於複雜的巢狀 if 判斷。如果您的 if-elif-else 鏈條非常長，或巢狀結構超過兩層，請思考是否能透過函式 (Function) 或其他資料結構（如字典 (Dictionary)）來重構，使邏輯更清晰。</blockquote>
+
+            <h3>B. 短路求值 (Short-circuit Evaluation)</h3>
+            <p>Python 的 <code>and</code> 和 <code>or</code> 具有短路特性。</p>
+            <ul>
+                <li>對於 <code>A and B</code>，如果 A 為 <code>False</code>，Python 就不會再計算 B 的值，因為結果必定是 <code>False</code>。</li>
+                <li>對於 <code>A or B</code>，如果 A 為 <code>True</code>，Python 就不會再計算 B 的值，因為結果必定是 <code>True</code>。</li>
+                <li>這個特性在處理某些可能引發錯誤的程式碼時非常有用，例如：<code>if x is not None and x.value > 10:</code> 可以確保只有在 <code>x</code> 不是 <code>None</code> 的情況下才會去存取 <code>.value</code>。</li>
+            </ul>
+
+            <h3>C. 真值測試 (Truthiness)</h3>
+            <blockquote>在 Python 中，不只是 <code>True</code> 和 <code>False</code>，許多物件本身也帶有布林意義。例如，任何非零數字、非空字串、非空列表等，在 <code>if</code> 判斷中都會被視為 <code>True</code>。空的物件（<code>0</code>, <code>""</code>, <code>[]</code>, <code>None</code>）則被視為 <code>False</code>。善用此特性可以讓程式碼更簡潔，例如 <code>if my_list:</code> 就等同於 <code>if len(my_list) > 0:</code>。</blockquote>
+        </section>
+
+        <section id="conclusion">
+            <h2>結論</h2>
+            <p>邏輯判斷是程式設計的靈魂，它賦予了程式碼「思考」與「決策」的能力。<code>if, elif, else</code> 構建了決策的骨架，而 <code>and</code> 與 <code>or</code> 則讓這些決策的條件變得更加豐富與精確。</p>
+            <p>掌握這些基礎是邁向更高級程式設計的第一步。未來，無論您是進行資料分析（例如，根據條件篩選數據框 DataFrame 中的資料）、開發機器學習模型（例如，決策樹的節點分裂），還是建構網路應用程式，其底層邏輯都離不開這些基本的流程控制結構。請務必透過大量練習，將其內化為您的直覺。</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
+        <p>由 Gemini 根據您的文件生成</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                const text = pre.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerText = '已複製!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = '複製';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('無法複製程式碼: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
