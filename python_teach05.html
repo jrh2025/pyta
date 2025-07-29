@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-05 迴圈與例外處理 (核心基礎篇)</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        .code-fstring-brace { color: var(--operator-color); }
+        .code-fstring-var { color: #fd971f; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-05 迴圈與例外處理 (核心基礎篇)</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#for-loop">For 迴圈</a>
+        <a href="#while-loop">While 迴圈</a>
+        <a href="#exception-handling">例外處理</a>
+        <a href="#summary">總結</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="for-loop">
+            <h2>主題一：<code>for</code> 迴圈：可預測次數的迭代</h2>
+            <p><code>for</code> 迴圈的核心思想是「針對一個序列 (sequence) 中的每一個元素，執行一次程式碼區塊」。它是 Python 中進行迭代操作最常用、最強大的工具。</p>
+
+            <h3>A. 核心概念與常用技巧</h3>
+            <ul>
+                <li><strong>基本迭代：</strong> 遍歷列表 (list)、元組 (tuple)、字串 (string) 等序列中的每個元素。</li>
+                <li><strong><code>range()</code> 函數：</strong> 生成一個整數序列，用於控制迴圈的執行次數。</li>
+                <li><strong>巢狀迴圈 (Nested Loops)：</strong> 在一個迴圈內部嵌入另一個迴圈，用於處理二維或多維資料結構。</li>
+                <li><strong>流程控制：</strong> 使用 <code>break</code> 可完全終止迴圈；使用 <code>continue</code> 可跳過當前迭代，直接進入下一次。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># --- 範例 1: 基本迭代與 range() ---</span>
+<span class="code-function">print</span>(<span class="code-string">"【範例 1-1：使用 range()】"</span>)
+<span class="code-keyword">for</span> <span class="code-variable">i</span> <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">5</span>): <span class="code-comment"># 產生 0, 1, 2, 3, 4</span>
+    <span class="code-function">print</span>(<span class="code-string">f"現在的數字是: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">i</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># --- 範例 2: 遍歷列表計算總分 ---</span>
+<span class="code-variable">student_scores</span> <span class="code-operator">=</span> [<span class="code-number">85</span>, <span class="code-number">92</span>, <span class="code-number">78</span>, <span class="code-number">65</span>, <span class="code-number">95</span>]
+<span class="code-variable">total_score</span> <span class="code-operator">=</span> <span class="code-number">0</span>
+<span class="code-function">print</span>(<span class="code-string">"\n【範例 2：遍歷列表】"</span>)
+<span class="code-keyword">for</span> <span class="code-variable">score</span> <span class="code-keyword">in</span> <span class="code-variable">student_scores</span>:
+    <span class="code-variable">total_score</span> <span class="code-operator">+=</span> <span class="code-variable">score</span>
+<span class="code-function">print</span>(<span class="code-string">f"班級總分為: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">total_score</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># --- 範例 3: 巢狀迴圈與 break/continue ---</span>
+<span class="code-variable">matrix</span> <span class="code-operator">=</span> [
+    [<span class="code-number">1</span>, <span class="code-number">99</span>, <span class="code-number">3</span>],
+    [<span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-operator">-</span><span class="code-number">1</span>],
+    [<span class="code-number">7</span>, <span class="code-number">8</span>, <span class="code-number">9</span>]
+]
+<span class="code-function">print</span>(<span class="code-string">"\n【範例 3: 在矩陣中尋找異常值】"</span>)
+<span class="code-keyword">for</span> <span class="code-variable">row</span> <span class="code-keyword">in</span> <span class="code-variable">matrix</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"正在檢查列: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">row</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+    <span class="code-keyword">for</span> <span class="code-variable">num</span> <span class="code-keyword">in</span> <span class="code-variable">row</span>:
+        <span class="code-keyword">if</span> <span class="code-variable">num</span> <span class="code-operator">&lt;</span> <span class="code-number">0</span>:
+            <span class="code-function">print</span>(<span class="code-string">" -> 發現負值，跳過此列剩下的數字"</span>)
+            <span class="code-keyword">break</span> <span class="code-comment"># 跳出內層迴圈 (不再檢查此列的其他數字)</span>
+        <span class="code-function">print</span>(<span class="code-string">f"  - 檢查數字: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">num</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+</code></pre>
+            </div>
+
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><strong>範例 1：</strong> <code>for i in range(5)</code> 建立一個執行 5 次的迴圈，變數 <code>i</code> 的值從 0 依序變化到 4。</li>
+                <li><strong>範例 2：</strong> <code>for score in student_scores</code> 會依序取出列表中的每一個分數並賦值給 <code>score</code> 變數，然後將其累加到 `total_score`。</li>
+                <li><strong>範例 3：</strong> 外層迴圈遍歷矩陣的每一「列」(row)，內層迴圈遍歷該列中的每一「數字」(num)。內層的 `break` 只會跳出其所在的當層迴圈（即對 `num` 的迭代），然後外層迴圈會繼續處理下一列。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>在機器學習領域，<code>for</code> 迴圈是遍歷資料集、進行特徵工程與模型訓練不可或缺的工具。 巢狀迴圈則是處理張量 (Tensor) 和影像資料等高維資料結構的基礎，例如遍歷一張圖片的每一個像素點。</blockquote>
+        </section>
+
+        <section id="while-loop">
+            <h2>主題二：<code>while</code> 迴圈：基於條件的迭代</h2>
+            <p><code>while</code> 迴圈的核心思想是「當條件為真 (True) 時，持續執行程式碼區塊」。 它適用於無法預知迴圈需要執行多少次，只能依據某個條件來決定是否繼續執行的情境。</p>
+            
+            <h3>A. 核心概念與常用技巧</h3>
+            <ul>
+                <li><strong>條件驅動：</strong> 迴圈的執行完全由一個布林表達式的結果控制。</li>
+                <li><strong>無限迴圈風險：</strong> 必須確保在迴圈體內有能夠最終改變條件狀態的邏輯，否則程式會卡住。</li>
+                <li><strong>使用者輸入驗證：</strong> `while` 迴圈是等待有效輸入的絕佳工具。</li>
+                <li><strong><code>while-else</code> 結構：</strong> `else` 區塊內的程式碼會在迴圈「正常結束」（即非因 `break` 而終止）時執行，可用於處理迴圈順利完成後的邏輯。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># --- 範例 4: 模擬批次任務處理 ---</span>
+<span class="code-variable">task_queue</span> <span class="code-operator">=</span> [<span class="code-string">'task-01'</span>, <span class="code-string">'task-02'</span>, <span class="code-string">'task-03'</span>]
+<span class="code-function">print</span>(<span class="code-string">"\n【範例 4: 處理任務佇列】"</span>)
+<span class="code-keyword">while</span> <span class="code-variable">task_queue</span>: <span class="code-comment"># 條件：只要佇列不為空 (即為 True)</span>
+    <span class="code-variable">current_task</span> <span class="code-operator">=</span> <span class="code-variable">task_queue</span>.<span class="code-function">pop</span>(<span class="code-number">0</span>) <span class="code-comment"># 取出第一個任務</span>
+    <span class="code-function">print</span>(<span class="code-string">f"正在處理: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">current_task</span><span class="code-fstring-brace">}</span><span class="code-string">... 處理完畢。"</span>)
+<span class="code-function">print</span>(<span class="code-string">"所有任務處理完成！"</span>)
+
+<span class="code-comment"># --- 範例 5: while-else 結構 ---</span>
+<span class="code-variable">attempts</span> <span class="code-operator">=</span> <span class="code-number">3</span>
+<span class="code-variable">password</span> <span class="code-operator">=</span> <span class="code-string">'GenAI-123'</span>
+<span class="code-function">print</span>(<span class="code-string">"\n【範例 5: 密碼驗證】"</span>)
+<span class="code-keyword">while</span> <span class="code-variable">attempts</span> <span class="code-operator">></span> <span class="code-number">0</span>:
+    <span class="code-variable">guess</span> <span class="code-operator">=</span> <span class="code-function">input</span>(<span class="code-string">f"您還有 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">attempts</span><span class="code-fstring-brace">}</span><span class="code-string"> 次機會，請輸入密碼: "</span>)
+    <span class="code-keyword">if</span> <span class="code-variable">guess</span> <span class="code-operator">==</span> <span class="code-variable">password</span>:
+        <span class="code-function">print</span>(<span class="code-string">"登入成功！"</span>)
+        <span class="code-keyword">break</span>
+    <span class="code-variable">attempts</span> <span class="code-operator">-=</span> <span class="code-number">1</span>
+<span class="code-keyword">else</span>:
+    <span class="code-comment"># 只有在 while 迴圈因為 attempts > 0 條件變為 False 而結束時，才會執行這裡</span>
+    <span class="code-function">print</span>(<span class="code-string">"嘗試次數用盡，帳號已鎖定。"</span>)</code></pre>
+            </div>
+
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><strong>範例 4：</strong> 在 Python 中，非空的列表在布林上下文中被視為 `True`，空列表則為 `False`。因此 `while task_queue:` 是一個非常精簡的寫法，意為「當佇列中還有任務時」。`pop(0)` 會移除並返回列表的第一個元素，這也確保了迴圈的條件最終會變為 `False`。</li>
+                <li><strong>範例 5：</strong> `while-else` 結構在此處非常實用。如果使用者在次數用盡前輸入正確密碼，`break` 會被觸發，迴圈提前終止，`else` 區塊將**不會**執行。反之，如果迴圈是因為 `attempts` 變為 0 而自然結束，`else` 區塊就會執行，以處理登入失敗的後果。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>在真實世界的 AI 應用中，`while` 迴圈常用於建立持續運行的服務，例如一個不斷監聽新請求的 API 伺服器，或是一個在背景持續處理資料流的消費者 (Consumer) 程序。理解其條件驅動的本質是設計這類持久性系統的基礎。</blockquote>
+        </section>
+
+        <section id="exception-handling">
+            <h2>主題三：例外處理 (Exception Handling)</h2>
+            <p>在程式執行期間，可能會發生各種錯誤，例如使用者輸入了無效的資料或試圖除以零。 這些在執行期間發生的錯誤被稱為「例外 (Exception)」。 例外處理機制允許我們「捕捉」這些錯誤並優雅地應對，而不是讓程式意外崩潰。</p>
+            
+            <h3>A. 核心概念與常用技巧</h3>
+            <ul>
+                <li><strong><code>try...except</code>：</strong> 捕捉特定錯誤的基本結構。 <code>try</code> 區塊放置可能引發例外的程式碼，<code>except</code> 區塊則在例外發生時執行。</li>
+                <li><strong>捕捉多重例外：</strong> 使用元組 `except (TypeError, ValueError):` 來一次捕捉多種類型的錯誤。</li>
+                <li><strong><code>else</code> 區塊：</strong> 在 `try` 區塊未發生任何例外時執行。</li>
+                <li><strong><code>finally</code> 區塊：</strong> 無論是否發生例外，都保證會執行，是釋放資源（如檔案、網路連線）的關鍵。</li>
+                <li><strong><code>raise</code> 關鍵字：</strong> 主動、手動地引發一個例外，用於在函式或類別中強制執行特定的前置條件或回報錯誤狀態。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># --- 範例 6: 處理資料並主動拋出例外 ---</span>
+<span class="code-keyword">def</span> <span class="code-function">preprocess_data</span>(<span class="code-variable">data_point</span>):
+    <span class="code-string">"""一個模擬資料預處理的函數"""</span>
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> <span class="code-function">isinstance</span>(<span class="code-variable">data_point</span>, <span class="code-function">dict</span>):
+        <span class="code-comment"># 使用 raise 強制執行先決條件：輸入必須是字典</span>
+        <span class="code-keyword">raise</span> <span class="code-variable">TypeError</span>(<span class="code-string">"輸入的資料點必須是字典格式"</span>)
+    
+    <span class="code-keyword">try</span>:
+        <span class="code-variable">value</span> <span class="code-operator">=</span> <span class="code-variable">data_point</span>[<span class="code-string">'value'</span>]
+        <span class="code-variable">normalized_value</span> <span class="code-operator">=</span> <span class="code-function">float</span>(<span class="code-variable">value</span>) <span class="code-operator">/</span> <span class="code-number">100.0</span>
+    <span class="code-keyword">except</span> <span class="code-variable">KeyError</span>:
+        <span class="code-comment"># 如果字典中缺少 'value' 鍵</span>
+        <span class="code-keyword">raise</span> <span class="code-variable">ValueError</span>(<span class="code-string">"資料點缺少 'value' 鍵"</span>)
+    <span class="code-keyword">except</span> (<span class="code-variable">ValueError</span>, <span class="code-variable">TypeError</span>) <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+        <span class="code-comment"># 如果 'value' 不是數字，float() 會失敗</span>
+        <span class="code-function">print</span>(<span class="code-string">f"資料格式錯誤: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+        <span class="code-keyword">return</span> <span class="code-keyword">None</span> <span class="code-comment"># 返回一個標記值表示失敗</span>
+    <span class="code-keyword">else</span>:
+        <span class="code-function">print</span>(<span class="code-string">"資料處理成功！"</span>)
+        <span class="code-keyword">return</span> <span class="code-variable">normalized_value</span>
+    <span class="code-keyword">finally</span>:
+        <span class="code-function">print</span>(<span class="code-string">f"--- 已處理資料點: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">data_point</span><span class="code-fstring-brace">}</span><span class="code-string"> ---"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">"\n【範例 6: 執行資料預處理】"</span>)
+<span class="code-function">preprocess_data</span>({<span class="code-string">'value'</span>: <span class="code-string">'123'</span>}) <span class="code-comment"># 成功案例</span>
+<span class="code-function">print</span>(<span class="code-string">"---"</span>)
+<span class="code-function">preprocess_data</span>({<span class="code-string">'value'</span>: <span class="code-string">'abc'</span>}) <span class="code-comment"># 轉換失敗案例</span>
+<span class="code-function">print</span>(<span class="code-string">"---"</span>)
+<span class="code-keyword">try</span>:
+    <span class="code-function">preprocess_data</span>(<span class="code-string">"not_a_dict"</span>) <span class="code-comment"># 類型錯誤案例</span>
+<span class="code-keyword">except</span> <span class="code-variable">TypeError</span> <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"捕獲到外部錯誤: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+            
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><strong><code>raise TypeError</code>：</strong> 在函式開頭，我們先檢查輸入類型。如果不符合要求，就使用 `raise` 主動拋出一個 `TypeError`，立即終止函式並告知呼叫者問題所在。這是一種「快速失敗」(Fail Fast) 的良好實踐。</li>
+                <li><strong><code>raise ValueError</code>：</strong> 在 `try` 區塊中，如果發生了 `KeyError`（表示輸入的字典格式不對），我們捕捉它，然後拋出一個更具語義的 `ValueError`，說明「業務邏輯」上的錯誤。</li>
+                <li><strong><code>except (ValueError, TypeError) as e</code>：</strong> 這裡我們將兩種可能的例外（`float()` 可能拋出的 `ValueError` 或 `TypeError`）在一個 `except` 塊中處理。`as e` 可以讓我們存取例外物件本身，方便日誌記錄或除錯。</li>
+                <li><strong><code>finally</code>：</strong> 無論處理成功、失敗還是中途拋出例外，`finally` 區塊都會執行。 這在需要確保資源（如檔案控制代碼、資料庫連線）被關閉的場景中至關重要。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>在開發複雜的機器學習管線 (Pipeline) 或可重用函式庫時，僅僅捕捉例外是不夠的。學會使用 `raise` 主動拋出有意義的例外，是設計清晰、穩健且易於除錯的 API 的關鍵。它讓函式的使用者能清楚地知道自己犯了什麼錯，而不是面對一個模糊的內部錯誤。</blockquote>
+        </section>
+
+        <section id="summary">
+            <h2>總結與前瞻</h2>
+            <p>掌握 <code>for</code>、<code>while</code> 迴圈與 <code>try-except-raise</code> 例外處理機制，是從初學者邁向專業 Python 開發者的關鍵一步。 迴圈是實現自動化的引擎，而例外處理則是保障系統穩定運行的安全網。</p>
+            <p>特別是在 AI 和資料科學領域，您將會不斷地使用迴圈來迭代巨量資料、訓練模型；同時也必須依賴強大的例外處理來應對資料中不可預見的錯誤與異常。精通這些基本但強大的結構，將為您未來建構複雜的演算法、框架與系統架構打下最堅實的基礎。</p>
+        </section>
+        
+    </div>
+
+    <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
+        <p>由 Gemini 根據您的文件生成並調整</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                const text = pre.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerText = '已複製!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = '複製';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('無法複製程式碼: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
