@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-06 迴圈與例外處理 (進階篇)</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        .code-fstring-brace { color: var(--operator-color); }
+        .code-fstring-var { color: #fd971f; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-06 迴圈與例外處理 (進階篇)</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#loop-adv">進階迴圈</a>
+        <a href="#exception-adv">進階例外</a>
+        <a href="#summary">總結</a>
+    </nav>
+
+    <div class="container">
+        <section>
+            <p>在前一份核心基礎篇中，我們已經掌握了 for 與 while 迴圈的基本操作，以及使用 try-except-else-finally 處理執行期錯誤的標準流程。本進階篇的目標是超越語法本身，深入探討 Python 中更優雅、高效的進階技巧。我們將學習如何撰寫更簡潔的「Pythonic」程式碼，並建構更具彈性與語意化的例外處理框架。精通這些技巧，將是您從程式學習者蛻變為專業開發者的重要里程碑。</p>
+        </section>
+
+        <section id="loop-adv">
+            <h2>第一部分：進階迴圈技巧與迭代模式</h2>
+            <p>在基礎篇之外，Python 提供了多種強大的工具，能讓迴圈的撰寫更為精煉與高效。</p>
+
+            <h3>1.1 列表生成式 (List Comprehensions): 簡潔與效率的極致</h3>
+            <p>列表生成式是 Python 最具代表性的特色之一。它允許您用一行程式碼來取代傳統的多行 for 迴圈，以建立新的列表。這不僅讓程式碼更簡潔，在許多情況下執行效率也更高。</p>
+            
+            <h4>傳統寫法 vs. 列表生成式</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【傳統 for 迴圈寫法】</span>
+<span class="code-variable">squares</span> <span class="code-operator">=</span> []
+<span class="code-keyword">for</span> <span class="code-variable">i</span> <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10</span>):
+    <span class="code-variable">squares</span>.<span class="code-function">append</span>(<span class="code-variable">i</span> <span class="code-operator">*</span> <span class="code-variable">i</span>)
+<span class="code-function">print</span>(<span class="code-string">f"傳統寫法結果: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">squares</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 【使用列表生成式】</span>
+<span class="code-comment"># 語法: [expression for item in iterable]</span>
+<span class="code-variable">squares_comp</span> <span class="code-operator">=</span> [<span class="code-variable">i</span> <span class="code-operator">*</span> <span class="code-variable">i</span> <span class="code-keyword">for</span> <span class="code-variable">i</span> <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10</span>)]
+<span class="code-function">print</span>(<span class="code-string">f"列表生成式結果: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">squares_comp</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+            
+            <h4>列表生成式 (含條件判斷)</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【範例：只計算偶數的平方】</span>
+<span class="code-comment"># 傳統寫法</span>
+<span class="code-variable">even_squares</span> <span class="code-operator">=</span> []
+<span class="code-keyword">for</span> <span class="code-variable">i</span> <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10</span>):
+    <span class="code-keyword">if</span> <span class="code-variable">i</span> <span class="code-operator">%</span> <span class="code-number">2</span> <span class="code-operator">==</span> <span class="code-number">0</span>:
+        <span class="code-variable">even_squares</span>.<span class="code-function">append</span>(<span class="code-variable">i</span> <span class="code-operator">*</span> <span class="code-variable">i</span>)
+<span class="code-function">print</span>(<span class="code-string">f"傳統寫法 (含條件): </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">even_squares</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 列表生成式 (含 if 條件)</span>
+<span class="code-comment"># 語法: [expression for item in iterable if condition]</span>
+<span class="code-variable">even_squares_comp</span> <span class="code-operator">=</span> [<span class="code-variable">i</span> <span class="code-operator">*</span> <span class="code-variable">i</span> <span class="code-keyword">for</span> <span class="code-variable">i</span> <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">10</span>) <span class="code-keyword">if</span> <span class="code-variable">i</span> <span class="code-operator">%</span> <span class="code-number">2</span> <span class="code-operator">==</span> <span class="code-number">0</span>]
+<span class="code-function">print</span>(<span class="code-string">f"列表生成式 (含條件): </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">even_squares_comp</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+            <blockquote><b>專業觀點：</b>在資料科學與機器學習的特徵工程中，列表生成式被廣泛用於對資料集進行快速轉換、清洗與篩選，是每一位 Python 資料分析師必備的技能。</blockquote>
+
+            <h3>1.2 enumerate(): 同時獲取索引與值</h3>
+            <p>當遍歷一個序列時，有時我們既需要元素的值，也需要該元素的索引。傳統作法是自行維護一個計數器，但 Python 提供了更優雅的 <code>enumerate()</code> 函式。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【範例：印出學生成績及其排名】</span>
+<span class="code-variable">student_scores</span> <span class="code-operator">=</span> [<span class="code-number">85</span>, <span class="code-number">92</span>, <span class="code-number">78</span>, <span class="code-number">95</span>, <span class="code-number">88</span>]
+<span class="code-function">print</span>(<span class="code-string">"\n【使用 enumerate() 獲取索引和值】"</span>)
+
+<span class="code-comment"># Pythonic 寫法：使用 enumerate()</span>
+<span class="code-comment"># enumerate() 會回傳一個包含 (索引, 值) 的元組 (tuple)</span>
+<span class="code-keyword">for</span> <span class="code-variable">index</span>, <span class="code-variable">score</span> <span class="code-keyword">in</span> <span class="code-function">enumerate</span>(<span class="code-variable">student_scores</span>):
+    <span class="code-function">print</span>(<span class="code-string">f"排名 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">index</span> <span class="code-operator">+</span> <span class="code-fstring-var">1</span><span class="code-fstring-brace">}</span><span class="code-string">: 分數 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">score</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+            
+            <h3>1.3 zip(): 並行遍歷多個序列</h3>
+            <p>若您需要同時遍歷兩個或多個序列，<code>zip()</code> 函式可以將這些序列「壓縮」在一起，讓您在單一 for 迴圈中並行迭代。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【範例：將學生姓名與成績配對】</span>
+<span class="code-variable">students</span> <span class="code-operator">=</span> [<span class="code-string">"Alice"</span>, <span class="code-string">"Bob"</span>, <span class="code-string">"Charlie"</span>, <span class="code-string">"David"</span>]
+<span class="code-variable">scores</span> <span class="code-operator">=</span> [<span class="code-number">85</span>, <span class="code-number">92</span>, <span class="code-number">78</span>, <span class="code-number">95</span>]
+<span class="code-function">print</span>(<span class="code-string">"\n【使用 zip() 並行遍歷】"</span>)
+
+<span class="code-comment"># zip() 會將對應位置的元素打包成元組</span>
+<span class="code-keyword">for</span> <span class="code-variable">student</span>, <span class="code-variable">score</span> <span class="code-keyword">in</span> <span class="code-function">zip</span>(<span class="code-variable">students</span>, <span class="code-variable">scores</span>):
+    <span class="code-function">print</span>(<span class="code-string">f"學生 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">student</span><span class="code-fstring-brace">}</span><span class="code-string"> 的成績是 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">score</span><span class="code-fstring-brace">}</span><span class="code-string"> 分。"</span>)
+<span class="code-comment"># 注意：如果序列長度不同，zip() 會在最短的序列結束時停止。</span></code></pre>
+            </div>
+            <blockquote><b>專業觀點：</b>在監督式學習中，特徵資料 (X) 與標籤資料 (y) 通常是分開的陣列或列表。<code>zip(X, y)</code> 是將特徵與其對應標籤配對進行處理的標準模式。</blockquote>
+
+            <h3>1.4 迴圈中的 else 區塊</h3>
+            <p>這是一個較不為人知但非常實用的語法。for 或 while 迴圈可以帶有一個 <code>else</code> 區塊。這個 else 區塊的執行時機是：當迴圈正常執行完畢 (即沒有被 <code>break</code> 陳述式中斷) 時。這非常適合用在「搜尋」情境中。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【範例：在列表中搜尋一個質數，如果沒找到就發出通知】</span>
+<span class="code-variable">numbers</span> <span class="code-operator">=</span> [<span class="code-number">6</span>, <span class="code-number">15</span>, <span class="code-number">21</span>, <span class="code-number">33</span>, <span class="code-number">55</span>]
+<span class="code-variable">prime_to_find</span> <span class="code-operator">=</span> <span class="code-number">17</span>  <span class="code-comment"># 一個不存在於列表中的質數</span>
+<span class="code-function">print</span>(<span class="code-string">"\n【在 for...else 結構中搜尋】"</span>)
+
+<span class="code-keyword">for</span> <span class="code-variable">num</span> <span class="code-keyword">in</span> <span class="code-variable">numbers</span>:
+    <span class="code-keyword">if</span> <span class="code-variable">num</span> <span class="code-operator">==</span> <span class="code-variable">prime_to_find</span>:
+        <span class="code-function">print</span>(<span class="code-string">f"找到了目標質數: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">num</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+        <span class="code-keyword">break</span>  <span class="code-comment"># 一旦找到，就中斷迴圈</span>
+<span class="code-keyword">else</span>:
+    <span class="code-comment"># 如果 for 迴圈從未被 break，代表搜尋完畢但沒找到</span>
+    <span class="code-function">print</span>(<span class="code-string">f"列表中未找到質數 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">prime_to_find</span><span class="code-fstring-brace">}</span><span class="code-string">。"</span>)</code></pre>
+            </div>
+            <p>這個結構避免了額外使用一個旗標變數 (e.g., <code>found = False</code>) 來判斷迴圈是否被中斷，讓程式碼更乾淨、意圖更明確。</p>
+        </section>
+
+        <section id="exception-adv">
+            <h2>第二部分：進階例外處理</h2>
+            <p>穩健的系統不僅要能處理預期的錯誤，更要能定義自己的錯誤類型，並以最安全的方式管理資源。</p>
+
+            <h3>2.1 使用 with 陳述式自動管理資源</h3>
+            <p>Python 提供了 <code>with</code> 陳述式，又稱為「內容管理器 (Context Manager)」，能夠更優雅且安全地處理需要設定 (setup) 與清理 (teardown) 的資源，如檔案、網路連線、資料庫交易等。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【範例：使用 with 陳述式讀取檔案】</span>
+<span class="code-variable">file_path</span> <span class="code-operator">=</span> <span class="code-string">"config.txt"</span>
+<span class="code-function">print</span>(<span class="code-string">f"\n【使用 'with' 陳述式自動管理資源】"</span>)
+
+<span class="code-keyword">try</span>:
+    <span class="code-comment"># with 會自動處理 file.close()</span>
+    <span class="code-comment"># 無論 with 區塊內發生任何錯誤或正常結束，Python 都會確保檔案被關閉</span>
+    <span class="code-keyword">with</span> <span class="code-function">open</span>(<span class="code-variable">file_path</span>, <span class="code-string">'r'</span>, <span class="code-variable">encoding</span><span class="code-operator">=</span><span class="code-string">'utf-8'</span>) <span class="code-keyword">as</span> <span class="code-variable">file</span>:
+        <span class="code-function">print</span>(<span class="code-string">f"檔案 '</span><span class="code-fstring-brace">{</span><span class="code-fstring-var">file_path</span><span class="code-fstring-brace">}</span><span class="code-string">' 已成功開啟。"</span>)
+        <span class="code-variable">content</span> <span class="code-operator">=</span> <span class="code-variable">file</span>.<span class="code-function">read</span>()
+        <span class="code-function">print</span>(<span class="code-string">"--- 檔案內容 ---"</span>)
+        <span class="code-function">print</span>(<span class="code-variable">content</span>)
+        <span class="code-function">print</span>(<span class="code-string">"------------------"</span>)
+<span class="code-keyword">except</span> <span class="code-variable">FileNotFoundError</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"錯誤：檔案 '</span><span class="code-fstring-brace">{</span><span class="code-fstring-var">file_path</span><span class="code-fstring-brace">}</span><span class="code-string">' 不存在。"</span>)
+<span class="code-keyword">except</span> <span class="code-variable">Exception</span> <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"處理檔案時發生了未預期的錯誤: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-function">print</span>(<span class="code-string">"'with' 區塊結束後，檔案會被自動關閉，無需手動呼叫 file.close()。"</span>)</code></pre>
+            </div>
+            <blockquote><b>最佳實踐：</b>永遠優先使用 <code>with</code> 陳述式來處理檔案和網路連線等資源，而非手動編寫 <code>try...finally</code>。</blockquote>
+
+            <h3>2.2 自訂例外 (Custom Exceptions): 建立語意化的錯誤</h3>
+            <p>在開發大型應用或函式庫時，建立自己的例外類型能大幅提升程式碼的可維護性與清晰度。自訂例外是透過繼承 Python 的 <code>Exception</code> 基底類別來建立的。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># --- 1. 定義自訂例外類別 ---</span>
+<span class="code-keyword">class</span> <span class="code-function">DataValidationError</span>(<span class="code-variable">Exception</span>):
+    <span class="code-string">"""當輸入資料不符合業務邏輯時拋出的例外。"""</span>
+    <span class="code-keyword">pass</span>
+
+<span class="code-keyword">class</span> <span class="code-function">InsufficientDataError</span>(<span class="code-variable">DataValidationError</span>):
+    <span class="code-string">"""當資料筆數不足以進行分析時拋出的例外。"""</span>
+    <span class="code-keyword">pass</span>
+
+<span class="code-comment"># --- 2. 在函式中使用自訂例外 ---</span>
+<span class="code-keyword">def</span> <span class="code-function">process_data</span>(<span class="code-variable">data_points</span>):
+    <span class="code-function">print</span>(<span class="code-string">f"\n【在函式中拋出與處理自訂例外】"</span>)
+    <span class="code-function">print</span>(<span class="code-string">f"正在處理資料: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">data_points</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+    
+    <span class="code-keyword">if</span> <span class="code-function">len</span>(<span class="code-variable">data_points</span>) <span class="code-operator">&lt;</span> <span class="code-number">3</span>:
+        <span class="code-keyword">raise</span> <span class="code-variable">InsufficientDataError</span>(<span class="code-string">"輸入資料不足，至少需要 3 個資料點。"</span>)
+    
+    <span class="code-keyword">for</span> <span class="code-variable">point</span> <span class="code-keyword">in</span> <span class="code-variable">data_points</span>:
+        <span class="code-keyword">if</span> <span class="code-variable">point</span> <span class="code-operator">&lt;=</span> <span class="code-number">0</span>:
+            <span class="code-keyword">raise</span> <span class="code-variable">DataValidationError</span>(<span class="code-string">f"資料點 '</span><span class="code-fstring-brace">{</span><span class="code-fstring-var">point</span><span class="code-fstring-brace">}</span><span class="code-string">' 無效，必須為正數。"</span>)
+            
+    <span class="code-function">print</span>(<span class="code-string">"資料驗證通過，處理完成。"</span>)
+
+<span class="code-comment"># --- 3. 捕捉自訂例外 ---</span>
+<span class="code-keyword">try</span>:
+    <span class="code-comment"># process_data([10, 20])  # 將觸發 InsufficientDataError</span>
+    <span class="code-function">process_data</span>([<span class="code-number">10</span>, <span class="code-number">20</span>, <span class="code-operator">-</span><span class="code-number">5</span>, <span class="code-number">30</span>])  <span class="code-comment"># 將觸發 DataValidationError</span>
+<span class="code-keyword">except</span> <span class="code-variable">InsufficientDataError</span> <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"捕捉到資料不足錯誤: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+<span class="code-keyword">except</span> <span class="code-variable">DataValidationError</span> <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"捕捉到資料驗證錯誤: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+
+            <h3>2.3 raise 與例外鏈結 (Exception Chaining)</h3>
+            <p>有時，在捕捉到一個低階例外後，您可能想將其包裝成一個更具業務意義的高階例外再向上拋出。Python 3 引入了「例外鏈結」(<code>raise...from...</code>) 來解決這個問題，它能保留原始的錯誤追蹤資訊，讓除錯更為方便。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 【範例：使用 'raise from' 進行例外鏈結】</span>
+<span class="code-keyword">class</span> <span class="code-function">ReportGenerationError</span>(<span class="code-variable">Exception</span>):
+    <span class="code-string">"""報告生成時的頂層錯誤。"""</span>
+    <span class="code-keyword">pass</span>
+
+<span class="code-keyword">def</span> <span class="code-function">generate_report</span>(<span class="code-variable">data_file</span>):
+    <span class="code-function">print</span>(<span class="code-string">"\n【使用 'raise from' 保留原始錯誤堆疊】"</span>)
+    <span class="code-keyword">try</span>:
+        <span class="code-keyword">with</span> <span class="code-function">open</span>(<span class="code-variable">data_file</span>, <span class="code-string">'r'</span>) <span class="code-keyword">as</span> <span class="code-variable">f</span>:
+            <span class="code-variable">content</span> <span class="code-operator">=</span> <span class="code-variable">f</span>.<span class="code-function">read</span>()
+            <span class="code-keyword">if</span> <span class="code-keyword">not</span> <span class="code-variable">content</span>:
+                <span class="code-keyword">raise</span> <span class="code-variable">KeyError</span>(<span class="code-string">"設定檔中缺少必要的鍵值。"</span>)
+        <span class="code-keyword">return</span> <span class="code-string">"報告生成成功！"</span>
+    <span class="code-keyword">except</span> (<span class="code-variable">IOError</span>, <span class="code-variable">KeyError</span>) <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+        <span class="code-comment"># 將底層錯誤包裝成高層業務例外，並用 'from' 保留原始例外資訊</span>
+        <span class="code-keyword">raise</span> <span class="code-variable">ReportGenerationError</span>(<span class="code-string">"無法生成報告，因來源資料有問題。"</span>) <span class="code-keyword">from</span> <span class="code-variable">e</span>
+
+<span class="code-comment"># --- 呼叫端 ---</span>
+<span class="code-keyword">try</span>:
+    <span class="code-function">generate_report</span>(<span class="code-string">"non_existent_file.txt"</span>)
+<span class="code-keyword">except</span> <span class="code-variable">ReportGenerationError</span> <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"捕捉到高階錯誤: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+    <span class="code-comment"># __cause__ 屬性會保留原始例外</span>
+    <span class="code-function">print</span>(<span class="code-string">f"根本原因 (Root Cause): </span><span class="code-fstring-brace">{</span><span class="code-function">type</span>(<span class="code-fstring-var">e</span>.<span class="code-variable">__cause__</span>).<span class="code-variable">__name__</span><span class="code-fstring-brace">}</span><span class="code-string">: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span>.<span class="code-variable">__cause__</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+        </section>
+
+        <section id="summary">
+            <h2>總結與前瞻性觀點</h2>
+            <p>本次進階篇探討的技術——列表生成式、<code>enumerate()</code>、<code>zip()</code>、迴圈 <code>else</code> 子句、<code>with</code> 陳述式、自訂例外與例外鏈結——是區分 Python 新手與資深開發者的重要分水嶺。</p>
+            <ul>
+                <li><strong>效率與表達力：</strong>列表生成式等技巧不僅僅是語法糖，它們代表了 Python「以簡潔為美」的哲學，並能寫出執行更快的程式碼
