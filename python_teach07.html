@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-07 生成式 (Comprehensions) 解析</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-07 生成式 (Comprehensions) 解析</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#list-comp">串列生成式</a>
+        <a href="#dict-comp">字典生成式</a>
+        <a href="#set-comp">集合生成式</a>
+        <a href="#gen-expr">生成器表達式</a>
+        <a href="#conclusion">結論</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="list-comp">
+            <h2>主題一：串列生成式 (List Comprehension)</h2>
+            <p>串列生成式是最常見也最基礎的生成式，其目標是快速生成一個新的串列。 它提供了一種優雅、緊湊的單行語法，來取代傳統的 for 迴圈與 `.append()` 操作。</p>
+
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>基礎語法：</strong> <code>new_list = [expression for item in iterable]</code></li>
+                <li><strong>篩選語法：</strong> <code>new_list = [expression for item in iterable if condition]</code></li>
+                <li><strong>條件表達式語法：</strong> <code>new_list = [expr_if_true if condition else expr_if_false for item in iterable]</code></li>
+                <li><strong>關鍵組成：</strong>
+                    <ul>
+                        <li><code>expression</code>: 對於 iterable 中的每一個 item 進行運算或處理的表達式。</li>
+                        <li><code>item</code>: 從 iterable 中逐一取出的元素。</li>
+                        <li><code>iterable</code>: 任何可迭代的物件，如 list, tuple, range, string 等。</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <h4>範例 1：基本轉換 (平方運算)</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 傳統 for 迴圈寫法</span>
+<span class="code-variable">numbers</span> <span class="code-operator">=</span> [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]
+<span class="code-variable">squares</span> <span class="code-operator">=</span> []
+<span class="code-keyword">for</span> n <span class="code-keyword">in</span> <span class="code-variable">numbers</span>:
+    <span class="code-variable">squares</span>.<span class="code-function">append</span>(n<span class="code-operator">**</span><span class="code-number">2</span>)
+<span class="code-function">print</span>(<span class="code-variable">squares</span>)  <span class="code-comment"># >> [1, 4, 9, 16, 25]</span>
+
+<span class="code-comment"># 使用串列生成式</span>
+<span class="code-variable">squares_comp</span> <span class="code-operator">=</span> [n<span class="code-operator">**</span><span class="code-number">2</span> <span class="code-keyword">for</span> n <span class="code-keyword">in</span> <span class="code-variable">numbers</span>]
+<span class="code-function">print</span>(<span class="code-variable">squares_comp</span>)  <span class="code-comment"># >> [1, 4, 9, 16, 25]</span></code></pre>
+            </div>
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>[n**2 for n in numbers]</code> 這一行程式碼精確地表達了其意圖：「為 numbers 中的每一個 n，計算其平方 (n**2)，並將所有結果收集成一個新的串列」。</li>
+            </ol>
+
+            <h4>範例 2：加入條件篩選 (if)</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">numbers</span> <span class="code-operator">=</span> [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-number">6</span>, <span class="code-number">7</span>, <span class="code-number">8</span>]
+<span class="code-comment"># 只挑選出偶數，並計算其平方</span>
+<span class="code-variable">even_squares_comp</span> <span class="code-operator">=</span> [n<span class="code-operator">**</span><span class="code-number">2</span> <span class="code-keyword">for</span> n <span class="code-keyword">in</span> <span class="code-variable">numbers</span> <span class="code-keyword">if</span> n <span class="code-operator">%</span> <span class="code-number">2</span> <span class="code-operator">==</span> <span class="code-number">0</span>]
+<span class="code-function">print</span>(<span class="code-variable">even_squares_comp</span>)  <span class="code-comment"># >> [4, 16, 36, 64]</span></code></pre>
+            </div>
+             <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>if n % 2 == 0</code> 這個條件過濾了 `numbers` 串列。</li>
+                <li>只有當 `n` 是偶數時，`n**2` 這個表達式才會被執行並加入新的串列中。</li>
+            </ol>
+
+            <h4>範例 3：加入條件表達式 (if-else)</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">numbers</span> <span class="code-operator">=</span> [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]
+<span class="code-comment"># 將數字串列轉換為字串串列，偶數標記為 'even'，奇數標記為 'odd'</span>
+<span class="code-variable">labels_comp</span> <span class="code-operator">=</span> [<span class="code-string">'even'</span> <span class="code-keyword">if</span> n <span class="code-operator">%</span> <span class="code-number">2</span> <span class="code-operator">==</span> <span class="code-number">0</span> <span class="code-keyword">else</span> <span class="code-string">'odd'</span> <span class="code-keyword">for</span> n <span class="code-keyword">in</span> <span class="code-variable">numbers</span>]
+<span class="code-function">print</span>(<span class="code-variable">labels_comp</span>)  <span class="code-comment"># >> ['odd', 'even', 'odd', 'even', 'odd']</span></code></pre>
+            </div>
+             <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                 <li>注意 `if-else` 結構是放在 `expression` 的位置，與單純的 `if` 篩選位置不同。</li>
+                 <li><code>'even' if n % 2 == 0 else 'odd'</code>: 對於 `numbers` 中的每個 `n`，如果 `n` 是偶數，則表達式的值為 `'even'`，否則為 `'odd'`。</li>
+            </ol>
+
+            <h4>範例 4：巢狀迴圈</h4>
+             <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">matrix</span> <span class="code-operator">=</span> [[<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>], [<span class="code-number">4</span>, <span class="code-number">5</span>, <span class="code-number">6</span>], [<span class="code-number">7</span>, <span class="code-number">8</span>, <span class="code-number">9</span>]]
+<span class="code-comment"># 將一個二維串列扁平化為一維串列</span>
+<span class="code-variable">flattened_comp</span> <span class="code-operator">=</span> [num <span class="code-keyword">for</span> row <span class="code-keyword">in</span> <span class="code-variable">matrix</span> <span class="code-keyword">for</span> num <span class="code-keyword">in</span> row]
+<span class="code-function">print</span>(<span class="code-variable">flattened_comp</span>)  <span class="code-comment"># >> [1, 2, 3, 4, 5, 6, 7, 8, 9]</span></code></pre>
+            </div>
+             <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                 <li><code>for row in matrix</code> 是外層迴圈，<code>for num in row</code> 是內層迴圈，其順序與傳統巢狀迴圈寫法一致。</li>
+            </ol>
+        </section>
+
+        <section id="dict-comp">
+            <h2>主題二：字典生成式 (Dictionary Comprehension)</h2>
+            <p>與串列生成式類似，字典生成式讓我們能快速地創建字典。</p>
+            
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>基礎語法：</strong> <code>new_dict = {key_expression: value_expression for item in iterable}</code></li>
+                <li><strong>功能：</strong> 可用於從可迭代物件創建字典，或基於現有字典進行篩選與轉換。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <h4>範例 5：創建數字與其平方的對應字典</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 使用字典生成式</span>
+<span class="code-variable">squares_dict_comp</span> <span class="code-operator">=</span> {i: i<span class="code-operator">**</span><span class="code-number">2</span> <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">1</span>, <span class="code-number">6</span>)}
+<span class="code-function">print</span>(<span class="code-variable">squares_dict_comp</span>)  <span class="code-comment"># >> {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</span></code></pre>
+            </div>
+
+            <h4>範例 6：從既有字典篩選或轉換</h4>
+             <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">prices</span> <span class="code-operator">=</span> {<span class="code-string">'apple'</span>: <span class="code-number">50</span>, <span class="code-string">'banana'</span>: <span class="code-number">30</span>, <span class="code-string">'laptop'</span>: <span class="code-number">30000</span>, <span class="code-string">'mouse'</span>: <span class="code-number">150</span>}
+<span class="code-comment"># 建立一個只包含價格大於 100 的新字典</span>
+<span class="code-variable">expensive_items</span> <span class="code-operator">=</span> {item: price <span class="code-keyword">for</span> item, price <span class="code-keyword">in</span> <span class="code-variable">prices</span>.<span class="code-function">items</span>() <span class="code-keyword">if</span> price <span class="code-operator">></span> <span class="code-number">100</span>}
+<span class="code-function">print</span>(<span class="code-variable">expensive_items</span>)  <span class="code-comment"># >> {'laptop': 30000, 'mouse': 150}</span></code></pre>
+            </div>
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>.items()</code> 方法會將字典的鍵值對以元組 (key, value) 的形式回傳，讓我們可以在生成式中同時操作鍵和值。</li>
+                <li><code>if price > 100</code> 篩選出符合條件的鍵值對來建立新字典。</li>
+            </ol>
+        </section>
+
+        <section id="set-comp">
+            <h2>主題三：集合生成式 (Set Comprehension)</h2>
+            <p>集合生成式的語法與字典生成式非常相似，但它只包含一個 expression。 集合最重要的特性是其元素是唯一不重複的。</p>
+            
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>基礎語法：</strong> <code>new_set = {expression for item in iterable}</code></li>
+                <li><strong>特性：</strong> 生成的結果會自動去除重複的元素。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <h4>範例 7：從包含重複元素的串列中建立唯一值的集合</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">numbers</span> <span class="code-operator">=</span> [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">4</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]
+<span class="code-comment"># 從一個串列中提取所有數字的平方，並確保結果中沒有重複值</span>
+<span class="code-variable">unique_squares</span> <span class="code-operator">=</span> {n<span class="code-operator">**</span><span class="code-number">2</span> <span class="code-keyword">for</span> n <span class="code-keyword">in</span> <span class="code-variable">numbers</span>}
+<span class="code-function">print</span>(<span class="code-variable">unique_squares</span>)  <span class="code-comment"># >> {1, 4, 9, 16, 25}</span></code></pre>
+            </div>
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li>儘管輸入的 `numbers` 串列中有重複的 2 和 4，但它們的平方 4 和 16 在最終的集合中只會出現一次。</li>
+            </ol>
+        </section>
+
+        <section id="gen-expr">
+            <h2>主題四：生成器表達式 (Generator Expression)</h2>
+            <p>使用 <code>()</code> 的生成式語法並不會立即建立一個元組，而是會建立一個<strong>生成器物件 (generator object)</strong>。</p>
+            
+            <h3>A. 核心概念與規則</h3>
+            <ul>
+                <li><strong>語法：</strong> <code>generator_object = (expression for item in iterable)</code></li>
+                <li><strong>延遲計算 (Lazy Evaluation)：</strong> 生成器不會一次性在記憶體中產生所有的結果，而是在每次被請求時才「即時」計算並回傳下一個值。</li>
+                <li><strong>記憶體效率：</strong> 這種特性使其在處理大量資料時極具記憶體效率。</li>
+                <li><strong>轉換為元組：</strong> 若要獲得一個元組，必須明確地使用 <code>tuple()</code> 建構函式。</li>
+            </ul>
+
+            <h3>B. 範例程式碼</h3>
+            <h4>範例 8：生成器表達式與元組轉換</h4>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-variable">numbers</span> <span class="code-operator">=</span> [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>]
+<span class="code-comment"># 這是一個生成器表達式</span>
+<span class="code-variable">squared_gen</span> <span class="code-operator">=</span> (n<span class="code-operator">**</span><span class="code-number">2</span> <span class="code-keyword">for</span> n <span class="code-keyword">in</span> <span class="code-variable">numbers</span>)
+<span class="code-function">print</span>(<span class="code-variable">squared_gen</span>)  <span class="code-comment"># >> &lt;generator object &lt;genexpr&gt; at 0x...&gt;</span>
+
+<span class="code-comment"># 將生成器物件轉換為元組</span>
+<span class="code-variable">squared_tuple</span> <span class="code-operator">=</span> <span class="code-function">tuple</span>(<span class="code-variable">squared_gen</span>)
+<span class="code-function">print</span>(<span class="code-variable">squared_tuple</span>)  <span class="code-comment"># >> (1, 4, 9, 16, 25)</span></code></pre>
+            </div>
+            <h3>C. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>(n**2 for n in numbers)</code> 立即返回一個生成器物件，程式碼並未在此時進行任何計算。</li>
+                <li>當 `tuple()` 函式被呼叫時，它會迭代 `squared_gen` 生成器，逐一取出計算後的值 (1, 4, 9...)，最終建構成一個完整的元組。</li>
+            </ol>
+            
+            <h3>D. 前瞻性觀點</h3>
+            <blockquote>Python 不直接提供「元組生成式」是基於其設計哲學。元組是不可變的(immutable)，一次性從一個完整的可迭代物件 (如生成器) 創建，是更符合其特性的作法。 使用生成器表達式搭配 `tuple()` 的兩步驟流程，在處理龐大資料集時，效能和記憶體使用上更具優勢。</blockquote>
+        </section>
+
+        <section id="conclusion">
+            <h2>結論與最佳實踐</h2>
+            <p>對於 Python 開發者而言，熟練掌握生成式是邁向編寫更高效、更具可讀性程式碼的關鍵一步。 在機器學習與資料科學領域，生成式是進行大規模資料集預處理與轉換的強力工具。</p>
+
+            <h3>語法速查表</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>類型</th>
+                        <th>語法</th>
+                        <th>主要用途</th>
+                        <th>特性</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>串列生成式</td>
+                        <td><code>[expr for item in iter]</code></td>
+                        <td>創建新的串列</td>
+                        <td>靈活、常用，可包含複雜邏輯</td>
+                    </tr>
+                    <tr>
+                        <td>字典生成式</td>
+                        <td><code>{key: val for item in iter}</code></td>
+                        <td>創建新的字典</td>
+                        <td>高效建構鍵值對</td>
+                    </tr>
+                    <tr>
+                        <td>集合生成式</td>
+                        <td><code>{expr for item in iter}</code></td>
+                        <td>創建新的集合</td>
+                        <td>自動處理重複元素，確保唯一性</td>
+                    </tr>
+                    <tr>
+                        <td>生成器表達式</td>
+                        <td><code>(expr for item in iter)</code></td>
+                        <td>創建生成器物件</td>
+                        <td>延遲計算，記憶體效率極高</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>最佳實踐建議</h3>
+            <ul>
+                <li><strong>優先使用：</strong> 當您需要根據現有可迭代物件創建新的串列、字典或集合時，應優先考慮使用生成式。</li>
+                <li><strong>保持簡潔：</strong> 如果生成式變得過於複雜（例如超過兩層的巢狀迴圈），為了可讀性與可維護性，退回到傳統的 for 迴圈可能是更好的選擇。</li>
+                <li><strong>善用生成器：</strong> 在處理可能消耗大量記憶體的龐大資料流時，請務必優先考慮使用生成器表達式，以最小化資源佔用。</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
+        <p>由 Gemini 根據您的文件生成</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                const text = pre.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerText = '已複製!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = '複製';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('無法複製程式碼: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
