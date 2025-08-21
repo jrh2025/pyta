@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-09 繼承 (Inheritance) 解析</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        .code-fstring-brace { color: var(--operator-color); }
+        .code-fstring-var { color: #fd971f; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-09 繼承 (Inheritance) 解析</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#what-is-inheritance">什麼是繼承</a>
+        <a href="#method-overriding">覆寫方法</a>
+        <a href="#using-super">使用 super()</a>
+        <a href="#multilevel-inheritance">多層繼承</a>
+        <a href="#multiple-inheritance">多重繼承</a>
+        <a href="#private-methods">私有方法</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="what-is-inheritance">
+            <h2>主題一：什麼是繼承 (Inheritance)？</h2>
+            <p>繼承是一種物件導向的概念，它允許一個類別（稱為 <strong>子類別 Subclass</strong>）獲取另一個類別（稱為 <strong>父類別 Superclass</strong>）的屬性和方法。這種關係通常被描述為「<strong>is-a</strong>」（是一種）的關係。例如，一個「學生」是一種「人」，因此「學生」類別可以繼承自「人」類別。</p>
+            
+            <h3>A. 範例程式碼：基本的繼承關係</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 定義父類別：Person</span>
+<span class="code-keyword">class</span> <span class="code-function">Person</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>):
+        <span class="code-variable">self</span>.<span class="code-variable">name</span> <span class="code-operator">=</span> <span class="code-variable">name</span>
+        <span class="code-variable">self</span>.<span class="code-variable">age</span> <span class="code-operator">=</span> <span class="code-variable">age</span>
+        <span class="code-function">print</span>(<span class="code-string">f"(父類別 Person 的 __init__ 已被呼叫)"</span>)
+
+    <span class="code-keyword">def</span> <span class="code-function">display_info</span>(<span class="code-variable">self</span>):
+        <span class="code-function">print</span>(<span class="code-string">f"姓名: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.name</span><span class="code-fstring-brace">}</span><span class="code-string">, 年齡: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.age</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 定義子類別：Student，它繼承自 Person</span>
+<span class="code-keyword">class</span> <span class="code-function">Student</span>(<span class="code-variable">Person</span>):
+    <span class="code-comment"># Student 類別目前沒有定義任何自己的方法或屬性</span>
+    <span class="code-comment"># 但它會自動擁有 Person 的一切</span>
+    <span class="code-keyword">pass</span>
+
+<span class="code-comment"># --- 實際操作 ---</span>
+<span class="code-comment"># 建立一個 Student 物件</span>
+<span class="code-variable">student1</span> <span class="code-operator">=</span> <span class="code-function">Student</span>(<span class="code-string">"王大明"</span>, <span class="code-number">20</span>)
+
+<span class="code-comment"># 呼叫繼承自 Person 類別的 display_info 方法</span>
+<span class="code-variable">student1</span>.<span class="code-function">display_info</span>()</code></pre>
+            </div>
+            <h3>B. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>class Student(Person):</code>: 這行程式碼定義了 `Student` 類別，並在括號中指定 `Person` 作為其父類別。</li>
+                <li>`pass`: 關鍵字表示 `Student` 類別的主體是空的，它沒有添加任何新的屬性或方法。</li>
+                <li><code>student1 = Student("王大明", 20)</code>: 即使 `Student` 類別沒有定義自己的 `__init__` 方法，它會自動呼叫父類別 `Person` 的 `__init__` 方法來初始化物件。</li>
+                <li><code>student1.display_info()</code>: `student1` 物件可以直接呼叫 `Person` 類別中定義的 `display_info` 方法，這完美展示了程式碼的複用。</li>
+            </ol>
+        </section>
+
+        <section id="method-overriding">
+            <h2>主題二：覆寫方法 (Method Overriding)</h2>
+            <p>子類別雖然繼承了父類別的所有方法，但有時父類別的方法行為不完全符合子類別的需求。這時，子類別可以重新定義一個與父類別同名的方法，這個過程稱為 <strong>覆寫 (Overriding)</strong>。</p>
+            <h3>A. 範例程式碼：覆寫 display_info 方法</h3>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-keyword">class</span> <span class="code-function">Student</span>(<span class="code-variable">Person</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>, <span class="code-variable">student_id</span>):
+        <span class="code-comment"># ... (初始化暫略，詳見下一節)</span>
+        <span class="code-keyword">super</span>().<span class="code-function">__init__</span>(<span class="code-variable">name</span>, <span class="code-variable">age</span>)
+        <span class="code-variable">self</span>.<span class="code-variable">student_id</span> <span class="code-operator">=</span> <span class="code-variable">student_id</span>
+
+    <span class="code-comment"># --- 覆寫父類別的 display_info 方法 ---</span>
+    <span class="code-keyword">def</span> <span class="code-function">display_info</span>(<span class="code-variable">self</span>):
+        <span class="code-comment"># 這裡我們完全重新定義了方法的內容</span>
+        <span class="code-function">print</span>(<span class="code-string">f"姓名: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.name</span><span class="code-fstring-brace">}</span><span class="code-string">, 年齡: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.age</span><span class="code-fstring-brace">}</span><span class="code-string">, 學號: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.student_id</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># --- 實際操作 ---</span>
+<span class="code-variable">student2</span> <span class="code-operator">=</span> <span class="code-function">Student</span>(<span class="code-string">"陳小美"</span>, <span class="code-number">21</span>, <span class="code-string">"S654321"</span>)
+<span class="code-function">print</span>(<span class="code-string">"\nStudent 物件的資訊 (使用覆寫後的方法)："</span>)
+<span class="code-variable">student2</span>.<span class="code-function">display_info</span>()</code></pre>
+            </div>
+            <h3>B. 程式碼細緻拆解</h3>
+             <ol>
+                <li>`def display_info(self):` 在 `Student` 類別中再次出現，代表我們要覆寫來自父類別的同名方法。</li>
+                <li>當 <code>student2.display_info()</code> 被呼叫時，Python 會優先使用 `Student` 類別中定義的版本，因為它更「具體」。</li>
+            </ol>
+        </section>
+
+        <section id="using-super">
+            <h2>主題三：使用 super() 呼叫父類別方法</h2>
+            <p>為了避免在子類別中重複撰寫父類別已有的功能，我們可以使用 <code>super()</code> 函式。<code>super()</code> 讓我們可以從子類別中明確地呼叫父類別的方法，這是繼承中的最佳實踐。</p>
+            <h3>A. 範例程式碼：使用 super() 優化</h3>
+             <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-keyword">class</span> <span class="code-function">Person</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>):
+        <span class="code-variable">self</span>.<span class="code-variable">name</span> <span class="code-operator">=</span> <span class="code-variable">name</span>
+        <span class="code-variable">self</span>.<span class="code-variable">age</span> <span class="code-operator">=</span> <span class="code-variable">age</span>
+    <span class="code-keyword">def</span> <span class="code-function">display_info</span>(<span class="code-variable">self</span>):
+        <span class="code-function">print</span>(<span class="code-string">f"姓名: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.name</span><span class="code-fstring-brace">}</span><span class="code-string">, 年齡: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.age</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>, <span class="code-variable">end</span><span class="code-operator">=</span><span class="code-string">""</span>)
+
+<span class="code-keyword">class</span> <span class="code-function">Student</span>(<span class="code-variable">Person</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>, <span class="code-variable">student_id</span>):
+        <span class="code-comment"># 使用 super() 呼叫父類別的 __init__</span>
+        <span class="code-keyword">super</span>().<span class="code-function">__init__</span>(<span class="code-variable">name</span>, <span class="code-variable">age</span>)
+        <span class="code-comment"># 子類別只需處理自己特有的屬性</span>
+        <span class="code-variable">self</span>.<span class="code-variable">student_id</span> <span class="code-operator">=</span> <span class="code-variable">student_id</span>
+
+    <span class="code-comment"># --- 使用 super() 優化覆寫方法 ---</span>
+    <span class="code-keyword">def</span> <span class="code-function">display_info</span>(<span class="code-variable">self</span>):
+        <span class="code-comment"># 首先，呼叫父類別的 display_info 方法</span>
+        <span class="code-keyword">super</span>().<span class="code-function">display_info</span>()
+        <span class="code-comment"># 然後，子類別只需添加自己獨特的部分</span>
+        <span class="code-function">print</span>(<span class="code-string">f", 學號: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.student_id</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-variable">student3</span> <span class="code-operator">=</span> <span class="code-function">Student</span>(<span class="code-string">"李四"</span>, <span class="code-number">22</span>, <span class="code-string">"S987654"</span>)
+<span class="code-variable">student3</span>.<span class="code-function">display_info</span>()</code></pre>
+            </div>
+             <h3>B. 程式碼細緻拆解</h3>
+            <ol>
+                <li><code>super().__init__(name, age)</code>: 這行程式碼明確地呼叫父類別 (`Person`) 的 `__init__` 方法，讓它去完成 `name` 和 `age` 的初始化，避免了程式碼重複。</li>
+                <li><code>super().display_info()</code>: 在子類別的 `display_info` 中，我們先呼叫父類別的同名方法來處理共通的輸出部分（姓名和年齡）。</li>
+                <li>接著，子類別只需 `print` 自己特有的資訊（學號），實現了功能的擴充而非完全重寫。</li>
+            </ol>
+        </section>
+
+        <section id="multilevel-inheritance">
+            <h2>主題四：多層繼承 (Multilevel Inheritance)</h2>
+            <p>繼承關係可以形成一個鏈條。一個類別可以繼承自另一個子類別，例如：`Person -> Student -> PhDStudent`。</p>
+             <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-keyword">class</span> <span class="code-function">PhDStudent</span>(<span class="code-variable">Student</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>, <span class="code-variable">student_id</span>, <span class="code-variable">research_topic</span>):
+        <span class="code-comment"># 呼叫其父類別 (Student) 的 __init__</span>
+        <span class="code-keyword">super</span>().<span class="code-function">__init__</span>(<span class="code-variable">name</span>, <span class="code-variable">age</span>, <span class="code-variable">student_id</span>)
+        <span class="code-variable">self</span>.<span class="code-variable">research_topic</span> <span class="code-operator">=</span> <span class="code-variable">research_topic</span>
+
+    <span class="code-keyword">def</span> <span class="code-function">display_info</span>(<span class="code-variable">self</span>):
+        <span class="code-keyword">super</span>().<span class="code-function">display_info</span>()
+        <span class="code-function">print</span>(<span class="code-string">f", 研究主題: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.research_topic</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-variable">phd1</span> <span class="code-operator">=</span> <span class="code-function">PhDStudent</span>(<span class="code-string">"林博士"</span>, <span class="code-number">28</span>, <span class="code-string">"P112233"</span>, <span class="code-string">"生成式AI"</span>)
+<span class="code-variable">phd1</span>.<span class="code-function">display_info</span>()</code></pre>
+            </div>
+             <blockquote>`phd1` 物件同時擁有 `Person`、`Student` 和 `PhDStudent` 三個類別的特性。`super()` 在此處會呼叫其直接父類別 `Student` 的方法。</blockquote>
+        </section>
+
+         <section id="multiple-inheritance">
+            <h2>主題五：多重繼承 (Multiple Inheritance)</h2>
+            <p>Python 允許一個子類別同時繼承多個父類別，這在需要組合不同功能時非常有用。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-keyword">class</span> <span class="code-function">Worker</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">job_title</span>):
+        <span class="code-variable">self</span>.<span class="code-variable">job_title</span> <span class="code-operator">=</span> <span class="code-variable">job_title</span>
+    <span class="code-keyword">def</span> <span class="code-function">work</span>(<span class="code-variable">self</span>):
+        <span class="code-function">print</span>(<span class="code-string">f"正在以 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.job_title</span><span class="code-fstring-brace">}</span><span class="code-string"> 的身份工作..."</span>)
+
+<span class="code-comment"># WorkingStudent 同時繼承 Student 和 Worker</span>
+<span class="code-keyword">class</span> <span class="code-function">WorkingStudent</span>(<span class="code-variable">Student</span>, <span class="code-variable">Worker</span>):
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>, <span class="code-variable">student_id</span>, <span class="code-variable">job_title</span>):
+        <span class="code-comment"># 當有多個父類別時，需要分別初始化</span>
+        <span class="code-variable">Student</span>.<span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">age</span>, <span class="code-variable">student_id</span>)
+        <span class="code-variable">Worker</span>.<span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">job_title</span>)
+
+<span class="code-variable">ws1</span> <span class="code-operator">=</span> <span class="code-function">WorkingStudent</span>(<span class="code-string">"張三"</span>, <span class="code-number">23</span>, <span class="code-string">"S556677"</span>, <span class="code-string">"研究助理"</span>)
+<span class="code-variable">ws1</span>.<span class="code-function">display_info</span>()  <span class="code-comment"># 來自 Student</span>
+<span class="code-variable">ws1</span>.<span class="code-function">work</span>()          <span class="code-comment"># 來自 Worker</span></code></pre>
+            </div>
+             <blockquote><strong>警示</strong>：多重繼承雖然強大，但也可能引發「鑽石問題」。Python 使用一套稱為 <strong>方法解析順序 (MRO)</strong> 的演算法來解決此問題。對於初學者，建議謹慎使用。</blockquote>
+        </section>
+
+        <section id="private-methods">
+            <h2>主題六：私有方法與屬性 (Name Mangling)</h2>
+            <p>在 Python 中，可以在名稱前加上<strong>兩個底線</strong> (<code>__</code>) 來建立「私有」成員。這並非真正的私有，而是一種稱為「<strong>名稱修飾 (Name Mangling)</strong>」的機制，目的是避免子類別無意中覆寫了父類別的內部方法。</p>
+             <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-keyword">class</span> <span class="code-function">Person</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">name</span>, <span class="code-variable">ssn</span>):
+        <span class="code-variable">self</span>.<span class="code-variable">name</span> <span class="code-operator">=</span> <span class="code-variable">name</span>
+        <span class="code-variable">self</span>.<span class="code-variable">__ssn</span> <span class="code-operator">=</span> <span class="code-variable">ssn</span>  <span class="code-comment"># 私有屬性</span>
+
+    <span class="code-comment"># 私有方法</span>
+    <span class="code-keyword">def</span> <span class="code-function">__get_ssn</span>(<span class="code-variable">self</span>):
+        <span class="code-keyword">return</span> <span class="code-variable">self</span>.<span class="code-variable">__ssn</span>
+
+    <span class="code-keyword">def</span> <span class="code-function">access_sensitive_info</span>(<span class="code-variable">self</span>):
+        <span class="code-comment"># 類別內部可以自由呼叫自己的私有方法</span>
+        <span class="code-variable">ssn</span> <span class="code-operator">=</span> <span class="code-variable">self</span>.<span class="code-function">__get_ssn</span>()
+        <span class="code-function">print</span>(<span class="code-string">f"</span><span class="code-fstring-brace">{</span><span class="code-fstring-var">self.name</span><span class="code-fstring-brace">}</span><span class="code-string"> 的 SSN 後四碼為 </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">ssn</span>[<span class="code-operator">-</span><span class="code-number">4</span>:]<span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-variable">p</span> <span class="code-operator">=</span> <span class="code-function">Person</span>(<span class="code-string">"秘密客"</span>, <span class="code-string">"ABC-12345"</span>)
+<span class="code-variable">p</span>.<span class="code-function">access_sensitive_info</span>() <span class="code-comment"># 成功</span>
+
+<span class="code-keyword">try</span>:
+    <span class="code-function">print</span>(<span class="code-variable">p</span>.<span class="code-variable">__ssn</span>)
+<span class="code-keyword">except</span> <span class="code-variable">AttributeError</span> <span class="code-keyword">as</span> <span class="code-variable">e</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"\n存取私有屬性失敗: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">e</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+        </section>
+
+         <section id="conclusion">
+            <h2>結論與前瞻性觀點</h2>
+            <p>繼承是物件導向程式設計中實現抽象化和程式碼複用的核心工具。透過建立清晰的類別層次，我們可以減少重複程式碼、提高可維護性，並建立更精確反映真實世界關係的邏輯模型。</p>
+            <blockquote>在 PyTorch 中建立一個神經網路模型時，您的模型類別通常會繼承自 `torch.nn.Module`，從而自動獲得模型訓練、參數管理等所有底層功能。理解繼承，是您從腳本編寫者邁向軟體架構師的必經之路。</blockquote>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
+        <p>由 Gemini 根據您的文件生成</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                const text = pre.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerText = '已複製!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = '複製';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('無法複製程式碼: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

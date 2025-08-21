@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python-10 模組匯入 (Import) 解析</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --background-color: #f4f6f8;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --code-bg-color: #2d2d2d;
+            --code-text-color: #f8f8f2;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --keyword-color: #f92672;
+            --string-color: #e6db74;
+            --comment-color: #75715e;
+            --number-color: #ae81ff;
+            --function-color: #66d9ef;
+            --operator-color: #f92672;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: var(--card-bg-color);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: 500;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--card-bg-color);
+            background-color: var(--primary-color);
+        }
+        nav a.home-link {
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        nav a.home-link:hover {
+            background-color: #e2e8f0; /* slate-200 */
+            color: var(--secondary-color);
+        }
+        section {
+            background-color: var(--card-bg-color);
+            margin: 20px 0;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 70px; /* Offset for sticky nav */
+        }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            font-size: 2rem;
+        }
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        .code-container {
+            position: relative;
+        }
+        pre {
+            background-color: var(--code-bg-color);
+            color: var(--code-text-color);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: inherit;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+        .code-container:hover .copy-btn {
+            opacity: 1;
+        }
+        .copy-btn:hover {
+            background-color: var(--primary-color);
+        }
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+        .code-keyword { color: var(--keyword-color); }
+        .code-string { color: var(--string-color); }
+        .code-comment { color: var(--comment-color); font-style: italic; }
+        .code-number { color: var(--number-color); }
+        .code-function { color: var(--function-color); }
+        .code-variable { color: #f8f8f2; }
+        .code-operator { color: var(--operator-color); }
+        .code-fstring-brace { color: var(--operator-color); }
+        .code-fstring-var { color: #fd971f; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: #777;
+        }
+        .footer-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Python-10 模組匯入 (Import) 解析</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="home-link">返回目錄</a>
+        <a href="#basic-syntax">基本語法</a>
+        <a href="#alias">使用別名</a>
+        <a href="#custom-module">自訂模組</a>
+        <a href="#search-path">搜尋路徑</a>
+        <a href="#conclusion">結論</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="basic-syntax">
+            <h2>主題一：import 的基本語法</h2>
+            <p>在 Python 中，每一個 <code>.py</code> 檔案都可以被視為一個<strong>模組</strong>。模組讓我們能將程式碼組織在獨立的檔案中，並在需要時載入使用。</p>
+
+            <h3>A. 方法一：<code>import module_name</code> (推薦)</h3>
+            <p>這是最直接的匯入方式，會將整個模組載入，您需要透過 <code>module_name.</code> 的前綴來存取其中的內容。這種方式可讀性極高，能有效避免命名衝突。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 匯入整個 math 模組</span>
+<span class="code-keyword">import</span> <span class="code-variable">math</span>
+
+<span class="code-comment"># 必須使用 'math.' 作為前綴來存取其內容</span>
+<span class="code-variable">pi_value</span> <span class="code-operator">=</span> <span class="code-variable">math</span>.<span class="code-variable">pi</span>
+<span class="code-variable">result</span> <span class="code-operator">=</span> <span class="code-variable">math</span>.<span class="code-function">sqrt</span>(<span class="code-number">16</span>)
+
+<span class="code-function">print</span>(<span class="code-string">f"圓周率 (pi) 的值是: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">pi_value</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"16 的平方根是: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">result</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+
+            <h3>B. 方法二：<code>from module_name import name1, name2</code></h3>
+            <p>如果您只需要模組中的少數幾個特定功能，可以使用此語法將它們直接匯入到當前的命名空間，使用時不需加上模組前綴。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 從 math 模組中，只匯入 pi 這個變數和 sqrt 這個函式</span>
+<span class="code-keyword">from</span> <span class="code-variable">math</span> <span class="code-keyword">import</span> <span class="code-variable">pi</span>, <span class="code-variable">sqrt</span>
+
+<span class="code-comment"># 現在可以直接使用 pi 和 sqrt，不需前綴</span>
+<span class="code-variable">pi_value</span> <span class="code-operator">=</span> <span class="code-variable">pi</span>
+<span class="code-variable">result</span> <span class="code-operator">=</span> <span class="code-function">sqrt</span>(<span class="code-number">16</span>)
+
+<span class="code-function">print</span>(<span class="code-string">f"圓周率 (pi) 的值是: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">pi_value</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"16 的平方根是: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">result</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+
+            <h3>C. 方法三：<code>from module_name import *</code> (不推薦)</h3>
+            <p><strong>強烈不建議</strong>在正式的專案程式碼中使用此方法。它會污染當前的命名空間，您將無法輕易追蹤變數來源，且極易引發命名衝突。</p>
+        </section>
+
+        <section id="alias">
+            <h2>主題二：使用 <code>as</code> 替模組或函式新增別名</h2>
+            <p>當模組名稱過長，或為了遵循社群慣例時，我們可以使用 <code>as</code> 關鍵字為匯入的模組或函式指定一個較短的別名。</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 1. 為模組設定別名 (在資料科學領域非常常見)</span>
+<span class="code-keyword">import</span> <span class="code-variable">numpy</span> <span class="code-keyword">as</span> <span class="code-variable">np</span>
+<span class="code-keyword">import</span> <span class="code-variable">pandas</span> <span class="code-keyword">as</span> <span class="code-variable">pd</span>
+
+<span class="code-comment"># 使用別名 'np' 來操作 numpy 模組</span>
+<span class="code-variable">my_array</span> <span class="code-operator">=</span> <span class="code-variable">np</span>.<span class="code-function">array</span>([<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>])
+<span class="code-function">print</span>(<span class="code-string">f"Numpy array: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">my_array</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 2. 為特定函式設定別名</span>
+<span class="code-keyword">from</span> <span class="code-variable">math</span> <span class="code-keyword">import</span> <span class="code-variable">factorial</span> <span class="code-keyword">as</span> <span class="code-variable">fact</span>
+
+<span class="code-comment"># 使用別名 'fact' 來呼叫 factorial 函式</span>
+<span class="code-function">print</span>(<span class="code-string">f"5 的階乘是: </span><span class="code-fstring-brace">{</span><span class="code-function">fact</span>(<span class="code-number">5</span>)<span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+        </section>
+
+        <section id="custom-module">
+            <h2>主題三：建立自己的模組</h2>
+            <p>任何一個 <code>.py</code> 檔案都可以作為模組被其他檔案匯入。</p>
+            
+            <h3>A. 範例程式碼：建立與使用模組</h3>
+            <p>首先，建立一個名為 <code>my_utils.py</code> 的檔案：</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 檔案名稱: my_utils.py</span>
+<span class="code-variable">PI</span> <span class="code-operator">=</span> <span class="code-number">3.14159265</span>
+
+<span class="code-keyword">def</span> <span class="code-function">add</span>(<span class="code-variable">x</span>, <span class="code-variable">y</span>):
+    <span class="code-string">"""回傳兩數之和"""</span>
+    <span class="code-keyword">return</span> <span class="code-variable">x</span> <span class="code-operator">+</span> <span class="code-variable">y</span>
+
+<span class="code-keyword">class</span> <span class="code-function">Circle</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-variable">self</span>, <span class="code-variable">radius</span>):
+        <span class="code-variable">self</span>.<span class="code-variable">radius</span> <span class="code-operator">=</span> <span class="code-variable">radius</span>
+    <span class="code-keyword">def</span> <span class="code-function">area</span>(<span class="code-variable">self</span>):
+        <span class="code-string">"""計算圓面積"""</span>
+        <span class="code-keyword">return</span> <span class="code-variable">PI</span> <span class="code-operator">*</span> (<span class="code-variable">self</span>.<span class="code-variable">radius</span> <span class="code-operator">**</span> <span class="code-number">2</span>)</code></pre>
+            </div>
+            <p>在同一個資料夾下，建立 <code>main.py</code> 來匯入並使用它：</p>
+             <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># 檔案名稱: main.py</span>
+<span class="code-comment"># 匯入我們自己建立的 my_utils 模組</span>
+<span class="code-keyword">import</span> <span class="code-variable">my_utils</span>
+
+<span class="code-comment"># 使用模組中的變數和函式</span>
+<span class="code-variable">sum_result</span> <span class="code-operator">=</span> <span class="code-variable">my_utils</span>.<span class="code-function">add</span>(<span class="code-number">10</span>, <span class="code-number">5</span>)
+<span class="code-function">print</span>(<span class="code-string">f"10 + 5 = </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">sum_result</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 建立模組中的類別實體</span>
+<span class="code-variable">c</span> <span class="code-operator">=</span> <span class="code-variable">my_utils</span>.<span class="code-function">Circle</span>(<span class="code-number">10</span>)
+<span class="code-function">print</span>(<span class="code-string">f"半徑為 10 的圓面積是: </span><span class="code-fstring-brace">{</span><span class="code-variable">c</span>.<span class="code-function">area</span>()<span class="code-fstring-brace">}</span><span class="code-string">"</span>)</code></pre>
+            </div>
+
+            <h3>B. <code>if __name__ == "__main__"</code> 的重要性</h3>
+            <p>這個條件判斷式是建立可複用模組的關鍵實踐。它讓我們可以在模組檔案中加入僅供測試或獨立執行時才運作的程式碼。</p>
+            <ul>
+                <li>如果檔案是<strong>直接被執行</strong> (例如 <code>python my_utils.py</code>)，其 <code>__name__</code> 變數的值會是 <code>"__main__"</code>。</li>
+                <li>如果檔案是作為模組<strong>被匯入</strong>，其 <code>__name__</code> 變數的值會是<strong>模組的名稱</strong> (例如 <code>"my_utils"</code>)。</li>
+            </ul>
+            <p>修改 <code>my_utils.py</code> 加入測試區塊：</p>
+            <div class="code-container">
+                <button class="copy-btn">複製</button>
+                <pre><code><span class="code-comment"># ... (函式與類別定義不變) ...</span>
+
+<span class="code-comment"># --- 測試區塊 ---</span>
+<span class="code-comment"># 這段程式碼只有在 my_utils.py 被直接執行時才會被觸發</span>
+<span class="code-keyword">if</span> <span class="code-variable">__name__</span> <span class="code-operator">==</span> <span class="code-string">"__main__"</span>:
+    <span class="code-function">print</span>(<span class="code-string">"正在直接執行 my_utils.py 檔案進行測試..."</span>)
+    <span class="code-variable">test_sum</span> <span class="code-operator">=</span> <span class="code-function">add</span>(<span class="code-number">50</span>, <span class="code-number">50</span>)
+    <span class="code-function">print</span>(<span class="code-string">f"測試 add(50, 50)，結果為: </span><span class="code-fstring-brace">{</span><span class="code-fstring-var">test_sum</span><span class="code-fstring-brace">}</span><span class="code-string">"</span>)
+
+<span class="code-comment"># 當我們執行 main.py 時，因為 my_utils 是被匯入的，</span>
+<span class="code-comment"># 所以 __name__ 的值是 "my_utils"，以上測試區塊不會執行。</span></code></pre>
+            </div>
+        </section>
+
+        <section id="search-path">
+            <h2>主題四：模組搜尋路徑、相對與絕對路徑匯入</h2>
+            <h3>A. Python 如何尋找模組？</h3>
+            <p>當您寫下 <code>import my_module</code> 時，Python 解譯器會依序在「模組搜尋路徑」中尋找 <code>my_module.py</code>。順序通常是：</p>
+            <ol>
+                <li>目前腳本所在的目錄。</li>
+                <li><code>PYTHONPATH</code> 環境變數中指定的目錄。</li>
+                <li>Python 安裝時設定的標準函式庫路徑。</li>
+            </ol>
+            
+            <h3>B. 套件 (Package) 與匯入方式</h3>
+            <p>當專案變大時，我們會將相關模組放入資料夾來管理，這個資料夾就稱為「<strong>套件 (Package)</strong>」。一個資料夾要被視為套件，其中必須包含一個（可以是空的）<code>__init__.py</code> 檔案。</p>
+            <blockquote><strong>絕對路徑匯入 (Absolute Import)</strong>：從專案根目錄開始指定完整路徑，例如 <code>from my_app.models import user</code>。這是 <strong>PEP 8 官方推薦</strong>的作法，因為它最清晰。</blockquote>
+            <blockquote><strong>相對路徑匯入 (Relative Import)</strong>：使用 <code>.</code> (目前目錄) 和 <code>..</code> (上一層目錄) 來指定模組的相對位置，例如 <code>from ..utils import formatter</code>。它只能在套件內部使用。</blockquote>
+            <p><strong>前瞻性建議</strong>：作為初學者和未來的軟體工程師，應<strong>優先養成使用絕對路徑匯入的習慣</strong>。</p>
+        </section>
+        
+        <section id="conclusion">
+            <h2>結論與前瞻性觀點</h2>
+            <p>模組與匯入系統是 Python 程式設計的支柱。一個優秀的開發者不僅知道如何編寫函式與類別，更重要的是知道如何將它們組織成結構良好、可維護、可複用的模-組與套件。</p>
+            <blockquote>在機器學習專案中，您將會大量地匯入 NumPy, Pandas, Scikit-learn, PyTorch 等第三方函式庫，並將自己的程式碼拆分為多個模組。熟練掌握 import 系統，是您從小型腳本開發邁向大型專案工程的關鍵一步。</blockquote>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><a href="index.html" class="footer-link">返回目錄</a></p>
+        <p>由 Gemini 根據您的文件生成</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const pre = button.parentElement.querySelector('pre');
+                const text = pre.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.innerText = '已複製!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.innerText = '複製';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('無法複製程式碼: ', err);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
