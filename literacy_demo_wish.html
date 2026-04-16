@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域素養與閱讀理解綜合評量 - 嚴格安全模式</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+
+        /* 系統級防護：徹底禁用文字選取與觸控長按反白 */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f0f2f5;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .option-btn {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(6px);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 警告通知動畫 */
+        @keyframes slideDown {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+
+            to {
+                top: 20px;
+                opacity: 1;
+            }
+        }
+
+        .toast-enter {
+            animation: slideDown 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        /* 滾動條美化 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- 全局系統警告 Toast -->
+    <div id="system-toast"
+        class="fixed left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-4 rounded-xl shadow-2xl z-[100] flex items-center font-bold text-lg hidden"
+        style="top: -100px;">
+        <svg class="w-7 h-7 mr-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+            </path>
+        </svg>
+        <span id="toast-message">系統警告：偵測到異常行為！</span>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white shadow-lg py-4 border-b-4 border-emerald-500 relative z-50">
+        <div class="max-w-5xl mx-auto px-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-wide">PISA/PIRLS 跨域素養評量系統</h1>
+                <p class="mt-1 text-slate-400 text-xs md:text-sm flex items-center">
+                    <svg class="w-4 h-4 mr-1 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                        </path>
+                    </svg>
+                    零信任前端防護模組已啟動 (Zero-Trust Enforced)
+                </p>
+            </div>
+            <div class="text-right hidden md:block text-sm bg-slate-800 px-4 py-2 rounded-lg border border-slate-700">
+                違規切換紀錄：<span id="violation-counter" class="font-bold text-red-400 text-lg">0</span> 次
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center p-4 my-6">
+
+        <!-- 嚴格鎖定畫面 (作弊被抓時觸發) -->
+        <div id="lockdown-screen"
+            class="hidden max-w-2xl w-full bg-red-50 border-4 border-red-600 rounded-2xl shadow-2xl p-10 text-center fade-in">
+            <svg class="w-24 h-24 text-red-600 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                </path>
+            </svg>
+            <h2 class="text-3xl font-black text-red-800 mb-4">系統安全鎖定</h2>
+            <p class="text-red-900 text-lg mb-6 leading-relaxed font-medium">
+                系統已偵測到您嘗試開啟「開發者工具」、檢視原始碼、切換分頁或使用違規快捷鍵。<br>
+                為維護測驗學術公平性，本試卷已強制凍結，您的作答紀錄已被清空。
+            </p>
+            <div
+                class="bg-white p-4 rounded-lg inline-block border border-red-200 shadow-sm text-slate-700 font-mono text-sm font-bold">
+                Error Code: ACADEMIC_INTEGRITY_VIOLATION
+            </div>
+        </div>
+
+        <div id="app-container"
+            class="max-w-4xl w-full bg-white rounded-3xl shadow-[0_20px_50px_rgba(8,_112,_184,_0.07)] overflow-hidden fade-in border border-slate-100">
+
+            <!-- Start Screen -->
+            <div id="start-screen" class="p-8 md:p-12 text-center">
+                <div class="mb-6 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-emerald-200 rounded-full blur-xl opacity-60"></div>
+                        <svg class="w-24 h-24 text-emerald-600 relative z-10" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-extrabold text-slate-800 mb-2">國語文綜合閱讀素養測驗</h2>
+                <p class="text-slate-500 mb-8 font-medium">測驗文本：陳木城《許願》與非連續性文本資料</p>
+
+                <div
+                    class="bg-amber-50 border-l-4 border-amber-500 text-left p-5 mb-10 text-sm text-amber-900 rounded-r-xl shadow-sm">
+                    <p class="font-bold mb-2 text-base text-amber-800">⚠️ 嚴格測驗安全規範（請詳閱）：</p>
+                    <ul class="list-disc pl-5 space-y-1.5 font-medium">
+                        <li>系統已啟用<span class="font-bold text-red-600">防複製、防右鍵與快捷鍵攔截</span>。</li>
+                        <li>測驗期間<span class="font-bold text-red-600">嚴禁切換瀏覽器分頁或最小化視窗</span>，系統將自動記錄。</li>
+                        <li>嚴禁開啟瀏覽器開發者工具 (DevTools)，違者試卷將立即永久鎖定。</li>
+                        <li class="font-bold text-red-700">本測驗為單次嚴格考核，一旦點擊啟動或繳交，將無法重新測驗。</li>
+                        <li>部分數理推演題包含「動態參數」，每次點擊數值皆不同，請謹慎運算。</li>
+                    </ul>
+                </div>
+                <button onclick="startQuiz()"
+                    class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition transform hover:-translate-y-1 hover:shadow-emerald-500/50 focus:outline-none flex items-center mx-auto text-lg w-full sm:w-auto justify-center">
+                    接受規範，開始測驗
+                    <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quiz-screen" class="hidden flex flex-col h-full">
+                <!-- Progress Bar -->
+                <div class="bg-slate-100 h-2.5 w-full">
+                    <div id="progress-bar" class="bg-emerald-500 h-2.5 transition-all duration-500 w-0 ease-out"></div>
+                </div>
+
+                <div class="p-6 md:p-10 flex-grow">
+                    <div class="flex justify-between items-center mb-6">
+                        <span id="question-counter"
+                            class="text-sm font-bold text-emerald-700 bg-emerald-50 px-4 py-1.5 rounded-full shadow-sm border border-emerald-100"></span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">PISA / PIRLS
+                            Assessment</span>
+                    </div>
+
+                    <h3 id="question-text"
+                        class="text-xl md:text-2xl font-bold text-slate-800 mb-8 leading-relaxed border-l-4 border-emerald-500 pl-5">
+                        <!-- Question goes here -->
+                    </h3>
+
+                    <div id="options-container" class="space-y-4">
+                        <!-- Options go here -->
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border-t border-slate-200 p-5 flex justify-end">
+                    <button id="next-btn" onclick="nextQuestion()" disabled
+                        class="bg-slate-300 cursor-not-allowed text-white font-bold py-3.5 px-8 rounded-xl transition duration-200 flex items-center">
+                        儲存並下一題
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen" class="hidden p-6 md:p-10">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-extrabold text-slate-800 mb-2">認知歷程與數據分析報告</h2>
+                    <p class="text-slate-500 font-medium">素養導向檢測結算表</p>
+                </div>
+
+                <div class="flex justify-center mb-10">
+                    <div
+                        class="bg-gradient-to-br from-emerald-50 to-white border-4 border-emerald-100 rounded-full w-48 h-48 flex flex-col items-center justify-center shadow-[0_10px_30px_rgba(16,185,129,0.2)] relative">
+                        <span id="score-text" class="text-5xl font-black text-emerald-600"></span>
+                        <span
+                            class="text-emerald-700 text-sm font-bold mt-2 bg-white px-4 py-1 rounded-full border border-emerald-100 absolute -bottom-4 shadow-sm">綜合正確率</span>
+                    </div>
+                </div>
+
+                <div id="review-container" class="space-y-6 mb-8 max-h-[550px] overflow-y-auto pr-2 custom-scrollbar">
+                    <!-- Review items go here -->
+                </div>
+
+                <div class="text-center border-t border-slate-200 pt-8 mt-4">
+                    <div
+                        class="inline-flex items-center px-6 py-3 bg-slate-100 border border-slate-200 rounded-xl text-slate-600 font-bold shadow-inner">
+                        <svg class="w-5 h-5 mr-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                        測驗已結束，本卷不可重複提交。認知歷程數據已安全封存。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Application Logic & Security Module -->
+    <script>
+        /* =========================================
+           🛡️ 零信任安全防護模組 (Zero-Trust Module)
+           ========================================= */
+
+        let violationCount = 0;
+        let isLocked = false;
+
+        function showWarningToast(message) {
+            if (isLocked) return;
+            const toast = document.getElementById('system-toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('toast-enter');
+
+            setTimeout(() => {
+                toast.classList.remove('toast-enter');
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function triggerLockdown() {
+            if (isLocked) return;
+            isLocked = true;
+            document.getElementById('app-container').classList.add('hidden');
+            document.getElementById('lockdown-screen').classList.remove('hidden');
+            quizData = []; // Purge sensitive data
+        }
+
+        // 1. 防選取、防右鍵、防拷貝
+        ['contextmenu', 'copy', 'cut', 'paste', 'dragstart', 'selectstart'].forEach(evt => {
+            document.addEventListener(evt, (e) => {
+                e.preventDefault();
+                showWarningToast('系統警告：測驗期間禁止使用拷貝或選單功能！');
+            });
+        });
+
+        // 2. 鍵盤行為攔截器
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                triggerLockdown();
+            }
+            if (e.ctrlKey || e.metaKey) {
+                const key = String.fromCharCode(e.keyCode).toLowerCase();
+                if (['u', 'c', 's', 'p', 'i', 'j'].includes(key)) {
+                    e.preventDefault();
+                    if (['i', 'j', 'u'].includes(key) && e.shiftKey) {
+                        triggerLockdown();
+                    } else {
+                        showWarningToast('系統警告：禁止使用未經授權的組合鍵！');
+                    }
+                }
+            }
+        });
+
+        // 3. DevTools 動態偵測陷阱
+        function detectDevTools() {
+            if (isLocked) return;
+            const threshold = 160;
+            const start = performance.now();
+            (function () { debugger; })();
+            const end = performance.now();
+            if (end - start > threshold) {
+                triggerLockdown();
+            }
+        }
+        setInterval(detectDevTools, 1500);
+
+        // 4. 視窗失焦偵測 (Anti-Tab Switching)
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "hidden" && !isLocked && !document.getElementById('start-screen').classList.contains('hidden') === false && document.getElementById('result-screen').classList.contains('hidden') === true) {
+                violationCount++;
+                document.getElementById('violation-counter').innerText = violationCount;
+                setTimeout(() => {
+                    showWarningToast(`警告！您已切換視窗 ${violationCount} 次，請維持頁面焦點！`);
+                }, 300);
+                if (violationCount >= 3) {
+                    triggerLockdown();
+                }
+            }
+        });
+
+
+        /* =========================================
+           🧠 核心題庫引擎與參數演算法
+           ========================================= */
+
+        let quizData = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userSelections = [];
+
+        // 洗牌演算法 (Fisher-Yates)
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // 動態題庫生成器
+        function generateDynamicQuizData() {
+            // -- 參數化數學推演題 1 --
+            const hours = [2, 3, 4, 5][Math.floor(Math.random() * 4)];
+            const days1 = [5, 6, 8, 10][Math.floor(Math.random() * 4)];
+            const growthRate = [1, 1.5, 2][Math.floor(Math.random() * 3)];
+            const growth1 = hours * days1 * growthRate;
+            const ratio = [1.5, 2.0, 2.5][Math.floor(Math.random() * 3)];
+            const days2 = [8, 10, 12][Math.floor(Math.random() * 3)];
+
+            // Ans9 = rate * (hours * ratio) * days2 = growthRate * hours * ratio * days2
+            const ans9 = growthRate * (hours * ratio) * days2;
+
+            let q9Opts = new Set();
+            q9Opts.add(`${ans9} 公分`);
+            q9Opts.add(`${ans9 + (growthRate * hours * 2)} 公分`);
+            q9Opts.add(`${Math.round(ans9 * 0.8)} 公分`);
+            while (q9Opts.size < 4) { q9Opts.add(`${Math.round(ans9 + Math.random() * 20 - 10)} 公分`); }
+
+            // -- 參數化數學推演題 2 --
+            const energyPerM = [0.8, 1.2, 1.5, 2.0][Math.floor(Math.random() * 4)];
+            const dist = [40, 50, 80, 100][Math.floor(Math.random() * 4)];
+            const branches = [60, 80, 120][Math.floor(Math.random() * 3)];
+
+            // Ans10 = dist * 2 (往返) * branches * energyPerM
+            const ans10 = dist * 2 * branches * energyPerM;
+
+            let q10Opts = new Set();
+            q10Opts.add(`${ans10} 焦耳`);
+            q10Opts.add(`${dist * branches * energyPerM} 焦耳`); // 忘記乘以2(往返)的陷阱選項
+            q10Opts.add(`${(dist * 2 * branches * energyPerM) + 500} 焦耳`);
+            while (q10Opts.size < 4) { q10Opts.add(`${Math.round(ans10 + Math.random() * 1000)} 焦耳`); }
+
+            return [
+                // PIRLS 1: 直接提取
+                {
+                    question: "【PIRLS 直接提取】根據《許願》一詩，小鳥為了虔誠地唱出每一天的希望，牠在青翠的林子裡先完成了什麼動作？",
+                    options: ["築好了巢", "學習飛翔", "尋找蟲子", "長出新葉"],
+                    answer: 0,
+                    explanation: "根據文本第三段：「在青翠的林子裡，小鳥築好了巢，在枝頭上合唱，虔誠唱出每一天的希望。」直接提取出「築好了巢」這個動作。"
+                },
+                // PIRLS 2: 直接推論
+                {
+                    question: "【PIRLS 直接推論】詩中最後一段提到「我張開夢想的翅膀」，作者之所以使用「翅膀」來具象化夢想，最合理的推論是什麼？",
+                    options: ["因為翅膀能對應後文「更高更遠的飛翔」，象徵追求遠大目標的突破力。", "因為作者希望能像第三段的小鳥一樣在青翠的林子裡生活。", "因為夢想如同幼鳥一般脆弱，需要展開翅膀來妥善保護。", "為了與第一段的小樹苗（無法移動）產生強烈的空間對比。"],
+                    answer: 0,
+                    explanation: "「翅膀」一詞具有飛行、向上的意象，緊接著後句是「願新的一年有更高更遠的飛翔」，因此可推論這是為了象徵實踐高遠目標的動力與突破限制的能力。"
+                },
+                // PIRLS 3: 詮釋與整合
+                {
+                    question: "【PIRLS 詮釋與整合】詩中的四個自然界角色（小樹苗、老樹、小鳥、杜鵑花），它們許願時所伴隨的自然環境條件（晨光、微風、林子、陽光）在整首詩的結構中發揮了什麼核心作用？",
+                    options: ["營造出萬物在春日充滿生機與希望的溫暖、和諧氛圍。", "暗示大自然的力量具有不可預測的破壞性，生物必須學會適應。", "強調不同生物之間為了爭奪陽光與微風等資源而產生的競爭關係。", "說明人類的願望唯有完全依賴這些特定天氣現象才有可能實現。"],
+                    answer: 0,
+                    explanation: "詩歌透過「柔和的晨光」、「徐徐的微風」、「燦爛的陽光」等正面感官詞彙作為背景，將動植物的生長與環境緊密結合，共同交織出充滿生命力與希望的春日景象。"
+                },
+                // PISA 1: 跨文本圖表比對
+                {
+                    question: "【PISA 跨域文本比對】根據課堂補充的【全球祈願文化統計】，若居住在義大利特雷維噴泉附近的約翰想祈求好運，以及住在日本的小村想為生病的奶奶祈福，他們依據當地習俗最可能採取的行動依序為何？",
+                    options: ["丟錢幣 ／ 摺紙鶴", "疊石頭 ／ 對極光許願", "摺紙鶴 ／ 丟錢幣", "對極光許願 ／ 疊石頭"],
+                    answer: 0,
+                    explanation: "根據習作文本資料：義大利羅馬特雷維噴泉的習俗是「丟錢幣」；而日本的習俗則是為了生病的人「摺紙鶴」祈願健康。"
+                },
+                // PISA 2: 推論分析
+                {
+                    question: "【PISA 跨文本推論】承上題，無論是韓國的疊石頭、義大利的丟錢幣，還是日本的摺紙鶴。在人類學與心理學的層面上，這些跨文化的許願行為具有哪一種共通的主要功能？",
+                    options: ["將抽象的「期待心想事成」轉化為具體的儀式感行動，給予心靈寄託。", "為了促進當地民俗觀光經濟發展與獲取巨大的商業利益。", "證明自己國家的傳統文化具有超自然力量，優於其他地區。", "利用特殊儀式強行改變他人的命運軌跡與天氣變化。"],
+                    answer: 0,
+                    explanation: "儘管各國許願形式不同，但本質上都是將人類內心對於未來的抽象「期盼/願望」，透過具體的、象徵性的動作表現出來，藉此獲得心理安慰與力量。"
+                },
+                // PISA 3: 生態系統邏輯比對
+                {
+                    question: "【PISA 系統邏輯比對】若科學家將本詩建構為一個「生態系互動矩陣」。在文本中，哪兩者的願望與行動在「物理空間」與「生態棲位」上具有最直接的共生依賴關係？",
+                    options: ["老樹（開創綠色的新天地）與小鳥（築好了巢在枝頭合唱）。", "小樹苗（希望快快長大）與杜鵑花（使大地變得亮麗耀眼）。", "杜鵑花（開滿天邊）與我（張開夢想的翅膀飛翔）。", "小鳥（唱出每一天的希望）與柔和的晨光（使小樹苗發芽）。"],
+                    answer: 0,
+                    explanation: "老樹長出新葉「開創綠色的新天地」提供了空間（枝頭），而小鳥正是在這個空間「築好了巢」，兩者在生態系統中展現了直接的棲地提供與利用關係。"
+                },
+                // 系統邏輯 1
+                {
+                    question: "【邏輯推演與修辭框架】若要為這首詩新增第五段，主角設定為「春雨」，且必須嚴格遵循前四段「『在（環境）中／下』+『主角擬人化動作』+『主角與其特性相關的願望』」的語法框架，下列何者最符合？",
+                    options: ["在綿綿的細雨中，春雨落入泥土，溫柔撫慰著乾渴的種子，要讓萬物展現無限的生機。", "春雨嘩啦啦的下，大地變得一片泥濘，阻擋了人們出門的腳步，希望能多放一天假。", "天空烏雲密布，春雨無情地拍打著老樹粗壯的手臂，希望能洗淨世界上一切的塵埃。", "春雨在早晨輕輕的落下，我撐著傘走在馬路上，希望能趕快抵達學校學習新知識。"],
+                    answer: 0,
+                    explanation: "原詩框架要求：1.描述環境(在綿綿細雨中)。2.擬人化動作(溫柔撫慰)。3.正向且符合其特性的願望(讓萬物展現生機)。選項 A 完全契合此一結構精神。"
+                },
+                // 系統邏輯 2
+                {
+                    question: "【哲學與生態思辨】詩作以大自然萬物（樹苗、老樹、鳥、花）的期盼開場，最終收結於「我」的夢想飛翔。這種由物及人的寫作手法，在素養教育層面上最想傳遞的深層價值觀為何？",
+                    options: ["人類與自然萬物共享著生命躍動的韻律，並能在觀察自然的生機中找到自我實現的動力。", "大自然的現象僅僅是人類情感的附屬品，大自然的存在是為了解決人類的心理需求。", "人類的夢想極為偉大，必須完全凌駕並超越於自然萬物的日常生長軌跡之上。", "只有在春天的特定時間點，人類的感知器官才能夠真正理解大自然的科學運作奧祕。"],
+                    answer: 0,
+                    explanation: "詩歌透過觀察自然界生生不息的許願與行動，最終反照回作者自身，體現了「天人合一」、在自然中汲取生命能量與奮鬥目標的正向生命觀。"
+                },
+                // 參數化數學推演題 1
+                {
+                    question: `【數學與生長參數模型】假設小樹苗每日的生長高度與光合作用的產能成正比。若每日在柔和晨光中照射 ${hours} 小時，經過 ${days1} 天，小樹苗總共可以長高 ${growth1} 公分。若春天來臨，日照充足，另一棵同品種的健康樹苗每日照射時間變成原來的 ${ratio} 倍，經過 ${days2} 天後，透過生長模型預期它可以長高多少公分？`,
+                    options: Array.from(q9Opts).slice(0, 4),
+                    answer: 0,
+                    explanation: `【演算歷程】先計算單位生長率：${growth1}公分 ÷ (${hours}小時 × ${days1}天) = 每小時每日產生 ${growthRate} 公分的生長量。<br>新的每日照射時間為：${hours} × ${ratio} = ${hours * ratio} 小時。<br>經過 ${days2} 天的總生長高度 = ${growthRate} × ${hours * ratio} × ${days2} = ${ans9} 公分。`
+                },
+                // 參數化數學推演題 2
+                {
+                    question: `【數學與能量耗損模型】小鳥為了「築好了巢」，必須反覆搬運樹枝。假設鳥類每飛行 1 公尺需消耗 ${energyPerM} 焦耳的能量。若小鳥尋找樹枝的地點距離鳥巢平均為 ${dist} 公尺，且完成一個堅固的巢共需要搬運 ${branches} 趟（每一次搬運皆須完成飛去與飛回的『往返』動作），請問小鳥光是在「飛行搬運」這項物理行動上，總共消耗了多少焦耳的能量？`,
+                    options: Array.from(q10Opts).slice(0, 4),
+                    answer: 0,
+                    explanation: `【演算歷程】首先釐清「一趟」包含往返，因此單趟飛行距離為 ${dist} × 2 = ${dist * 2} 公尺。<br>搬運 ${branches} 趟的總飛行距離為：${dist * 2} × ${branches} = ${dist * 2 * branches} 公尺。<br>總消耗能量 = 總距離 × 每公尺消耗能量 = ${dist * 2 * branches} × ${energyPerM} = ${ans10} 焦耳。`
+                }
+            ];
+        }
+
+        function startQuiz() {
+            if (isLocked) return;
+            currentQuestionIndex = 0;
+            score = 0;
+            userSelections = [];
+
+            // 雙重隨機化洗牌 (打亂題號、打亂選項並重新綁定解答)
+            let rawData = generateDynamicQuizData();
+            rawData.forEach(q => {
+                const correctAnswerString = q.options[q.answer];
+                q.options = shuffleArray(q.options);
+                q.answer = q.options.indexOf(correctAnswerString); // 重新定位正確答案索引
+            });
+            quizData = shuffleArray(rawData);
+
+            // UI 狀態切換
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+
+            const quizScreen = document.getElementById('quiz-screen');
+            quizScreen.classList.remove('hidden');
+            quizScreen.classList.remove('fade-in');
+            void quizScreen.offsetWidth; // Trigger reflow
+            quizScreen.classList.add('fade-in');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const currentQ = quizData[currentQuestionIndex];
+            document.getElementById('question-counter').innerText = `作答進度：${currentQuestionIndex + 1} / ${quizData.length}`;
+
+            // 進度條演算
+            const progressPct = ((currentQuestionIndex) / quizData.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPct}%`;
+
+            document.getElementById('question-text').innerText = currentQ.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            // 生成選項按鈕
+            currentQ.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn w-full text-left p-4 md:p-5 rounded-2xl border-2 border-slate-200 bg-white hover:border-emerald-400 hover:bg-emerald-50 focus:outline-none text-slate-700 font-medium text-base md:text-lg shadow-sm`;
+                btn.innerHTML = `<span class="inline-block w-8 h-8 rounded-full bg-slate-100 text-center leading-8 mr-3 text-sm font-bold text-slate-500 shadow-inner">${String.fromCharCode(65 + index)}</span> <span class="leading-relaxed">${opt}</span>`;
+                btn.onclick = () => selectOption(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            // 按鈕重置
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = true;
+            nextBtn.className = "bg-slate-300 cursor-not-allowed text-white font-bold py-3.5 px-8 rounded-xl transition duration-200 flex items-center shadow-sm";
+            nextBtn.innerHTML = currentQuestionIndex === quizData.length - 1
+                ? '繳交試卷並分析數據 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
+                : '儲存並下一題 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>';
+        }
+
+        function selectOption(selectedIndex, btnElement) {
+            userSelections[currentQuestionIndex] = selectedIndex;
+            const optionsContainer = document.getElementById('options-container');
+
+            // 視覺狀態重繪
+            Array.from(optionsContainer.children).forEach((child, idx) => {
+                const span = child.querySelector('span:first-child');
+                if (idx === selectedIndex) {
+                    child.className = `option-btn w-full text-left p-4 md:p-5 rounded-2xl border-2 border-emerald-500 bg-emerald-50 focus:outline-none text-emerald-900 font-bold text-base md:text-lg shadow-md`;
+                    span.className = `inline-block w-8 h-8 rounded-full bg-emerald-600 text-center leading-8 mr-3 text-sm font-bold text-white shadow-inner`;
+                } else {
+                    child.className = `option-btn w-full text-left p-4 md:p-5 rounded-2xl border-2 border-slate-200 bg-white hover:border-emerald-300 hover:bg-emerald-50/50 focus:outline-none text-slate-700 font-medium text-base md:text-lg shadow-sm`;
+                    span.className = `inline-block w-8 h-8 rounded-full bg-slate-100 text-center leading-8 mr-3 text-sm font-bold text-slate-500 shadow-inner`;
+                }
+            });
+
+            // 啟用下一步按鈕
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = false;
+            nextBtn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition transform hover:-translate-y-1 focus:outline-none flex items-center";
+        }
+
+        function nextQuestion() {
+            if (userSelections[currentQuestionIndex] === quizData[currentQuestionIndex].answer) {
+                score++;
+            }
+
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                const quizScreen = document.getElementById('quiz-screen');
+                quizScreen.classList.remove('fade-in');
+                void quizScreen.offsetWidth;
+                quizScreen.classList.add('fade-in');
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            const resultScreen = document.getElementById('result-screen');
+            resultScreen.classList.remove('hidden');
+            resultScreen.classList.add('fade-in');
+
+            const percentage = Math.round((score / quizData.length) * 100);
+            document.getElementById('score-text').innerText = `${percentage}%`;
+
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '';
+
+            quizData.forEach((q, i) => {
+                const isCorrect = userSelections[i] === q.answer;
+                const userAnsText = q.options[userSelections[i]];
+                const correctAnsText = q.options[q.answer];
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `p-6 rounded-2xl border ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-red-50/50 border-red-200'} shadow-sm`;
+
+                itemDiv.innerHTML = `
+                    <div class="flex items-start mb-2">
+                        <div class="flex-shrink-0 mt-1 mr-4">
+                            ${isCorrect
+                        ? '<div class="bg-emerald-100 p-1.5 rounded-full"><svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg></div>'
+                        : '<div class="bg-red-100 p-1.5 rounded-full"><svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg></div>'}
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-slate-800 font-bold mb-3 text-lg leading-snug">Q${i + 1}. ${q.question}</h4>
+                            ${!isCorrect ? `
+                                <div class="bg-white rounded-lg p-3 border border-red-100 mb-2">
+                                    <p class="text-sm md:text-base text-red-600 font-medium"><span class="font-bold text-red-800 mr-2">✗ 您的作答：</span>${userAnsText}</p>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-emerald-100 mb-4 shadow-sm">
+                                    <p class="text-sm md:text-base text-emerald-700 font-medium"><span class="font-bold text-emerald-900 mr-2">✓ 標準解答：</span>${correctAnsText}</p>
+                                </div>
+                            ` : `
+                                <div class="bg-white rounded-lg p-3 border border-emerald-100 mb-4 shadow-sm">
+                                    <p class="text-sm md:text-base text-emerald-700 font-medium"><span class="font-bold text-emerald-900 mr-2">✓ 精準作答：</span>${correctAnsText}</p>
+                                </div>
+                            `}
+                            <div class="bg-slate-800 rounded-xl p-4 text-sm text-slate-300 mt-2 shadow-inner">
+                                <span class="font-bold text-emerald-400 flex items-center mb-1.5 text-base tracking-wide">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    素養核心解析
+                                </span>
+                                <p class="leading-relaxed text-slate-300">${q.explanation}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                reviewContainer.appendChild(itemDiv);
+            });
+        }
+    </script>
+</body>
+
+</html>

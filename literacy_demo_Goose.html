@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨域素養動態評量：風與糧的交響曲</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .option-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-card:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-emerald-700 to-teal-600 text-white shadow-lg py-8">
+        <div class="max-w-4xl mx-auto px-6">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">風與糧的交響曲</h1>
+            <p class="mt-2 text-emerald-100 font-light italic">跨域生態、遺傳與系統演化綜合評量</p>
+            <div class="mt-4 flex gap-2">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-medium">PISA 導向</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-medium">PIRLS 四層次</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-medium">動態參數生成</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div id="app-container"
+            class="max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden fade-in min-h-[600px] flex flex-col">
+
+            <!-- Start Screen -->
+            <div id="start-screen" class="p-10 flex flex-col items-center justify-center text-center flex-grow">
+                <div
+                    class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-8">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                        </path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">歡迎進入動態素養評量系統</h2>
+                <p class="text-slate-500 mb-10 max-w-lg leading-relaxed text-lg">
+                    本測驗將基於「阿白與阿雅」的故事，考察您的閱讀整合、生態數據分析與物理邏輯推演能力。<br>
+                    <span class="text-emerald-600 font-semibold block mt-2">※ 注意：每次測驗數值將重新演算，解析亦會隨之變動。</span>
+                </p>
+                <button onclick="startQuiz()"
+                    class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-12 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95 text-lg">
+                    進入深度評量
+                </button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quiz-screen" class="hidden flex flex-col h-full flex-grow">
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-100 h-1.5">
+                    <div id="progress-bar" class="bg-emerald-500 h-full transition-all duration-500 w-0"></div>
+                </div>
+
+                <div class="p-8 md:p-12 flex-grow">
+                    <div class="flex justify-between items-center mb-8">
+                        <span id="question-tag"
+                            class="text-xs font-bold tracking-widest text-emerald-600 uppercase bg-emerald-50 px-3 py-1 rounded"></span>
+                        <span id="question-counter" class="text-sm font-medium text-slate-400"></span>
+                    </div>
+
+                    <h3 id="question-text" class="text-xl md:text-2xl font-bold text-slate-800 mb-10 leading-snug"></h3>
+
+                    <!-- Supplemental Data Context (Optional) -->
+                    <div id="data-context"
+                        class="hidden mb-8 p-6 bg-slate-50 border border-slate-200 rounded-2xl overflow-x-auto">
+                        <!-- Dynamic table/chart will be injected here -->
+                    </div>
+
+                    <div id="options-container" class="grid grid-cols-1 gap-4">
+                        <!-- Options injected here -->
+                    </div>
+                </div>
+
+                <div class="p-8 bg-slate-50 border-t border-slate-100 flex justify-end">
+                    <button id="next-btn" onclick="nextQuestion()" disabled
+                        class="bg-slate-300 cursor-not-allowed text-white font-bold py-3 px-10 rounded-xl transition duration-300 flex items-center">
+                        確認選項
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen" class="hidden p-8 md:p-12 flex-grow overflow-y-auto custom-scrollbar">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center p-6 bg-emerald-50 rounded-full mb-6">
+                        <span id="score-percentage" class="text-5xl font-black text-emerald-600"></span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-slate-800">深度評量分析報表</h2>
+                    <p class="text-slate-500 mt-2">根據您的認知表現，我們提供了以下回饋：</p>
+                </div>
+
+                <div id="review-container" class="space-y-8 mb-12">
+                    <!-- Detailed review cards -->
+                </div>
+
+                <div class="flex justify-center pt-8 border-t border-slate-100">
+                    <button onclick="startQuiz()"
+                        class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-2xl shadow-lg transition transform hover:-translate-y-1">
+                        重新執行演算法 (重新出題)
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-slate-400 text-xs tracking-widest uppercase">
+        AI-Enhanced Assessment Engine v2.5 | 📚 跨域素養評量
+    </footer>
+
+    <script>
+        let quizData = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userSelections = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // --- 動態數據表格生成器 ---
+        function generateTraitsTable() {
+            return `
+                <table class="w-full text-sm text-left text-slate-600">
+                    <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                        <tr>
+                            <th class="px-4 py-2">性狀特徵</th>
+                            <th class="px-4 py-2">華鵝 (家鵝)</th>
+                            <th class="px-4 py-2">鴻雁 (野雁)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="px-4 py-2 font-medium">羽色</td>
+                            <td class="px-4 py-2">純白色為主</td>
+                            <td class="px-4 py-2">灰褐色保護色</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-4 py-2 font-medium">額頭特徵</td>
+                            <td class="px-4 py-2">明顯橘紅色肉瘤 (Knob)</td>
+                            <td class="px-4 py-2">平坦，流線型</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-4 py-2 font-medium">主要肌群</td>
+                            <td class="px-4 py-2">白肌肉 (短程爆發)</td>
+                            <td class="px-4 py-2">紅肌肉 (耐力遷徙)</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 font-medium">代謝適應</td>
+                            <td class="px-4 py-2">高澱粉穀物</td>
+                            <td class="px-4 py-2">高纖維水草</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="mt-2 text-[10px] text-slate-400 italic text-right">※ 數據來源：農莊生態觀察日誌</p>
+            `;
+        }
+
+        // --- 核心動態題庫引擎 ---
+        function generateDynamicQuizData() {
+            // 數學題 1: 翼載荷模型演算
+            const wRatio = (Math.random() * (3.5 - 2.0) + 2.0).toFixed(1); // 2.0 - 3.5 倍
+            const sRatio = (Math.random() * (1.2 - 0.7) + 0.7).toFixed(1); // 0.7 - 1.2 倍
+            const correctAns1 = (wRatio / sRatio).toFixed(2);
+            const wrongAns1a = (wRatio * sRatio).toFixed(2);
+            const wrongAns1b = (parseFloat(wRatio) + parseFloat(sRatio)).toFixed(2);
+            const wrongAns1c = (sRatio / wRatio).toFixed(2);
+
+            // 數學題 2: V編隊能源節省計算
+            const nFollowers = Math.floor(Math.random() * 5) + 5; // 5 - 10 隻跟隨者
+            const savingPct = Math.floor(Math.random() * 10) + 15; // 15 - 25% 節省
+            const hours = Math.floor(Math.random() * 6) + 4; // 4 - 10 小時
+            const baseEnergy = 100; // 基礎每小時 100 單位
+
+            const leadTotal = baseEnergy * hours;
+            const followerTotal = baseEnergy * (1 - savingPct / 100) * hours * nFollowers;
+            const totalEnergy = Math.round(leadTotal + followerTotal);
+            const naiveTotal = baseEnergy * hours * (nFollowers + 1); // 沒算節省的
+
+            return [
+                {
+                    tag: "直接提取 / 生物背景",
+                    question: "根據文本內容，阿白作為『華鵝』與阿雅作為『鴻雁』，其祖源關係最精確的描述為何？",
+                    options: [
+                        "華鵝是由鴻雁馴化而來的後裔，兩者在生物學上屬於同一屬。",
+                        "兩者完全沒有血緣關係，只是因為外型相似被陳伯放在一起。",
+                        "鴻雁是家鵝在歐洲演化出的野生變種。",
+                        "華鵝與天鵝的血緣較近，與鴻雁則完全無關。"
+                    ],
+                    answer: 0,
+                    explanation: "文本首部曲與四部曲明確指出：華鵝的直系祖先是鴻雁，兩者共享屬名且沒有生殖隔離。"
+                },
+                {
+                    tag: "詮釋整合 / 生理機制",
+                    question: "阿雅在意外墜落後，為何陳伯細心照料後她仍無法回到雲端？請從生物力學角度判斷：",
+                    options: [
+                        "候鳥遷徙需要極高的空氣動力對稱性，骨折修復後的骨痂或角度偏差會導致阻力激增。",
+                        "她因為習慣了陳伯的餵食，體重過重而喪失了飛行意志。",
+                        "阿白在深夜戰鬥中弄傷了她的另一隻翅膀。",
+                        "她產下了大雄與小羽後，為了育雛而自願放棄飛行能力。"
+                    ],
+                    answer: 0,
+                    explanation: "文本三部曲提到鳥類骨骼中空精細，即便癒合，幾公釐的偏差也會讓高頻率振翅的生理負荷超載。"
+                },
+                {
+                    tag: "檢驗評估 / 系統合作",
+                    question: "在對抗流浪老狗的戰鬥中，阿白與阿雅的表現如何詮釋了『軟硬實力互補』？",
+                    options: [
+                        "阿雅提供精準的偵測預警（軟實力），阿白提供強大的物理打擊（硬實力）。",
+                        "阿白利用白色羽毛偽裝成石頭，阿雅負責正面衝撞。",
+                        "陳伯才是唯一的力量來源，阿白與阿雅只是誘餌。",
+                        "阿雅負責在空中投擲雜草干擾，阿白負責指揮撤退。"
+                    ],
+                    answer: 0,
+                    explanation: "文本四部曲分析，阿雅具備野生動物的敏銳感官充當『雷達』，阿白則利用厚實體型與喙鋸齒正面迎敵。"
+                },
+                {
+                    tag: "圖表轉譯 / PISA 交叉比對",
+                    question: "根據下方『性狀特徵對照表』與文本，阿白展現出的『橘紅色肉瘤』主要反映了什麼？",
+                    context: generateTraitsTable(),
+                    options: [
+                        "人類在無掠食壓力下，為了美觀與辨識所進行的人工選育結果。",
+                        "野外生存時用來撞擊掠食者的攻擊武器。",
+                        "為了在遷徙飛行中增加升力的氣體囊袋。",
+                        "因為長期食用玉米而產生的病理性增生。"
+                    ],
+                    answer: 0,
+                    explanation: "表格顯示肉瘤是家鵝特徵。文本解釋這是馴化過程中產生的性狀，通常與人工選育有關。"
+                },
+                {
+                    tag: "邏輯推理 / 遺傳分離",
+                    question: "大雄與小羽雖然是一同出生的親兄弟，卻展現截然不同的性格與體態（一愛糧、一愛風）。這最能解釋生物學上的哪種現象？",
+                    options: [
+                        "受精過程中染色體的隨機組合導致『遺傳分離』，使後代呈現不同的性狀趨勢。",
+                        "陳伯在餵食時偏心，導致大雄發育較好。",
+                        "小羽因為是後破殼的，所以營養不良才顯得纖細。",
+                        "阿白在孵蛋時不小心壓壞了小羽的基因。"
+                    ],
+                    answer: 0,
+                    explanation: "文本五部曲明確指出，雜交後代會出現遺傳分離，是多樣性延續的關鍵。"
+                },
+                {
+                    tag: "物理模型 / 參數化計算",
+                    question: `【實驗數據推算】假設翼載荷公式為 L = W / S。觀測顯示：大雄的體重是小羽的 ${wRatio} 倍，而大雄的翅膀面積僅是小羽的 ${sRatio} 倍。請問大雄起飛時需克服的翼載荷是小羽的幾倍？`,
+                    options: [
+                        `${correctAns1} 倍`,
+                        `${wrongAns1a} 倍`,
+                        `${wrongAns1b} 倍`,
+                        `${wrongAns1c} 倍`
+                    ],
+                    answer: 0,
+                    explanation: `計算過程：L_大雄 = (${wRatio}W) / (${sRatio}S) = (${wRatio}/${sRatio}) * (W/S)。經計算：${wRatio} ÷ ${sRatio} = ${correctAns1}。翼載荷越高，升空難度越大。`
+                },
+                {
+                    tag: "能源規劃 / 參數化計算",
+                    question: `【遷徙能源估算】已知領頭雁每小時耗能 ${baseEnergy} 單位。後方雁鳥因上升氣流可節省 ${savingPct}% 的耗能。若一個由『1隻領頭 + ${nFollowers}隻跟隨』組成的編隊飛行 ${hours} 小時，該群體總共消耗多少能源？`,
+                    options: [
+                        `${totalEnergy} 單位`,
+                        `${naiveTotal} 單位`,
+                        `${totalEnergy + 500} 單位`,
+                        `${Math.round(totalEnergy * 0.8)} 單位`
+                    ],
+                    answer: 0,
+                    explanation: `演算解析：領頭耗能 = ${baseEnergy} × ${hours} = ${leadTotal}。單隻跟隨耗能 = ${baseEnergy} × (1 - ${savingPct}%) × ${hours} = ${baseEnergy * (1 - savingPct / 100) * hours}。總耗能 = ${leadTotal} + (${baseEnergy * (1 - savingPct / 100) * hours} × ${nFollowers}) = ${totalEnergy} 單位。`
+                },
+                {
+                    tag: "人性思辨 / 後記詮釋",
+                    question: "陳伯感嘆：『一個愛風，一個愛糧。這就是命。』根據後記的哲學昇華，這句話最想傳達的意涵為何？",
+                    options: [
+                        "世界同時需要穩健的『守成者』與冒險的『開拓者』，生命樣貌本無優劣之分。",
+                        "這是一種悲觀論調，認為生命被基因鎖死，無法改變。",
+                        "這是在批評大雄太懶惰，只知道吃糧而不願意飛翔。",
+                        "這是在暗示阿雅的教育失敗，導致家庭分裂。"
+                    ],
+                    answer: 0,
+                    explanation: "後記將阿白與阿雅的故事昇華為社會縮影，強調不同天性在社會中的互補價值。"
+                },
+                {
+                    tag: "行為分析 / 本能騷動",
+                    question: "小羽在秋天出現的『遷徙不安』現象（整夜不睡、仰望星空、減少進食），其生理驅動力為何？",
+                    options: [
+                        "內分泌系統受日照時數與遺傳代碼驅動，強行切換代謝模式以應對長途飛行。",
+                        "因為大雄長得太壯，小羽在爭奪食物中失敗而產生焦慮。",
+                        "農莊內的環境衛生太差，導致小羽感染了某種寄生蟲。",
+                        "他純粹是想逃避陳伯每天撒下的穀物，尋找更好吃的東西。"
+                    ],
+                    answer: 0,
+                    explanation: "文本五部曲科普筆記提到，遷徙本能是由基因共同控制的複合行為，會改變生理狀態。"
+                },
+                {
+                    tag: "綜合評鑑 / 生命價值",
+                    question: "阿雅雖然失去了翅膀，卻說她『透過兒子找回了天空』，這句話在文本中的深層意義是：",
+                    options: [
+                        "遺傳不僅是生理性狀的傳遞，更是靈魂夢想與野性的延續。",
+                        "她計畫訓練小羽以後飛回來帶她走。",
+                        "她發現待在農莊吃糧其實比飛翔更舒服，只是在安慰自己。",
+                        "她看到小羽飛走後，自己終於可以獨佔阿白的愛。"
+                    ],
+                    answer: 0,
+                    explanation: "這是感性的詮釋整合題。反映了阿雅將未竟的野性夢想，透過具備遷徙潛力的小羽得以實現。"
+                }
+            ];
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userSelections = [];
+
+            // 生成動態題庫並洗牌
+            const rawQuestions = generateDynamicQuizData();
+            quizData = shuffleArray(rawQuestions).map(q => {
+                const correctOpt = q.options[q.answer];
+                q.options = shuffleArray([...q.options]);
+                q.answer = q.options.indexOf(correctOpt);
+                return q;
+            });
+
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = quizData[currentQuestionIndex];
+
+            // 進度與標籤
+            document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / quizData.length) * 100}%`;
+            document.getElementById('question-tag').innerText = q.tag;
+            document.getElementById('question-counter').innerText = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+            document.getElementById('question-text').innerText = q.question;
+
+            // 補充數據 (如果有)
+            const contextEl = document.getElementById('data-context');
+            if (q.context) {
+                contextEl.innerHTML = q.context;
+                contextEl.classList.remove('hidden');
+            } else {
+                contextEl.classList.add('hidden');
+            }
+
+            // 選項渲染
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "option-card w-full text-left p-5 rounded-2xl border-2 border-slate-100 bg-white hover:border-emerald-500 hover:bg-emerald-50 text-slate-700 font-medium flex items-center gap-4 group";
+                btn.innerHTML = `
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-100 text-slate-400 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center font-bold transition-colors">
+                        ${String.fromCharCode(65 + idx)}
+                    </div>
+                    <span>${opt}</span>
+                `;
+                btn.onclick = () => selectOption(idx);
+                container.appendChild(btn);
+            });
+
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = true;
+            nextBtn.className = "bg-slate-300 cursor-not-allowed text-white font-bold py-3 px-10 rounded-xl transition duration-300";
+            nextBtn.innerText = currentQuestionIndex === quizData.length - 1 ? "查看分析結果" : "確認選項";
+        }
+
+        function selectOption(idx) {
+            userSelections[currentQuestionIndex] = idx;
+            const btns = document.querySelectorAll('.option-card');
+            btns.forEach((b, i) => {
+                const circle = b.querySelector('div');
+                if (i === idx) {
+                    b.classList.add('border-emerald-600', 'bg-emerald-50');
+                    circle.classList.add('bg-emerald-600', 'text-white');
+                } else {
+                    b.classList.remove('border-emerald-600', 'bg-emerald-50');
+                    circle.classList.remove('bg-emerald-600', 'text-white');
+                }
+            });
+
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = false;
+            nextBtn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-10 rounded-xl shadow-lg transition transform hover:-translate-y-1";
+        }
+
+        function nextQuestion() {
+            if (userSelections[currentQuestionIndex] === quizData[currentQuestionIndex].answer) {
+                score++;
+            }
+
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            const resultScreen = document.getElementById('result-screen');
+            resultScreen.classList.remove('hidden');
+
+            const pct = Math.round((score / quizData.length) * 100);
+            document.getElementById('score-percentage').innerText = `${pct}%`;
+
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+
+            quizData.forEach((q, i) => {
+                const isCorrect = userSelections[i] === q.answer;
+                const card = document.createElement('div');
+                card.className = `p-6 rounded-2xl border-l-8 ${isCorrect ? 'border-emerald-500 bg-emerald-50/50' : 'border-rose-500 bg-rose-50/50'}`;
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <h4 class="font-bold text-slate-800 text-lg">${i + 1}. ${q.question}</h4>
+                        <span class="${isCorrect ? 'text-emerald-600' : 'text-rose-600'} font-black text-sm uppercase tracking-widest">
+                            ${isCorrect ? 'Correct' : 'Incorrect'}
+                        </span>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <p class="text-slate-600"><span class="font-bold">您的選擇：</span>${q.options[userSelections[i]]}</p>
+                        ${!isCorrect ? `<p class="text-emerald-700 font-bold"><span class="font-bold">正確答案：</span>${q.options[q.answer]}</p>` : ''}
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-200/50">
+                        <p class="text-slate-500 text-sm leading-relaxed">
+                            <span class="inline-block px-2 py-0.5 bg-slate-200 text-slate-600 text-[10px] font-bold rounded mr-2 uppercase">專家解析</span>
+                            ${q.explanation}
+                        </p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+
+</html>
