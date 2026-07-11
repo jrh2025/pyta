@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新多益閱讀核心特訓互動版 (第 101 - 104 題)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+            background-color: #f0f4f8;
+        }
+        .toeic-font {
+            font-family: "Times New Roman", Times, serif;
+        }
+        /* 3D 閃卡樣式 */
+        .flashcard-container {
+            perspective: 1000px;
+        }
+        .flashcard-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flashcard-flipped {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- 頂部導覽列 -->
+    <header class="bg-[#1a365d] text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-[#1a365d] font-black px-2.5 py-1 rounded text-lg tracking-wider">NEW TOEIC</div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight">閱讀核心特訓互動系統</h1>
+                    <p class="text-xs text-slate-300">單元：PART 5 單句填空精選解析 (101 – 104 題)</p>
+                </div>
+            </div>
+            
+            <!-- Tab 切換按鈕 -->
+            <div class="flex bg-slate-800/60 p-1 rounded-lg border border-slate-700 w-full sm:w-auto">
+                <button id="nav-quiz" onclick="switchTab('quiz')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition bg-blue-600 text-white">
+                    <i class="fa-solid fa-pen-to-square"></i> 互動測驗
+                </button>
+                <button id="nav-cards" onclick="switchTab('cards')" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md text-slate-300 hover:text-white transition">
+                    <i class="fa-solid fa-clone"></i> 字彙閃卡
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主體內容 -->
+    <main class="max-w-5xl w-full mx-auto px-4 py-6 flex-grow">
+        
+        <!-- ================= 頁面 1: 互動測驗 ================= -->
+        <div id="tab-quiz" class="space-y-6">
+            
+            <!-- 控制與進度面板 -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col md:flex-row gap-5 justify-between items-center">
+                <!-- 進度條 -->
+                <div class="w-full md:w-2/3">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">測驗完成進度</span>
+                        <span id="progress-text" class="text-sm font-bold text-[#1a365d]">已解答 0 / 4 題</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden border border-slate-200/50">
+                        <div id="progress-bar" class="bg-blue-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+                <!-- 遮罩全域控制與重測按鈕 -->
+                <div class="flex flex-wrap gap-2.5 w-full md:w-auto justify-end">
+                    <button onclick="toggleAllVocabMasks(false)" class="flex-1 sm:flex-none px-3.5 py-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-200">
+                        <i class="fa-solid fa-eye"></i> 顯示全部單字
+                    </button>
+                    <button onclick="toggleAllVocabMasks(true)" class="flex-1 sm:flex-none px-3.5 py-2 text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition flex items-center justify-center gap-1.5 border border-slate-200">
+                        <i class="fa-solid fa-eye-slash"></i> 隱藏全部單字
+                    </button>
+                    <button onclick="resetQuiz()" class="flex-1 sm:flex-none px-3.5 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-slate-900 rounded-lg transition flex items-center justify-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-rotate-right"></i> 重新測驗
+                    </button>
+                </div>
+            </div>
+
+            <!-- 題目卡片區域 -->
+            <div id="questions-container" class="space-y-6">
+                
+                <!-- Q101 -->
+                <div id="q101-card" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300">
+                    <div class="bg-[#1a365d] text-white px-5 py-3.5 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-500 text-slate-900 text-xs font-bold px-2 py-0.5 rounded">第 101 題</span>
+                            <span class="text-sm font-semibold tracking-wide">核心考點：受詞位置 — 反身代名詞</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs bg-slate-800/50 px-2.5 py-1 rounded">
+                            <span>難易度：</span>
+                            <span class="text-green-400 font-bold">低</span>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6">
+                        <!-- 題目 -->
+                        <div class="toeic-font text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+                            Emily introduced <span id="q101-blank" class="px-3 py-1 bg-slate-100 border-b-2 border-dashed border-blue-600 text-blue-700 rounded transition-all duration-300">_______</span> before starting the interview for the management job.
+                        </div>
+                        <!-- 選項 (A B C D) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            <button onclick="selectOption('101', 'A', 'she')" id="q101-opt-A" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">A</span>
+                                <span>she</span>
+                            </button>
+                            <button onclick="selectOption('101', 'B', 'herself')" id="q101-opt-B" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">B</span>
+                                <span>herself</span>
+                            </button>
+                            <button onclick="selectOption('101', 'C', 'hers')" id="q101-opt-C" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">C</span>
+                                <span>hers</span>
+                            </button>
+                            <button onclick="selectOption('101', 'D', 'her')" id="q101-opt-D" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">D</span>
+                                <span>her</span>
+                            </button>
+                        </div>
+                        
+                        <!-- 提交按鈕 -->
+                        <div class="flex justify-end">
+                            <button id="q101-submit" onclick="submitAnswer('101')" disabled class="w-full sm:w-auto px-6 py-2.5 bg-slate-300 text-slate-500 font-bold rounded-lg cursor-not-allowed transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-circle-check"></i> 確認答案
+                            </button>
+                        </div>
+
+                        <!-- 解析區 (預設隱藏) -->
+                        <div id="q101-analysis" class="hidden mt-6 pt-6 border-t border-slate-100 space-y-5">
+                            <!-- 正確答案狀態 Banner -->
+                            <div id="q101-feedback-banner" class="p-3.5 rounded-lg flex items-center gap-3 font-semibold text-sm">
+                                <!-- JS 動態插入圖示與文字 -->
+                            </div>
+                            
+                            <!-- 翻譯 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-language"></i> 中文翻譯</h4>
+                                <div class="bg-slate-50 p-3.5 rounded-lg text-slate-600 text-sm border border-slate-100">
+                                    Emily 在開始管理職的面試之前先自我介紹。
+                                </div>
+                            </div>
+                            
+                            <!-- 深度解析 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> 解題深度邏輯</h4>
+                                <div class="text-slate-600 text-sm leading-relaxed space-y-2 bg-slate-50/50 p-3.5 rounded-lg border border-slate-100">
+                                    <p>1. <strong>結構分析：</strong> 句子的主詞是 <span class="font-semibold text-slate-800">Emily</span>，主要動詞為 <span class="font-semibold text-slate-800">introduced</span>（介紹）。此處動詞後面需要一個受詞。</p>
+                                    <p>2. <strong>核心判定：</strong> 當句子的主詞與動詞的受詞為同一人時（Emily 介紹她自己），必須使用反身代名詞。因此選 <span class="text-emerald-600 font-semibold">(B) herself</span>，並構成習慣用語 <span class="italic text-blue-700">introduce oneself</span>（自我介紹）。</p>
+                                    <p>3. <strong>干擾項排除：</strong> <span class="font-semibold">(A) she</span> 為主格，不能當受詞；<span class="font-semibold">(C) hers</span> 為所有格代名詞，語意變成「介紹她的東西」，不切實際；<span class="font-semibold">(D) her</span> 為受格或所有格，若填入受格則語意會變成「Emily 介紹另外一個女性」，不符合自我介紹的語境。</p>
+                                </div>
+                            </div>
+
+                            <!-- 核心單字 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-2.5 flex items-center gap-1.5"><i class="fa-solid fa-spell-check"></i> 核心單字彙整 <span class="text-xs font-normal text-slate-400">(點擊灰色色塊可個別揭曉中文)</span></h4>
+                                <div class="overflow-hidden border border-slate-200 rounded-lg shadow-sm">
+                                    <table class="w-full text-sm text-left">
+                                        <thead class="bg-slate-50 text-slate-700 text-xs uppercase border-b border-slate-200">
+                                            <tr>
+                                                <th class="px-4 py-2 w-1/3">單字</th>
+                                                <th class="px-4 py-2 w-1/6">詞性</th>
+                                                <th class="px-4 py-2 w-1/2">中文釋義</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100">
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">management</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">管理，經營；管理部門</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">introduce</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">v.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">介紹，引進</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q102 -->
+                <div id="q102-card" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300">
+                    <div class="bg-[#1a365d] text-white px-5 py-3.5 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-500 text-slate-900 text-xs font-bold px-2 py-0.5 rounded">第 102 題</span>
+                            <span class="text-sm font-semibold tracking-wide">核心考點：祈使句結構 — 動詞原形開頭</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs bg-slate-800/50 px-2.5 py-1 rounded">
+                            <span>難易度：</span>
+                            <span class="text-green-400 font-bold">低</span>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6">
+                        <!-- 題目 -->
+                        <div class="toeic-font text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+                            <span id="q102-blank" class="px-3 py-1 bg-slate-100 border-b-2 border-dashed border-blue-600 text-blue-700 rounded transition-all duration-300">_______</span> to the e-mail from the supervisor as soon as possible and ask questions if anything is unclear.
+                        </div>
+                        <!-- 選項 (A B C D) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            <button onclick="selectOption('102', 'A', 'Response')" id="q102-opt-A" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">A</span>
+                                <span>Response</span>
+                            </button>
+                            <button onclick="selectOption('102', 'B', 'Responding')" id="q102-opt-B" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">B</span>
+                                <span>Responding</span>
+                            </button>
+                            <button onclick="selectOption('102', 'C', 'Respond')" id="q102-opt-C" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">C</span>
+                                <span>Respond</span>
+                            </button>
+                            <button onclick="selectOption('102', 'D', 'Responds')" id="q102-opt-D" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">D</span>
+                                <span>Responds</span>
+                            </button>
+                        </div>
+                        
+                        <!-- 提交按鈕 -->
+                        <div class="flex justify-end">
+                            <button id="q102-submit" onclick="submitAnswer('102')" disabled class="w-full sm:w-auto px-6 py-2.5 bg-slate-300 text-slate-500 font-bold rounded-lg cursor-not-allowed transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-circle-check"></i> 確認答案
+                            </button>
+                        </div>
+
+                        <!-- 解析區 (預設隱藏) -->
+                        <div id="q102-analysis" class="hidden mt-6 pt-6 border-t border-slate-100 space-y-5">
+                            <!-- 正確答案狀態 Banner -->
+                            <div id="q102-feedback-banner" class="p-3.5 rounded-lg flex items-center gap-3 font-semibold text-sm">
+                                <!-- JS 動態插入 -->
+                            </div>
+                            
+                            <!-- 翻譯 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-language"></i> 中文翻譯</h4>
+                                <div class="bg-slate-50 p-3.5 rounded-lg text-slate-600 text-sm border border-slate-100">
+                                    盡快回覆主管寄的電子郵件，如果有任何不清楚的地方就問問題。
+                                </div>
+                            </div>
+                            
+                            <!-- 深度解析 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> 解題深度邏輯</h4>
+                                <div class="text-slate-600 text-sm leading-relaxed space-y-2 bg-slate-50/50 p-3.5 rounded-lg border border-slate-100">
+                                    <p>1. <strong>結構分析：</strong> 全句由對等連接詞 <span class="font-semibold text-blue-700">and</span> 連接兩個對等的動作。後半句為 <span class="italic font-semibold text-slate-800">ask questions...</span>（原形動詞開頭的祈使句），代表前半句也必須是省略主詞的祈使句結構。</p>
+                                    <p>2. <strong>核心判定：</strong> 祈使句用來表示命令、請求或建議，句首直接以「動詞原形」開始。因此正確答案為 <span class="text-emerald-600 font-semibold">(C) Respond</span>。</p>
+                                    <p>3. <strong>干擾項排除：</strong> <span class="font-semibold">(A) Response</span> 為名詞，不可作句首動詞；<span class="font-semibold">(B) Responding</span> 為動名詞或分詞，若當主詞則本句缺乏主要動詞；<span class="font-semibold">(D) Responds</span> 為第三人稱單數動詞，不符合祈使句使用動詞原形的規則。</p>
+                                </div>
+                            </div>
+
+                            <!-- 核心單字 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-2.5 flex items-center gap-1.5"><i class="fa-solid fa-spell-check"></i> 核心單字彙整 <span class="text-xs font-normal text-slate-400">(點擊灰色色塊可個別揭曉中文)</span></h4>
+                                <div class="overflow-hidden border border-slate-200 rounded-lg shadow-sm">
+                                    <table class="w-full text-sm text-left">
+                                        <thead class="bg-slate-50 text-slate-700 text-xs uppercase border-b border-slate-200">
+                                            <tr>
+                                                <th class="px-4 py-2 w-1/3">單字</th>
+                                                <th class="px-4 py-2 w-1/6">詞性</th>
+                                                <th class="px-4 py-2 w-1/2">中文釋義</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100">
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">supervisor</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">管理者，主管，監督者</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">unclear</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">adj.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">不明確的，不清楚的</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">respond</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">v.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">回答，回覆，反應</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q103 -->
+                <div id="q103-card" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300">
+                    <div class="bg-[#1a365d] text-white px-5 py-3.5 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-500 text-slate-900 text-xs font-bold px-2 py-0.5 rounded">第 103 題</span>
+                            <span class="text-sm font-semibold tracking-wide">核心考點：名詞詞彙辨析</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs bg-slate-800/50 px-2.5 py-1 rounded">
+                            <span>難易度：</span>
+                            <span class="text-amber-400 font-bold">中</span>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6">
+                        <!-- 題目 -->
+                        <div class="toeic-font text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+                            The <span id="q103-blank" class="px-3 py-1 bg-slate-100 border-b-2 border-dashed border-blue-600 text-blue-700 rounded transition-all duration-300">_______</span> of the retreat was to allow all of the employees to bond with one another.
+                        </div>
+                        <!-- 選項 (A B C D) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            <button onclick="selectOption('103', 'A', 'measure')" id="q103-opt-A" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">A</span>
+                                <span>measure</span>
+                            </button>
+                            <button onclick="selectOption('103', 'B', 'convention')" id="q103-opt-B" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">B</span>
+                                <span>convention</span>
+                            </button>
+                            <button onclick="selectOption('103', 'C', 'scheme')" id="q103-opt-C" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">C</span>
+                                <span>scheme</span>
+                            </button>
+                            <button onclick="selectOption('103', 'D', 'purpose')" id="q103-opt-D" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">D</span>
+                                <span>purpose</span>
+                            </button>
+                        </div>
+                        
+                        <!-- 提交按鈕 -->
+                        <div class="flex justify-end">
+                            <button id="q103-submit" onclick="submitAnswer('103')" disabled class="w-full sm:w-auto px-6 py-2.5 bg-slate-300 text-slate-500 font-bold rounded-lg cursor-not-allowed transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-circle-check"></i> 確認答案
+                            </button>
+                        </div>
+
+                        <!-- 解析區 (預設隱藏) -->
+                        <div id="q103-analysis" class="hidden mt-6 pt-6 border-t border-slate-100 space-y-5">
+                            <!-- 正確答案狀態 Banner -->
+                            <div id="q103-feedback-banner" class="p-3.5 rounded-lg flex items-center gap-3 font-semibold text-sm">
+                                <!-- JS 動態插入 -->
+                            </div>
+                            
+                            <!-- 翻譯 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-language"></i> 中文翻譯</h4>
+                                <div class="bg-slate-50 p-3.5 rounded-lg text-slate-600 text-sm border border-slate-100">
+                                    員工研習營的目的是讓所有員工能夠彼此團結。
+                                </div>
+                            </div>
+                            
+                            <!-- 深度解析 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> 解題深度邏輯</h4>
+                                <div class="text-slate-600 text-sm leading-relaxed space-y-2 bg-slate-50/50 p-3.5 rounded-lg border border-slate-100">
+                                    <p>1. <strong>結構分析：</strong> 句子結構為 <span class="italic font-semibold text-slate-800">"The [名詞] of the retreat was to..."</span>。空格處需要填入一個名詞作為句子的核心主詞，並與後方的 be 動詞引導的不定詞補語（...是為了讓員工團結）語意相符。</p>
+                                    <p>2. <strong>核心判定：</strong> 從語意邏輯來看，舉辦 <span class="italic font-semibold text-slate-800">retreat</span>（員工研習營）的「目的」是促進員工之間的凝聚力，因此選擇 <span class="text-emerald-600 font-semibold">(D) purpose</span>（目的）最符合情境。</p>
+                                    <p>3. <strong>干擾項排除：</strong> <span class="font-semibold">(A) measure</span> 表示「措施、度量單位」，與語意不符；<span class="font-semibold">(B) convention</span> 表示「習俗、慣例、傳統大會」，不合語境；<span class="font-semibold">(C) scheme</span> 表示「計畫、陰謀」，在此情境下不合適。</p>
+                                </div>
+                            </div>
+
+                            <!-- 核心單字 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-2.5 flex items-center gap-1.5"><i class="fa-solid fa-spell-check"></i> 核心單字彙整 <span class="text-xs font-normal text-slate-400">(點擊灰色色塊可個別揭曉中文)</span></h4>
+                                <div class="overflow-hidden border border-slate-200 rounded-lg shadow-sm">
+                                    <table class="w-full text-sm text-left">
+                                        <thead class="bg-slate-50 text-slate-700 text-xs uppercase border-b border-slate-200">
+                                            <tr>
+                                                <th class="px-4 py-2 w-1/3">單字</th>
+                                                <th class="px-4 py-2 w-1/6">詞性</th>
+                                                <th class="px-4 py-2 w-1/2">中文釋義</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100">
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">retreat</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n. / v.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">n. 員工研習營，退修會（企業常在郊外舉辦的凝聚團隊活動）；v. 撤退</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">bond with</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">phr.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">與...凝聚感情，和...團結、黏合</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">measure</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n. / v.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">n. 措施，辦法，度量單位；v. 測量</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">convention</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">大會，大聚會；習俗，慣例</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">scheme</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">計畫，方案；陰謀</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q104 -->
+                <div id="q104-card" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300">
+                    <div class="bg-[#1a365d] text-white px-5 py-3.5 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <span class="bg-amber-500 text-slate-900 text-xs font-bold px-2 py-0.5 rounded">第 104 題</span>
+                            <span class="text-sm font-semibold tracking-wide">核心考點：to 不定詞的形式</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs bg-slate-800/50 px-2.5 py-1 rounded">
+                            <span>難易度：</span>
+                            <span class="text-green-400 font-bold">低</span>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6">
+                        <!-- 題目 -->
+                        <div class="toeic-font text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+                            The wildlife preserve was created by the Florida Nature Commission to <span id="q104-blank" class="px-3 py-1 bg-slate-100 border-b-2 border-dashed border-blue-600 text-blue-700 rounded transition-all duration-300">_______</span> the state's endangered species.
+                        </div>
+                        <!-- 選項 (A B C D) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            <button onclick="selectOption('104', 'A', 'protect')" id="q104-opt-A" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">A</span>
+                                <span>protect</span>
+                            </button>
+                            <button onclick="selectOption('104', 'B', 'protection')" id="q104-opt-B" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">B</span>
+                                <span>protection</span>
+                            </button>
+                            <button onclick="selectOption('104', 'C', 'protective')" id="q104-opt-C" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">C</span>
+                                <span>protective</span>
+                            </button>
+                            <button onclick="selectOption('104', 'D', 'protecting')" id="q104-opt-D" class="toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3">
+                                <span class="w-7 h-7 flex items-center justify-center bg-slate-100 rounded-full font-bold text-slate-600 text-xs border border-slate-200">D</span>
+                                <span>protecting</span>
+                            </button>
+                        </div>
+                        
+                        <!-- 提交按鈕 -->
+                        <div class="flex justify-end">
+                            <button id="q104-submit" onclick="submitAnswer('104')" disabled class="w-full sm:w-auto px-6 py-2.5 bg-slate-300 text-slate-500 font-bold rounded-lg cursor-not-allowed transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-circle-check"></i> 確認答案
+                            </button>
+                        </div>
+
+                        <!-- 解析區 (預設隱藏) -->
+                        <div id="q104-analysis" class="hidden mt-6 pt-6 border-t border-slate-100 space-y-5">
+                            <!-- 正確答案狀態 Banner -->
+                            <div id="q104-feedback-banner" class="p-3.5 rounded-lg flex items-center gap-3 font-semibold text-sm">
+                                <!-- JS 動態插入 -->
+                            </div>
+                            
+                            <!-- 翻譯 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-language"></i> 中文翻譯</h4>
+                                <div class="bg-slate-50 p-3.5 rounded-lg text-slate-600 text-sm border border-slate-100">
+                                    這個野生動物保護區，是佛羅里達自然委員會為了保護該州瀕危物種而設立的。
+                                </div>
+                            </div>
+                            
+                            <!-- 深度解析 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-lightbulb"></i> 解題深度邏輯</h4>
+                                <div class="text-slate-600 text-sm leading-relaxed space-y-2 bg-slate-50/50 p-3.5 rounded-lg border border-slate-100">
+                                    <p>1. <strong>結構分析：</strong> 主句 <span class="italic text-slate-800 font-semibold">"The wildlife preserve was created..."</span> 結構已經完整。後方的 <span class="text-blue-700 font-semibold">to</span> 引導一個表目的的不定詞片語（為了要做某事），後方接有受詞 <span class="italic font-semibold text-slate-800">the state's endangered species</span>。</p>
+                                    <p>2. <strong>核心判定：</strong> 不定詞助動詞 <span class="text-blue-700 font-semibold">to</span> 後方必須接「動詞原形」(V)，用以表示目的。因此正確答案為 <span class="text-emerald-600 font-semibold">(A) protect</span>（保護）。</p>
+                                    <p>3. <strong>干擾項排除：</strong> <span class="font-semibold">(B) protection</span> 為名詞，不可直接接在 to 後面且後面又帶受詞；<span class="font-semibold">(C) protective</span> 為形容詞，詞性不符；<span class="font-semibold">(D) protecting</span> 為現在分詞或動名詞，此處的 to 是不定詞引導詞而非介系詞，不能接 V-ing。</p>
+                                </div>
+                            </div>
+
+                            <!-- 核心單字 -->
+                            <div>
+                                <h4 class="text-blue-800 font-bold text-sm mb-2.5 flex items-center gap-1.5"><i class="fa-solid fa-spell-check"></i> 核心單字彙整 <span class="text-xs font-normal text-slate-400">(點擊灰色色塊可個別揭曉中文)</span></h4>
+                                <div class="overflow-hidden border border-slate-200 rounded-lg shadow-sm">
+                                    <table class="w-full text-sm text-left">
+                                        <thead class="bg-slate-50 text-slate-700 text-xs uppercase border-b border-slate-200">
+                                            <tr>
+                                                <th class="px-4 py-2 w-1/3">單字</th>
+                                                <th class="px-4 py-2 w-1/6">詞性</th>
+                                                <th class="px-4 py-2 w-1/2">中文釋義</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-100">
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">wildlife</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">野生動物</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">preserve</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n. / v.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">n. 保護區，禁獵區；v. 保存，維護</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">commission</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">委員會；佣金，代辦費</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">endangered</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">adj.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">瀕臨絕種的，瀕危的</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 font-semibold toeic-font text-blue-900">species</td>
+                                                <td class="px-4 py-3 text-slate-400 italic">n.</td>
+                                                <td class="px-4 py-3">
+                                                    <span onclick="toggleMask(this)" class="vocab-mask text-transparent bg-slate-200 px-2 py-0.5 rounded cursor-pointer transition-all duration-300 select-none">物種（單複數同形）</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 成績結算卡 (預設隱藏) -->
+            <div id="score-card" class="hidden bg-gradient-to-br from-slate-900 to-[#1a365d] text-white p-6 sm:p-8 rounded-xl shadow-lg border border-blue-950 text-center space-y-5 transform transition-all duration-700">
+                <div class="inline-block bg-amber-500 text-[#1a365d] px-4 py-1.5 rounded-full font-bold text-sm tracking-widest uppercase">
+                    🏆 測驗成果報告
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">您的最終得分：<span id="final-score" class="text-amber-400 text-4xl sm:text-5xl font-black">0 / 4</span></h3>
+                
+                <div class="max-w-md mx-auto bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 text-slate-200 text-sm leading-relaxed">
+                    <p id="expert-feedback" class="font-medium text-amber-300 mb-1"></p>
+                    <p id="expert-subtext"></p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-3.5 pt-2">
+                    <button onclick="resetQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-[#1a365d] font-bold rounded-lg shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> 再測一次
+                    </button>
+                    <button onclick="switchTab('cards')" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-lg shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-clone"></i> 去複習單字閃卡
+                    </button>
+                </div>
+            </div>
+
+            <!-- 專家思維策略 -->
+            <div class="bg-blue-50 border border-blue-200 p-5 rounded-xl shadow-sm">
+                <h3 class="text-[#1a365d] font-bold text-base mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-500"></i> 💡 專家前瞻思維：多益 Part 5 高效解題核心策略
+                </h3>
+                <ul class="space-y-3.5 text-sm text-slate-700">
+                    <li class="flex gap-2.5 items-start">
+                        <span class="mt-1 w-5 h-5 flex items-center justify-center bg-[#1a365d] text-white font-bold text-[10px] rounded-full shrink-0">1</span>
+                        <span><strong>代名詞考題秒殺法：</strong> 多益常考「主格/受格/所有格/反身代名詞」的區分。看到題幹有動作且主詞與受詞指的是同一人時，毫不猶豫直選反身代名詞（如 <span class="italic font-medium text-blue-800">introduce oneself</span>）。</span>
+                    </li>
+                    <li class="flex gap-2.5 items-start">
+                        <span class="mt-1 w-5 h-5 flex items-center justify-center bg-[#1a365d] text-white font-bold text-[10px] rounded-full shrink-0">2</span>
+                        <span><strong>祈使句結構洞察：</strong> 句首留空且後面沒有主要動詞，或是由 <span class="italic text-blue-800 font-medium">and/but</span> 連接另一個動詞原形時，此句即為祈使句，答案必為動詞原形。</span>
+                    </li>
+                    <li class="flex gap-2.5 items-start">
+                        <span class="mt-1 w-5 h-5 flex items-center justify-center bg-[#1a365d] text-white font-bold text-[10px] rounded-full shrink-0">3</span>
+                        <span><strong>不定詞與介系詞 to 的區別：</strong> 看到 to 時需判斷其功能。若是表示「為了...」，後方必接動詞原形；若是 <span class="italic text-blue-800 font-medium">look forward to, object to</span> 等固定搭配，則是介系詞，後方需接動詞名詞 (<span class="italic text-blue-800 font-medium">V-ing</span>)。</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- ================= 頁面 2: 字彙閃卡 ================= -->
+        <div id="tab-cards" class="hidden space-y-6">
+            
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div>
+                        <h2 class="text-lg font-bold text-[#1a365d] flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-amber-500"></i> 多益必考核心字彙閃卡 (3D Y-Axis Flip)
+                        </h2>
+                        <p class="text-xs text-slate-500">本單元精選 16 組多益關鍵核心單字。點擊卡片即可進行 3D 翻面，測試自己的瞬間記憶力！</p>
+                    </div>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <button onclick="flipAllCards(true)" class="flex-1 sm:flex-none px-3.5 py-1.5 text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition border border-blue-200">
+                            全體翻到背面 (中文)
+                        </button>
+                        <button onclick="flipAllCards(false)" class="flex-1 sm:flex-none px-3.5 py-1.5 text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg transition border border-slate-200">
+                            全體翻到正面 (英文)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 閃卡放置區域 -->
+            <div id="flashcards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- 由 JS 動態渲染載入 -->
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- 頁腳 -->
+    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 space-y-1">
+            <p class="font-semibold text-slate-300">新多益 (NEW TOEIC) 閱讀精準複習筆記互動版</p>
+            <p>Designed for Success &bull; 全端高質感互動式網頁設計 &bull; &copy; 2026 版權所有</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 互動邏輯 -->
+    <script>
+        // 1. 題庫與答案對照資料
+        const questionsData = {
+            "101": {
+                correctLetter: "B",
+                options: {
+                    "A": "she",
+                    "B": "herself",
+                    "C": "hers",
+                    "D": "her"
+                }
+            },
+            "102": {
+                correctLetter: "C",
+                options: {
+                    "A": "Response",
+                    "B": "Responding",
+                    "C": "Respond",
+                    "D": "Responds"
+                }
+            },
+            "103": {
+                correctLetter: "D",
+                options: {
+                    "A": "measure",
+                    "B": "convention",
+                    "C": "scheme",
+                    "D": "purpose"
+                }
+            },
+            "104": {
+                correctLetter: "A",
+                options: {
+                    "A": "protect",
+                    "B": "protection",
+                    "C": "protective",
+                    "D": "protecting"
+                }
+            }
+        };
+
+        // 2. 閃卡字彙清單
+        const vocabList = [
+            { word: "management", pos: "n.", meaning: "管理，經營；管理部門" },
+            { word: "introduce", pos: "v.", meaning: "介紹，引進" },
+            { word: "supervisor", pos: "n.", meaning: "管理者，主管，監督者" },
+            { word: "unclear", pos: "adj.", meaning: "不明確的，不清楚的" },
+            { word: "respond", pos: "v.", meaning: "回答，回覆，反應" },
+            { word: "retreat", pos: "n. / v.", meaning: "n. 員工研習營，退修會；v. 撤退" },
+            { word: "bond with", pos: "phr.", meaning: "與...凝聚感情，和...團結、黏合" },
+            { word: "measure", pos: "n. / v.", meaning: "n. 措施，辦法，度量單位；v. 測量" },
+            { word: "convention", pos: "n.", meaning: "大會，大聚會；習俗，慣例" },
+            { word: "scheme", pos: "n.", meaning: "計畫，方案；陰謀" },
+            { word: "wildlife", pos: "n.", meaning: "野生動物" },
+            { word: "preserve", pos: "n. / v.", meaning: "n. 保護區，禁獵區；v. 保存，維護" },
+            { word: "commission", pos: "n.", meaning: "委員會；佣金，代辦費" },
+            { word: "endangered", pos: "adj.", meaning: "瀕臨絕種的，瀕危的" },
+            { word: "species", pos: "n.", meaning: "物種（單複數同形）" },
+            { word: "protect", pos: "v.", meaning: "保護，防護" }
+        ];
+
+        // 3. 狀態變數
+        let userSelections = { "101": null, "102": null, "103": null, "104": null };
+        let submittedAnswers = { "101": false, "102": false, "103": false, "104": false };
+
+        // 4. 初始化
+        window.onload = function() {
+            renderFlashcards();
+            // 預設將單字表的遮罩隱藏
+            toggleAllVocabMasks(true);
+        };
+
+        // 5. 分頁切換系統
+        function switchTab(tabName) {
+            const tabQuiz = document.getElementById('tab-quiz');
+            const tabCards = document.getElementById('tab-cards');
+            const navQuiz = document.getElementById('nav-quiz');
+            const navCards = document.getElementById('nav-cards');
+
+            if (tabName === 'quiz') {
+                tabQuiz.classList.remove('hidden');
+                tabCards.classList.add('hidden');
+                
+                // 按鈕樣式啟用
+                navQuiz.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition bg-blue-600 text-white";
+                navCards.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md text-slate-300 hover:text-white transition";
+            } else {
+                tabQuiz.classList.add('hidden');
+                tabCards.classList.remove('hidden');
+
+                // 按鈕樣式啟用
+                navQuiz.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md text-slate-300 hover:text-white transition";
+                navCards.className = "flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition bg-blue-600 text-white";
+            }
+        }
+
+        // 6. 選擇答案
+        function selectOption(qNo, optionLetter, wordText) {
+            if (submittedAnswers[qNo]) return; // 已送出則鎖定
+
+            userSelections[qNo] = optionLetter;
+
+            // 更新題目中的底線文字
+            const blankEl = document.getElementById(`q${qNo}-blank`);
+            blankEl.innerText = ` ${wordText} `;
+            blankEl.className = "px-3 py-1 bg-blue-50 border-b-2 border-blue-600 text-blue-700 font-bold rounded shadow-sm scale-105 transition-all duration-300";
+
+            // 清空所有選項樣式，並為被選中的項目加上選取效果
+            const options = ['A', 'B', 'C', 'D'];
+            options.forEach(letter => {
+                const optBtn = document.getElementById(`q${qNo}-opt-${letter}`);
+                if (letter === optionLetter) {
+                    optBtn.className = "toeic-font p-3.5 text-left border-2 border-blue-600 bg-blue-50/50 rounded-lg shadow-sm transition-all font-semibold flex items-center gap-3 text-blue-900";
+                    // 圈圈樣式變色
+                    optBtn.firstElementChild.className = "w-7 h-7 flex items-center justify-center bg-blue-600 text-white rounded-full font-bold text-xs";
+                } else {
+                    optBtn.className = "toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3 text-slate-700";
+                    optBtn.firstElementChild.className = "w-7 h-7 flex items-center justify-center bg-slate-100 text-slate-600 rounded-full font-bold text-xs border border-slate-200";
+                }
+            });
+
+            // 啟用提交按鈕
+            const submitBtn = document.getElementById(`q${qNo}-submit`);
+            submitBtn.disabled = false;
+            submitBtn.className = "w-full sm:w-auto px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm cursor-pointer transition flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]";
+        }
+
+        // 7. 提交答案
+        function submitAnswer(qNo) {
+            if (submittedAnswers[qNo]) return;
+
+            submittedAnswers[qNo] = true;
+
+            const selected = userSelections[qNo];
+            const correct = questionsData[qNo].correctLetter;
+            const isCorrect = (selected === correct);
+
+            // 鎖定所有選項按鈕的點擊
+            const options = ['A', 'B', 'C', 'D'];
+            options.forEach(letter => {
+                const optBtn = document.getElementById(`q${qNo}-opt-${letter}`);
+                optBtn.disabled = true;
+                optBtn.classList.add('cursor-not-allowed', 'opacity-70');
+            });
+
+            // 隱藏/停用提交按鈕
+            const submitBtn = document.getElementById(`q${qNo}-submit`);
+            submitBtn.classList.add('hidden');
+
+            // 獲取題目填空元素，並給予對應的正誤顏色
+            const blankEl = document.getElementById(`q${qNo}-blank`);
+            if (isCorrect) {
+                blankEl.className = "px-3 py-1 bg-emerald-50 border-b-2 border-emerald-600 text-emerald-700 font-bold rounded shadow-sm scale-105 transition-all duration-300";
+            } else {
+                blankEl.className = "px-3 py-1 bg-red-50 border-b-2 border-red-500 text-red-600 font-bold rounded shadow-sm scale-105 transition-all duration-300";
+            }
+
+            // 選項標示紅綠燈
+            options.forEach(letter => {
+                const optBtn = document.getElementById(`q${qNo}-opt-${letter}`);
+                if (letter === correct) {
+                    // 正確選項一律顯示為綠色
+                    optBtn.className = "toeic-font p-3.5 text-left border-2 border-emerald-500 bg-emerald-50/50 rounded-lg shadow-sm font-bold flex items-center gap-3 text-emerald-900";
+                    optBtn.firstElementChild.className = "w-7 h-7 flex items-center justify-center bg-emerald-500 text-white rounded-full font-bold text-xs shadow-sm";
+                    // 加上打勾標誌
+                    const checkMark = document.createElement('span');
+                    checkMark.className = "ml-auto text-emerald-600 text-sm font-bold bg-emerald-100 px-2 py-0.5 rounded flex items-center gap-1";
+                    checkMark.innerHTML = '<i class="fa-solid fa-check"></i> 正確答案';
+                    optBtn.appendChild(checkMark);
+                } else if (letter === selected && !isCorrect) {
+                    // 選錯的項目顯示為紅色
+                    optBtn.className = "toeic-font p-3.5 text-left border-2 border-red-500 bg-red-50/50 rounded-lg shadow-sm font-bold flex items-center gap-3 text-red-900";
+                    optBtn.firstElementChild.className = "w-7 h-7 flex items-center justify-center bg-red-500 text-white rounded-full font-bold text-xs shadow-sm";
+                    // 加上打叉標誌
+                    const crossMark = document.createElement('span');
+                    crossMark.className = "ml-auto text-red-600 text-sm font-bold bg-red-100 px-2 py-0.5 rounded flex items-center gap-1";
+                    crossMark.innerHTML = '<i class="fa-solid fa-xmark"></i> 您的選擇';
+                    optBtn.appendChild(crossMark);
+                }
+            });
+
+            // 揭曉解析區塊
+            const analysisEl = document.getElementById(`q${qNo}-analysis`);
+            analysisEl.classList.remove('hidden');
+
+            // 建立狀態 Banner
+            const bannerEl = document.getElementById(`q${qNo}-feedback-banner`);
+            if (isCorrect) {
+                bannerEl.className = "p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg flex items-center gap-3 font-semibold text-sm";
+                bannerEl.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-600 text-xl"></i> 恭喜您！答對了！這題考的是「' + (qNo === '101' ? '受詞位置 — 反身代名詞' : qNo === '102' ? '祈使句結構 — 動詞原形開頭' : qNo === '103' ? '名詞詞彙辨析' : 'to 不定詞的形式') + '」核心概念。';
+            } else {
+                bannerEl.className = "p-3.5 bg-red-50 border border-red-200 text-red-800 rounded-lg flex items-center gap-3 font-semibold text-sm";
+                bannerEl.innerHTML = '<i class="fa-solid fa-circle-xmark text-red-500 text-xl"></i> 別灰心！答錯了。請參閱下方解題深度邏輯與單字複習。';
+            }
+
+            updateProgress();
+        }
+
+        // 8. 更新測驗進度與成績結算
+        function updateProgress() {
+            let solvedCount = 0;
+            let correctCount = 0;
+
+            for (const qNo in submittedAnswers) {
+                if (submittedAnswers[qNo]) {
+                    solvedCount++;
+                    if (userSelections[qNo] === questionsData[qNo].correctLetter) {
+                        correctCount++;
+                    }
+                }
+            }
+
+            // 更新頂部進度條
+            const progressPercent = (solvedCount / 4) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('progress-text').innerText = `已解答 ${solvedCount} / 4 題`;
+
+            // 當全部答完
+            if (solvedCount === 4) {
+                setTimeout(() => {
+                    const scoreCard = document.getElementById('score-card');
+                    scoreCard.classList.remove('hidden');
+                    
+                    // 平滑滾動到成績單
+                    scoreCard.scrollIntoView({ behavior: 'smooth' });
+
+                    document.getElementById('final-score').innerText = `${correctCount} / 4 題`;
+
+                    // 動態專家評語
+                    const feedbackEl = document.getElementById('expert-feedback');
+                    const subtextEl = document.getElementById('expert-subtext');
+                    
+                    if (correctCount === 4) {
+                        feedbackEl.innerText = "🌟 卓越！完美的答題表現！";
+                        subtextEl.innerText = "您對反身代名詞、祈使句、名詞辨析與不定詞的掌握度可謂爐火純青。這正是向多益高分突破的最佳底子！";
+                    } else if (correctCount === 3) {
+                        feedbackEl.innerText = "✨ 優異！表現相當出色！";
+                        subtextEl.innerText = "您僅差一步就能拿到滿分。仔細研讀錯誤的那一題，將此核心文法與考點徹底內化，下次一定沒問題。";
+                    } else if (correctCount >= 1 && correctCount <= 2) {
+                        feedbackEl.innerText = "📚 穩紮穩打！仍有巨大提升空間！";
+                        subtextEl.innerText = "多益 Part 5 著重於秒殺文法與單字。建議您多加利用下方的「字彙閃卡」並反覆研讀各題的解題深度邏輯。";
+                    } else {
+                        feedbackEl.innerText = "☕ 不要氣餒！重新調整腳步！";
+                        subtextEl.innerText = "這組考題集結了高頻率的基本考點。請重新詳閱翻譯與解題大腦邏輯，打穩基本功後再重新挑戰一次吧！";
+                    }
+                }, 800);
+            }
+        }
+
+        // 9. 單字遮罩控制 (安全切換)
+        function toggleMask(element) {
+            element.classList.toggle('text-transparent');
+            element.classList.toggle('bg-slate-200');
+        }
+
+        // 一鍵顯示/隱藏所有單字中文
+        function toggleAllVocabMasks(shouldHide) {
+            const masks = document.querySelectorAll('.vocab-mask');
+            masks.forEach(mask => {
+                if (shouldHide) {
+                    mask.classList.add('text-transparent', 'bg-slate-200');
+                } else {
+                    mask.classList.remove('text-transparent', 'bg-slate-200');
+                }
+            });
+        }
+
+        // 10. 重置測驗
+        function resetQuiz() {
+            // 狀態還原
+            userSelections = { "101": null, "102": null, "103": null, "104": null };
+            submittedAnswers = { "101": false, "102": false, "103": false, "104": false };
+
+            // 重置頂部進度條
+            document.getElementById('progress-bar').style.width = `0%`;
+            document.getElementById('progress-text').innerText = `已解答 0 / 4 題`;
+
+            // 隱藏成績單
+            document.getElementById('score-card').classList.add('hidden');
+
+            // 還原每一題卡片
+            const qNos = ["101", "102", "103", "104"];
+            qNos.forEach(qNo => {
+                // 還原空格
+                const blankEl = document.getElementById(`q${qNo}-blank`);
+                blankEl.innerText = "_______";
+                blankEl.className = "px-3 py-1 bg-slate-100 border-b-2 border-dashed border-blue-600 text-blue-700 rounded transition-all duration-300";
+
+                // 還原提交按鈕
+                const submitBtn = document.getElementById(`q${qNo}-submit`);
+                submitBtn.disabled = true;
+                submitBtn.classList.remove('hidden');
+                submitBtn.className = "w-full sm:w-auto px-6 py-2.5 bg-slate-300 text-slate-500 font-bold rounded-lg cursor-not-allowed transition flex items-center justify-center gap-2";
+
+                // 隱藏解析區
+                document.getElementById(`q${qNo}-analysis`).classList.add('hidden');
+
+                // 還原選項按鈕樣式與啟用
+                const options = ['A', 'B', 'C', 'D'];
+                options.forEach(letter => {
+                    const optBtn = document.getElementById(`q${qNo}-opt-${letter}`);
+                    optBtn.disabled = false;
+                    optBtn.className = "toeic-font p-3.5 text-left border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-all font-medium flex items-center gap-3 text-slate-700";
+                    optBtn.firstElementChild.className = "w-7 h-7 flex items-center justify-center bg-slate-100 text-slate-600 rounded-full font-bold text-xs border border-slate-200";
+                    
+                    // 移除打勾、打叉標誌
+                    const extraBadges = optBtn.querySelectorAll('span:not(:first-child)');
+                    extraBadges.forEach(badge => badge.remove());
+                });
+            });
+
+            // 還原單字遮罩
+            toggleAllVocabMasks(true);
+
+            // 平滑滾動到頂部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 11. 渲染 3D 閃卡
+        function renderFlashcards() {
+            const container = document.getElementById('flashcards-container');
+            container.innerHTML = '';
+
+            vocabList.forEach((item, index) => {
+                const cardHTML = `
+                    <div class="flashcard-container h-44 cursor-pointer" onclick="flipCard(this)">
+                        <div class="flashcard-inner relative w-full h-full text-center rounded-xl shadow-sm border border-slate-200/80">
+                            <!-- 閃卡正面 (英文) -->
+                            <div class="flashcard-front absolute w-full h-full bg-white rounded-xl p-5 flex flex-col justify-between items-center z-10">
+                                <div class="w-full flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                    <span>Vocabulary Card</span>
+                                    <span>#${String(index + 1).padStart(2, '0')}</span>
+                                </div>
+                                <div class="toeic-font text-xl font-bold text-[#1a365d] tracking-wide my-auto px-2">
+                                    ${item.word}
+                                </div>
+                                <div class="text-[10px] text-slate-400 flex items-center gap-1">
+                                    <i class="fa-solid fa-rotate"></i> 點擊卡片翻面
+                                </div>
+                            </div>
+                            
+                            <!-- 閃卡背面 (中文) -->
+                            <div class="flashcard-back absolute w-full h-full bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-xl p-5 flex flex-col justify-between items-center">
+                                <div class="w-full flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                                    <span>Chinese Meaning</span>
+                                    <span class="text-[#1a365d] italic font-semibold">${item.pos}</span>
+                                </div>
+                                <div class="text-sm font-bold text-slate-700 my-auto px-1 leading-relaxed">
+                                    ${item.meaning}
+                                </div>
+                                <div class="text-[9px] text-slate-400">
+                                    再次點擊翻回正面
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        }
+
+        // 12. 翻轉單張卡片
+        function flipCard(cardContainer) {
+            const inner = cardContainer.querySelector('.flashcard-inner');
+            inner.classList.toggle('flashcard-flipped');
+        }
+
+        // 13. 全體一鍵翻轉
+        function flipAllCards(shouldFlipToBack) {
+            const cards = document.querySelectorAll('.flashcard-inner');
+            cards.forEach(card => {
+                if (shouldFlipToBack) {
+                    card.classList.add('flashcard-flipped');
+                } else {
+                    card.classList.remove('flashcard-flipped');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
