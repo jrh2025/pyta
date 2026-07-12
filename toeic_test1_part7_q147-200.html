@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Part 7 閱讀理解";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-after: always; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-block:last-of-type {
+    page-break-after: avoid;
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 10px 15px;
+    font-weight: bold; 
+    font-size: 11pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 15px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 15px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    tracking-wider: 0.05em;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 11pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    text-align: justify;
+    padding-right: 15px !important;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    text-align: justify;
+    padding-left: 15px !important;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px;
+}
+.section-main-title {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 11pt;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 4px;
+}
+.question-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #2c5282;
+    font-size: 9.5pt;
+    margin-bottom: 8px;
+    background-color: #ebf8ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.question-text {
+    font-weight: bold;
+    font-size: 11pt;
+    color: #1a202c;
+    margin-bottom: 8px;
+    font-family: "Times New Roman", Times, serif;
+}
+.options-table { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 5px 8px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 8pt; 
+    padding: 1px 5px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 6px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #f7fafc;
+    border-left: 3px solid #cbd5e1;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 9pt;
+}
+.exp-title {
+    font-weight: bold;
+    color: #4a5568;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    text-decoration: underline;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    background-color: #edf2f7;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 15px;
+    border-top: 1px solid #e2e8f0;
+    page-break-inside: avoid;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 5px; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 9pt;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 5px 8px; 
+    font-size: 9pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 25px; 
+    padding: 15px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 11pt; 
+    margin-top: 0;
+    margin-bottom: 8px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 18px; 
+    font-size: 9pt; 
+    color: #2d3748; 
+    line-height: 1.5;
+}
+.expert-list li { 
+    margin-bottom: 6px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 1 - PART 7 閱讀理解精選解析 (第 147 – 200 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 147-148 refer to the following invitation. (147-148 題參照以下邀請函。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="text-center font-bold text-lg mb-4 text-[#1a365d] border-b pb-2">Cardigan Bay General Hospital Fundraising Dinner</div>
+<p class="mb-4">You are cordially invited to attend a dinner fundraiser in aid of Cardigan Bay General Hospital on April 25 at 7:30 p.m. in the Iris Room at the Beaufort Hotel.</p>
+<p class="mb-4">The east wing has barely changed since the opening day. In order to make improvements to it, the hospital needs about £300,000, which this dinner will raise funds for.</p>
+<p class="mb-4">Tickets can be purchased for £100 at the main desk. Those purchasing four tickets or more at one time will receive a copy of Dr. Dianne Larsen's book on nutrition, <i>Food Fit</i>, valued at £25, as a gift.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="text-center font-bold text-lg mb-4 text-[#1a365d] border-b pb-2">Cardigan Bay 綜合醫院募款晚宴</div>
+<p class="mb-4">誠摯邀請您參加援助 Cardigan Bay 綜合醫院的募款晚宴，時間是 4 月 25 日晚上 7:30，在 Beaufort 飯店 Iris 廳舉行。</p>
+<p class="mb-4">本院東側自開院以來幾乎未改變。為進行改善，本院需要約 30 萬英鎊，將於本次晚宴募款。</p>
+<p class="mb-4">門票可於正門櫃台以 100 英鎊購買。一次購買四張以上門票者，將獲贈 Dianne Larsen 醫師關於營養的著作《Food Fit》一本，價值 25 英鎊。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 147 題 | 核心考點：wh-問題 Why (難易度：高)</div>
+                <div class="question-text">Q147. Why does the hospital need funding?</div>
+                <table class="options-table">
+            <tr><td>(A) It needs to pay for extra research into diseases.</td><td>(B) It has to hire more medical personnel.</td></tr>
+            <tr><td class="correct-option">(C) It would like to refurbish a section of the building. <span class="badge-correct">正確答案</span></td><td>(D) It requires the purchase of new medical equipment.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼醫院需要資金？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>題目詢問醫院需要資金的原因。<br>
+                        <strong>2. 核心判定：</strong>文章指出東翼自開業起幾乎沒變，為了對其進行改善 (make improvements) 需要大約 30 萬英鎊，對應 (C) 翻新大樓一部分 (refurbish a section)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 疾病研究，(B) 聘僱人員，(D) 購買設備，在文中均未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 148 題 | 核心考點：wh-問題 How (難易度：中)</div>
+                <div class="question-text">Q148. How can guests obtain a complimentary item?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) By paying for at least four guests. <span class="badge-correct">正確答案</span></td><td>(B) By presenting an invitation from a previous event.</td></tr>
+            <tr><td>(C) By making reservations for an event online.</td><td>(D) By volunteering to help at the hospital.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">賓客怎樣可以得到贈品？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>題目詢問如何獲得贈品。定位贈品 (complimentary item / gift) 的條件。<br>
+                        <strong>2. 核心判定：</strong>一次購買四張或以上門票的人將獲得...作為贈品。選項 (A) 替至少四名賓客付費，即購買至少四張票，完全對應此意。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 舊邀請函，(C) 線上預約，(D) 做志工，皆為干擾項。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">fundraising</td><td class="vocab-pos">n.</td><td class="vocab-meaning">募款</td></tr><tr><td class="vocab-word">cordially</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">誠摯地</td></tr><tr><td class="vocab-word">renovate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">整修</td></tr><tr><td class="vocab-word">refurbish</td><td class="vocab-pos">v.</td><td class="vocab-meaning">整修，翻新</td></tr><tr><td class="vocab-word">complimentary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">免費贈送的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 149-150 refer to the following ticket. (149-150 題參照以下車票。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border-2 border-dashed border-slate-300 p-4 font-mono text-xs bg-slate-50 space-y-3">
+  <div class="text-center font-bold text-sm tracking-widest border-b pb-1 text-slate-700">WALLACE TRANSPORTATION: TICKET</div>
+  <div class="grid grid-cols-2 gap-2 pt-2 border-b pb-2">
+    <div><strong>PASSENGER:</strong> William Singer</div>
+    <div class="col-span-2"><strong>HOME ADDRESS:</strong> 21 West 74th St., New York, NY 10023</div>
+  </div>
+  <div class="grid grid-cols-3 gap-2 border-b pb-2">
+    <div><strong>CLASS:</strong> Regular</div>
+    <div><strong>FARE:</strong> $52.00</div>
+  </div>
+  <div>
+    <strong>ITINERARY:</strong>
+    <table class="w-full text-left mt-1 text-[11px]">
+      <tr><td>Depart: New York City</td><td class="text-right">5:10 a.m.</td></tr>
+      <tr><td>Arrive: Pittsburgh</td><td class="text-right">12:12 p.m.</td></tr>
+      <tr class="text-slate-500"><td>Depart: Pittsburgh</td><td class="text-right">1:20 p.m.</td></tr>
+      <tr><td>Arrive: Columbus</td><td class="text-right">4:50 p.m.</td></tr>
+      <tr class="text-slate-500"><td>Depart: Columbus</td><td class="text-right">5:30 p.m.</td></tr>
+      <tr><td>Arrive: Chicago</td><td class="text-right">10:05 p.m.</td></tr>
+    </table>
+  </div>
+  <div class="text-[10px] text-slate-650 font-sans border-t pt-2 leading-relaxed text-justify">
+    Your bus will leave terminal at 5:10 a.m. Passengers are permitted to bring two pieces of luggage on board, one for carry-on and one stored away. No refunds for missed departures. Cancel ticket: (212) 555-8843.
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="border-2 border-dashed border-slate-300 p-4 font-mono text-xs bg-slate-50 space-y-3">
+  <div class="text-center font-bold text-sm tracking-widest border-b pb-1 text-slate-700">WALLACE 交通：車票</div>
+  <div class="grid grid-cols-2 gap-2 pt-2 border-b pb-2">
+    <div><strong>乘客:</strong> William Singer</div>
+    <div class="col-span-2"><strong>住家地址:</strong> 紐約州紐約市西 74 街 21 號，郵遞區號 10023</div>
+  </div>
+  <p>出發日期為 8 月 11 日。行程包括出發紐約市、抵達匹茲堡、出發匹茲堡、抵達哥倫布、出發哥倫布、抵達芝加哥。乘客可自備兩件行李。錯過出發不予退款。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 149 題 | 核心考點：Not/True True 問題 (難易度：中)</div>
+                <div class="question-text">Q149. What is indicated about Mr. Singer?</div>
+                <table class="options-table">
+            <tr><td>(A) He bought a return ticket.</td><td>(B) He was charged a reduced fare.</td></tr>
+            <tr><td>(C) He plans on staying the night in Columbus.</td><td class="correct-option">(D) He is a resident of New York. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Singer 先生，何者正確？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>對照車票地址細節。<br>
+                        <strong>2. 核心判定：</strong>車票顯示住家地址在 New York，這說明他是 New York 居民 (resident)，對應 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 無回程資訊，(B) 為 Regular 票價，(C) 僅停留 40 分鐘，不符過夜敘述。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 150 題 | 核心考點：Not/True Not 問題 (難易度：高)</div>
+                <div class="question-text">Q150. What is NOT indicated on the ticket?</div>
+                <table class="options-table">
+            <tr><td>(A) The company's refund policy.</td><td>(B) The estimated arrival time in Pittsburgh.</td></tr>
+            <tr><td>(C) The baggage allowance.</td><td class="correct-option">(D) The time of departure from Chicago. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">車票上沒有包含什麼資訊？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>否定型 Not/True 問題。<br>
+                        <strong>2. 核心判定：</strong>行程表最後一行為 Arrive Chicago，即抵達芝加哥時間，並未列出從芝加哥出發的時間，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到不予退費 (No refunds)，(B) 提到抵達匹茲堡時間，(C) 提到行李允許量。A、B、C 排除。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">departure</td><td class="vocab-pos">n.</td><td class="vocab-meaning">出發</td></tr><tr><td class="vocab-word">itinerary</td><td class="vocab-pos">n.</td><td class="vocab-meaning">行程表</td></tr><tr><td class="vocab-word">fare</td><td class="vocab-pos">n.</td><td class="vocab-meaning">票價</td></tr><tr><td class="vocab-word">luggage</td><td class="vocab-pos">n.</td><td class="vocab-meaning">行李 (同義詞 baggage)</td></tr><tr><td class="vocab-word">refund</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">退費</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 151-152 refer to the following letter. (151-152 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-sm font-sans">
+  <div class="space-y-1 text-slate-505">
+    <div><strong>Nisa Miskin</strong> | Inman Pharmaceuticals</div>
+    <div class="pt-2">August 12</div>
+  </div>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    I am a representative from Well Time Benefits. We understand your role as a benefits manager and can offer plans that make your job easier. Well Time Benefits offers a variety of packages covering insurance needs, such as medical, mental health, dental, life, and more. Popular packages include "Health Plus" and the comprehensive "Choice Care." Disability and parental leave benefits are inclusive with the Choice Care package.
+  </p>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    I will contact your office within the next two weeks to find out if you'd like to set up an appointment. Call 555-4433 if sooner.
+  </p>
+  <div class="pt-2 text-slate-700">Sincerely,<br><strong>Lucas Moreland</strong> | Well Time Benefits</div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-sm font-sans">
+  <p>我是 Well Time Benefits 公司的代表。我們能提供讓您福利經理工作更輕鬆的方案。Well Time Benefits 提供多種保險，包含醫療、牙齒與人壽保險。「Choice Care」屬於保障全面的方案，包含殘疾與育嬰假津貼。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 151 題 | 核心考點：尋找主題/目的 (難易度：低)</div>
+                <div class="question-text">Q151. What is the purpose of the letter?</div>
+                <table class="options-table">
+            <tr><td>(A) To introduce an employee training program</td><td class="correct-option">(B) To describe a company's products <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To invite a participant to a human resources seminar</td><td>(D) To compare a variety of insurance packages</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這封信的目的是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>信件首段揭示目的。<br>
+                        <strong>2. 核心判定：</strong>信件主要是向潛在客戶推薦其福利與保險套裝產品/服務，故選 (B) 描述公司的產品 (describe products)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 培訓，(C) 人資研討會，(D) 方案比較，皆非主要目的。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 152 題 | 核心考點：wh-問題 How (難易度：中)</div>
+                <div class="question-text">Q152. How can a company receive coverage for parental absence?</div>
+                <table class="options-table">
+            <tr><td>(A) By renewing membership in a benefits program</td><td>(B) By sending a document within the next two weeks</td></tr>
+            <tr><td class="correct-option">(C) By registering employees for comprehensive coverage <span class="badge-correct">正確答案</span></td><td>(D) By paying an additional monthly charge</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">公司怎樣可以獲得育嬰假的保險？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位 parental leave 的條件。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "parental leave benefits are inclusive with the Choice Care package"，而 Choice Care 是 comprehensive 方案，故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 會員更新，(B) 兩週內寄件，(D) 額外月費，皆不符。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">pharmaceutical</td><td class="vocab-pos">n.</td><td class="vocab-meaning">製藥公司</td></tr><tr><td class="vocab-word">representative</td><td class="vocab-pos">n.</td><td class="vocab-meaning">代表</td></tr><tr><td class="vocab-word">comprehensive</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">全面的</td></tr><tr><td class="vocab-word">disability</td><td class="vocab-pos">n.</td><td class="vocab-meaning">殘疾</td></tr><tr><td class="vocab-word">parental leave</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">育嬰假</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 153-154 refer to the following text message chain. (153-154 題參照以下訊息對話紀錄。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="bg-slate-100 p-4 rounded-xl space-y-3 font-sans max-w-md mx-auto text-xs sm:text-sm">
+  <div class="flex flex-col space-y-1">
+    <div class="text-slate-500 font-bold">Sonya Meadows [1:45 p.m.]</div>
+    <div class="bg-blue-500 text-white p-2.5 rounded-2xl rounded-tl-none text-justify">
+      Brian, sorry to bother you, but I need to ask a favor. I have to deliver the final rental contract for an office space, but my last appointment ran long. I don't think I can make it there on time.
+    </div>
+  </div>
+  <div class="flex flex-col space-y-1">
+    <div class="text-slate-505 font-bold">Brian Hull [1:46 p.m.]</div>
+    <div class="bg-slate-200 text-slate-800 p-2.5 rounded-2xl rounded-tl-none text-justify">
+      I can probably deliver it for you. Send me the details.
+    </div>
+  </div>
+  <div class="flex flex-col space-y-1">
+    <div class="text-slate-500 font-bold">Sonya Meadows [1:48 p.m.]</div>
+    <div class="bg-blue-500 text-white p-2.5 rounded-2xl rounded-tl-none text-justify">
+      Thanks! The client is Coventry Financial, renting a space at State Tower on Market Street. It's Unit 1804. Appointment is at 2:40.
+    </div>
+  </div>
+  <div class="flex flex-col space-y-1">
+    <div class="text-slate-505 font-bold">Brian Hull [1:50 p.m.]</div>
+    <div class="bg-slate-200 text-slate-800 p-2.5 rounded-2xl rounded-tl-none text-justify">
+      I'll take a cab so I get there faster. It'd take me twice as long if I had to look for parking in that area. What about the contract?
+    </div>
+  </div>
+  <div class="flex flex-col space-y-1">
+    <div class="text-slate-500 font-bold">Sonya Meadows [1:51 p.m.]</div>
+    <div class="bg-blue-500 text-white p-2.5 rounded-2xl rounded-tl-none text-justify">
+      It should be sitting on my desk. I asked our receptionist to make copies of it earlier and leave it in my office.
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="bg-slate-100 p-4 rounded-xl space-y-3 font-sans max-w-md mx-auto text-xs sm:text-sm">
+  <p>Sonya 因會議延遲，請求 Brian 幫忙遞送 Coventry Financial 的辦公室租約（地點在 Market 街 State Tower 1804 室）。Brian 決定搭計程車，因為那一帶很難停車。合約在 Sonya 桌上。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 153 題 | 核心考點：推論題 (難易度：高)</div>
+                <div class="question-text">Q153. What is suggested about Market Street?</div>
+                <table class="options-table">
+            <tr><td>(A) It is half an hour away from Ms. Meadows' office.</td><td>(B) It is located in a shopping district.</td></tr>
+            <tr><td class="correct-option">(C) It is difficult to find parking there. <span class="badge-correct">正確答案</span></td><td>(D) It is near a major transit stop.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Market 街，文中暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>對應 Brian 提到停車的句子。<br>
+                        <strong>2. 核心判定：</strong>Brian 說如果在那裡找車位會花兩倍時間，這暗示了該地區非常難停車，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 距離、(B) 購物區、(D) 轉運站，均未提。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 154 題 | 核心考點：掌控意圖 (難易度：高)</div>
+                <div class="question-text">Q154. At 1:51 p.m., what does Ms. Meadows mean when she writes, "It should be sitting on my desk"?</div>
+                <table class="options-table">
+            <tr><td>(A) She put a message from a customer on a counter.</td><td>(B) She misplaced a client's business card.</td></tr>
+            <tr><td>(C) She could not access her appointment schedule.</td><td class="correct-option">(D) She believes that a document is in her workspace. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在下午 1:51，Meadows 小姐說 "It should be sitting on my desk" 是什麼意思？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>分析說話者的意圖。<br>
+                        <strong>2. 核心判定：</strong>她指合約（document）在她的桌上，意即在她個人的工作空間（workspace），選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 留言放櫃台，(B) 放錯名片，(C) 無法讀取行程表，皆與合約無關。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">bother</td><td class="vocab-pos">v.</td><td class="vocab-meaning">打擾</td></tr><tr><td class="vocab-word">ask a favor</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">請求幫忙</td></tr><tr><td class="vocab-word">make it</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">及時趕到</td></tr><tr><td class="vocab-word">look for parking</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">尋找停車位</td></tr><tr><td class="vocab-word">receptionist</td><td class="vocab-pos">n.</td><td class="vocab-meaning">接待員</td></tr><tr><td class="vocab-word">workspace</td><td class="vocab-pos">n.</td><td class="vocab-meaning">工作空間</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 5 | Questions 155-157 refer to the following e-mail. (155-157 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+  <div class="bg-slate-200 p-4 border-b border-slate-300 space-y-1 text-slate-700">
+    <div><strong>TO:</strong> Steven Joyce &lt;sjoyce@fastmail.com&gt;</div>
+    <div><strong>FROM:</strong> Fast Track Records &lt;information@fasttrackrecords.com&gt;</div>
+    <div><strong>DATE:</strong> May 20</div>
+    <div><strong>SUBJECT:</strong> Information</div>
+  </div>
+  <div class="p-6 bg-white space-y-4 text-slate-800 leading-relaxed">
+    <p>Dear Mr. Joyce, we celebrate Record Store Day to honor the independent spirit of record stores. Here are some of the planned highlights of the day:</p>
+    <div class="border border-slate-100 rounded-lg overflow-hidden my-3">
+      <table class="w-full text-left border-collapse text-[11px] sm:text-xs">
+        <tr class="bg-slate-50 border-b border-slate-100 font-bold text-slate-700">
+          <th class="p-2 w-1/4">Time</th>
+          <th class="p-2 w-3/4">Event & Activities Details</th>
+        </tr>
+        <tr class="border-b border-slate-100">
+          <td class="p-2 font-bold text-[#1a365d] whitespace-nowrap">11 a.m. - 12 p.m.</td>
+          <td class="p-2">John Kher, Sarah Feinstein, and other local music critics will be reading selections from their work at Gold Sounds Records.</td>
+        </tr>
+        <tr class="border-b border-slate-100 bg-slate-50/50">
+          <td class="p-2 font-bold text-[#1a365d] whitespace-nowrap">12 p.m. - 5 p.m.</td>
+          <td class="p-2">Marshalltown Records will be offering a special discount on all jazz and blues records. Stop by their store and receive up to 50% off on your favorite albums.</td>
+        </tr>
+        <tr class="border-b border-slate-100">
+          <td class="p-2 font-bold text-[#1a365d] whitespace-nowrap">1 p.m. - 5 p.m.</td>
+          <td class="p-2">Duke Records will stage a raffle for a variety of merchandise, including vinyl cases, T-shirts, and other memorabilia.</td>
+        </tr>
+        <tr class="border-b border-slate-100 bg-slate-50/50">
+          <td class="p-2 font-bold text-[#1a365d] whitespace-nowrap">2:30 p.m. - 3:30 p.m.</td>
+          <td class="p-2">Local rock band The Chimney Sweeps will be performing an in-store concert at Desert Island Records.</td>
+        </tr>
+        <tr class="border-b border-slate-100">
+          <td class="p-2 font-bold text-[#1a365d] whitespace-nowrap">4 p.m. - 5 p.m.</td>
+          <td class="p-2">Gold Sounds Records will be holding a music-themed trivia competition. Winners will receive special prizes including autographed CDs and posters.</td>
+        </tr>
+        <tr class="bg-slate-50/50">
+          <td class="p-2 font-bold text-amber-600 whitespace-nowrap">5 p.m.</td>
+          <td class="p-2">A small after-party will be held at Marshalltown Records.</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+  <p>世界唱片行日活動時間表：11:00 評論家朗讀（Gold Sounds）；12:00-17:00 爵士與藍調打折（Marshalltown）；13:00-17:00 抽獎（Duke）；14:30-15:30 搖滾樂團演唱會（Desert Island）；16:00-17:00 問答（Gold Sounds）；17:00 派對（Marshalltown）。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 155 題 | 核心考點：尋找主題/目的 (難易度：低)</div>
+                <div class="question-text">Q155. What is the main purpose of the e-mail?</div>
+                <table class="options-table">
+            <tr><td>(A) To announce a record store's grand opening</td><td>(B) To list music-related events for the summer months</td></tr>
+            <tr><td class="correct-option">(C) To provide a schedule for a special celebration <span class="badge-correct">正確答案</span></td><td>(D) To keep members informed of local concerts</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這封電子郵件的主要目的是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>題目詢問電子郵件的主要目的。<br>
+                        <strong>2. 核心判定：</strong>信件列出了 Record Store Day 各時段的活動，目的為提供特殊慶祝活動的日程表，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 宣告開幕，(B) 列出夏季活動，(D) 讓會員知曉本地音樂會，皆非主旨。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 156 題 | 核心考點：Not/True Not 問題 (難易度：中)</div>
+                <div class="question-text">Q156. What is NOT mentioned as a planned activity for Record Store Day?</div>
+                <table class="options-table">
+            <tr><td>(A) A store-sponsored contest</td><td>(B) A musical performance</td></tr>
+            <tr><td class="correct-option">(C) A speech by a musician <span class="badge-correct">正確答案</span></td><td>(D) A reading by local reviewers</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">哪項活動沒有被提到是世界唱片行日的預定計畫？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>否定型 Not/True 問題，尋找文中「未」提到的活動。<br>
+                        <strong>2. 核心判定：</strong>表中 11 a.m. 提到朗讀 (reading/reviewers)；2:30 p.m. 提到演唱會 (concert)；4 p.m. 提到問答 (trivia competition/contest)。未提及音樂家發表演講 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>A、B、D 均能在時間表中找到對應，應排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 157 題 | 核心考點：Not/True True 問題 (難易度：低)</div>
+                <div class="question-text">Q157. What is indicated about Marshalltown Records?</div>
+                <table class="options-table">
+            <tr><td>(A) It specializes in jazz and blues records.</td><td>(B) It has two branches in the city.</td></tr>
+            <tr><td>(C) It is giving away a selection of merchandise.</td><td class="correct-option">(D) It will be the venue for the final event. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Marshalltown Records，文中敘述了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>肯定型 Not/True 問題，找出關於 Marshalltown 的正確說明。<br>
+                        <strong>2. 核心判定：</strong>時間表最後一項活動為 "5 p.m. A after-party will be held at Marshalltown Records"。此為當天最後一個活動，場地在 Marshalltown。因此 (D) 是正確的。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 專營爵士與藍調（文中僅說提供折扣），(B) 兩家分店，(C) 贈送商品（這是 Duke Records 舉辦的）。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">independent spirit</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">獨立精神</td></tr><tr><td class="vocab-word">forward</td><td class="vocab-pos">v.</td><td class="vocab-meaning">轉寄</td></tr><tr><td class="vocab-word">critic</td><td class="vocab-pos">n.</td><td class="vocab-meaning">評論家 (同義詞 reviewer)</td></tr><tr><td class="vocab-word">raffle</td><td class="vocab-pos">n.</td><td class="vocab-meaning">抽獎</td></tr><tr><td class="vocab-word">venue</td><td class="vocab-pos">n.</td><td class="vocab-meaning">場地</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 6 | Questions 158-161 refer to the following announcement. (158-161 題參照以下公告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-emerald-200 rounded-xl overflow-hidden font-sans text-xs sm:text-sm bg-white">
+  <div class="bg-emerald-700 text-white p-4 font-bold text-center tracking-wide text-base">
+    Eagle Canyon City Park
+  </div>
+  <div class="p-6 space-y-4 text-slate-800 leading-relaxed text-justify">
+    <p>
+      Over the past month, there has been an increase in sightings of raccoons in the park. The rangers suspect they are attracted by food scraps left by visitors. 
+      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 1">[1]</span> 
+      The public health department does not want to encourage the raccoons to leave the wooded areas as they can be carriers of disease. 
+      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 2">[2]</span> 
+      With that in mind:
+    </p>
+    <ul class="list-disc pl-5 space-y-2 text-slate-700">
+      <li>Do not leave garbage—take it with you, or place it in closed bins.</li>
+      <li>Do not approach raccoons or feed them; they have sharp claws and can be dangerous when frightened.</li>
+    </ul>
+    <p>
+      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 3">[3]</span> 
+      Along with this, we will hold volunteer park cleanups on the last Saturday of each month. Our next one is June 27. Interested participants should report to the visitor center to register. 
+      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 4">[4]</span> 
+      All participants will be provided with protective gloves and vests, water, and lunch.
+    </p>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="border border-emerald-200 rounded-xl overflow-hidden font-sans text-xs sm:text-sm bg-white">
+  <p>公園出現浣熊。為了防止疾病傳播，請勿餵食，垃圾請帶走或丟在密閉垃圾桶內。每月最後一個星期六有志工清理活動（下次為 6 月 27 日），請至遊客中心報名。提供手套、背心與午餐。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 158 題 | 核心考點：尋找主題/目的 (難易度：低)</div>
+                <div class="question-text">Q158. Why was the announcement written?</div>
+                <table class="options-table">
+            <tr><td>(A) To declare a public meeting</td><td>(B) To announce the opening of a wildlife park</td></tr>
+            <tr><td>(C) To provide directions to a visitor center</td><td class="correct-option">(D) To alert visitors of a problem <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼撰寫這篇公告？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>公告首段揭示目的。<br>
+                        <strong>2. 核心判定：</strong>公告指出浣熊通報件數大增，警告遊客不要餵食以避免公衛問題，屬於警示遊客某項問題，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 宣告大眾會議，(B) 野生公園開幕，(C) 指引方向，皆非主旨。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 159 題 | 核心考點：Not/True Not 問題 (難易度：高)</div>
+                <div class="question-text">Q159. What is NOT mentioned about raccoons?</div>
+                <table class="options-table">
+            <tr><td>(A) They are potential threats to other animals.</td><td class="correct-option">(B) They should only be approached under staff supervision. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) They are drawn toward food left by humans.</td><td>(D) They pose a hazard when feeling scared.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於檢視浣熊，哪項敘述沒有在文中提到？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>否定型 Not/True 問題。<br>
+                        <strong>2. 核心判定：</strong>文中表示 "do not approach them"，並未提到可在員工監督下接近，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到對其他動物威脅，(C) 被食物吸引，(D) 提到受驚時危險，皆在文中出現。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 160 題 | 核心考點：wh-問題 What (難易度：中)</div>
+                <div class="question-text">Q160. What will volunteers be given?</div>
+                <table class="options-table">
+            <tr><td>(A) A map of the park</td><td>(B) Some food to distribute to animals</td></tr>
+            <tr><td>(C) A certificate of accomplishment</td><td class="correct-option">(D) Some protective gear <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">志工將會獲得什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位志工的物資項目。<br>
+                        <strong>2. 核心判定：</strong>文中表示將為參加者提供 "protective gloves and vests"，這屬於防護裝備 (protective gear)，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 地圖，(B) 動物食物，(C) 證書，皆未提到。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 161 題 | 核心考點：找出句子位置 (難易度：高)</div>
+                <div class="question-text">Q161. In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? "We will accept registration forms up to two days prior to the event."</div>
+                <table class="options-table">
+            <tr><td>(A) [1]</td><td>(B) [2]</td></tr>
+            <tr><td>(C) [3]</td><td class="correct-option">(D) [4] <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在 [1]、[2]、[3]、[4] 標記的位置中，以下句子最適合放入哪裡？
+"We will accept registration forms up to two days prior to the event."</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>插入句的連貫性分析。<br>
+                        <strong>2. 核心判定：</strong>被插入句中包含 "registration forms"。前文提到 "report to the visitor center to register"，因此接在其後說明截止日期最為連貫，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>[1], [2], [3] 所在的上下文都是在說明浣熊帶來的危害，與報名無關。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">sightings</td><td class="vocab-pos">n.</td><td class="vocab-meaning">目擊</td></tr><tr><td class="vocab-word">scraps</td><td class="vocab-pos">n.</td><td class="vocab-meaning">殘渣</td></tr><tr><td class="vocab-word">carrier</td><td class="vocab-pos">n.</td><td class="vocab-meaning">帶原者</td></tr><tr><td class="vocab-word">cleanup</td><td class="vocab-pos">n.</td><td class="vocab-meaning">清潔</td></tr><tr><td class="vocab-word">register</td><td class="vocab-pos">v.</td><td class="vocab-meaning">登記</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 7 | Questions 162-165 refer to the following online chat discussion. (162-165 題參照以下網路聊天討論。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+  <div class="bg-[#1a365d] text-white p-3 font-bold flex items-center justify-between text-xs sm:text-sm">
+    <span>💬 N-Genz Auto Project Discussion</span>
+  </div>
+  <div class="p-4 space-y-3.5 max-h-[450px] overflow-y-auto bg-slate-100 text-slate-800 text-xs sm:text-sm">
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-500 font-bold ml-1"><span class="text-blue-700">Michelle Hanson</span> 11:40</div>
+      <div class="bg-blue-600 text-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] text-justify">
+        Can I get an update on N-Genz Auto? Presentation moved up to Tuesday, August 10.
+      </div>
+    </div>
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-505 font-bold ml-1"><span class="text-emerald-700">Barry Carr</span> 11:42</div>
+      <div class="bg-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] border border-slate-200 text-justify">
+        TV commercial script done this afternoon. Waiting for permission to proceed.
+      </div>
+    </div>
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-500 font-bold ml-1"><span class="text-purple-700">Dustin Rodriguez</span> 11:45</div>
+      <div class="bg-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] border border-slate-200 text-justify">
+        Lead actor backed out. Agency is finding a replacement. We can shoot on July 18 at Snappy.
+      </div>
+    </div>
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-500 font-bold ml-1"><span class="text-purple-700">Dustin Rodriguez</span> 11:54</div>
+      <div class="bg-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] border border-slate-200 text-justify">
+        Good news. Agency says second choice performer can do the job.
+      </div>
+    </div>
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-505 font-bold ml-1"><span class="text-emerald-700">Barry Carr</span> 11:55</div>
+      <div class="bg-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] border border-slate-200 text-justify">
+        I can't make it on 18th (client meeting). I'll send Brianna Johns in my place.
+      </div>
+    </div>
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-505 font-bold ml-1"><span class="text-purple-700">Dustin Rodriguez</span> 11:57</div>
+      <div class="bg-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] border border-slate-200 text-justify">
+        I'll get in touch with her shortly.
+      </div>
+    </div>
+    <div class="flex flex-col items-start space-y-1">
+      <div class="text-[10px] text-slate-500 font-bold ml-1"><span class="text-blue-700">Michelle Hanson</span> 11:58</div>
+      <div class="bg-blue-600 text-white p-2.5 rounded-2xl rounded-tl-none max-w-[85%] text-justify">
+        Looks like we are on the right track. Willa, send me a link to the site so I can see progress.
+      </div>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <p>專案進度追蹤。簡報提前。電視廣告腳本下午好。主角退出，第二人選確定。7月18日照常拍攝，Barry 開會無法去，派 Brianna 代替。Willa 將提供網站連結。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 162 題 | 核心考點：推論題 (難易度：高)</div>
+                <div class="question-text">Q162. What type of business does Ms. Hanson most likely work for?</div>
+                <table class="options-table">
+            <tr><td>(A) A television studio</td><td class="correct-option">(B) An advertising firm <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A Web design company</td><td>(D) An automobile manufacturer</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Hanson 小姐最可能在哪種公司工作？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>結合各成員工作進行推導。<br>
+                        <strong>2. 核心判定：</strong>她管理 N-Genz Auto 廣告宣傳專案，協調電視廣告與網頁設計。這說明她服務於廣告公司，選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 電視工作室，(C) 網頁設計公司，(D) 汽車製造商，皆不正確。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 163 題 | 核心考點：掌控意圖 (難易度：中)</div>
+                <div class="question-text">Q163. At 11:58, what does Ms. Hanson mean when she writes, "on the right track"?</div>
+                <table class="options-table">
+            <tr><td>(A) She has agreed to some script modifications.</td><td>(B) She is pleased with the progress for a site design.</td></tr>
+            <tr><td class="correct-option">(C) She thinks the project is going according to plan. <span class="badge-correct">正確答案</span></td><td>(D) She is satisfied with a casting decision.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在 11:58，Hanson 小姐寫下 "on the right track" 是什麼意思？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>分析說話者的意圖。<br>
+                        <strong>2. 核心判定：</strong>這代表她認為各項進度都很順利，專案正按原計畫進行，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 腳本修改，(B) 網頁進度，(D) 演員挑選，皆非 on the right track 的廣義代表。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 164 題 | 核心考點：Not/True True 問題 (難易度：高)</div>
+                <div class="question-text">Q164. What is true about Mr. Rodriguez?</div>
+                <table class="options-table">
+            <tr><td>(A) He only recently started working at the company.</td><td class="correct-option">(B) He plans to get in contact with Ms. Johns. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) He will send someone in his place to a meeting.</td><td>(D) He will deliver an upcoming client presentation.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Rodriguez 先生，何者正確？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>尋找與 Dustin 相關的正確說明。<br>
+                        <strong>2. 核心判定：</strong>Barry 提到派 Brianna Johns 代替。Dustin 回應 "I'll get in touch with her shortly..."。因此他計劃與 Johns 聯絡，選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 新進，(C) 派人代開會，(D) 客戶簡報，皆不對應。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 165 題 | 核心考點：wh-問題 What (難易度：低)</div>
+                <div class="question-text">Q165. What has Ms. Hopkins been asked to do?</div>
+                <table class="options-table">
+            <tr><td>(A) Send a progress report</td><td>(B) Forward a detailed calendar</td></tr>
+            <tr><td class="correct-option">(C) Provide a Web site address <span class="badge-correct">正確答案</span></td><td>(D) E-mail a performer's resumé</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Hopkins 小姐被要求做什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位對 Hopkins 的要求。<br>
+                        <strong>2. 核心判定：</strong>Michelle 要求："Willa, could you send me a link to the site..."。傳送網站連結即為提供網址，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 進度報告，(B) 行程表，(D) 表演者履歷，排除。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">promotion</td><td class="vocab-pos">n.</td><td class="vocab-meaning">促銷</td></tr><tr><td class="vocab-word">commercial</td><td class="vocab-pos">n.</td><td class="vocab-meaning">電視廣告</td></tr><tr><td class="vocab-word">back out</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">退出</td></tr><tr><td class="vocab-word">performer</td><td class="vocab-pos">n.</td><td class="vocab-meaning">表演者</td></tr><tr><td class="vocab-word">client</td><td class="vocab-pos">n.</td><td class="vocab-meaning">客戶</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 8 | Questions 166-168 refer to the following information. (166-168 題參照以下資訊。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-xs sm:text-sm font-sans">
+  <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2">Hanlan's Coffee Company — Ethical Purchasing Policy</div>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    At Hanlan's, we know that our customers like to drink only the finest coffee. Many coffee producers provide employees with poor working conditions, which Hanlan's does not support. We have exclusive contracts with farms in Guatemala, Ethiopia, and Vietnam. 
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 1">[1]</span>
+    Because of this, we know exactly who is producing our coffee. We ensure acceptable working conditions and wages, and we pay an additional 10 percent above market prices. 
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 2">[2]</span>
+    Furthermore, we started the Hanlan's Development Foundation. Each year, we put five percent of corporate profits into building schools, water pumps, and health care facilities in the villages near where our coffee is grown. The goal is to make certain that our workers' children are safe, healthy, and receive an education. 
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 3">[3]</span>
+    Find out more at www.hanlancoffee.com/foundation.
+    <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px] mx-1 select-none" title="Position 4">[4]</span>
+  </p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <p>我們和瓜地馬拉、衣索比亞、越南的農場有專屬契約。我們感謝所有農夫的努力，付給他們額外 10% 高於市場行情的價格。此外，我們每年投入利潤的 5%，在咖啡種植地附近城鎮與村莊建設學校、抽水設施及醫療設施，確保所有員工的小孩都安全、健康並能上學。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 166 題 | 核心考點：Not/True True 問題 (難易度：中)</div>
+                <div class="question-text">Q166. What is indicated about Hanlan's Coffee Company's partner farms?</div>
+                <table class="options-table">
+            <tr><td>(A) They sell their products on the open market.</td><td>(B) They are subsidized by local governments.</td></tr>
+            <tr><td>(C) They grow a number of different crops.</td><td class="correct-option">(D) They are situated in several countries. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Hanlan's Coffee 公司的合作農場，文中提到什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位 contracts with farms 相關句。<br>
+                        <strong>2. 核心判定：</strong>文中第一段後段提到 "We have exclusive contracts with farms in Guatemala, Ethiopia, and Vietnam."。這三個國家即代表 (D) They are situated in several countries，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 專屬契約，非公開市場；(B) 政府補助未提及；(C) 種植多種不同作物，未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 167 題 | 核心考點：wh-問題 Who (難易度：高)</div>
+                <div class="question-text">Q167. Who does the Hanlan's Development Foundation mostly benefit?</div>
+                <table class="options-table">
+            <tr><td>(A) International agriculture researchers</td><td class="correct-option">(B) Coffee farmers' children <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Employees working abroad</td><td>(D) Members of a coffee growers' association</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Hanlan's 開發基金會最主要對誰有利？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位 Foundation 的目標。<br>
+                        <strong>2. 核心判定：</strong>文中指出，該基金會投入利潤於基礎建設，其 "goal is to make certain that our workers' children are safe..."。這對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 農業研究人員，(C) 在海外工作員工，(D) 種植者協會成員，均非主要受益對象。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 168 題 | 核心考點：找出句子位置 (難易度：高)</div>
+                <div class="question-text">Q168. In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? "By achieving this worthwhile objective, we'll be able to continue our efforts."</div>
+                <table class="options-table">
+            <tr><td>(A) [1]</td><td>(B) [2]</td></tr>
+            <tr><td class="correct-option">(C) [3] <span class="badge-correct">正確答案</span></td><td>(D) [4]</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在 [1]、[2]、[3]、[4] 標記的位置中，以下句子最適合放入哪裡？
+"By achieving this worthwhile objective, we'll be able to continue our efforts."</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>尋找與 objective 相關之連貫處。<br>
+                        <strong>2. 核心判定：</strong>被插入句中包含 "this worthwhile objective"。前文 [3] 的前一句說明了基金會的目標是確保小孩安全健康並獲得教育。這與 "objective" 形成呼應，因此放在 [3] 是最連貫的，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>[1]、[2]、[4] 的上下文都在說明咖啡採購與契約，並無提及任何「目標」，故無法形成呼應。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">ethical</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">道德的</td></tr><tr><td class="vocab-word">purchasing policy</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">採購政策</td></tr><tr><td class="vocab-word">exclusive contract</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">專屬契約</td></tr><tr><td class="vocab-word">corporate profits</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">公司利潤</td></tr><tr><td class="vocab-word">objective</td><td class="vocab-pos">n.</td><td class="vocab-meaning">目標</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 9 | Questions 169-171 refer to the following article. (169-171 題參照以下報導。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-xs sm:text-sm font-sans">
+  <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2">Ping Software's Head Honored as Tech Woman of the Year</div>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    Rebecca Curtis, CEO of software company Ping, has been named the most successful woman in the tech world by <i>Gadget Lover</i> magazine. Ms. Curtis, who took over the company five years ago and transformed it into a thriving multi-platform enterprise, is expected to deliver an acceptance speech at the annual conference on December 2.
+  </p>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    Ms. Curtis replaced the previous CEO, Mark Spalding, when Ping was mainly known for its word processing software. Due to the influx of new word-processing products, Ping's software was not selling well. Ms. Curtis quickly reversed that by developing a wide range of high-quality software including photo-editing and spreadsheet programs. Now Ping is notable for its cutting-edge, dependable technology.
+  </p>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    Over the next several years, Ms. Curtis says Ping will create a membership plan. Those who sign up will be able to download new Ping products at a reduced rate.
+  </p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-xs sm:text-sm font-sans">
+  <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2">Ping Software 公司領導人獲得年度科技女人榮譽</div>
+  <p class="text-slate-600 leading-relaxed text-justify">
+    Rebecca Curtis 於五年前接管 Ping，將其發展為蓬勃的多平台企業。當她接任 Mark Spalding 時，公司主要做文書處理軟體。因市場競爭激烈銷路下滑，她迅速開發了相片編輯與試算表軟體扭轉乾坤。未來還將推出會員折扣下載計畫。
+  </p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 169 題 | 核心考點：Not/True True 問題 (難易度：高)</div>
+                <div class="question-text">Q169. What is stated about Ping?</div>
+                <table class="options-table">
+            <tr><td>(A) It recently hired new systems programmers.</td><td>(B) It was founded five years ago.</td></tr>
+            <tr><td>(C) It offers free downloads to members.</td><td class="correct-option">(D) It was associated with a particular software type. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Ping 公司，文中敘述了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位與公司軟體類型相關句。<br>
+                        <strong>2. 核心判定：</strong>第二段第一句指出 "Ping was mainly known for its word processing software."。這說明該公司與一種特定的軟體類型相聯結，對應選項 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 系統設計師未提，(B) 五年前接管而非創立，(C) 折扣下載而非免費。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 170 題 | 核心考點：Not/True Not 問題 (難易度：高)</div>
+                <div class="question-text">Q170. What is NOT mentioned about Rebecca Curtis?</div>
+                <table class="options-table">
+            <tr><td>(A) She could be speaking at an upcoming conference.</td><td class="correct-option">(B) She was Ping's first female CEO. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) She was recognized by a magazine.</td><td>(D) She helped Ping expand its product line.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Rebecca Curtis，何者未被提及？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>否定型 Not/True 問題，尋找未提及背景。<br>
+                        <strong>2. 核心判定：</strong>文章提到演講 (A)、雜誌肯定 (C)、擴增產品線 (D)，但從未提到她是否為該公司「首位」女性執行長。因此 (B) 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>A、C、D 皆有提及，排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 171 題 | 核心考點：wh-問題 What (難易度：中)</div>
+                <div class="question-text">Q171. According to the article, what is expected to happen at Ping Software?</div>
+                <table class="options-table">
+            <tr><td>(A) It will develop a hardware product.</td><td>(B) Its Web site will be closed down permanently.</td></tr>
+            <tr><td class="correct-option">(C) It will offer programs at lower prices. <span class="badge-correct">正確答案</span></td><td>(D) It will merge with another company.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">根據報導，預期 Ping Software 將會發生什麼事？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位未來預期規劃項目。<br>
+                        <strong>2. 核心判定：</strong>第三段提到 "download new Ping products at a reduced rate."。'reduced rate' 即以折扣/低價提供，對應 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 硬體，(B) 網站關閉，(D) 合併，均未提。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">thriving</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">蓬勃發展的</td></tr><tr><td class="vocab-word">word processing</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">文書處理</td></tr><tr><td class="vocab-word">cutting-edge</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">先進的</td></tr><tr><td class="vocab-word">reduced rate</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">折扣價</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 10 | Questions 172-175 refer to the following report. (172-175 題參照以下報告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-xs sm:text-sm font-sans">
+  <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2">City Trends Report — Valencia</div>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    Tourism numbers in Valencia have been increasing for three years running. At the beginning, the city received under a million visitors a year, but latest figures show this jumped to over 1.4 million.
+  </p>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    There are factors that account for this. The new Sanchez Museum of Iberian Art has proven a big draw since opening last year. Updates to rail services from Valencia to Madrid and Barcelona reduced travel time significantly. With a major airport expansion due this year, things will get even better.
+  </p>
+  <p class="text-slate-800 leading-relaxed text-justify">
+    In addition, the city government's international advertising campaign two years ago proved beneficial. The city was marketed by television, print, and social media. Apollo and Company recently put the city in third place in measuring the quality of life in European cities due to its lovely waterfront, low housing costs, and modern infrastructure.
+  </p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="border border-slate-200 p-6 rounded-xl bg-white space-y-4 text-xs sm:text-sm font-sans">
+  <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2">城市趨勢報告——瓦倫西亞</div>
+  <p class="text-slate-600 leading-relaxed text-justify">
+    瓦倫西亞觀光人數連續三年上升，目前已突破 140 萬。Sanchez 美術館落成、鐵路服務升級（至馬德里與巴塞隆納）使旅行時間大幅縮短。年底前機場將完成擴建。兩年前開始行銷，並被評為歐洲小型宜居城市第三名（因濱海位置、房價低廉及完善基礎建設）。
+  </p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 172 題 | 核心考點：尋找主題/目的 (難易度：低)</div>
+                <div class="question-text">Q172. What is the report mainly about?</div>
+                <table class="options-table">
+            <tr><td>(A) Campaigns to make a city more liveable</td><td>(B) Upgrades to an international conference facility</td></tr>
+            <tr><td>(C) Changes to a government's building codes</td><td class="correct-option">(D) Improvements to a city's tourism industry <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這份報告主要與什麼有關？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>通讀全文歸納主旨。<br>
+                        <strong>2. 核心判定：</strong>報告首段及二、三段詳細剖析帶動該觀光成長的各項改善。由此可知，報告主要在於介紹該市觀光業的各項進步與改善，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 宜居宣傳，(B) 會議設施升級，(C) 建築法規變更，未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 173 題 | 核心考點：Not/True Not 問題 (難易度：中)</div>
+                <div class="question-text">Q173. What is NOT mentioned as a reason for the figure increase?</div>
+                <table class="options-table">
+            <tr><td>(A) A new museum facility</td><td class="correct-option">(B) An updated tax system <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A marketing campaign</td><td>(D) A shorter transit time</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">什麼不是文章中提到數字增加的原因？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>否定型 Not/True 問題。<br>
+                        <strong>2. 核心判定：</strong>文中提及的原因包括新美術館 (A)、廣告行銷活動 (C)、鐵路服務升級縮短時間 (D)。完全未提及「稅制更新」，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>A、C、D 皆能在文中找到對應，應排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 174 題 | 核心考點：Not/True True 問題 (難易度：中)</div>
+                <div class="question-text">Q174. What is indicated about Madrid?</div>
+                <table class="options-table">
+            <tr><td>(A) It was selected by a consultancy as having a high quality of life.</td><td>(B) It was less popular with tourists than Barcelona for three years.</td></tr>
+            <tr><td class="correct-option">(C) Its transportation time from Valencia has been shortened. <span class="badge-correct">正確答案</span></td><td>(D) Its city council hired a firm to develop a marketing strategy.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於馬德里，文中提到了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>以 Madrid 為關鍵字在文中進行定位。<br>
+                        <strong>2. 核心判定：</strong>第二段指出 "updates to rail services from Valencia to Madrid... have reduced travel time significantly."。這代表從瓦倫西亞到馬德里的運輸時間縮短了，對應 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 生活品質評比是指瓦倫西亞；(B) 文中未作此比較；(D) 市議會雇用顧問公司，未提。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 175 題 | 核心考點：wh-問題 Why (難易度：高)</div>
+                <div class="question-text">Q175. Why was Valencia ranked in third place?</div>
+                <table class="options-table">
+            <tr><td>(A) It is popular with business travelers.</td><td>(B) It recently updated its waterfront location.</td></tr>
+            <tr><td class="correct-option">(C) It offers residents affordable homes. <span class="badge-correct">正確答案</span></td><td>(D) It schedules a lot of outdoor activities.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼瓦倫西亞排名第三？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位與 rank 相關的評比理由。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "They cited its lovely waterfront location, low housing costs... as reasons..."。'low housing costs' 對應選項 (C) 負擔得起的住宅。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 商務客歡迎，(B) waterfront 更新，(D) 戶外活動，均未提。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">tourism</td><td class="vocab-pos">n.</td><td class="vocab-meaning">觀光業</td></tr><tr><td class="vocab-word">waterfront</td><td class="vocab-pos">n.</td><td class="vocab-meaning">濱水區</td></tr><tr><td class="vocab-word">housing cost</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">房價</td></tr><tr><td class="vocab-word">affordable</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">負擔得起的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 11 | Questions 176-180 refer to the following letter and e-mail. (176-180 題參照以下信件與電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="space-y-6">
+  <div class="border-l-4 border-slate-400 pl-4 py-1 bg-white p-5 rounded-r-xl border border-slate-200/80 text-xs sm:text-sm font-sans">
+    <div class="text-right text-slate-505 font-bold mb-2">May 10 | Maxfield Financial Group</div>
+    <div class="text-slate-700 mb-4">Bethany Aldridge<br>18 Juniper Road<br>Westport, CT 06880</div>
+    <p class="text-slate-800 leading-relaxed text-justify mb-3">
+      This letter is in response to your request to sign up for paperless statements. Your statements will now be sent via e-mail on the 25th of each month. All such statements will also be accessible from your online account. If you would like a paper statement mailed in addition, log on to your account and check the "Mail my Statement" box under "Delivery Preferences." Keep in mind that Maxfield Financial Group does charge an annual fee of $24 to clients who choose to receive paper statements.
+    </p>
+    <div class="pt-4 text-slate-600">Sincerely,<br>Customer Service</div>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+    <div class="bg-slate-200 p-4 border-b border-slate-300 space-y-1 text-slate-700">
+      <div><strong>TO:</strong> Bethany Aldridge &lt;bethanyal22@totalmail.net&gt;</div>
+      <div><strong>FROM:</strong> Customer Service &lt;cs@maxfieldfin.com&gt;</div>
+      <div><strong>DATE:</strong> May 25</div>
+      <div><strong>SUBJECT:</strong> Your May Statement</div>
+    </div>
+    <div class="p-6 bg-white space-y-4 text-slate-800 leading-relaxed">
+      <p>Dear Ms. Aldridge,</p>
+      <p class="text-justify">
+        Please find your Maxfield Financial Group electronic statement for May attached. As this is the first electronic statement sent to you, please review it. We have received your payment, and your copy will arrive via mail within five to seven days.
+      </p>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <div class="border-l-4 border-slate-400 pl-4 py-1 bg-white p-5 rounded-r-xl border border-slate-200/80">
+    <p>對帳單將於每月 25 日以電郵傳送。若仍需要加寄紙本，請線上勾選，本公司會收取 24 美元年費。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>5 月份電子對帳單已寄出。因這是第一份，請仔細查閱。我們已收到付款，紙本會在 5 到 7 天內郵寄給您。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 176 題 | 核心考點：尋找主題/目的 (難易度：高)</div>
+                <div class="question-text">Q176. Why was the letter written?</div>
+                <table class="options-table">
+            <tr><td>(A) To describe the steps necessary to obtain a card</td><td class="correct-option">(B) To inform a customer of a change in correspondence <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To alert an online banking user of unusual transactions</td><td>(D) To offer receipt recycling policy details to an account holder</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼寫了這封信？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位第一篇信件的首段開啟原因。<br>
+                        <strong>2. 核心判定：</strong>信件第一句提及將改為電子郵件發送，屬於通信方式的變更。'statements' 對應 'correspondence'，因此 (B) 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 辦卡，(C) 異常交易，(D) 政策，皆非文中討論細節。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 177 題 | 核心考點：Not/True True 問題 (難易度：中)</div>
+                <div class="question-text">Q177. What is stated about paperless statements in the letter?</div>
+                <table class="options-table">
+            <tr><td>(A) They must be retained by recipients for tax purposes.</td><td>(B) They require an assigned password to open.</td></tr>
+            <tr><td class="correct-option">(C) They can be accessed from an online account at anytime. <span class="badge-correct">正確答案</span></td><td>(D) They contain less detail than the paper documents that are mailed.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於無紙對帳單，信中敘述了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>無紙對帳單細節對照。<br>
+                        <strong>2. 核心判定：</strong>信件指出 "accessible from your online account"。這對應 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 稅務，(B) 密碼，(D) 內容細節較少，均不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 178 題 | 核心考點：wh-問題 How (難易度：中)</div>
+                <div class="question-text">Q178. According to the letter, how can print copies of statements be requested?</div>
+                <table class="options-table">
+            <tr><td>(A) By e-mailing the service center</td><td>(B) By calling the accounts department</td></tr>
+            <tr><td class="correct-option">(C) By selecting an option online <span class="badge-correct">正確答案</span></td><td>(D) By faxing a request form</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">根據信件，要怎樣申請對帳單的列印複本？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>尋找列印複本的申請方式。<br>
+                        <strong>2. 核心判定：</strong>第二段指出："log on to your account and check the 'Mail my Statement' box..."。這即為 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 電郵，(B) 電話，(D) 傳真，皆非文中所言。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 179 題 | 核心考點：wh-問題 Why (難易度：中)</div>
+                <div class="question-text">Q179. Why has Ms. Aldridge been asked to check her digital statement?</div>
+                <table class="options-table">
+            <tr><td>(A) It includes an important notification.</td><td>(B) It has the incorrect contact information.</td></tr>
+            <tr><td>(C) It shows some additional charges for services.</td><td class="correct-option">(D) It is the first one she has received. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼 Aldridge 小姐被要求查看她的數位對帳單？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位第二篇郵件說明。<br>
+                        <strong>2. 核心判定：</strong>郵件指出："As this is the first electronic statement sent to you, please review it."。因此選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 通知，(B) 聯絡資料錯誤，(C) 額外服務費，皆非原因。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 180 題 | 核心考點：推論題 (難易度：高)</div>
+                <div class="question-text">Q180. What can be inferred about Ms. Aldridge?</div>
+                <table class="options-table">
+            <tr><td>(A) She notified a financial provider of an address change.</td><td>(B) She must submit a complete payment within seven days.</td></tr>
+            <tr><td>(C) She reported an error found on a monthly statement.</td><td class="correct-option">(D) She paid a yearly charge to Maxfield Financial Group. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Aldridge 小姐，可以推知什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章聯動推理。<br>
+                        <strong>2. 核心判定：</strong>第二篇郵件指出紙本將郵寄寄達，說明她有選擇取得紙本對帳單。而第一篇指出「對選擇收到紙本的客戶收取 24 美元金年費」。由此可知她支付了此筆年費，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 地址變更，(B) 七天內付款，(C) 通報錯誤，皆不正確。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">paperless</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">無紙的</td></tr><tr><td class="vocab-word">statement</td><td class="vocab-pos">n.</td><td class="vocab-meaning">對帳單</td></tr><tr><td class="vocab-word">accessible</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">可取得的</td></tr><tr><td class="vocab-word">annual fee</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">年費</td></tr><tr><td class="vocab-word">electronic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">電子的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 12 | Questions 181-185 refer to the following announcement and concert schedule. (181-185 題參照以下公告與音樂會日程表。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="space-y-6">
+  <div class="border border-emerald-200 rounded-xl overflow-hidden font-sans text-xs sm:text-sm bg-white">
+    <div class="bg-emerald-700 text-white p-4 font-bold text-center tracking-wide text-base">
+      The Woodlands Merchants Association Concert Series Sponsorship
+    </div>
+    <div class="p-6 space-y-4 text-slate-800 leading-relaxed text-justify">
+      <p>
+        The Woodlands Merchants Association summer concert series will be held at Center Square. Sponsoring this event will help our main goal: to bring the business community and local residents together.
+      </p>
+      <p>
+        For companies sponsoring a concert for $500 or more, we will have their information printed in the local newspaper, <i>The Woodlands Times</i>. Additionally, during the event, cosponsors can hand out flyers or give away coupons from a booth.
+      </p>
+    </div>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm p-6 space-y-4">
+    <div class="text-center font-extrabold text-[#1a365d] text-base border-b pb-2">
+      Summer Concert Series Schedule and Sponsorship Rates
+    </div>
+    <table class="w-full text-left text-xs bg-white border border-slate-200">
+      <tr class="bg-slate-150">
+        <th class="p-2">Date</th><th class="p-2">Performer</th><th class="p-2 text-right">Rate</th>
+      </tr>
+      <tr><td class="p-2">July 4</td><td class="p-2 font-bold">Pearson Trio</td><td class="p-2 text-right font-mono">$450</td></tr>
+      <tr><td class="p-2">July 11</td><td class="p-2 font-bold">Throwback</td><td class="p-2 text-right font-mono">$500</td></tr>
+      <tr><td class="p-2">July 18</td><td class="p-2 font-bold">University Chorus</td><td class="p-2 text-right font-mono">$550</td></tr>
+      <tr><td class="p-2">July 25</td><td class="p-2 font-bold">Treble Trouble</td><td class="p-2 text-right font-mono">$550</td></tr>
+    </table>
+    <div class="bg-white border p-3 text-slate-505 text-[11px] space-y-1">
+      <p>* Note 1: Co-sponsorship by two companies is permissible.</p>
+      <p>* Note 2: Distributed items are not part of the sponsorship cost and must be paid for by the sponsor.</p>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <div class="border border-emerald-250 rounded-xl overflow-hidden bg-white p-5">
+    <p>舉辦夏季音樂會。贊助費達 500 美元以上者，資訊刊登報紙。共同贊助者可設攤發送傳單及試用品。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>Pearson Trio ($450)、Throwback ($500)、University Chorus ($550)、Treble Trouble ($550)。備註指出共同贊助許可，分發物品成本自理。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 181 題 | 核心考點：尋找主題/目的 (難易度：中)</div>
+                <div class="question-text">Q181. What is the announcement mainly about?</div>
+                <table class="options-table">
+            <tr><td>(A) A request for performers for a concert series</td><td>(B) A revised policy regarding advertising materials</td></tr>
+            <tr><td>(C) A campaign to increase membership in a group</td><td class="correct-option">(D) A promotional opportunity for local establishments <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這篇公告主要與什麼有關？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位公告主要內容。<br>
+                        <strong>2. 核心判定：</strong>公告指出提供本地企業贊助音樂會的機會，有助於宣傳商家店舗。這是一項促銷宣傳機會，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 徵求演員，(B) 修改政策，(C) 招募會員，皆未提。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 182 題 | 核心考點：wh-問題 What (難易度：高)</div>
+                <div class="question-text">Q182. According to the announcement, what is a goal of the event?</div>
+                <table class="options-table">
+            <tr><td>(A) Increasing economic activity in a town</td><td class="correct-option">(B) Fostering interaction between businesses and citizens <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Recognizing the creative talents of local performers</td><td>(D) Raising money for a charity program</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">根據公告，這項活動的目標是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位目標 goal / aim 相關字。<br>
+                        <strong>2. 核心判定：</strong>公告第一段指出目標為 "to bring the business community and local residents together"。這轉化為 "fostering interaction between businesses and citizens"，符合 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 經濟，(C) 表彰才華，(D) 慈善籌款，皆非主要宣示目標。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 183 題 | 核心考點：推論題 (難易度：最高)</div>
+                <div class="question-text">Q183. What is suggested about the evening concerts?</div>
+                <table class="options-table">
+            <tr><td>(A) Poor weather conditions may cause them to be held indoors.</td><td>(B) They are paid for partly by donations gathered from the audiences.</td></tr>
+            <tr><td class="correct-option">(C) Cosponsors can distribute flyers and samples at them. <span class="badge-correct">正確答案</span></td><td>(D) They will take place for the first time at Center Square this year.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於晚間音樂會，文中暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>綜合公告與日程表的資訊分析。<br>
+                        <strong>2. 核心判定：</strong>第一篇提到共同贊助者被允許分發傳單；第二篇提到所有活動皆允許由兩家公司進行共同贊助。結合兩者，可以推知共同贊助商能夠在現場分發傳單與試用品，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 氣候，(B) 觀眾捐款，(D) 今年首次，皆未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 184 題 | 核心考點：wh-問題 What (難易度：中)</div>
+                <div class="question-text">Q184. What are sponsors required to do?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Cover the cost of handouts <span class="badge-correct">正確答案</span></td><td>(B) Finalize concert schedules</td></tr>
+            <tr><td>(C) Provide samples of products</td><td>(D) Sign contracts with performers</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">贊助者被要求做什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>尋找贊助商被規定執行的義務。<br>
+                        <strong>2. 核心判定：</strong>第二篇 Note 2 指出任何分發的傳單皆不屬於列出的贊助費用的範圍，必須完全由贊助商自行負擔費用，即 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 敲定日程，(C) 提供樣品，(D) 簽約，皆不對應。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 185 題 | 核心考點：Not/True (難易度：高)</div>
+                <div class="question-text">Q185. For which concert would sponsors NOT have their details printed in the local newspaper?</div>
+                <table class="options-table">
+            <tr><td>(A) Throwback</td><td>(B) Treble Trouble</td></tr>
+            <tr><td>(C) University Chorus</td><td class="correct-option">(D) Pearson Trio <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">哪場音樂會的贊助商不會在當地報紙上印出其詳細資料？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>結合兩篇文章的費率門檻邏輯推理。<br>
+                        <strong>2. 核心判定：</strong>第一篇指出刊登報紙的門檻是贊助 500 美元以上；第二篇顯示 Pearson Trio 費率是 $450。低於 500 美元門檻，故不會刊登，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>A、B、C 費率皆達 $500 或以上，資料將會被刊登，排除。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">sponsorship</td><td class="vocab-pos">n.</td><td class="vocab-meaning">贊助</td></tr><tr><td class="vocab-word">flyer</td><td class="vocab-pos">n.</td><td class="vocab-meaning">傳單</td></tr><tr><td class="vocab-word">permissible</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">可允許的</td></tr><tr><td class="vocab-word">cosponsor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">共同贊助者</td></tr><tr><td class="vocab-word">handout</td><td class="vocab-pos">n.</td><td class="vocab-meaning">傳單</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 13 | Questions 186-190 refer to the following article, Web page, and e-mail. (186-190 題參照以下報導、網頁與電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="space-y-6">
+  <div class="border border-slate-200 p-6 rounded-xl bg-white text-xs sm:text-sm font-sans">
+    <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2 mb-3">Gunton City Council to Consider Blandfolk Superstore Proposal</div>
+    <p class="text-slate-800 leading-relaxed text-justify mb-3">
+      At a Gunton City Council meeting on May 2, members listened to a presentation from representatives of Blandfolk Superstore about building a branch locally. The retail giant proposed erecting an outlet measuring 9,500 square meters just within city <b>limits</b> on Medford Avenue. However, the chosen land has not yet been authorized for commercial establishments, so Blandfolk has requested that the property be rezoned.
+    </p>
+    <p class="text-slate-800 leading-relaxed text-justify">
+      Gunton mayor Claire O'Rourke told representatives that the council would discuss the proposition this month and address it at their next meeting in June.
+    </p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+    <div class="bg-slate-200 px-4 py-2 border-b border-slate-300 flex justify-between text-slate-600 font-bold text-[11px]">
+      <span>🌐 www.guntonherald.com</span>
+    </div>
+    <div class="p-6 bg-white space-y-4">
+      <p class="text-slate-800 leading-relaxed text-justify">
+        Ronald Pinero posted on May 7: I am writing in regard to the construction proposal from Blandfolk Superstore. As a long-time business owner, I am concerned. I manage Ballas Boutique, a clothing store in the downtown area. Large corporate retailers have forced many smaller stores out of business, even on the outskirts. I hope the mayor will reject the proposal.
+      </p>
+    </div>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+    <div class="bg-slate-200 p-4 border-b border-slate-300 text-slate-700">
+      <div><strong>TO:</strong> Ronald Pinero &lt;rpinero@dailymaily.com&gt;</div>
+      <div><strong>FROM:</strong> Adeline Morris &lt;amorris@guntoncoc.org&gt;</div>
+    </div>
+    <div class="p-6 bg-white space-y-4 text-slate-800 leading-relaxed text-justify">
+      <p>Dear Mr. Pinero,</p>
+      <p>
+        Your concern is something the board of the Gunton Chamber of Commerce has been discussing. We agree that something must be done to protect stores in the downtown area, like yours. On June 3, the city council will be holding a public meeting. It would be helpful if you joined us and gave a short talk.
+      </p>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <div class="border border-slate-200 p-5 bg-white">
+    <p>Blandfolk Superstore 提議在 Medford 大街邊界內建造 9500 平方公尺的商場，並要求土地分區重新調整。市長 O'Rourke 表示將在 6 月會期審議。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>市民 Ronald Pinero 留言表示他經營市中心的 Ballas Boutique，擔心連鎖巨頭會擊垮小店鋪，呼籲市長否決提案。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>商會秘書 Adeline Morris 寫信支持他，同意應保護市中心店家，並邀請他出席 6 月 3 日的市議會公開會議發言。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 186 題 | 核心考點：尋找主題/目的 (難易度：低)</div>
+                <div class="question-text">Q186. What is the article mainly about?</div>
+                <table class="options-table">
+            <tr><td>(A) A mayor's recent proposal</td><td class="correct-option">(B) A corporation's plans to build a store <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A city's thriving downtown scene</td><td>(D) A council's efforts to reduce unemployment</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這篇報導主要與什麼有關？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>第一篇報導的主旨目的。<br>
+                        <strong>2. 核心判定：</strong>第一篇報導指出 Blandfolk Superstore 提議在當地建設分店。這對應 (B) 某公司建設商店的計畫。'building a branch' 替換為 'build a store'，完全一致。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 市長提案非主線，(C) 市中心景象僅在留言中提及，(D) 降低失業率為副產品。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 187 題 | 核心考點：wh-問題 What (難易度：高)</div>
+                <div class="question-text">Q187. What does Mr. Pinero want Ms. O'Rourke to do?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Turn down a proposition from Blandfolk Superstore <span class="badge-correct">正確答案</span></td><td>(B) Meet with executives from Ballas Boutique</td></tr>
+            <tr><td>(C) Rezone some property to allow for construction</td><td>(D) Defer funding for private business owners</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Pinero 先生希望 O'Rourke 女士做什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>關聯第二篇留言作者的要求與第一篇的人物身份。<br>
+                        <strong>2. 核心判定：</strong>第二篇中 Pinero 表示希望市長否決提案。第一篇指出市長為 Claire O'Rourke。因此他希望市長拒絕大賣場提案，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 與服飾店主管見面，(C) 重新分區，(D) 推遲資金，皆不對應。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 188 題 | 核心考點：字彙題 (難易度：中)</div>
+                <div class="question-text">Q188. In the article, the word "limits" in paragraph 1, line 5, is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td>(A) regulations</td><td class="correct-option">(B) borders <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) levels</td><td>(D) obstacles</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在報導中，第一段第 5 行的字「limits」與下列哪一個字的意思最接近？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>字彙題。結合上下文分析 limits 的含義。<br>
+                        <strong>2. 核心判定：</strong>文中為 "just within city limits on Medford Avenue"（在市邊界內）。此處 limits 作「邊界」解，故 borders 為最佳答案，選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 規定，(C) 水準，(D) 障礙，皆不符合 limits 在此處空間範圍的含義。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 189 題 | 核心考點：wh-問題 What (難易度：高)</div>
+                <div class="question-text">Q189. What will take place on June 3?</div>
+                <table class="options-table">
+            <tr><td>(A) Those on the Gunton City Council will vote on a plan.</td><td class="correct-option">(B) Some Chamber of Commerce members will attend a public hearing. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Construction of a large retail outlet will get underway.</td><td>(D) Ms. Morris will voice some citizens' concerns at a trial.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">6 月 3 日將會發生什麼事？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位第三篇郵件中的日期項目。<br>
+                        <strong>2. 核心判定：</strong>郵件指出："On June 3, the city council will be holding a public meeting that some of us will be attending."。這裡的 public meeting 替換為 public hearing（公聽會），us 指 Chamber of Commerce 成員，因此選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 表決提案，(C) 賣場動工，(D) 審判發聲，皆不對應。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 190 題 | 核心考點：推論題 (難易度：最高)</div>
+                <div class="question-text">Q190. What is indicated about Ms. Morris?</div>
+                <table class="options-table">
+            <tr><td>(A) She is in charge of relocation for the city council.</td><td>(B) She runs a store that sells items at bargain prices.</td></tr>
+            <tr><td class="correct-option">(C) She thinks that Ballas Boutique should be preserved. <span class="badge-correct">正確答案</span></td><td>(D) She signed a petition sponsored by Gunton City Council.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Morris 女士，文暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨越第二篇與第三篇文章的線索進行聯動。<br>
+                        <strong>2. 核心判定：</strong>第二篇指出 Pinero 經營市中心服飾店 Ballas Boutique；第三篇中商會秘書 Morris 寫信表示 "protect stores... like yours"。這說明她認為 Ballas Boutique 應該受到保護，選 (C)。'protect' 替換為 'preserve'，完全契合。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 負責遷移，(B) 經營打折店，(D) 簽署請願書，皆無此資訊。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">limits</td><td class="vocab-pos">n.</td><td class="vocab-meaning">邊界 (同義詞 borders)</td></tr><tr><td class="vocab-word">mayor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">市長</td></tr><tr><td class="vocab-word">downtown</td><td class="vocab-pos">n./adj.</td><td class="vocab-meaning">市中心</td></tr><tr><td class="vocab-word">preserve</td><td class="vocab-pos">v.</td><td class="vocab-meaning">保護 (同義詞 protect)</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 14 | Questions 191-195 refer to the following invoice, e-mail, and message. (191-195 題參照以下發票、電子郵件與訊息。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="space-y-6">
+  <div class="border border-slate-200 p-6 rounded-xl bg-white text-xs sm:text-sm font-sans">
+    <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2 mb-3">Invoice</div>
+    <div class="grid grid-cols-2 gap-4 text-[11px] mb-4 text-slate-500 border-b pb-3">
+      <div><strong>From:</strong> Oresund Graphics, Netherlands</div>
+      <div><strong>To:</strong> Kaiser Investment Services, Germany (Floor 4)</div>
+      <div class="col-span-2"><strong>Date:</strong> October 4</div>
+    </div>
+    <table class="w-full text-left text-xs bg-white border border-slate-200 mb-4">
+      <tr class="bg-slate-100 font-bold border-b border-slate-200"><th class="p-2">Services</th><th class="p-2 text-right">Charges</th></tr>
+      <tr class="border-b border-slate-100"><td class="p-2">Design, Layout, and Photography of Annual Shareholders Report</td><td class="p-2 text-right font-mono">€745</td></tr>
+      <tr class="border-b border-slate-100"><td class="p-2">Design and Layout of Investing with Kaiser Brochure</td><td class="p-2 text-right font-mono">€545</td></tr>
+      <tr class="border-b border-slate-100"><td class="p-2">Design and Layout of Terms and Conditions Booklet</td><td class="p-2 text-right font-mono">€300</td></tr>
+      <tr class="bg-slate-50 font-black"><td class="p-2">TOTAL DUE</td><td class="p-2 text-right font-mono">€2,240</td></tr>
+    </table>
+    <div class="text-[10px] text-slate-500 border-t pt-3">
+      • Due in 15 days. Additional changes incur a €100 surcharge. No checks accepted. Payment via www.friendpay.com.
+    </div>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+    <div class="bg-slate-200 p-4 border-b border-slate-300 text-slate-750">
+      <div><strong>TO:</strong> Alexander Svensson | <strong>FROM:</strong> Christine Kaufmann | <strong>DATE:</strong> October 7</div>
+    </div>
+    <div class="p-6 bg-white text-slate-800 leading-relaxed text-justify">
+      We received your invoice and proofs. Our managing director requested we change the photograph on the front cover. We commissioned a photographer to take a new picture. Unfortunately, we cannot move our due date as the brochures must be shipped in time for a campaign launch planned for November.
+    </div>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm">
+    <div class="p-6 bg-white text-slate-800 leading-relaxed text-justify">
+      <div class="text-center font-bold text-base text-[#1a365d] border-b pb-2">Kaiser Investment Services Newsletter (December)</div>
+      <p>Matthias Furst (CEO) year-end message: Kaiser Investment Services outperformed expectations. In this December issue, learn about North America expansion and see photos from last month's (November) launch of our marketing campaign in the US, which was well attended by potential clients.</p>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <div class="border border-slate-200 p-5 bg-white">
+    <p>發票細項：包含設計、排版與攝影。小冊子設計未含拍照。15天到期，額外變更 €100。不收支票。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>Christine 表示總經理要求更換封面照片。因為小冊子必須在 11 月推廣活動中使用，故無法延遲交期。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>12月年終通訊中，執行長提到 11 月在美國成功舉辦了有潛在客戶出席的推廣行銷活動。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 191 題 | 核心考點：Not/True True 問題 (難易度：最高)</div>
+                <div class="question-text">Q191. What is true about Oresund Graphics and Design?</div>
+                <table class="options-table">
+            <tr><td>(A) It accepts checks in the mail as payment.</td><td class="correct-option">(B) It did not take pictures for a booklet. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It has its own finance department.</td><td>(D) It is based on the fourth floor of a building.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Oresund Graphics and Design 公司，何者正確？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>對比發票上的服務細項。<br>
+                        <strong>2. 核心判定：</strong>明細第二、三項 booklets (Brochure / Booklet) 只有 Design and Layout，不含第一項的 Photography。因此該公司未替小冊子照相，選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 不收支票，(C) 財務部門未提，(D) 4 樓是 Kaiser 的地址。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 192 題 | 核心考點：推論題 (難易度：最高)</div>
+                <div class="question-text">Q192. What is suggested about Kaiser Investment Services?</div>
+                <table class="options-table">
+            <tr><td>(A) It is planning to hire a full-time photographer.</td><td>(B) It did not receive all of the promised documents.</td></tr>
+            <tr><td>(C) It may be charged for paying an invoice late.</td><td class="correct-option">(D) It will have to pay a fee of €100 for a revision. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Kaiser Investment Services 公司，文中暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>結合郵件的修改要求與發票的附加服務費分析。<br>
+                        <strong>2. 核心判定：</strong>Kaiser 要求更換封面照片 (change the photograph)，這屬於額外修改。發票說明額外變更每份收 €100，故 Kaiser 需付 €100 費用，選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 聘用全職攝影師，(B) 未收到承諾文件，(C) 逾期付款，皆未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 193 題 | 核心考點：尋找主題/目的 (難易度：中)</div>
+                <div class="question-text">Q193. What is one purpose of the message?</div>
+                <table class="options-table">
+            <tr><td>(A) To recognize a firm's top employees</td><td class="correct-option">(B) To go over a company's achievements <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To announce the results of a sale</td><td>(D) To invite participants to a celebration</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">訊息 (第三篇致詞) 的一個目的是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>回顧年終致詞主要內容與意圖。<br>
+                        <strong>2. 核心判定：</strong>執行長回顧過去一年表現超出預期、顧客滿意度居首等成就，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 表揚員工，(C) 宣告銷售結果，(D) 邀請慶祝，排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 194 題 | 核心考點：字彙題 (難易度：高)</div>
+                <div class="question-text">Q194. In the message, the word "outperformed" in paragraph 1, line 2, is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td>(A) taken part in</td><td>(B) put apart from</td></tr>
+            <tr><td class="correct-option">(C) done better than <span class="badge-correct">正確答案</span></td><td>(D) given more than</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在訊息中，第一段第 2 行的字「outperformed」與下列哪一個字的意思最接近？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>字彙同義字分析。<br>
+                        <strong>2. 核心判定：</strong>outperform 代表「表現超越」，即做得比...更好，對應 done better than，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 參與，(B) 與...分離，(D) 給予比...更多，排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 195 題 | 核心考點：推論題 (難易度：最高)</div>
+                <div class="question-text">Q195. What most likely did Kaiser Investment Services do recently?</div>
+                <table class="options-table">
+            <tr><td>(A) It held a retirement party for staff members.</td><td>(B) It conducted a survey among employees.</td></tr>
+            <tr><td>(C) It launched a series of new products in Germany.</td><td class="correct-option">(D) It distributed brochures to potential US clients. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Kaiser Investment Services 公司最近最有可能做了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章聯環推論題。<br>
+                        <strong>2. 核心判定：</strong>第二篇指出小冊子必須在 11 月推廣活動中使用；第三篇通訊指出 11 月在美國 (US) 舉辦了有潛在客戶出席的行銷推廣活動。綜合這兩點，說明 11 月在美國的行銷活動中使用了該批製作的小冊子，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 退休派對，(B) 員工意見調查，(C) 德國推出新產品，均不符。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">invoice</td><td class="vocab-pos">n.</td><td class="vocab-meaning">發票</td></tr><tr><td class="vocab-word">brochure</td><td class="vocab-pos">n.</td><td class="vocab-meaning">小冊子</td></tr><tr><td class="vocab-word">surcharge</td><td class="vocab-pos">n.</td><td class="vocab-meaning">附加費</td></tr><tr><td class="vocab-word">proof</td><td class="vocab-pos">n.</td><td class="vocab-meaning">校樣</td></tr><tr><td class="vocab-word">outperform</td><td class="vocab-pos">v.</td><td class="vocab-meaning">超越 (同義詞 done better than)</td></tr><tr><td class="vocab-word">revision</td><td class="vocab-pos">n.</td><td class="vocab-meaning">修改</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 15 | Questions 196-200 refer to the following e-mail, program, and form. (196-200 題參照以下電子郵件、課程表與表格。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="space-y-6">
+  <!-- Article 1: E-mail -->
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm shadow-sm">
+    <div class="bg-slate-200 p-4 border-b border-slate-300 space-y-1 text-slate-700">
+      <div><strong>TO:</strong> El Paso Center for the Digital Arts &lt;questions@elpasodigital.com&gt;</div>
+      <div><strong>FROM:</strong> Raymond Hardy &lt;rayhardy@goodmail.com&gt;</div>
+      <div><strong>DATE:</strong> April 30</div>
+      <div><strong>SUBJECT:</strong> Classes</div>
+    </div>
+    <div class="p-6 bg-white space-y-4 text-slate-800 leading-relaxed text-justify">
+      <p>To Whom It May Concern:</p>
+      <p>
+        My name is Raymond Hardy, and I'm the president of Homestead Photo Club here in El Paso. We heard that your center will be teaching some classes on photography this summer. I also understand you offer special rates for groups. If so, we are interested in registering. Four of us want to take landscape photography at beginners' level. Another three of our members want to take a more advanced class and would like to know whether you offer any. Could you send me some more information?
+      </p>
+      <p>
+        Sincerely,<br>
+        Raymond Hardy<br>
+        President, Homestead Photo Club
+      </p>
+    </div>
+  </div>
+
+  <!-- Article 2: Program -->
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm shadow-sm p-6 space-y-4">
+    <div class="text-center font-extrabold text-[#1a365d] text-base border-b pb-2">
+      El Paso Center for the Digital Arts: Upcoming One-Day Classes May 7-12
+    </div>
+    <table class="w-full border-collapse text-left text-xs bg-white border border-slate-200">
+      <thead>
+        <tr class="bg-slate-100 font-bold border-b border-slate-200">
+          <th class="p-2">Date</th>
+          <th class="p-2">Class Title</th>
+          <th class="p-2">Instructor</th>
+          <th class="p-2 text-right">Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b border-slate-100">
+          <td class="p-2">May 8 (Mon) 7:30 p.m.</td>
+          <td class="p-2 font-semibold">Professional Photography Software</td>
+          <td class="p-2">Lindsay Arias</td>
+          <td class="p-2 text-right font-mono">$50</td>
+        </tr>
+        <tr class="border-b border-slate-100">
+          <td class="p-2">May 9 (Tue) 8:00 p.m.</td>
+          <td class="p-2 font-semibold">Marketing your Photos</td>
+          <td class="p-2">Carrie Felix</td>
+          <td class="p-2 text-right font-mono">$48</td>
+        </tr>
+        <tr class="border-b border-slate-100">
+          <td class="p-2">May 10 (Wed) 8:00 p.m.</td>
+          <td class="p-2 font-semibold">Photographing With Natural Light</td>
+          <td class="p-2">Ben Greenwood</td>
+          <td class="p-2 text-right font-mono">$52</td>
+        </tr>
+        <tr class="border-b border-slate-100">
+          <td class="p-2">May 11 (Thu) 8:30 p.m.</td>
+          <td class="p-2 font-semibold">Landscape Photography</td>
+          <td class="p-2">Sue Adler</td>
+          <td class="p-2 text-right font-mono">$54</td>
+        </tr>
+        <tr>
+          <td class="p-2">May 12 (Fri) 7:00 p.m.</td>
+          <td class="p-2 font-semibold">Wedding Photography</td>
+          <td class="p-2">Finley Kolwalski</td>
+          <td class="p-2 text-right font-mono">$47</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="bg-white border p-3 rounded-lg text-slate-500 text-[11px] leading-relaxed">
+      *Friday's class is for advanced participants only.
+    </div>
+  </div>
+
+  <!-- Article 3: Form -->
+  <div class="border border-slate-200 rounded-xl bg-slate-50 overflow-hidden font-sans text-xs sm:text-sm shadow-sm p-6 space-y-4">
+    <div class="text-center font-bold text-[#1a365d] text-base border-b pb-2">Class Registration Form</div>
+    <div class="bg-white border p-4 rounded-xl space-y-2 text-xs">
+      <div class="grid grid-cols-2 gap-2 border-b pb-2">
+        <div><strong>Name:</strong> Raymond Hardy</div>
+        <div><strong>Address:</strong> 2094 Firebird Drive, El Paso, TX 79901</div>
+        <div><strong>Phone:</strong> 555-3004</div>
+        <div><strong>E-mail:</strong> rayhardy@goodmail.com</div>
+      </div>
+      <div class="border-b pb-2">
+        <strong>Do you have any professional photography experience?</strong><br>
+        Yes ☐ / No ☑
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div><strong>Course:</strong> Landscape Photography</div>
+        <div><strong>Payment method:</strong> Cash</div>
+      </div>
+    </div>
+    <div class="bg-white border p-4 rounded-xl text-slate-600 text-xs leading-relaxed space-y-1.5">
+      <p>The El Paso Center for the Digital Arts is a nonprofit organization <b>focused on</b> advancing people's knowledge of film, photography, and graphic design.</p>
+      <p>• Please note that the center does not provide any cameras or accessories, and participants must supply their own.</p>
+      <p>• Those signing up as a group of three or more pay $30 each except for weekend classes.</p>
+      <p>• Confirm registration within 24 hours of payment. Tuition fees are nonrefundable and must be paid one week prior to the start of any course.</p>
+    </div>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="space-y-6 text-xs sm:text-sm font-sans">
+  <div class="border border-slate-200 p-5 bg-white">
+    <p>Homestead 攝影社社長 Raymond Hardy 寫信詢問團體優惠。四人想上初級風景攝影，三人想上進階課程。要求提供地點與費用資訊。</p>
+  </div>
+  <div class="border border-slate-200 rounded-xl bg-slate-50 p-5">
+    <p>5月7-12日課程表：週一軟體、週二行銷、週三自然光、週四風景攝影、週五婚禮攝影。備註指出週五課程限進階者報名。</p>
+  </div>
+  <div class="border border-slate-250 rounded-xl bg-slate-50 p-5">
+    <p>Raymond Hardy 的報名表：報名風景攝影課，無專業經驗，現金支付。備註：中心不提供相機，必須自備。三人以上團體平日課優惠價每人 $30。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 196 題 | 核心考點：尋找主題/目的 (難易度：低)</div>
+                <div class="question-text">Q196. What is the main purpose of the e-mail?</div>
+                <table class="options-table">
+            <tr><td>(A) To recruit people to a photography club</td><td class="correct-option">(B) To request information on some courses <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To register for an upcoming contest</td><td>(D) To give feedback on a recent lecture</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">電子郵件的主要目的是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>第一篇郵件的主旨判定。<br>
+                        <strong>2. 核心判定：</strong>Raymond Hardy 寫信詢問："Could you send me some more information?"，主要是詢問課程的詳細資料，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 招募社團成員，(C) 報名競賽，(D) 演講反饋，排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 197 題 | 核心考點：推論題 (難易度：最高)</div>
+                <div class="question-text">Q197. What is true about the Homestead Photo Club?</div>
+                <table class="options-table">
+            <tr><td>(A) All of its members work as professional photographers.</td><td>(B) Most of its members have attended classes before.</td></tr>
+            <tr><td class="correct-option">(C) Some of its members can take a class in wedding photography. <span class="badge-correct">正確答案</span></td><td>(D) A few of its members want to sign up for three or more classes.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Homestead 攝影社團，何者正確？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章聯動推理。<br>
+                        <strong>2. 核心判定：</strong>第一篇指出「另外三名成員想上更進階的課」；第二篇課程表顯示週五的 `Wedding Photography` 課限進階者報名 (for advanced participants only)。因此，這三名進階成員可以報名該課程，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 全體均為專業（郵件寫業餘社團），(B) 大部分成員上過課未提，(D) 報名三堂以上未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 198 題 | 核心考點：字彙題 (難易度：中)</div>
+                <div class="question-text">Q198. In the form, the phrase "focused on" in paragraph 1, line 1, is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td>(A) partnered with</td><td>(B) looked over</td></tr>
+            <tr><td class="correct-option">(C) dedicated to <span class="badge-correct">正確答案</span></td><td>(D) marketed for</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在表格的說明中，短語「focused on」的意思與下列哪一個最接近？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>字彙同義字分析。<br>
+                        <strong>2. 核心判定：</strong>文中句為 "focused on advancing people's knowledge..."（專注於/致力於提升大眾知識...）。focused on 在此代表「致力於」，因此與 dedicated to 意思最接近，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 與...合夥，(B) 瀏覽，(D) 為...做行銷，排除。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 199 題 | 核心考點：推論題 (難易度：最高)</div>
+                <div class="question-text">Q199. How much will Mr. Hardy probably have to pay for his class?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) $30 <span class="badge-correct">正確答案</span></td><td>(B) $47</td></tr>
+            <tr><td>(C) $52</td><td>(D) $54</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Hardy 先生可能要付多少錢上課？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章費率與團體條件綜合推理。<br>
+                        <strong>2. 核心判定：</strong>第三篇顯示 Raymond 報名 `Landscape Photography`，第二篇顯示該課在週四，費率原為 $54。然而第一篇提到他們有 4 人要報名該課，屬於「三人以上團體」；第三篇說明「平日團體報名享有每人 $30 優惠價」，故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) $47、(C) $52、(D) $54，均未計算團體優惠價。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 200 題 | 核心考點：wh-問題 What (難易度：最高)</div>
+                <div class="question-text">Q200. What will Mr. Hardy be required to do?</div>
+                <table class="options-table">
+            <tr><td>(A) Speak with an instructor prior to the start of a course</td><td class="correct-option">(B) Bring his personal photography equipment <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Provide a piece of identification</td><td>(D) Submit proof of previous experience</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Hardy 先生將必須做什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>尋找學生義務細節。<br>
+                        <strong>2. 核心判定：</strong>第三篇說明指出："the center does not provide any cameras or accessories, and participants must supply their own."（中心不提供相機，學生需自備）。對應 (B) 攜帶個人的攝影器材。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 與講師談話，(C) 提供身分證件，(D) 提交先前經驗證明，皆非規定。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">rate</td><td class="vocab-pos">n.</td><td class="vocab-meaning">費用</td></tr><tr><td class="vocab-word">landscape</td><td class="vocab-pos">n.</td><td class="vocab-meaning">風景</td></tr><tr><td class="vocab-word">advanced</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">進階的</td></tr><tr><td class="vocab-word">instructor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">講師</td></tr><tr><td class="vocab-word">nonprofit</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">非營利的</td></tr><tr><td class="vocab-word">accessory</td><td class="vocab-pos">n.</td><td class="vocab-meaning">配件</td></tr><tr><td class="vocab-word">nonrefundable</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">不可退款的</td></tr><tr><td class="vocab-word">prior to</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">在...之前</td></tr><tr><td class="vocab-word">dedicated to</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">致力於</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 多益 Part 7 閱讀理解專家高分思維</div>
+        <ul class="expert-list">
+            <li><strong>快速判定文章體裁與主旨：</strong>閱讀理解的第一步是看標題和首段。例如 P1 是醫院募款邀請函，P3 是銷售信件，P5 是時間表郵件，P6 是公園公告，P7 是專案討論對話，P8 是道德採購政策，P9 是人物報導，P10 是城市趨勢報告，P11 是雙篇信件電郵，P12 是雙篇公告費率表，P13 是三篇量販店審議，P14 是發票電郵通訊，P15 是電郵課程表與報名表。心中帶著架構，答題時就能迅速定位資訊。</li><li><strong>熟練同義詞替換（Paraphrasing）：</strong>多益 Part 7 的正確答案幾乎都經過同義詞轉寫。例如 147 題 'make improvements' 轉為 'refurbish'；148 題 'purchasing four tickets' 轉為 'paying for at least four guests'；154 題 'on my desk in my office' 轉為 'in her workspace'；156 題 'music critics' 轉為 'reviewers'；160 題 'protective gloves and vests' 轉為 'protective gear'；165 題 'send a link' 轉為 'Provide a Web site address'；167 題 'workers' children' 轉為 'farmers' children'；171 題 'reduced rate' 轉為 'lower prices'；175 題 'low housing costs' 轉為 'affordable homes'；176 題 'statements' 轉為 'correspondence'；177 題 'at your convenience' 轉為 'at anytime'；180 題 'an annual fee' 轉為 'a yearly charge'；181 題 'local businesses' 轉為 'local establishments'；182 題 'bring together' 轉為 'fostering interaction'；184 題 'distributed items (flyers)' 轉為 'handouts'；186 題 'building a branch' 轉為 'build a store'；187 題 'reject the proposal' 轉為 'Turn down a proposition'；190 題 'protect' 轉為 'preserve'；192 題 'additional changes / surcharge' 轉為 'pay a fee for a revision'；193 題 'thank everyone / outperformed' 轉為 'go over achievements'；194 題 'outperformed' 轉為 'done better than'；196 題 'details about location and cost' 轉為 'information on some courses'；198 題 'focused on' 轉為 'dedicated to'；200 題 'does not provide cameras... supply their own' 轉為 'Bring his personal photography equipment'。這要求考生平時多累積替換表達。</li><li><strong>細心審查資訊細節（Not/True 題）：</strong>解答 Not/True 題時，切忌憑直覺。149 題 Singer 的居住地是從 HOME ADDRESS 推導的；150 題 Chicago 僅列出抵達而非出發；157 題 Marshalltown 僅是舉辦派對的場地，不能推論為「專營」；166 題將瓜地馬拉、衣索比亞與越南歸納為 'situated in several countries'；170 題 Rebecca Curtis 雖是傑出執行長，但未提及是否為首位女性；191 題 booklets 費用明細沒有 Photography，說明 Oresund 並未替小冊子拍照。這些細微差別是多益的核心陷阱。</li><li><strong>多篇章的綜合推理題：</strong>多選篇章關聯推理題（如 Q176-180、Q181-185、Q186-190、Q191-195、Q196-200）是高分門檻。180 題，第二篇提到「紙本將寄出」對應第一篇的「紙本需支付 24 美元年費」；183 題，第一篇「共同贊助者可發傳單」對應第二篇「允許進行共同贊助」；185 題，第一篇「贊助達 500 美元以上才能刊登報紙」對應第二篇費率表的「Pearson Trio 費率為 450 美元，低於門檻」；190 題，第二篇指出 Pinero 經營 Ballas Boutique，對應第三篇 Morris 說要保護「像您那樣的市中心店鋪」；195 題，第二篇「小冊子在 11 月宣傳活動中使用」，對應第三篇「11 月在美國 (US) 舉辦了有潛在客戶出席的推廣活動」，進而推知 Kaiser  সম্প্রতি美國活動發放了小冊子；197 題，第一篇提到有三名成員想上進階課，對應第二篇週五 Wedding Photography 限制進階參加，推知成員可以上婚禮攝影課；199 題，Raymond 報名 Landscape Photography (週四，$54)，但第一篇提到他們有 4 人團體報名，平日課團體優惠價為 $30，故他只需付 $30。這類題目代表了多益最核心、最精采的邏輯考驗。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

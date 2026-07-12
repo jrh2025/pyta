@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Part 6 短文填空";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-after: always; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-block:last-of-type {
+    page-break-after: avoid;
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 10px 15px;
+    font-weight: bold; 
+    font-size: 11pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 15px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 15px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    tracking-wider: 0.05em;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 11.5pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    text-align: justify;
+    padding-right: 15px !important;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    text-align: justify;
+    padding-left: 15px !important;
+}
+.blank-line { 
+    text-decoration: underline; 
+    color: #2b6cb0; 
+    font-weight: bold;
+    padding: 0 2px;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px;
+}
+.section-main-title {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 11pt;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 4px;
+}
+.question-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #2c5282;
+    font-size: 9.5pt;
+    margin-bottom: 8px;
+    background-color: #ebf8ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.options-table { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 5px 8px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 8pt; 
+    padding: 1px 5px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 6px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #f7fafc;
+    border-left: 3px solid #cbd5e1;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 9pt;
+}
+.exp-title {
+    font-weight: bold;
+    color: #4a5568;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    text-decoration: underline;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    background-color: #edf2f7;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 15px;
+    border-top: 1px solid #e2e8f0;
+    page-break-inside: avoid;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 5px; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 9pt;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 5px 8px; 
+    font-size: 9pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 25px; 
+    padding: 15px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 11pt; 
+    margin-top: 0;
+    margin-bottom: 8px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 18px; 
+    font-size: 9pt; 
+    color: #2d3748; 
+    line-height: 1.5;
+}
+.expert-list li { 
+    margin-bottom: 6px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 1 - PART 6 短文填空精選解析 (第 131 – 146 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 131-134 refer to the following notice. (131-134 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">Wimberley Group will <span class="blank-line">(131) _______</span> its rent collection system to electronic one. This change will apply to all apartments effective February 1. <span class="blank-line">(132) _______</span>, Cash and personal checks will no longer be accepted.</p>
+<p class="mb-4">Every tenant needs to create a user profile at www.wimberleygroup.com. After logging in, tenants will be able to <span class="blank-line">(133) _______</span> a payment. You can do this by selecting the unpaid bill and then clicking on the button at the bottom of the screen. <span class="blank-line">(134) _______</span> you hit "Pay", the amount you designate will be deducted from your registered credit card or bank account. If you wish to arrange automatic payments, please click the button labeled "Pay this amount every month."</p>
+<p>Thank you for your cooperation. If you have any questions, e-mail us at help@wimberleygroup.com.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4"><b>所有承租戶注意</b></p>
+<p class="mb-4">Wimberley Group 公司將轉換收租系統為電子系統。此變更將適用於所有公寓，自 2 月 1 日起生效。自該日起，承租戶須線上繳納租金。現金及個人支票將不再接受。</p>
+<p class="mb-4">每位承租戶皆須於 www.wimberleygroup.com 建立使用者資料。登入後，承租戶將可進行付款。您可以選擇未付帳單並點擊畫面下方按鈕付款。當您點擊「付款」後，您所指定之金額將立即自您登記之信用卡或銀行帳戶扣除。若您希望設定自動付款，請點選「每月支付此金額」按鈕。</p>
+<p>感謝您的合作。如有任何問題，請寄電子郵件至 help@wimberleygroup.com 聯絡我們。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 131 題 | 核心考點：動詞詞彙 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) induce</td><td>(B) fluctuate</td></tr>
+            <tr><td class="correct-option">(C) convert <span class="badge-correct">正確答案</span></td><td>(D) recover</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Wimberley Group 公司將轉換收租系統為電子系統。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子結構為 "Wimberley Group will [131: 動詞原型] its rent collection system..."，空格處需要填入動詞原型，後接受詞 its rent collection system 並搭配介系詞 to (to electronic one)。<br>
+                        <strong>2. 核心判定：</strong>文意是「將轉換收租系統為電子系統」，常用片語為 convert A to B（將 A 轉換為 B），因此動詞 (C) convert（轉換，變換）是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) induce 表示「引起」，(B) fluctuate 表示「波動」，(D) recover 表示「恢復，重獲」，皆不符合搭配詞或上下文句意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 132 題 | 核心考點：選出空格中正確的句子 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) Tenants had found the new system easy to use.</td><td class="correct-option">(B) From that day on, tenants must pay their rental fees online. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) The new system allowed for a greater variety of payment options.</td><td>(D) Only certain Wimberley Group occupants will be affected.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">自該日起，承租戶須線上繳納租金。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>本題為篇章插句題，需同時參考空格前後文意。前句提到「電子收租系統自 2 月 1 日起生效」，後句提到「將不再接受現金與個人支票」。<br>
+                        <strong>2. 核心判定：</strong>空格內容應作為電子收租系統生效與不再收紙本票據之間的橋樑。正確答案為 (B) From that day on, tenants must pay their rental fees online（自該日起，承租戶須線上繳納租金），完美銜接 2 月 1 日生效日與不再接受現金支票的邏輯。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 採用過去完成式且此時新系統尚未開始使用，時態不符；(C) 提到更多元付款選擇，但後句卻限制「不再接受現金支票」，語意矛盾；(D) 提到僅部分住戶受影響，與前句「適用所有公寓 (all apartments)」衝突。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 133 題 | 核心考點：動詞慣用語 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) postpone</td><td>(B) cancel</td></tr>
+            <tr><td>(C) oppose</td><td class="correct-option">(D) make <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">登入後，承租戶將可進行付款。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 be able to，後接空格與名詞受詞 a payment，此處需填入動詞原型構成合適的動詞片語。<br>
+                        <strong>2. 核心判定：</strong>與 a payment 形成動詞片語「進行付款、繳費」的慣用語是 make a payment，因此 (D) make 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) postpone 表示「延期」，(B) cancel 表示「取消」，(C) oppose 表示「反對」，皆不符合與 a payment 的日常慣用搭配與通知語境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 134 題 | 核心考點：副詞子句連接詞 (時間) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) Even though</td><td>(B) During</td></tr>
+            <tr><td>(C) Since</td><td class="correct-option">(D) As soon as <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">當您點擊「付款」後，您所指定之金額將立即自您登記之信用卡或銀行帳戶扣除。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>分析句子結構，"[134: 連接詞] you hit 'Pay', the amount ... will be deducted..."，逗號後為完整主要子句，前半句含有動詞 hit，故空格需要一個連接詞來引導副詞子句。<br>
+                        <strong>2. 核心判定：</strong>根據句意「一旦按下付款，指定的金額將會被扣除」，表示「一...就...」的副詞子句連接詞 (D) As soon as 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) Even though 表示讓步的「雖然」，(C) Since 表示「自從」或「因為」，皆不符扣款邏輯；(B) During 是介系詞，後面只能接名詞，不能引導包含動詞 (hit) 的子句。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">tenant</td><td class="vocab-pos">n.</td><td class="vocab-meaning">承租人，住戶；v. 租屋居住</td></tr><tr><td class="vocab-word">rent</td><td class="vocab-pos">n.</td><td class="vocab-meaning">租金；v. 租用，租出</td></tr><tr><td class="vocab-word">collection</td><td class="vocab-pos">n.</td><td class="vocab-meaning">收集，收取，募捐</td></tr><tr><td class="vocab-word">apply</td><td class="vocab-pos">v.</td><td class="vocab-meaning">適用，申請</td></tr><tr><td class="vocab-word">no longer</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">不再...</td></tr><tr><td class="vocab-word">accept</td><td class="vocab-pos">v.</td><td class="vocab-meaning">接受</td></tr><tr><td class="vocab-word">unpaid</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">未付的，未償還的</td></tr><tr><td class="vocab-word">bill</td><td class="vocab-pos">n.</td><td class="vocab-meaning">帳單</td></tr><tr><td class="vocab-word">hit</td><td class="vocab-pos">v.</td><td class="vocab-meaning">用力按壓或點擊（實體或電腦畫面上的按鈕）</td></tr><tr><td class="vocab-word">designate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">指定；adj. 指定的</td></tr><tr><td class="vocab-word">deduct</td><td class="vocab-pos">v.</td><td class="vocab-meaning">扣除</td></tr><tr><td class="vocab-word">arrange</td><td class="vocab-pos">v.</td><td class="vocab-meaning">安排，整理</td></tr><tr><td class="vocab-word">automatic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">自動的</td></tr><tr><td class="vocab-word">label</td><td class="vocab-pos">v.</td><td class="vocab-meaning">（在表格等處）標註（必要的資訊）</td></tr><tr><td class="vocab-word">cooperation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">合作，協力</td></tr><tr><td class="vocab-word">certain</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">特定的，確定的</td></tr><tr><td class="vocab-word">occupant</td><td class="vocab-pos">n.</td><td class="vocab-meaning">佔用者，居住者</td></tr><tr><td class="vocab-word">affect</td><td class="vocab-pos">v.</td><td class="vocab-meaning">影響，對...發生作用</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 135-138 refer to the following e-mail. (135-138 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">Dear Ms. Thornberry,</p>
+<p class="mb-4">I am writing about the Trax 2700 laptop you dropped off at our store on June 15 because of problems with its screen. After sending it to our <span class="blank-line">(135) _______</span> for examination, we discovered that it contained a faulty component. At present, your laptop is being <span class="blank-line">(136) _______</span>. As requested, we are also thoroughly testing the device to see if there are any other issues.</p>
+<p class="mb-4">As this problem appears to have been entirely our fault, we will provide you with a $50 voucher to use at our retail store. <span class="blank-line">(137) _______</span>, e-coupons for our Web site are also available. Just let us know which you'd prefer.</p>
+<p class="mb-4"><span class="blank-line">(138) _______</span>. If you have not received it by then, please call customer service.</p>
+<p>Best wishes,<br>Vincent Nakamura<br>Customer Satisfaction Department</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">親愛的 Thornberry 小姐：</p>
+<p class="mb-4">我寫這封信是關於您 6 月 15 日因螢幕問題送到本店的 Trax 2700 筆記型電腦。送交我們的技術人員檢查後，我們發現這台電腦的一個零件故障。目前，您的筆記型電腦正在修理中。依照您的要求，我們也正在徹底檢測這台裝置，看看還有沒有其他問題。</p>
+<p class="mb-4">由於這個問題似乎完全是我們的過錯，我們將提供您可以在我們的零售店使用的 50 美元禮券。或者也可以提供我們網站的電子折價券。只要讓我們知道您想要哪一種即可。</p>
+<p class="mb-4">我們將在三天內送回您的電腦。如果您到時候沒有收到，請打電話聯絡客服。</p>
+<p>Vincent Nakamura<br>顧客滿意部門</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 135 題 | 核心考點：名詞位置 (人物 vs. 抽象/事物名詞) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) technicality</td><td>(B) technical</td></tr>
+            <tr><td class="correct-option">(C) technicians <span class="badge-correct">正確答案</span></td><td>(D) technology</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">送交我們的技術人員檢查後，我們發現這台電腦的一個零件故障。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 "After sending it to our..."，our 為所有格，後方需要接名詞作為介系詞 to 的受詞。選項中 (A) (C) (D) 皆為名詞。<br>
+                        <strong>2. 核心判定：</strong>考量文意，此處為「送交給我們的（技術人員）檢查」，故應填入指稱「人」的複數名詞 (C) technicians（技術人員）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) technicality 表示「技術性細節/專門性」，(D) technology 表示「技術/科技」，若填入會變成送交給技術性或科技檢查，不合邏輯；(B) technical 為形容詞，不可單獨作為受詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 136 題 | 核心考點：動詞詞彙 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) replaced</td><td class="correct-option">(B) repaired <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) shipped</td><td>(D) recalled</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">目前，您的筆記型電腦正在修理中。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 "At present, your laptop is being..."，為現在進行式的被動語態 (be + being + p.p.)，空格需填入過去分詞形式的動詞。<br>
+                        <strong>2. 核心判定：</strong>上一句提到電腦零件故障，下一句提及正檢測有無其他問題，說明電腦目前正在「修理中」，故選 (B) repaired（修理，修補）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) replaced 表示「被替換」，(C) shipped 表示「被運送」，(D) recalled 表示「被召回」，皆不符合上下文「在店內進行檢測與處理」的脈絡。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 137 題 | 核心考點：連接副詞 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) Regrettably</td><td>(B) Subsequently</td></tr>
+            <tr><td>(C) Approximately</td><td class="correct-option">(D) Alternatively <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">或者也可以提供我們網站的電子折價券。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於句首且後面接逗號，此為連接副詞的位置，用以指明前後句的邏輯關係。<br>
+                        <strong>2. 核心判定：</strong>前句提到「提供可在實體店使用的禮券」，後句提到「也可以提供網站電子折價券」，兩者為替代方案關係。因此選 (D) Alternatively（或者，作為替代地）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) Regrettably 表示「遺憾地」，(B) Subsequently 表示「隨後，接著」，(C) Approximately 表示「大約地」，皆無法表達替代方案的邏輯聯結。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 138 題 | 核心考點：選出空格中正確的句子 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) The model you inquired about is no longer available at this location.</td><td class="correct-option">(B) We will send the computer back to you within three days. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) You are not covered under the warranty as it has expired.</td><td>(D) We have been receiving a number of complaints about our service.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們將在三天內送回您的電腦。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題。後句為「If you have not received it by then... (如果您到時候沒有收到...)」，其中代名詞 "it" 指代電腦，"by then" 指代某個時間點。<br>
+                        <strong>2. 核心判定：</strong>前句必須提供一個與電腦遞送以及明確時間點相關的訊息。正確答案為 (B) We will send the computer back to you within three days（我們將在三天內送回您的電腦），"it" 對應 computer，"by then" 對應三天內。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到該機型沒有貨，與正在維修並寄回的脈絡不符；(C) 提到保固過期，無法與後句的「沒收到請打給客服」合理銜接；(D) 提到客服投訴，偏離主題。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">examination</td><td class="vocab-pos">n.</td><td class="vocab-meaning">檢查，調查</td></tr><tr><td class="vocab-word">contain</td><td class="vocab-pos">v.</td><td class="vocab-meaning">包含，容納</td></tr><tr><td class="vocab-word">faulty</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">有缺陷的，故障的</td></tr><tr><td class="vocab-word">component</td><td class="vocab-pos">n.</td><td class="vocab-meaning">零件，構成要素</td></tr><tr><td class="vocab-word">thoroughly</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">徹底地，完全地</td></tr><tr><td class="vocab-word">device</td><td class="vocab-pos">n.</td><td class="vocab-meaning">裝置，設備</td></tr><tr><td class="vocab-word">issue</td><td class="vocab-pos">n.</td><td class="vocab-meaning">問題，議題</td></tr><tr><td class="vocab-word">entirely</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">完全地</td></tr><tr><td class="vocab-word">voucher</td><td class="vocab-pos">n.</td><td class="vocab-meaning">商品券，禮券</td></tr><tr><td class="vocab-word">retail store</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">零售店</td></tr><tr><td class="vocab-word">inquire</td><td class="vocab-pos">v.</td><td class="vocab-meaning">詢問</td></tr><tr><td class="vocab-word">location</td><td class="vocab-pos">n.</td><td class="vocab-meaning">地點，場所</td></tr><tr><td class="vocab-word">cover</td><td class="vocab-pos">v.</td><td class="vocab-meaning">覆蓋，包含，在...之下（如：保固）</td></tr><tr><td class="vocab-word">warranty</td><td class="vocab-pos">n.</td><td class="vocab-meaning">保證書，保固</td></tr><tr><td class="vocab-word">expire</td><td class="vocab-pos">v.</td><td class="vocab-meaning">到期，期滿</td></tr><tr><td class="vocab-word">a number of</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">許多的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 139-142 refer to the following announcement. (139-142 題參照以下公告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4"><b>Notice for All Staff</b></p>
+<p class="mb-4">The shopping mall our store is located in will be closed from December 24 to 26. <span class="blank-line">(139) _______</span>, some of you will be coming in on December 24 to set up for our post-holiday sale. The guard who usually opens the mall doors in the morning is off duty during this time. <span class="blank-line">(140) _______</span>. Daniel Monahan is the most senior staff member, so I will give it to him, and he will let everyone inside.</p>
+<p class="mb-4">It is vital that you <span class="blank-line">(141) _______</span> Daniel at the entrance at exactly 10 a.m. We don't want to waste time making him go back and forth to open the doors, so please be considerate and arrive as <span class="blank-line">(142) _______</span> as you can.</p>
+<p>Thank you for your understanding.</p>
+<p>Alison Culpepper<br>Store manager</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4"><b>給所有員工的通知</b></p>
+<p class="mb-4">本店所在的購物中心將於 12 月 24 日至 26 日暫停營業。然而，各位當中有些人要在 12 月 24 日來上班，為假期後特賣做準備。早上通常會到購物中心開門的警衛，這段期間不上班。所以必須要有保全密碼才能進入建築物內。Daniel Monahan 是最資深的員工，所以我會給他密碼，而他會讓大家進入。</p>
+<p class="mb-4">大家必須早上 10 點整在入口 and Daniel 會合。我們不想浪費時間讓他來來回回開門，所以請著想這一點，盡可能準時到達。</p>
+<p>感謝大家的體諒。</p>
+<p>Alison Culpepper<br>店經理</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 139 題 | 核心考點：連接副詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) Besides</td><td>(B) Otherwise</td></tr>
+            <tr><td>(C) Accordingly</td><td class="correct-option">(D) However <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">然而，各位當中有些人要在 12 月 24 日來上班...</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於句首且接逗號，此為連接副詞位置。需分析前後兩句語意關係。<br>
+                        <strong>2. 核心判定：</strong>前句指出「購物中心將閉館三天」，後句指出「有些員工 24 日仍要來店準備特賣」。兩者存在相反與對比的語意轉折，故選表示轉折的 (D) However（然而）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) Besides 表示遞進的「而且」，(B) Otherwise 表示條件的「否則」，(C) Accordingly 表示因果的「因此/相應地」，皆不符轉折語意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 140 題 | 核心考點：選出空格中正確的句子 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) Making sure we answer customer inquiries in a timely manner is our priority.</td><td>(B) You should be able to use your employee pass to access the mall.</td></tr>
+            <tr><td class="correct-option">(C) A security code will therefore be required to enter the building. <span class="badge-correct">正確答案</span></td><td>(D) You will need to handle backorders caused by his absence.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">所以必須要有保全密碼才能進入建築物內。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題。前句提及「早上負責開門的警衛這段時間不上班 (off duty)」，後句提及「Daniel是最資深員工，我會把『它(it)』交給他，他會讓大家進去」。<br>
+                        <strong>2. 核心判定：</strong>後句的代名詞 "it" 必須在前句中有明確的先行詞。選項 (C) A security code will therefore be required to enter the building（因此進入建築物需要保安密碼）中的 security code（密碼）剛好對應後文的 "it"，且合理解釋了警衛不上班後的進入配套措施。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到回答顧客諮詢，與警衛開門進出無關；(B) 提到可使用員工通行證，但若使用通行證，後文就無需將 "it" 交給 Daniel 讓他開門；(D) 提到處理缺貨訂單，偏離主題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 141 題 | 核心考點：重要動詞/形容詞 + that 子句 (省略 should 之動詞原形) (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) are meeting</td><td class="correct-option">(B) meet <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) had met</td><td>(D) met</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">大家必須早上 10 點整在入口和 Daniel 會合。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句型為 "It is vital that you [141: 動詞] Daniel..."，It is vital (重要的/必須的) 為表示義務與重要性的句型，that 子句中的動詞必須使用「(should) + 動詞原形」。<br>
+                        <strong>2. 核心判定：</strong>在此結構下，必須使用動詞原型，故選 (B) meet。<br>
+                        <strong>3. 干擾項排除：</strong>(A) are meeting 為進行式，(C) had met 為過去完成式，(D) met 為過去式，皆不符合 that子句中使用動詞原形的文法規範。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 142 題 | 核心考點：副詞詞彙 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) punctually <span class="badge-correct">正確答案</span></td><td>(B) regularly</td></tr>
+            <tr><td>(C) politely</td><td>(D) impressively</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">請著想這一點，盡可能準時到達。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 "arrive as [142: 副詞] as you can" 之中，修飾動詞 arrive。<br>
+                        <strong>2. 核心判定：</strong>前文提到「請在 10 點整會合，以免讓開門的 Daniel 來來回回浪費時間」，因此空格要求的是「準時」，選 (A) punctually（準時地）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) regularly 表示「規律地」，(C) politely 表示「禮貌地」，(D) impressively 表示「令人印象深刻地」，皆不符合要求「在特定時間點準時到場」的脈絡。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">set up</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">準備，創立</td></tr><tr><td class="vocab-word">guard</td><td class="vocab-pos">n.</td><td class="vocab-meaning">警衛；v. 看守</td></tr><tr><td class="vocab-word">off duty</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">不在值勤中的</td></tr><tr><td class="vocab-word">senior</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">上級的，資深的；n. 年長者</td></tr><tr><td class="vocab-word">vital</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">重要的，必要的</td></tr><tr><td class="vocab-word">entrance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">入口，入場</td></tr><tr><td class="vocab-word">back and forth</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">來來回回</td></tr><tr><td class="vocab-word">considerate</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">體諒的、考慮周到的</td></tr><tr><td class="vocab-word">inquiry</td><td class="vocab-pos">n.</td><td class="vocab-meaning">詢問</td></tr><tr><td class="vocab-word">timely</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">及時的，適時的</td></tr><tr><td class="vocab-word">priority</td><td class="vocab-pos">n.</td><td class="vocab-meaning">優先事項</td></tr><tr><td class="vocab-word">pass</td><td class="vocab-pos">n.</td><td class="vocab-meaning">通行證；v. 通過</td></tr><tr><td class="vocab-word">security</td><td class="vocab-pos">n.</td><td class="vocab-meaning">保全，安全</td></tr><tr><td class="vocab-word">handle</td><td class="vocab-pos">v.</td><td class="vocab-meaning">處理</td></tr><tr><td class="vocab-word">backorder</td><td class="vocab-pos">n.</td><td class="vocab-meaning">因缺貨而暫時無法交貨的訂單</td></tr><tr><td class="vocab-word">absence</td><td class="vocab-pos">n.</td><td class="vocab-meaning">不在，缺席</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 143-146 refer to the following e-mail. (143-146 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">To: Rajesh Singh &lt;rajesh.singh@indiaclothing.in&gt;</p>
+<p class="mb-4">From: Faria Deveraj &lt;f.deveraj@mumbai.gov.in&gt;</p>
+<p class="mb-4">Subject: Scheduled Inspection</p>
+<p class="mb-4">Date: October 12</p>
+<p class="mb-4">Dear Mr. Singh,</p>
+<p class="mb-4">On October 17, your clothing factory will face its yearly government inspection. This annual <span class="blank-line">(143) _______</span> will verify that all labor laws are being followed. Your factory passed the <span class="blank-line">(144) _______</span> evaluation with no major problems, so our inspectors hope to see a similar level of compliance this time around.</p>
+<p class="mb-4">You are <span class="blank-line">(145) _______</span> obliged to provide access to any part of the factory that the inspectors may wish to see. Failure to comply in this regard may result in fines and further investigation. Also, the inspectors need to confirm that workers are being properly compensated. <span class="blank-line">(146) _______</span>.</p>
+<p class="mb-4">Thank you for your attention to this matter.</p>
+<p>Faria Deveraj<br>Inspection Team Leader<br>City Government of Mumbai</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">收件者：Rajesh Singh &lt;rajesh.singh@indiaclothing.in&gt;</p>
+<p class="mb-4">寄件者：Faria Deveraj &lt;f.deveraj@mumbai.gov.in&gt;</p>
+<p class="mb-4">主旨：預定的檢查</p>
+<p class="mb-4">日期：10 月 12 日</p>
+<p class="mb-4">親愛的 Singh 先生：</p>
+<p class="mb-4">10 月 17 日，貴服飾工廠將接受年度政府稽查。此年度評鑑將確認廠方是否遵守所有勞動法規。貴廠已通過先前的評鑑，且無重大問題，因此本稽查小組希望這次結果顯示貴廠仍保持同等守法水準。</p>
+<p class="mb-4">在法律上，您有義務允許稽查人員進入他們希望檢視的工廠任何區域。若不遵守，可能會導致罰款與進一步調查。此外，稽查人員需要確認員工皆獲得合理薪酬。人事部門將必須準備相關文件。</p>
+<p class="mb-4">感謝您對此事的關注。</p>
+<p>Faria Deveraj<br>檢查小組組長<br>孟買市政府</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 143 題 | 核心考點：名詞詞彙 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) meeting</td><td>(B) investment</td></tr>
+            <tr><td>(C) commemoration</td><td class="correct-option">(D) assessment <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">此年度評鑑將確認廠方是否遵守所有勞動法規。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 "This annual..."，此處需要填入一個名詞作為句子的主詞。選項皆為名詞形式。<br>
+                        <strong>2. 核心判定：</strong>前句指出「工廠將面臨年度政府稽查 (inspection)」，故本句主詞 "This annual [143]" 代表該稽查評估。選 (D) assessment（評價，評估）最符合句意。<br>
+                        <strong>3. 干擾項排除：</strong>(A) meeting 表示「會議」，(B) investment 表示「投資」，(C) commemoration 表示「紀念活動」，皆不符合政府官方對勞動法規遵循狀況進行稽查評估的性質。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 144 題 | 核心考點：形容詞詞彙 (時態邏輯) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) decided</td><td>(B) forthcoming</td></tr>
+            <tr><td class="correct-option">(C) previous <span class="badge-correct">正確答案</span></td><td>(D) ultimate</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">貴廠已通過先前的評鑑，且無重大問題...</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於定冠詞 the 與名詞 evaluation 之間，需要一個形容詞來修飾 evaluation。<br>
+                        <strong>2. 核心判定：</strong>句子動詞為 passed（已通過，過去式），且後文對比 "this time around (這一次)"，顯示該 evaluation 是指過去發生的。故選 (C) previous（先前的）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) decided 表示「決定好的/果斷的」，(B) forthcoming 表示「即將到來的（與過去式 passed 矛盾）」，(D) ultimate 表示「最終的」，均不符句意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 145 題 | 核心考點：副詞修飾形容詞/過去分詞 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) legally <span class="badge-correct">正確答案</span></td><td>(B) legality</td></tr>
+            <tr><td>(C) legal</td><td>(D) legitimate</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在法律上，您有義務允許稽查人員進入工廠...</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 be 動詞 (are) 與過去分詞 (obliged) 之間。此位置需要副詞來修飾過去分詞/形容詞 obliged。<br>
+                        <strong>2. 核心判定：</strong>能放在 be ... p.p. 中間修飾分詞的必須是副詞，故選 (A) legally（在法律上，合法地）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) legality 是名詞（合法性），(C) legal 是形容詞（法律的），(D) legitimate 是形容詞（合法的/正當的），皆不能在此位置修飾 obliged。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 146 題 | 核心考點：選出空格中正確的句子 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) A copy of the receipt for your recent payment has been sent to you in the mail.</td><td class="correct-option">(B) The human resources department will need to prepare the relevant documents. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Consequently, the company wishes to avoid paying any such penalties.</td><td>(D) We are interested in hearing about certain products that were recalled.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">人事部門將必須準備相關文件。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題。前句為「稽查人員需要確認員工皆獲得合理薪酬 (workers are being properly compensated)」。<br>
+                        <strong>2. 核心判定：</strong>確認薪資發放與福利是否守法，必須審查人事資料與薪資單等文件。正確答案為 (B) The human resources department will need to prepare the relevant documents（人事部門將必須準備相關文件）最為切題。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到付款收據郵寄，與稽查無關；(C) 提到公司想避免支付罰款，語意過於跳躍，且無 context 支持已產生罰款；(D) 提到產品召回，偏離「勞動法規稽查」的主題。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">inspection</td><td class="vocab-pos">n.</td><td class="vocab-meaning">檢查，視察</td></tr><tr><td class="vocab-word">annual</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">年度的</td></tr><tr><td class="vocab-word">verify</td><td class="vocab-pos">v.</td><td class="vocab-meaning">確認，證實</td></tr><tr><td class="vocab-word">evaluation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">評價</td></tr><tr><td class="vocab-word">inspector</td><td class="vocab-pos">n.</td><td class="vocab-meaning">檢察員，視察員</td></tr><tr><td class="vocab-word">compliance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">遵守，遵從</td></tr><tr><td class="vocab-word">oblige</td><td class="vocab-pos">v.</td><td class="vocab-meaning">迫使，使有義務</td></tr><tr><td class="vocab-word">result in</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">導致</td></tr><tr><td class="vocab-word">fine</td><td class="vocab-pos">n.</td><td class="vocab-meaning">罰金；v. 處...以罰金</td></tr><tr><td class="vocab-word">compensate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">補償，付酬勞</td></tr><tr><td class="vocab-word">receipt</td><td class="vocab-pos">n.</td><td class="vocab-meaning">收據，收到</td></tr><tr><td class="vocab-word">relevant</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">關聯的，切題的</td></tr><tr><td class="vocab-word">document</td><td class="vocab-pos">n.</td><td class="vocab-meaning">文件</td></tr><tr><td class="vocab-word">penalty</td><td class="vocab-pos">n.</td><td class="vocab-meaning">處罰，罰款</td></tr><tr><td class="vocab-word">recall</td><td class="vocab-pos">v.</td><td class="vocab-meaning">召回，回想起</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 多益 Part 6 短文填空專家解題核心思維</div>
+        <ul class="expert-list">
+            <li><strong>首句定調，掌握文體與時態基調：</strong>Part 6 均為完整篇章（書信、公告、通告等），開頭第一句通常揭示了文章的目的與時間背景。例如 P2 的 dropped off (過去式) 對比後文的 is being repaired (進行被動)，理清時間軸有助於秒殺動詞與形容詞時態題。</li><li><strong>插句題遵循『指代一致』與『邏輯順承』：</strong>插入句子題（如 132, 138, 140, 146）是 Part 6 的核心難點。解題時必須尋找前後句的<strong>關鍵代名詞</strong>（例如 P3 中的 'it' 對應前句的 'security code'）以及<strong>時間/因果聯結</strong>（例如 P2 中 'by then' 對應前句的 'within three days'）。</li><li><strong>注意連接副詞的邏輯語意轉折：</strong>例如 However (轉折), Alternatively (替代方案) 均出現在句首並接逗號，這要求考生具備宏觀閱讀能力，必須完整理解前後兩句話的語意關係，切忌單句孤立分析。</li><li><strong>牢記特定句型文法：</strong>例如 'It is vital that + 主詞 + (should) + 動詞原形'，這類假設法義務句型在多益中出現頻率極高，屬於送分題，看到 vital/essential/request 等詞應立即反射填入動詞原形（如 141 題 meet）。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>
