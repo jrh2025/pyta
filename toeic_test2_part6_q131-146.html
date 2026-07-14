@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Test 2 Part 6 短文填空";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-inside: avoid; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 8px 12px;
+    font-weight: bold; 
+    font-size: 10pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 10px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 12px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    padding-right: 12px !important;
+    text-align: justify;
+}
+.blank-line {
+    font-weight: bold;
+    color: #2b6cb0;
+    text-decoration: underline;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    padding-left: 12px !important;
+    text-align: justify;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 12px;
+}
+.question-item {
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 12px;
+}
+.question-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 9pt;
+    margin-bottom: 6px;
+}
+
+.options-table { 
+    width: 100%; 
+    margin-bottom: 6px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 4px 6px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 9.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 7.5pt; 
+    padding: 1px 4px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 4px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #1a365d;
+    padding: 8px 10px;
+    margin-top: 6px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+}
+.exp-title {
+    font-weight: bold;
+    color: #2c5282;
+    margin-bottom: 3px;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 8.5pt;
+    padding: 5px 6px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 4px 6px; 
+    font-size: 8.5pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 20px; 
+    padding: 12px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 10pt; 
+    margin-bottom: 6px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 15px; 
+    font-size: 8.5pt; 
+    color: #2d3748; 
+    line-height: 1.45;
+}
+.expert-list li { 
+    margin-bottom: 5px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 2 - PART 6 短文填空精選解析 (第 131 – 146 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 131-134 refer to the following advertisement. (131-134 題參照以下廣告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">The next time you're in downtown Houston and would like a taste of Asia, visit Sensasia on the second floor of Cheviston Center. Sensasia offers authentic <span class="blank-line">(131) _______</span> from China, Japan, India, Thailand, Korea, and Vietnam.</p>
+<p class="mb-4"><span class="blank-line">(132) _______</span>. From Monday to Friday, enjoy handmade sushi prepared with fresh seafood, delicious Korean bibimbap, and tasty Vietnamese pho. On weekends, Hong Kong style dim sum, consisting of various bite-size portions of food, <span class="blank-line">(133) _______</span> along with our regular menu items. And once a month, our chefs introduce something new for diners to try. <span class="blank-line">(134) _______</span>, only Sensasia can give you such a wide variety of meals in one location.</p>
+<p>For group reservations, please call 555-4272. To view our menu, please visit our Web site at www.sensasia.com.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">下次當您來到休士頓市中心，想要品嚐一下亞洲風味的話，請到 Cheviston Center 二樓 of Sensasia。Sensasia 提供來自中國、日本、印度、泰國、韓國、和越南的正宗菜餚。</p>
+<p class="mb-4">我們每天供應種類廣泛的人氣亞洲料理。從週一到週五，請享用以新鮮海鮮手工製作的壽司、美味的韓式拌飯和好吃的越南河粉。在週末，除了我們的固定菜色以外，還會準備有多種一口分量食物的港式點心。我們的主廚每個月會推出一次新菜色讓顧客嘗試。簡而言之，只有 Sensasia 能在同一家店帶給您種類這麼廣泛的菜色。</p>
+<p>團體預約請撥打 555-4272。要看我們的菜單，請上我們的網站 www.sensasia.com。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 131 題 | 核心考點：名詞詞彙 參考上下文 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) dishes <span class="badge-correct">正確答案</span></td><td>(B) materials</td></tr>
+            <tr><td>(C) components</td><td>(D) directions</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Sensasia 提供來自中國、日本、印度、泰國、韓國、和越南的正宗菜餚。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子結構為 "Sensasia offers authentic [131: 名詞] from China..."，空格處需要填入名詞作 offers 的直接受詞。<br>
+                        <strong>2. 核心判定：</strong>根據上文的 "a taste of Asia" (亞洲風味) 以及下文所列出的壽司、拌飯、越南河粉等餐點，此處指該餐廳提供正宗的「菜餚 (dishes)」，故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) materials (材料)、(C) components (構成要素/零件)、(D) directions (方向/指示)，均不符合指稱餐點或菜餚的語境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 132 題 | 核心考點：選出空格中正確的句子 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) Our chefs use exotic seasonings in all of our grilled food.</td><td>(B) Some parts of our restaurant are now being refurbished.</td></tr>
+            <tr><td class="correct-option">(C) We serve a wide range of popular Asian cuisine every day. <span class="badge-correct">正確答案</span></td><td>(D) Our food is delicious but limited to seafood selections.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們每天供應種類廣泛的人氣亞洲料理。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題，需要同時分析空格前後句意。空格後接續列出「週一到週五提供壽司、拌飯、河粉...週末提供港式點心...」。<br>
+                        <strong>2. 核心判定：</strong>空格內容應是後文所列出的每日菜色供應的總括句。正確答案為 (C) We serve a wide range of popular Asian cuisine every day（我們每天供應種類廣泛的人氣亞洲料理），能自然引導出後面星期一至星期天具體菜色的介紹。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到烤肉中使用異國調味料，偏離主題；(B) 提到餐廳部分區域正在整修，與菜單供應無關；(D) 提到食物僅限於海鮮，與下文列出的韓式拌飯 (bibimbap) 語意衝突。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 133 題 | 核心考點：〔動詞位置〕主動態與被動態的區別 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) prepares</td><td>(B) prepared</td></tr>
+            <tr><td class="correct-option">(C) is prepared <span class="badge-correct">正確答案</span></td><td>(D) preparing</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在週末，除了我們的固定菜色以外，還會準備有多種一口分量食物的港式點心。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子結構為 "On weekends, Hong Kong style dim sum (主詞), consisting of... (分詞修飾語), [133: 謂語動詞] along with..."。主詞為單數的 dim sum。<br>
+                        <strong>2. 核心判定：</strong>港式點心（dim sum）與動詞 prepare（準備）之間為被動關係（點心是被準備的），且空格後無受詞，必須使用單數被動語態，故選 (C) is prepared。<br>
+                        <strong>3. 干擾項排除：</strong>(A) prepares 為單數主動式，語意不通且缺受詞；(B) prepared 作為過去式主動動詞同樣語意不通，若作為過去分詞則本句會缺少謂語動詞；(D) preparing 為現在分詞，無法單獨作謂語動詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 134 題 | 核心考點：連接副詞 參考全文 (難易度：最高)</div>
+                <table class="options-table">
+            <tr><td>(A) Conversely</td><td class="correct-option">(B) In short <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To that end</td><td>(D) Not to mention</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">簡而言之，只有 Sensasia 能在同一家店帶給您種類這麼廣泛的菜色。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於句首且接逗號，此處需要填入一個連接副詞，用以表示前後文的邏輯連結。<br>
+                        <strong>2. 核心判定：</strong>前文介紹了 Sensasia 週一到週五的餐點、週末的點心以及每月的廚師新菜，本句則在總結「只有 Sensasia 能提供如此多樣的亞洲菜色」。選 (B) In short（簡而言之，總之）最符合結論句的邏輯關係。<br>
+                        <strong>3. 干擾項排除：</strong>(A) Conversely (相反地) 語意相反；(C) To that end (為了那個目的/為此) 代表目的；(D) Not to mention (更不用說) 後面必須接名詞片語或子句，不可直接加逗號置於句首作連接副詞。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">taste</td><td class="vocab-pos">n.</td><td class="vocab-meaning">味道，品嘗</td></tr><tr><td class="vocab-word">authentic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">真正的，正宗的</td></tr><tr><td class="vocab-word">seafood</td><td class="vocab-pos">n.</td><td class="vocab-meaning">海鮮</td></tr><tr><td class="vocab-word">pho</td><td class="vocab-pos">n.</td><td class="vocab-meaning">（越南）河粉</td></tr><tr><td class="vocab-word">consist of</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">由...組成</td></tr><tr><td class="vocab-word">along with</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">伴隨著...，與...一起</td></tr><tr><td class="vocab-word">diner</td><td class="vocab-pos">n.</td><td class="vocab-meaning">用餐者，餐廳顧客</td></tr><tr><td class="vocab-word">a variety of</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">多樣的，多種的</td></tr><tr><td class="vocab-word">exotic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">異國風的</td></tr><tr><td class="vocab-word">seasoning</td><td class="vocab-pos">n.</td><td class="vocab-meaning">調味料</td></tr><tr><td class="vocab-word">refurbish</td><td class="vocab-pos">v.</td><td class="vocab-meaning">整修，重新裝潢</td></tr><tr><td class="vocab-word">cuisine</td><td class="vocab-pos">n.</td><td class="vocab-meaning">料理，烹飪</td></tr><tr><td class="vocab-word">selection</td><td class="vocab-pos">n.</td><td class="vocab-meaning">選擇，精選物</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 135-138 refer to the following e-mail. (135-138 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">To: Scott Douglas &lt;sdouglas@evergladeprints.com&gt;<br>From: Edward Kovac &lt;edward.k@collinsconsulting.com&gt;<br>Subject: Brochure alterations<br>Date: 8 May</p>
+<p class="mb-4">Dear Mr. Douglas,</p>
+<p class="mb-4">Please find attached a copy of the brochure you designed with our comments. Our team has reviewed the draft, and we are <span class="blank-line">(135) _______</span> with the quality of the pamphlet thus far. Despite this, we do require a few changes.</p>
+<p class="mb-4">In particular, there were minor layout and color errors and some important information was <span class="blank-line">(136) _______</span> as well. We left notes in the brochure regarding where the omitted details should go. <span class="blank-line">(137) _______</span>. Please send us a revised draft when it is ready. We will, of course, be happy to <span class="blank-line">(138) _______</span> the extra cost.</p>
+<p class="mb-4">Best wishes,<br>Edward</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">收件者：Scott Douglas &lt;sdouglas@evergladeprints.com&gt;<br>寄件者：Edward Kovac &lt;edward.k@collinsconsulting.com&gt;<br>主旨：小冊子的修改<br>日期：5月8日</p>
+<p class="mb-4">親愛的 Douglas 先生：</p>
+<p class="mb-4">附檔是您設計的小冊子，上面有我們的意見。我們的團隊已經檢視過草稿，我們目前為止對小冊子的品質滿意。儘管如此，我們還是需要一些修改。</p>
+<p class="mb-4">尤其是有些小小的排版與顏色錯誤，一些重要資訊也遺漏了。我們在小冊子上註記了遺漏的細節應該放在哪裡。我們要求每個修改都要正確地反映出來。請在修改好的草稿準備好後寄給我們。當然，我們很樂意負擔額外的費用。</p>
+<p class="mb-4">Edward</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 135 題 | 核心考點：形容詞詞彙 參考上下文 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) concerned</td><td class="correct-option">(B) satisfied <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) credited</td><td>(D) troubled</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們目前為止對小冊子的品質滿意。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子結構為 "we are [135: 形容詞] with the quality..."。空格處需要一個與介系詞 with 搭配的形容詞。<br>
+                        <strong>2. 核心判定：</strong>後文提到 "Despite this, we do require a few changes" (儘管如此，我們還是需要一些修改)。 Despite this (儘管如此) 表示語意轉折，說明前面對品質的看法是正面滿意的，故選 (B) satisfied (滿意的)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) concerned (擔憂的)、(C) credited (歸功於/信任的)、(D) troubled (煩惱的/不安的)，放入句中皆無法與後面 "Despite this" 形成合理的語意轉折。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 136 題 | 核心考點：形容詞/動詞詞彙 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) allowed</td><td>(B) asserted</td></tr>
+            <tr><td>(C) moving</td><td class="correct-option">(D) missing <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">一些重要資訊也遺漏了。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 "some important information was..."，此處需要填入一個形容詞或過去分詞作主詞補語。<br>
+                        <strong>2. 核心判定：</strong>下文指出 "We left notes ... regarding where the omitted details should go" (我們在小冊子上註記了【遺漏】的細節應該放在哪裡)，表明此處在抱怨重要資訊「缺失了/漏掉了」，故選 (D) missing。<br>
+                        <strong>3. 干擾項排除：</strong>(A) allowed (被允許的)、(B) asserted (被主張的/斷言的)、(C) moving (令人感動的)，皆不符合版面錯誤與細節遺漏的商業校對情境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 137 題 | 核心考點：選出空格中正確的句子 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) We are not sure why these details were included.</td><td class="correct-option">(B) We need each correction to be reflected precisely. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) We would like you to change the entire layout.</td><td>(D) We ask that you send the invoice for the design we chose.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們要求每個修改都要正確地反映出來。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題。前句為「我們標註了遺漏的細節該放哪裡」，後句為「請在修改草稿準備好後寄給我們」。<br>
+                        <strong>2. 核心判定：</strong>空格內容應代表客戶對修改的要求。正確答案為 (B) We need each correction to be reflected precisely（我們要求每個修改都要正確地反映出來），承上啟下，符合校對修改的合理流程與嚴格要求。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到不確定為什麼加入這些細節，與前句「資訊漏掉了需要補上」矛盾；(C) 提到想變更整個排版，與前句「微小排版與顏色錯誤」矛盾；(D) 提到請寄設計費發票，在草稿修改完成前不符合結算發票的邏輯順序。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 138 題 | 核心考點：to 不定詞的功能 (及物動詞搭配) (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) cover <span class="badge-correct">正確答案</span></td><td>(B) covered</td></tr>
+            <tr><td>(C) covering</td><td>(D) covers</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">當然，我們很樂意負擔額外的費用。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 "be happy to [138: 動詞原形] the extra cost"。此處 to 為動詞不定詞的標誌，空格處需要填入及物動詞原形。<br>
+                        <strong>2. 核心判定：</strong>與受詞 the extra cost 搭配且表示「支付、負擔」的及物動詞為 cover，故選動詞原形 (A) cover。<br>
+                        <strong>3. 干擾項排除：</strong>(B) covered 為過去式/過去分詞，(C) covering 為現在分詞，(D) covers 為第三人稱單數現在式，均不能接在不定詞 to 後方。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">alteration</td><td class="vocab-pos">n.</td><td class="vocab-meaning">修改，變更</td></tr><tr><td class="vocab-word">attach</td><td class="vocab-pos">v.</td><td class="vocab-meaning">附加，貼上</td></tr><tr><td class="vocab-word">review</td><td class="vocab-pos">v.</td><td class="vocab-meaning">檢查，審查</td></tr><tr><td class="vocab-word">draft</td><td class="vocab-pos">n.</td><td class="vocab-meaning">草稿，草案</td></tr><tr><td class="vocab-word">quality</td><td class="vocab-pos">n.</td><td class="vocab-meaning">品質，特質</td></tr><tr><td class="vocab-word">thus far</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">到目前為止</td></tr><tr><td class="vocab-word">pamphlet</td><td class="vocab-pos">n.</td><td class="vocab-meaning">小冊子</td></tr><tr><td class="vocab-word">in particular</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">尤其，特別</td></tr><tr><td class="vocab-word">minor</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">較小的，次要的</td></tr><tr><td class="vocab-word">regarding</td><td class="vocab-pos">prep.</td><td class="vocab-meaning">關於...</td></tr><tr><td class="vocab-word">omit</td><td class="vocab-pos">v.</td><td class="vocab-meaning">遺漏，省略</td></tr><tr><td class="vocab-word">go</td><td class="vocab-pos">v.</td><td class="vocab-meaning">去，放置在某處</td></tr><tr><td class="vocab-word">revise</td><td class="vocab-pos">v.</td><td class="vocab-meaning">修訂，修改</td></tr><tr><td class="vocab-word">extra</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">額外的；n. 額外事物</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 139-142 refer to the following letter. (139-142 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">June 21</p>
+<p class="mb-4">Magnum Insurance<br>337 Deerborne Avenue<br>Banff, Alberta, T2N 4S5<br>Canada</p>
+<p class="mb-4">Dear Mr. Clayburn,</p>
+<p class="mb-4">This letter is to inform you that we have received your insurance claim for hail damage to your home, and we are <span class="blank-line">(139) _______</span> processing it. As you know, the powerful storm last week affected the entire city. As a result, an overwhelming number of homeowners <span class="blank-line">(140) _______</span> assistance. Nevertheless, we are working as speedily as we can to handle these applications.</p>
+<p class="mb-4">An adjustor can inspect your property in a few days. <span class="blank-line">(141) _______</span>. You can speed up the process by presenting documentary evidence ahead of time. Still, it may take some weeks to complete all the necessary forms and prepare a compensation <span class="blank-line">(142) _______</span>. We hope you understand. The funds you'll need to carry out the necessary repairs will be transmitted to you as quickly as possible.</p>
+<p class="mb-4">Thank you for your cooperation.</p>
+<p class="mb-4">Judith Underwood<br>Claims coordinator</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">6 月 21 日</p>
+<p class="mb-4">Magnum 保險公司<br>337 Deerborne 大道<br>班夫，亞伯達省，T2N 4S5<br>加拿大</p>
+<p class="mb-4">親愛的 Clayburn 先生：</p>
+<p class="mb-4">這封信是要通知您，我們已經收到您住家因冰雹受損的保險理賠申請，目前正在處理中。如您所知，上週的強烈風暴影響了全市。因此，有為數眾多的房屋所有人要求協助。不過，我們正盡速處理這些申請。</p>
+<p class="mb-4">理算師可以在幾天後察看您的建築物。可能的話，請開始拍攝您住家受損區域的照片。您可以事先提出文書證據以加速處理程序。不過，要填好所有必要表格並準備理賠估算書，仍需要數週的時間。我們希望您能理解。您進行必要維修所需的資金，將會盡快匯給您。</p>
+<p class="mb-4">感謝您的合作。</p>
+<p class="mb-4">Judith Underwood<br>理賠協調員</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 139 題 | 核心考點：副詞詞彙 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) previously</td><td class="correct-option">(B) currently <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) surprisingly</td><td>(D) typically</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們已經收到您住家因冰雹受損的保險理賠申請，目前正在處理中。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子結構為 "we are [139: 副詞] processing it"。此處需要一個副詞修飾現在進行式動詞 processing。<br>
+                        <strong>2. 核心判定：</strong>前文提到「已經收到理賠申請」，後文提到正在處理它。在商業理賠情境中，表示該申請「目前」正在處理，最符合語境的副詞是 (B) currently (目前，現今)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) previously (先前，之前) 與進行式時態矛盾；(C) surprisingly (令人驚訝地) 語氣不合常理；(D) typically (典型地，通常) 代表習慣或一般性，與處理單一特定申請的語境不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 140 題 | 核心考點：現在完成式 參考上下文 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) requests</td><td>(B) were requested</td></tr>
+            <tr><td class="correct-option">(C) have requested <span class="badge-correct">正確答案</span></td><td>(D) had requested</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因此，有為數眾多的房屋所有人要求協助。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為主詞 "an overwhelming number of homeowners" (複數)，空格後為受詞 "assistance"。空格處需要填入一個複數主動式謂語動詞。<br>
+                        <strong>2. 核心判定：</strong>風暴是在上週發生的，而眾多屋主「要求協助」的行為與影響一直持續到現在（目前保險公司積案極多）。因此，應使用現在完成式 (C) have requested（已經要求，一直要求）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) requests 是一般現在式單數，與複數主詞不符；(B) were requested 是被動語態，後不可直接接受詞 assistance；(D) had requested 為過去完成式，強調發生在過去某動作之前，與本文「風暴影響並持續至今」的邏輯不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 141 題 | 核心考點：選出空格中正確的句子 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) You must submit your insurance claim as soon as possible.</td><td>(B) He has provided you with the assistance you require.</td></tr>
+            <tr><td>(C) Making this investment will raise your home's market value.</td><td class="correct-option">(D) If possible, start photographing the damaged areas of your home. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">可能的話，請開始拍攝您住家受損區域的照片。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題。前句為「理算師幾天內會去察看您的建築物」，後句為「您可以藉由事先提供文書證據來加速處理」。<br>
+                        <strong>2. 核心判定：</strong>空格內容應作為「理算師察看」與「提供證據」之間的橋樑。正確答案為 (D) If possible, start photographing the damaged areas of your home（可能的話，請開始拍攝您住家受損區域的照片），照片即為後文所稱的「證據」，邏輯極其嚴密。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 提到必須盡快送出申請，但信首已表明「已收到您的申請」，前後矛盾；(B) 提到理算師已提供協助，但理算師根本還沒去察看；(C) 提到投資能提升房產市場價值，偏離理賠主題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 142 題 | 核心考點：名詞詞彙 參考全文 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) score</td><td class="correct-option">(B) estimate <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) history</td><td>(D) receipt</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">不過，要填好所有必要表格並準備理賠估算書，仍需要數週的時間。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為不定冠詞 a，後方需要一個單數可數名詞。構成 "prepare a compensation [142]" 結構。<br>
+                        <strong>2. 核心判定：</strong>保險理賠在決定撥款金額前，必須先評估並準備「理賠估算書/估計額」。正確答案為 (B) estimate（估算，估算書）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) score (分數)、(C) history (歷史/紀錄)、(D) receipt (收據)，皆不符合補償理賠的程序性文件名稱。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">claim</td><td class="vocab-pos">n.</td><td class="vocab-meaning">要求，理賠申請；v. 要求，聲稱</td></tr><tr><td class="vocab-word">damage</td><td class="vocab-pos">n.</td><td class="vocab-meaning">損害；v. 損害</td></tr><tr><td class="vocab-word">process</td><td class="vocab-pos">v.</td><td class="vocab-meaning">處理；n. 過程</td></tr><tr><td class="vocab-word">adjustor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">理算師，理賠查勘員</td></tr><tr><td class="vocab-word">documentary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">文書的，證件的</td></tr><tr><td class="vocab-word">evidence</td><td class="vocab-pos">n.</td><td class="vocab-meaning">證據，證明</td></tr><tr><td class="vocab-word">compensation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">補償，理賠金</td></tr><tr><td class="vocab-word">transmit</td><td class="vocab-pos">v.</td><td class="vocab-meaning">傳送，匯出</td></tr><tr><td class="vocab-word">cooperation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">合作</td></tr><tr><td class="vocab-word">previously</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">先前地</td></tr><tr><td class="vocab-word">currently</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">目前</td></tr><tr><td class="vocab-word">surprisingly</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">令人驚訝地</td></tr><tr><td class="vocab-word">typically</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">典型地</td></tr><tr><td class="vocab-word">request</td><td class="vocab-pos">v./n.</td><td class="vocab-meaning">要求</td></tr><tr><td class="vocab-word">assistance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">協助</td></tr><tr><td class="vocab-word">estimate</td><td class="vocab-pos">n.</td><td class="vocab-meaning">估算，估價單；v. 估計</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 143-146 refer to the following memo. (143-146 題參照以下備忘錄。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">To: All staff<br>From: Susan Ward<br>Subject: Employee handbook<br>Date: April 15</p>
+<p class="mb-4">Thank you to everyone who participated in the discussions with company management. Your comments about some employees being unaware of the procedures for day-to-day operations have been heard. We are now working to <span class="blank-line">(143) _______</span> the situation.</p>
+<p class="mb-4">For starters, we will be publishing the company's standard operating procedures as soon as possible. A printed guide will give management and staff an official reference on the performance of daily tasks. <span class="blank-line">(144) _______</span>. Hopefully, it will help move us closer to our goal of having firmly <span class="blank-line">(145) _______</span> policies.</p>
+<p class="mb-4">If any revisions are required, these will be incorporated into a later version of the manual. The final version will also be <span class="blank-line">(146) _______</span> through the company's internal network. If you have any questions, please direct them to your departmental supervisors.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">收件者：所有員工<br>寄件者：Susan Ward<br>主旨：員工手冊<br>日期：4 月 15 日</p>
+<p class="mb-4">感謝各位參加與公司經營團隊的討論。大家表示某些員工不知道日常作業流程的意見，我們聽見了。我們現在正在努力處理這個情況。</p>
+<p class="mb-4">首先，我們將盡快發布公司的標準作業程序。書面指南將讓經營團隊與員工在日常事務的執行方面有一個正式的參考。下次會議將會發放這本手冊的臨時版本。希望這將會幫助我們更接近擁有穩固確立政策的目標。</p>
+<p class="mb-4">如果需要任何修訂的話，修訂內容將包含在之後版本的手冊中。最終版本也將可以透過公司的內部網路取得。如果您有任何問題，請向您的部門主管反應。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 143 題 | 核心考點：動詞詞彙 參考全文 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) maintain</td><td>(B) inspect</td></tr>
+            <tr><td class="correct-option">(C) address <span class="badge-correct">正確答案</span></td><td>(D) ignore</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們現在正在努力處理這個情況。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 "We are now working to [143: 動詞原形] the situation (受詞)"，空格需要填入一個及物動詞原形。<br>
+                        <strong>2. 核心判定：</strong>前句提及員工抱怨「有人不熟悉日常運作流程，我們聽到了」，為了回應意見，公司現在正努力「處理/解決 (address)」這個棘手情況，故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) maintain (維持) 代表不變，與改進現狀矛盾；(B) inspect (檢查/視察) 指官員或稽查員，不符經理人內部處理；(D) ignore (忽略) 與 working to (努力...) 語意矛盾。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 144 題 | 核心考點：選出空格中正確的句子 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) A provisional copy of this handbook will be distributed at the next meeting. <span class="badge-correct">正確答案</span></td><td>(B) Your comments on the revised manual were very much appreciated.</td></tr>
+            <tr><td>(C) A copy of the article may be found in last month's company newsletter.</td><td>(D) We are glad that everyone is now up-to-date on our meeting schedule.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">下次會議將會發放這本手冊的臨時版本。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>此為篇章插句題。前文提到「準備盡快出版標準程序，書面指南會成為日常任務的官方參考」，後句為「希望『它(it)』能幫助我們更接近穩固建立政策的目標」。<br>
+                        <strong>2. 核心判定：</strong>後句的 it 必須有前面的先行詞。正確答案為 (A) A provisional copy of this handbook will be distributed at the next meeting（下次會議將會發放這本手冊的臨時版本），其中的 handbook 對應後面的 "it"，且符合新手冊出爐發放的商業流程。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 提到對修訂版手冊的意見表示感謝，但此時手冊尚未發放；(C) 提到上月通訊刊登了文章，與此處手冊發放無關；(D) 提到大家對會議時程有最新掌握，偏離主題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 145 題 | 核心考點：〔形容詞位置〕現在分詞 vs. 過去分詞 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td>(A) establish</td><td class="correct-option">(B) established <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) establishing</td><td>(D) establishment</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">希望這將會幫助我們更接近擁有穩固確立政策的目標。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前有副詞 firmly，後有複數名詞 policies。空格處應填入分詞或形容詞來修飾 policies。<br>
+                        <strong>2. 核心判定：</strong>政策（policies）與動詞 establish（建立，確立）之間是被動關係（政策被確立）。因此選過去分詞 (B) established 作形容詞，表示「已被確立的、穩固的政策」。<br>
+                        <strong>3. 干擾項排除：</strong>(A) establish 是動詞原形；(C) establishing 是現在分詞（表示政策主動去建立別人，語意不通）；(D) establishment 是名詞，無法在此被副詞 firmly 修飾去限制 policies。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 146 題 | 核心考點：〔補語位置〕名詞補語 vs. 形容詞補語 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) access</td><td class="correct-option">(B) accessible <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) accesses</td><td>(D) accessing</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">最終版本也將可以透過公司的內部網路取得。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子結構為 "The final version will also be [146: 形容詞補語] through..."，be 動詞後需要形容詞作主詞補語，說明最終版本的狀態。<br>
+                        <strong>2. 核心判定：</strong>表達「可以被存取的、可以取得的」狀態，應使用形容詞 (B) accessible（可存取的，可取得的），指員工可以透過內部網路取得該手冊最終版。<br>
+                        <strong>3. 干擾項排除：</strong>(A) access 是名詞（權限）或動詞，不能在此接在 be 動詞後面作主詞 final version 的狀態補語；(C) accesses 是動詞單三；(D) accessing 是進行式分詞，語意不通。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">handbook</td><td class="vocab-pos">n.</td><td class="vocab-meaning">手冊，指南</td></tr><tr><td class="vocab-word">unaware</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">不知道的，未察覺的</td></tr><tr><td class="vocab-word">procedure</td><td class="vocab-pos">n.</td><td class="vocab-meaning">程序，步驟</td></tr><tr><td class="vocab-word">operation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">營運，運作</td></tr><tr><td class="vocab-word">address</td><td class="vocab-pos">v.</td><td class="vocab-meaning">處理，解決</td></tr><tr><td class="vocab-word">provisional</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">臨時的，暫時的</td></tr><tr><td class="vocab-word">distribute</td><td class="vocab-pos">v.</td><td class="vocab-meaning">分發，分配</td></tr><tr><td class="vocab-word">newsletter</td><td class="vocab-pos">n.</td><td class="vocab-meaning">內部通訊，簡報</td></tr><tr><td class="vocab-word">up-to-date</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">最新的</td></tr><tr><td class="vocab-word">firmly</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">堅固地，穩固地</td></tr><tr><td class="vocab-word">establish</td><td class="vocab-pos">v.</td><td class="vocab-meaning">建立，確立</td></tr><tr><td class="vocab-word">policy</td><td class="vocab-pos">n.</td><td class="vocab-meaning">政策，保險單</td></tr><tr><td class="vocab-word">revision</td><td class="vocab-pos">n.</td><td class="vocab-meaning">修訂，修改</td></tr><tr><td class="vocab-word">incorporate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">合併，納入</td></tr><tr><td class="vocab-word">internal</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">內部的</td></tr><tr><td class="vocab-word">access</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">接近，取得，使用權</td></tr><tr><td class="vocab-word">accessible</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">可得到的，可存取的</td></tr><tr><td class="vocab-word">supervisor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">主管，監督者</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 多益 Test 2 Part 6 短文填空專家解題核心思維</div>
+        <ul class="expert-list">
+            <li><strong>理清文章主旨與前後邏輯轉折：</strong>Part 6 是篇章閱讀的一部分，上下文的邏輯關係至關重要。例如 135 題，必須透過後文的 <em>Despite this</em> (儘管如此) 作為轉折指標，推論出前文對品質的正面評價，從而選出 <em>satisfied</em>；而 139 題則應分析理賠進度，配合進行式選出 <em>currently</em> (目前)。</li><li><strong>插句題緊扣前後文的關鍵指代：</strong>解篇章插句題時，要特別留意題目中的細節與代名詞承接。如 141 題理算師即將勘查，空格填入「請拍攝受損區域照片」能完美銜接後文「事先提出證據以加速理賠」的逻辑；而 144 題「發放臨時版手冊」則完美對應後文 'Hopefully, it will...' 中的代名詞 <em>it</em>。</li><li><strong>掌握時態與特定句型文法：</strong>例如 140 題中，上週風暴影響全市，住戶提出協助的影響持續至今，應使用現在完成式 <em>have requested</em>；而 145 題 policies 與 establish 之間為被動關係，故應選用過去分詞 <em>established</em> 修飾 policies；146 題 be 動詞後需接形容詞 <em>accessible</em> 作主詞 final version 的狀態補語。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

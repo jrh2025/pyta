@@ -13,7 +13,7 @@
         color: #718096;
     }
     @bottom-left {
-        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Part 6 短文填空";
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Test 1 Part 6 短文填空";
         font-family: Arial, "Microsoft JhengHei", sans-serif;
         font-size: 8.5pt;
         color: #718096;
@@ -34,109 +34,95 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
 .subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
 
 .passage-block { 
-    page-break-after: always; 
+    page-break-inside: avoid; 
     margin-bottom: 30px; 
     border: 1px solid #e2e8f0; 
     border-radius: 8px; 
     background-color: #ffffff; 
     overflow: hidden; 
 }
-.passage-block:last-of-type {
-    page-break-after: avoid;
-}
 .passage-header { 
     background-color: #1a365d; 
     color: #ffffff; 
-    padding: 10px 15px;
+    padding: 8px 12px;
     font-weight: bold; 
-    font-size: 11pt; 
+    font-size: 10pt; 
 }
 
 .passage-table { 
     width: 100%; 
     border-collapse: collapse; 
-    margin: 15px 0; 
+    margin: 10px 0; 
 }
 .passage-table td { 
     vertical-align: top; 
     width: 50%; 
-    padding: 0 15px; 
+    padding: 0 12px; 
 }
 .column-title {
     font-weight: bold;
     color: #2c5282;
     border-bottom: 1.5px solid #2c5282;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     padding-bottom: 3px;
-    font-size: 9.5pt;
+    font-size: 9pt;
     text-transform: uppercase;
-    tracking-wider: 0.05em;
 }
 .passage-en { 
     font-family: "Times New Roman", Times, serif; 
-    font-size: 11.5pt; 
+    font-size: 10.5pt; 
     line-height: 1.5; 
     color: #1a202c; 
     border-right: 1.5px dashed #e2e8f0;
+    padding-right: 12px !important;
     text-align: justify;
-    padding-right: 15px !important;
+}
+.blank-line {
+    font-weight: bold;
+    color: #2b6cb0;
+    text-decoration: underline;
 }
 .passage-zh { 
     font-family: Arial, "Microsoft JhengHei", sans-serif; 
     font-size: 9.5pt; 
     line-height: 1.55; 
     color: #4a5568; 
+    padding-left: 12px !important;
     text-align: justify;
-    padding-left: 15px !important;
-}
-.blank-line { 
-    text-decoration: underline; 
-    color: #2b6cb0; 
-    font-weight: bold;
-    padding: 0 2px;
 }
 
 .questions-section {
     background-color: #f8fafc;
     border-top: 1px solid #e2e8f0;
-    padding: 15px;
-}
-.section-main-title {
-    font-weight: bold;
-    color: #1a365d;
-    font-size: 11pt;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #cbd5e1;
-    padding-bottom: 4px;
+    padding: 12px;
 }
 .question-item {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 12px;
-    margin-bottom: 15px;
-    page-break-inside: avoid;
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 12px;
+}
+.question-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 .question-item-header {
     font-weight: bold;
-    color: #2c5282;
-    font-size: 9.5pt;
-    margin-bottom: 8px;
-    background-color: #ebf8ff;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: inline-block;
+    color: #1a365d;
+    font-size: 9pt;
+    margin-bottom: 6px;
 }
+
 .options-table { 
     width: 100%; 
-    margin-bottom: 10px; 
+    margin-bottom: 6px; 
     border-collapse: collapse; 
 }
 .options-table td { 
     width: 50%; 
-    padding: 5px 8px; 
+    padding: 4px 6px; 
     font-family: "Times New Roman", Times, serif; 
-    font-size: 10.5pt; 
+    font-size: 9.5pt; 
     color: #4a5568; 
 }
 .correct-option { 
@@ -147,34 +133,32 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
     display: inline-block; 
     background-color: #c6f6d5; 
     color: #22543d;
-    font-size: 8pt; 
-    padding: 1px 5px; 
+    font-size: 7.5pt; 
+    padding: 1px 4px; 
     border-radius: 3px; 
     font-family: "Microsoft JhengHei", sans-serif; 
-    margin-left: 6px; 
+    margin-left: 4px; 
     vertical-align: middle; 
 }
 
 .explanation-box {
-    background-color: #f7fafc;
-    border-left: 3px solid #cbd5e1;
-    padding: 8px 12px;
-    margin-top: 8px;
-    font-size: 9pt;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #1a365d;
+    padding: 8px 10px;
+    margin-top: 6px;
+    font-size: 8.5pt;
+    border-radius: 4px;
 }
 .exp-title {
     font-weight: bold;
-    color: #4a5568;
-    margin-top: 4px;
+    color: #2c5282;
     margin-bottom: 3px;
-    text-decoration: underline;
 }
 .exp-translation {
     color: #4a5568;
     margin-bottom: 6px;
-    background-color: #edf2f7;
-    padding: 4px 8px;
-    border-radius: 3px;
+    font-style: italic;
 }
 .exp-detail {
     color: #2d3748;
@@ -182,21 +166,20 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
 }
 
 .passage-vocab-section {
-    padding: 15px;
+    padding: 12px;
     border-top: 1px solid #e2e8f0;
-    page-break-inside: avoid;
+    background-color: #ffffff;
 }
 .vocab-table { 
     width: 100%; 
     border-collapse: collapse; 
-    margin-top: 5px; 
 }
 .vocab-table th {
     background-color: #f1f5f9;
     color: #475569;
     font-weight: bold;
-    font-size: 9pt;
-    padding: 6px 8px;
+    font-size: 8.5pt;
+    padding: 5px 6px;
     border: 1px solid #e2e8f0;
     text-align: left;
 }
@@ -204,8 +187,8 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
     background-color: #f8fafc; 
 }
 .vocab-table td { 
-    padding: 5px 8px; 
-    font-size: 9pt; 
+    padding: 4px 6px; 
+    font-size: 8.5pt; 
     border: 1px solid #e2e8f0; 
 }
 .vocab-word { 
@@ -223,8 +206,8 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
 
 .expert-summary { 
     page-break-inside: avoid; 
-    margin-top: 25px; 
-    padding: 15px;
+    margin-top: 20px; 
+    padding: 12px;
     background-color: #ebf8ff; 
     border: 1px solid #bee3f8; 
     border-radius: 8px; 
@@ -232,19 +215,18 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
 .expert-title { 
     color: #2b6cb0; 
     font-weight: bold; 
-    font-size: 11pt; 
-    margin-top: 0;
-    margin-bottom: 8px; 
+    font-size: 10pt; 
+    margin-bottom: 6px; 
 }
 .expert-list { 
     margin: 0; 
-    padding-left: 18px; 
-    font-size: 9pt; 
+    padding-left: 15px; 
+    font-size: 8.5pt; 
     color: #2d3748; 
-    line-height: 1.5;
+    line-height: 1.45;
 }
 .expert-list li { 
-    margin-bottom: 6px; 
+    margin-bottom: 5px; 
 }
 </style>
 </head>
@@ -276,7 +258,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </table>
             
             <div class="questions-section">
-                <div class="section-main-title">📝 題型練習與深度解析</div>
                 
             <div class="question-item">
                 <div class="question-item-header">第 131 題 | 核心考點：動詞詞彙 (難易度：中)</div>
@@ -353,7 +334,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </div>
             
             <div class="passage-vocab-section">
-                <div class="section-main-title">📚 本篇核心單字彙整</div>
                 
         <table class="vocab-table">
             <thead>
@@ -397,7 +377,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </table>
             
             <div class="questions-section">
-                <div class="section-main-title">📝 題型練習與深度解析</div>
                 
             <div class="question-item">
                 <div class="question-item-header">第 135 題 | 核心考點：名詞位置 (人物 vs. 抽象/事物名詞) (難易度：中)</div>
@@ -474,7 +453,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </div>
             
             <div class="passage-vocab-section">
-                <div class="section-main-title">📚 本篇核心單字彙整</div>
                 
         <table class="vocab-table">
             <thead>
@@ -518,7 +496,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </table>
             
             <div class="questions-section">
-                <div class="section-main-title">📝 題型練習與深度解析</div>
                 
             <div class="question-item">
                 <div class="question-item-header">第 139 題 | 核心考點：連接副詞 (難易度：中)</div>
@@ -595,7 +572,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </div>
             
             <div class="passage-vocab-section">
-                <div class="section-main-title">📚 本篇核心單字彙整</div>
                 
         <table class="vocab-table">
             <thead>
@@ -647,7 +623,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </table>
             
             <div class="questions-section">
-                <div class="section-main-title">📝 題型練習與深度解析</div>
                 
             <div class="question-item">
                 <div class="question-item-header">第 143 題 | 核心考點：名詞詞彙 (難易度：高)</div>
@@ -724,7 +699,6 @@ h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
             </div>
             
             <div class="passage-vocab-section">
-                <div class="section-main-title">📚 本篇核心單字彙整</div>
                 
         <table class="vocab-table">
             <thead>
