@@ -1,0 +1,2450 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Part 7 閱讀理解";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-after: always; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-block:last-of-type {
+    page-break-after: avoid;
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 10px 15px;
+    font-weight: bold; 
+    font-size: 11pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 15px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 15px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    tracking-wider: 0.05em;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 11pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    text-align: justify;
+    padding-right: 15px !important;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    text-align: justify;
+    padding-left: 15px !important;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px;
+}
+.section-main-title {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 11pt;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 4px;
+}
+.question-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #2c5282;
+    font-size: 9.5pt;
+    margin-bottom: 8px;
+    background-color: #ebf8ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.question-text {
+    font-weight: bold;
+    font-size: 11pt;
+    color: #1a202c;
+    margin-bottom: 8px;
+    font-family: "Times New Roman", Times, serif;
+}
+.options-table { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 5px 8px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 8pt; 
+    padding: 1px 5px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 6px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #f7fafc;
+    border-left: 3px solid #cbd5e1;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 9pt;
+}
+.exp-title {
+    font-weight: bold;
+    color: #4a5568;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    text-decoration: underline;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    background-color: #edf2f7;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 15px;
+    border-top: 1px solid #e2e8f0;
+    page-break-inside: avoid;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 5px; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 9pt;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 5px 8px; 
+    font-size: 9pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 25px; 
+    padding: 15px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 11pt; 
+    margin-top: 0;
+    margin-bottom: 8px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 18px; 
+    font-size: 9pt; 
+    color: #2d3748; 
+    line-height: 1.5;
+}
+.expert-list li { 
+    margin-bottom: 6px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 4 - PART 7 閱讀理解精選解析 (第 147 – 200 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 147-148 refer to the following notice. (147-148 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="notice-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">Notice: Parking Lot Renovation</h4>
+  <p class="mb-2">Please be advised that the main parking lot behind the West Wing will be closed for repaving from <b>Friday, November 20, at 6:00 p.m. through Sunday, November 22, at 8:00 p.m.</b></p>
+  <p class="mb-2">All employees are requested to park their vehicles in the North Lot during this period. Access cards for the North Lot will be activated automatically for all staff. We apologize for the temporary inconvenience.</p>
+  <p class="text-right">Facilities Management Team</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="notice-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">通知：停車場整修</h4>
+  <p class="mb-2">請注意，西翼後方的主停車場將於 <b>11 月 20 日週五下午 6:00 至 11 月 22 日週日下午 8:00</b> 進行重鋪路面工程而暫時關閉。</p>
+  <p class="mb-2">在此期間，所有員工請將車輛停放在北停車場。全體員工的北停車場門禁卡將自動啟用。對於此次暫時帶來的不便，我們深表歉意。</p>
+  <p class="text-right">設施管理團隊</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 147 題 | 核心考點：細節檢索 (難易度：低)</div>
+                <div class="question-text">Q147. What is the main purpose of the notice?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) To announce the closure of a parking lot <span class="badge-correct">正確答案</span></td><td>(B) To report the loss of a vehicle access card</td></tr>
+            <tr><td>(C) To schedule an office painting project</td><td>(D) To change the working hours of staff</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這則通知的主要目的是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主旨細節題。定位首句。<br>
+                        <strong>2. 核心判定：</strong>通知首句指出 "main parking lot... will be closed for repaving"，對應 (A) To announce the closure of a parking lot。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 遺失卡片、(C) 油漆專案、(D) 更改上班時間，均非主旨。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 148 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q148. Where should employees park their cars during the renovation?</div>
+                <table class="options-table">
+            <tr><td>(A) In the West Wing driveway</td><td class="correct-option">(B) In the North Lot <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) At the nearby shopping mall</td><td>(D) On Broadway Street</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">北停車場。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節比對題。定位第二段。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "park their vehicles in the North Lot during this period"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 西翼車道、(C) 百貨商場、(D) 百老匯街，均不合文意。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">renovation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">整修，翻新</td></tr><tr><td class="vocab-word">repave</td><td class="vocab-pos">v.</td><td class="vocab-meaning">重新鋪路</td></tr><tr><td class="vocab-word">vehicle</td><td class="vocab-pos">n.</td><td class="vocab-meaning">車輛，工具</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 149-150 refer to the following e-mail. (149-150 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded">
+  <p class="mb-1"><b>To:</b> All Department Managers &lt;managers@apexcorp.com&gt;</p>
+  <p class="mb-1"><b>From:</b> Helen Shaw &lt;hshaw@apexcorp.com&gt;</p>
+  <p class="mb-3"><b>Date:</b> October 12</p>
+  <p class="mb-2">Dear Managers,</p>
+  <p class="mb-2">This is to inform you that our quarterly budget reviews will be held next week. Each department is required to present a detailed expense forecast for the upcoming fiscal year. Please ensure your presentations are ready by <b>Friday, October 16</b>.</p>
+  <p class="mb-2">We will meet in <b>Conference Room B</b> on <b>Tuesday, October 20, at 10:00 a.m.</b> If you need to reschedule your assigned time slot, please contact me by Friday afternoon.</p>
+  <p class="mb-2">Best regards,</p>
+  <p>Helen Shaw<br>Chief Financial Officer</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded">
+  <p class="mb-1"><b>收件者：</b>所有部門經理 &lt;managers@apexcorp.com&gt;</p>
+  <p class="mb-1"><b>寄件者：</b>Helen Shaw &lt;hshaw@apexcorp.com&gt;</p>
+  <p class="mb-3"><b>日期：</b>10 月 12 日</p>
+  <p class="mb-2">親愛的經理們：</p>
+  <p class="mb-2">特此通知，我們的季度預算審查會議將於下週舉行。每個部門都需要提交下一財政年度的詳細費用預測。請確保在 <b>10 月 16 日週五</b> 之前準備好您的簡報。</p>
+  <p class="mb-2">我們將於 <b>10 月 20 日週二上午 10:00</b> 在 <b>B 會議室</b> 會面。如果您需要重新安排您被分配的時間段，請在週五下午之前與我聯絡。</p>
+  <p class="mb-2">祝好，</p>
+  <p>Helen Shaw<br>財務長</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 149 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q149. What must each department prepare for the budget review?</div>
+                <table class="options-table">
+            <tr><td>(A) A list of potential new hires</td><td class="correct-option">(B) A detailed expense forecast <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A project feedback report</td><td>(D) A customer satisfaction survey</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">每個部門必須為預算審查準備什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索題。定位首段第二句。<br>
+                        <strong>2. 核心判定：</strong>信中指出 "present a detailed expense forecast for the upcoming fiscal year"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 新員工名單、(C) 反饋報告、(D) 顧客滿意度調查，均非準備內容。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 150 題 | 核心考點：時間點比對 (難易度：中)</div>
+                <div class="question-text">Q150. By when should managers contact Ms. Shaw to reschedule their time slots?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Friday, October 16 <span class="badge-correct">正確答案</span></td><td>(B) Tuesday, October 20</td></tr>
+            <tr><td>(C) Wednesday, October 14</td><td>(D) Friday, October 23</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">10 月 16 日週五。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間定位與交叉比對。定位第二段末句。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "please contact me by Friday afternoon"，對照上文的日期指標 "Friday, October 16"，可判定截止時間為 10 月 16 日週五，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 會議日、(C)、(D) 為干擾日期。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">quarterly</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">季度的，每季的</td></tr><tr><td class="vocab-word">expense forecast</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">費用預測，開支預估</td></tr><tr><td class="vocab-word">reschedule</td><td class="vocab-pos">v.</td><td class="vocab-meaning">重新排定時間，改期</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 151-152 refer to the following memorandum. (151-152 題參照以下備忘錄。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="memo-box border p-4 bg-slate-50 rounded">
+  <p class="mb-1"><b>TO:</b> All Support Staff</p>
+  <p class="mb-1"><b>FROM:</b> Technical Operations Team</p>
+  <p class="mb-3"><b>SUBJECT:</b> Scheduled Database Upgrade</p>
+  <p class="mb-2">Our customer database will undergo a major software upgrade next weekend, starting on <b>Saturday, October 24, at 11:00 p.m.</b> and concluding by <b>Sunday, October 25, at 5:00 a.m.</b></p>
+  <p class="mb-2">During this maintenance window, the online customer portal and internal payment systems will be offline. We recommend that customer representatives complete all pending transactions before Friday evening to avoid data synchronization errors. Thank you for your cooperation.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="memo-box border p-4 bg-slate-50 rounded">
+  <p class="mb-1"><b>收件者：</b>所有支援人員</p>
+  <p class="mb-1"><b>寄件者：</b>技術營運團隊</p>
+  <p class="mb-3"><b>主旨：</b>預定資料庫升級</p>
+  <p class="mb-2">我們的客戶資料庫將於下週末進行重大軟體升級，時間自 <b>10 月 24 日週六晚上 11:00</b> 開始，並於 <b>10 月 25 日週日凌晨 5:00</b> 前結束。</p>
+  <p class="mb-2">在此維護時段內，線上客戶入口網站和內部支付系統將會離線。我們建議客戶代表在週五晚上之前完成所有未決交易，以避免數據同步錯誤。感謝您的合作。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 151 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q151. How long is the database upgrade expected to take?</div>
+                <table class="options-table">
+            <tr><td>(A) 2 hours</td><td class="correct-option">(B) 6 hours <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) 12 hours</td><td>(D) 24 hours</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">6 小時。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間區間計算題。<br>
+                        <strong>2. 核心判定：</strong>升級自週六晚上 11:00 (11:00 p.m.) 開始，到週日凌晨 5:00 (5:00 a.m.) 結束，時間間隔為 6 小時，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 2小時、(C) 12小時、(D) 24小時，均非正確計算結果。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 152 題 | 核心考點：指引與建議理解 (難易度：中)</div>
+                <div class="question-text">Q152. What are customer representatives advised to do?</div>
+                <table class="options-table">
+            <tr><td>(A) Register for a CRM training session</td><td class="correct-option">(B) Complete pending transactions before Friday night <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Contact support to report database errors</td><td>(D) Work overtime on Sunday morning</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在週五晚上之前完成未決交易。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位與句意理解。定位至第二段。<br>
+                        <strong>2. 核心判定：</strong>文中建議 "complete all pending transactions before Friday evening"，與選項 (B) 吻合。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 註冊培訓、(C) 通報錯誤、(D) 週日加班，均非建議內容。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">undergo</td><td class="vocab-pos">v.</td><td class="vocab-meaning">經歷，遭受</td></tr><tr><td class="vocab-word">conclude</td><td class="vocab-pos">v.</td><td class="vocab-meaning">結束，終結</td></tr><tr><td class="vocab-word">offline</td><td class="vocab-pos">adj./adv.</td><td class="vocab-meaning">離線的，未連線的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 153-154 refer to the following advertisement. (153-154 題參照以下廣告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">Modern Retail Space on Broadway!</h4>
+  <p class="mb-2">Looking for a premium storefront to showcase your brand? Vanguard Properties offers a newly renovated retail space located on <b>Broadway Street</b>, situated directly opposite the central subway station.</p>
+  <ul class="list-disc pl-5 mb-3">
+    <li>3,000 square feet of open-plan layout</li>
+    <li>High ceiling with modern lighting fixtures</li>
+    <li>Loading dock at the back of the building</li>
+  </ul>
+  <p class="mb-2">We offer attractive lease terms for long-term tenants. For inquiries or to schedule a walk-through, please contact <b>Vanguard Property Managers</b> at <b>555-0145</b>.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">百老匯街現代零售空間出租！</h4>
+  <p class="mb-2">正在尋找優質店面展示您的品牌嗎？Vanguard 物業公司提供一個百老匯街上新裝修的零售空間，正對著中央地鐵站。</p>
+  <ul class="list-disc pl-5 mb-3">
+    <li>3,000 平方英尺的開放式格局</li>
+    <li>高天花板配備現代照明燈具</li>
+    <li>大樓後方設有裝卸貨平台</li>
+  </ul>
+  <p class="mb-2">我們為長期租戶提供吸引人的租約條款。如需諮詢或安排實地看屋，請撥打 <b>555-0145</b> 聯絡 <b>Vanguard 物業經理</b>。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 153 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q153. What is mentioned about the location of the property?</div>
+                <table class="options-table">
+            <tr><td>(A) It is located next to a park.</td><td class="correct-option">(B) It is situated opposite a subway station. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It is near the suburban airport.</td><td>(D) It is on the third floor of a mall.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">它位於地鐵站對面。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>位置細節定位題。定位第一段。<br>
+                        <strong>2. 核心判定：</strong>第一段指出 "situated directly opposite the central subway station"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 公園旁、(C) 機場附近、(D) 商場三樓，均與原文不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 154 題 | 核心考點：特徵定位 (難易度：中)</div>
+                <div class="question-text">Q154. Which feature is included in the property?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) A rear loading dock <span class="badge-correct">正確答案</span></td><td>(B) An underground parking garage</td></tr>
+            <tr><td>(C) A private conference room</td><td>(D) A fully furnished reception desk</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">後方設有裝卸貨平台。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>清單項目比對。<br>
+                        <strong>2. 核心判定：</strong>清單中第三點寫道 "Loading dock at the back of the building" (back 相當於 rear)，與選項 (A) A rear loading dock 吻合。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 地下車庫、(C) 會議室、(D) 接待台，在文中均未提及。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">storefront</td><td class="vocab-pos">n.</td><td class="vocab-meaning">店面</td></tr><tr><td class="vocab-word">fixture</td><td class="vocab-pos">n.</td><td class="vocab-meaning">（房屋內的）固定裝置，設備（如燈具）</td></tr><tr><td class="vocab-word">lease term</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">租期，租約條款</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 5 | Questions 155-157 refer to the following text message chain. (155-157 題參照以下簡訊對話。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="chat-box border p-4 bg-slate-50 rounded space-y-3">
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Mark Davis (2:15 p.m.):</b> Hi Linda, did you review the revised contract for the office furniture order yet?</p>
+  </div>
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Linda Kinkade (2:17 p.m.):</b> Yes, but I noticed they billed us for two steel cabinets instead of one. <b>I'll call them now</b> to get that corrected.</p>
+  </div>
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Mark Davis (2:18 p.m.):</b> Good catch. I'll wait to sign it until you receive the updated invoice.</p>
+  </div>
+  <div class="message sent text-right">
+    <p class="meta font-bold text-xs text-blue-600"><b>Linda Kinkade (2:20 p.m.):</b> They apologized and said they will send the corrected document by email within ten minutes. I will forward it to you immediately.</p>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="chat-box border p-4 bg-slate-50 rounded space-y-3">
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Mark Davis (2:15 p.m.):</b> 嗨 Linda，你審查過辦公室家具訂單的修改後合約了嗎？</p>
+  </div>
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Linda Kinkade (2:17 p.m.):</b> 審過了，但我注意到他們對我們收取了兩個鋼製櫃的費用，而不是一個。<b>我現在就打給他們</b>來修正這個錯誤。</p>
+  </div>
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Mark Davis (2:18 p.m.):</b> 看得仔細。在您收到更新的發票之前，我會先不簽署。</p>
+  </div>
+  <div class="message sent text-right">
+    <p class="meta font-bold text-xs text-blue-600"><b>Linda Kinkade (2:20 p.m.):</b> 這是他們道歉並表示將在十分鐘內通過電子郵件發送更正後的文件。我會立即轉發給您。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 155 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q155. What issue did Ms. Kinkade discover in the contract?</div>
+                <table class="options-table">
+            <tr><td>(A) The delivery address was incorrect.</td><td>(B) The price of the desk was missing.</td></tr>
+            <tr><td class="correct-option">(C) They were billed for too many items. <span class="badge-correct">正確答案</span></td><td>(D) The signature line was omitted.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">計費項目數量過多。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位題。<br>
+                        <strong>2. 核心判定：</strong>Linda 提到 "billed us for two steel cabinets instead of one"（多算了一個櫃子），即多計了產品項目費用，對應 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 地址不對、(B) 桌子價格缺失、(D) 缺少簽名欄，均不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 156 題 | 核心考點：句意分析 (主動採取行動) (難易度：高)</div>
+                <div class="question-text">Q156. At 2:17 p.m., what does Ms. Kinkade mean when she writes, "I'll call them now"?</div>
+                <table class="options-table">
+            <tr><td>(A) She wants to place an order for more steel cabinets.</td><td class="correct-option">(B) She will contact the supplier to fix a billing mistake. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) She is going to cancel the contract negotiation.</td><td>(D) She will ask the IT team to check the email server.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">她將聯絡供應商以修正帳單錯誤。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>對話情境分析。<br>
+                        <strong>2. 核心判定：</strong>Linda 在發現多收一個櫃子的錢後說 "I'll call them now to get that corrected."，說明她要致電給對方（家具商）來修正這項帳單錯誤，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 訂更多櫃子、(C) 取消合約談判、(D) 讓 IT 查伺服器，均與語境無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 157 題 | 核心考點：時間點推論 (難易度：中)</div>
+                <div class="question-text">Q157. When does the supplier promise to send the corrected contract?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Within ten minutes <span class="badge-correct">正確答案</span></td><td>(B) By tomorrow afternoon</td></tr>
+            <tr><td>(C) Before Friday evening</td><td>(D) By next Monday</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">10 分鐘內。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位題。<br>
+                        <strong>2. 核心判定：</strong>Linda 最後一條訊息提到 "send the corrected document... within ten minutes"，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B)、(C)、(D) 是干擾時間。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">revised</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">修改過的</td></tr><tr><td class="vocab-word">good catch</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">（口語）看的好，找得準</td></tr><tr><td class="vocab-word">forward</td><td class="vocab-pos">v.</td><td class="vocab-meaning">轉寄，轉發</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 6 | Questions 158-160 refer to the following webpage. (158-160 題參照以下網頁。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs text-slate-400 mb-2"><b>URL:</b> www.seattletransit.gov/smartcard</p>
+  <h4 class="font-bold text-lg mb-2">SmartTransit Card Transition Guidelines</h4>
+  <p class="mb-2">To improve service efficiency, Seattle Transit will transition fully to the new <b>SmartTransit Card</b> starting <b>November 1</b>. Please review the instructions below to complete the transition:</p>
+  <p class="mb-2"><b>1. Balance Transfer:</b> Commuters holding old paper tickets can transfer their remaining monetary balances to a new SmartTransit Card at any service desk. This service is free until <b>November 15</b>.</p>
+  <p class="mb-2"><b>2. Online Registration:</b> Register your SmartTransit Card online to protect your balance in case of card loss. Registered users can manage balances and arrange automatic top-ups online.</p>
+  <p class="mb-2">A $5 processing fee will apply to all card replacements for unregistered cards. Please complete your registration before <b>December 1</b> to receive a $5 bonus ride credit.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs text-slate-400 mb-2"><b>網址：</b> www.seattletransit.gov/smartcard</p>
+  <h4 class="font-bold text-lg mb-2">智慧運輸卡過渡指南</h4>
+  <p class="mb-2">為了提高服務效率，西雅圖運輸局將從 <b>11 月 1 日</b> 起完全過渡到新的 <b>SmartTransit Card（智慧運輸卡）</b>。請閱讀以下說明完成過渡：</p>
+  <p class="mb-2"><b>1. 餘額轉移：</b>持有舊紙質車票的通勤者可以在任何服務台將其剩餘的金額餘額轉移到新的智慧運輸卡中。在 <b>11 月 15 日</b> 之前，此項服務是免費的。</p>
+  <p class="mb-2"><b>2. 線上註冊：</b>在線上註冊您的智慧運輸卡，以防卡片遺失時保護您的餘額。註冊用戶可以在線上管理餘額並設定自動儲值。</p>
+  <p class="mb-2">對於未註冊的卡片，更換新卡將收取 5 美元的手續費。請在 <b>12 月 1 日</b> 之前完成您的註冊，以獲得 5 美元的免費乘車點數贈送。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 158 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q158. When will Seattle Transit transition fully to the new card?</div>
+                <table class="options-table">
+            <tr><td>(A) October 12</td><td class="correct-option">(B) November 1 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) November 15</td><td>(D) December 1</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">11 月 1 日。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>日期定位題。<br>
+                        <strong>2. 核心判定：</strong>網頁首段指出 "transition fully to the new SmartTransit Card starting November 1"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 10月12日、(C) 11月15日是免除費用截止日、(D) 12月1日是註冊優惠截止日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 159 題 | 核心考點：細節比對 (難易度：中)</div>
+                <div class="question-text">Q159. What benefit is offered to users who register their cards before December 1?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) A $5 bonus ride credit <span class="badge-correct">正確答案</span></td><td>(B) A free steel key holder</td></tr>
+            <tr><td>(C) A waiver of all transit fares for a month</td><td>(D) A monthly newsletter subscription</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">5 美元的免費乘車點數。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>利益點細節定位題。定位最後一段最後一句。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "complete your registration before December 1 to receive a $5 bonus ride credit"，與選項 (A) 吻合。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 鑰匙扣、(C) 免費一個月車資、(D) 月刊訂閱，均無提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 160 題 | 核心考點：費用細節比對 (難易度：中)</div>
+                <div class="question-text">Q160. How much is the card replacement fee for unregistered cards?</div>
+                <table class="options-table">
+            <tr><td>(A) $2</td><td class="correct-option">(B) $5 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) $15</td><td>(D) $20</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">5 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>數字與費用檢索。<br>
+                        <strong>2. 核心判定：</strong>最後一段首句指出 "A $5 processing fee will apply to all card replacements for unregistered cards"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(C)、(D) 是干擾數字。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">transition</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">過渡，轉變</td></tr><tr><td class="vocab-word">monetary balance</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">貨幣餘額，金額</td></tr><tr><td class="vocab-word">top-up</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">儲值，充值</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 7 | Questions 161-163 refer to the following article. (161-163 題參照以下文章。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="article-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs text-slate-400 mb-2"><b>Brampton Business Weekly - October 15</b></p>
+  <h4 class="font-bold text-lg mb-2">Vortex Corporation Wins IT Security Contract</h4>
+  <p class="mb-2">Brampton-based software developer <b>Vortex Corporation</b> has secured a major contract to upgrade the network security systems of three regional banks in Illinois. This venture represents Vortex's largest commercial project to date.</p>
+  <p class="mb-2">According to CTO Helen Shaw, the project will involve installing advanced encryption protocols and training bank staff on data protection. Installation is scheduled to begin early next month, with completion expected by the end of the year.</p>
+  <p class="mb-2">"This contract is a significant milestone," said Shaw. "Financial institutions are facing increased threats, and we are well-positioned to strengthen their defenses."</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="article-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs text-slate-400 mb-2"><b>布蘭普頓商業週報 - 10 月 15 日</b></p>
+  <h4 class="font-bold text-lg mb-2">Vortex Corporation 贏得 IT 安全合約</h4>
+  <p class="mb-2">總部位於布蘭普頓的軟體開發商 <b>Vortex Corporation</b> 獲得了一份重大合約，負責升級伊利諾州三家地方銀行的網路安全系統。這項投資代表了 Vortex 迄今為止最大的商業項目。</p>
+  <p class="mb-2">據技術長 Helen Shaw 表示，該項目將涉及安裝先進的加密協議以及對銀行員工進行數據保護培訓。安裝工作計畫於下月初開始，預計年底前完工。</p>
+  <p class="mb-2">「這份合約是一個重要的里程碑，」Shaw 說。「金融機構面臨著越來越多的威脅，我們已做好充分準備來加強他們的防禦。」</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 161 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q161. Where is Vortex Corporation based?</div>
+                <table class="options-table">
+            <tr><td>(A) Seattle</td><td class="correct-option">(B) Brampton <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Chicago</td><td>(D) Madrid</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">布蘭普頓（Brampton）。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>地理位置定位題。定位首句。<br>
+                        <strong>2. 核心判定：</strong>文章第一句指出 "Brampton-based software developer Vortex Corporation"，這代表其總部在布蘭普頓，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 西雅圖、(C) 芝加哥、(D) 馬德里，均不合首句。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 162 題 | 核心考點：項目細節理解與時間點 (難易度：中)</div>
+                <div class="question-text">Q162. When is the project expected to be completed?</div>
+                <table class="options-table">
+            <tr><td>(A) Early next month</td><td class="correct-option">(B) By the end of the year <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Within three business days</td><td>(D) By next Spring</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">年底前。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間檢索題。定位到第二段結尾。<br>
+                        <strong>2. 核心判定：</strong>第二段結尾指出 "with completion expected by the end of the year"，與選項 (B) 吻合。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 下月初為開工時間、(C) 三個工作天內、(D) 明春，均非完工時間。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 163 題 | 核心考點：同義字代換 (難易度：高)</div>
+                <div class="question-text">Q163. In the third paragraph, the word "strengthen" is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) reinforce <span class="badge-correct">正確答案</span></td><td>(B) evaluate</td></tr>
+            <tr><td>(C) negotiate</td><td>(D) publish</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">加強，鞏固。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>同義字選擇。<br>
+                        <strong>2. 核心判定：</strong>CTO Helen Shaw 指出 "we are well-positioned to strengthen their defenses"（加強他們的防線），這裡的 strengthen 指強化、加固防禦，最接近 (A) reinforce（加強，強化）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 評估、(C) 談判、(D) 出版，均與加強防禦之意無關。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">secure</td><td class="vocab-pos">v.</td><td class="vocab-meaning">獲得，確保</td></tr><tr><td class="vocab-word">encryption protocol</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">加密協議</td></tr><tr><td class="vocab-word">milestone</td><td class="vocab-pos">n.</td><td class="vocab-meaning">里程碑</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 8 | Questions 164-167 refer to the following online chat. (164-167 題參照以下線上對話。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="chat-box border p-4 bg-slate-50 rounded space-y-3">
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Jane Adams (11:05 a.m.):</b> Hi David, I'm reviewing the final layout for the promotional pamphlet. The fonts on the back page look too small.</p>
+  </div>
+  <div class="message sent text-right">
+    <p class="meta font-bold text-xs text-blue-600"><b>David Lee (11:07 a.m.):</b> Yes, I noticed that too. We had to shrink them to fit all the store address details.</p>
+  </div>
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Jane Adams (11:08 a.m.):</b> I see, but readability is vital. We should delete the old shop location since it closed last month anyway. <b>That will free up some space</b>.</p>
+  </div>
+  <div class="message sent text-right">
+    <p class="meta font-bold text-xs text-blue-600"><b>David Lee (11:10 a.m.):</b> Perfect. I'll remove it and increase the font size. I'll upload the updated draft by 1:00 p.m.</p>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="chat-box border p-4 bg-slate-50 rounded space-y-3">
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Jane Adams (11:05 a.m.):</b> 嗨 David，我正在審查宣傳手冊的最終排版。封底的字體看起來太小了。</p>
+  </div>
+  <div class="message sent text-right">
+    <p class="meta font-bold text-xs text-blue-600"><b>David Lee (11:07 a.m.):</b> 是的，我也注意到了。我們必須縮小字體以容納所有的分店地址細節。</p>
+  </div>
+  <div class="message received">
+    <p class="meta font-bold text-xs"><b>Jane Adams (11:08 a.m.):</b> 我明白，但可讀性至關重要。反正那家舊分店上個月已經關門了，我們應該把它的地址刪掉。<b>這會釋放一些空間</b>。</p>
+  </div>
+  <div class="message sent text-right">
+    <p class="meta font-bold text-xs text-blue-600"><b>David Lee (11:10 a.m.):</b> 太好了。我會把它刪除並增加字體大小。我將在下午 1:00 之前上傳更新後的草稿。</p>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 164 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q164. What problem does Ms. Adams point out?</div>
+                <table class="options-table">
+            <tr><td>(A) The brochure has a spelling mistake.</td><td class="correct-option">(B) The font size on the back page is too small. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) The price of the promotion is wrong.</td><td>(D) The graphics on the front page are blurry.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">封底字體太小。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位題。定位 Jane 的第一句簡訊。<br>
+                        <strong>2. 核心判定：</strong>Jane 提到 "The fonts on the back page look too small"（封底字體太小），對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 拼寫錯誤、(C) 價格有誤、(D) 圖片模糊，均不符簡訊。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 165 題 | 核心考點：句意分析 (釋放空間) (難易度：高)</div>
+                <div class="question-text">Q165. At 11:08 a.m., what does Ms. Adams mean when she writes, "That will free up some space"?</div>
+                <table class="options-table">
+            <tr><td>(A) They can relocate their office to a larger room.</td><td class="correct-option">(B) Deleting obsolete information allows for larger text sizes. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Vanguard properties has empty commercial listings.</td><td>(D) They should hire more support engineers.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">刪除過期資訊可以容納更大的字體大小。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>對話語意推斷題。<br>
+                        <strong>2. 核心判定：</strong>Jane 指出應把上月已關閉的舊店地址刪除（delete the old shop location），如此一來，版面上就會有剩餘空間以利字體放大，提高可讀性。對應 (B) Deleting obsolete information allows for larger text sizes。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 辦公室搬遷到大房間、(C) 尋找空置商業物業、(D) 雇用更多工程師，均偏離手冊排版主題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 166 題 | 核心考點：細節理解與判定 (難易度：中)</div>
+                <div class="question-text">Q166. What happened to the old shop location last month?</div>
+                <table class="options-table">
+            <tr><td>(A) It was temporarily renovated.</td><td class="correct-option">(B) It was closed permanently. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It had its lease extended.</td><td>(D) It relocated to downtown Seattle.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">它永久關閉了。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索題。定位 Jane 11:08 的簡訊。<br>
+                        <strong>2. 核心判定：</strong>Jane 提到 "since it closed last month anyway"，說明這家舊分店上個月關門了，即 (B) closed permanently。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 暫時裝修、(C) 延長租約、(D) 搬遷至西雅圖，均不合文意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 167 題 | 核心考點：時間點定位 (難易度：中)</div>
+                <div class="question-text">Q167. By what time does Mr. Lee promise to upload the updated draft?</div>
+                <table class="options-table">
+            <tr><td>(A) By 11:10 a.m.</td><td class="correct-option">(B) By 1:00 p.m. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) By 2:15 p.m.</td><td>(D) By 5:00 p.m.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">下午 1:00 之前。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間檢索題。定位最後一條訊息。<br>
+                        <strong>2. 核心判定：</strong>David Lee 提到 "upload the updated draft by 1:00 p.m."，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 發簡訊時間、(C) 另一篇的發簡訊時間、(D) 資料庫升級結束時間。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">promotional</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">促銷的，宣傳的</td></tr><tr><td class="vocab-word">shrink</td><td class="vocab-pos">v.</td><td class="vocab-meaning">收縮，縮小</td></tr><tr><td class="vocab-word">obsolete</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">廢棄的，過時的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 9 | Questions 168-171 refer to the following form. (168-171 題參照以下表單。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="form-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard Fitness Center - Membership Pause Request</h4>
+  <table class="w-full border-collapse border border-slate-300 text-sm mb-3">
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100" style="width:30%">Member Name</td>
+      <td class="border border-slate-300 p-2">Linda Kinkade</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">Membership Number</td>
+      <td class="border border-slate-300 p-2">VF-8910</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">Requested Pause Duration</td>
+      <td class="border border-slate-300 p-2">2 Months</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">Start Date</td>
+      <td class="border border-slate-300 p-2">November 1</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">Reason for Request</td>
+      <td class="border border-slate-300 p-2">Temporary international business trip</td>
+    </tr>
+  </table>
+  <p class="text-xs mb-2"><b>Note:</b> A non-refundable <b>$20 administrative fee</b> applies to all membership pause requests. Monthly billing will resume automatically after the pause duration ends.</p>
+  <div class="text-xs mt-4 pt-4 border-t border-slate-200">
+    <span><b>Linda Kinkade</b> (Signature)</span>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="form-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard 健身中心 - 會員暫停申請表</h4>
+  <table class="w-full border-collapse border border-slate-300 text-sm mb-3">
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100" style="width:30%">會員姓名</td>
+      <td class="border border-slate-300 p-2">Linda Kinkade</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">會員編號</td>
+      <td class="border border-slate-300 p-2">VF-8910</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">申請暫停時間</td>
+      <td class="border border-slate-300 p-2">2 個月</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">開始日期</td>
+      <td class="border border-slate-300 p-2">11 月 1 日</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2 font-bold bg-slate-100">申請原因</td>
+      <td class="border border-slate-300 p-2">臨時國際商務出差</td>
+    </tr>
+  </table>
+  <p class="text-xs mb-2"><b>備註：</b>所有會員暫停申請需支付不予退還的 <b>20 美元行政規費</b>。暫停時間結束後，月度扣款將自動恢復。</p>
+  <div class="text-xs mt-4 pt-4 border-t border-slate-200">
+    <span><b>Linda Kinkade</b>（簽名）</span>
+  </div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 168 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q168. What is the purpose of the form?</div>
+                <table class="options-table">
+            <tr><td>(A) To renew an expired membership</td><td class="correct-option">(B) To request a temporary pause in membership <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To register for a personal training course</td><td>(D) To apply for a career position at Vanguard</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">申請暫時中止會員身分。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主旨細節定位。<br>
+                        <strong>2. 核心判定：</strong>表單標題 "Membership Pause Request" 表明目的是暫停會員籍，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 續訂、(C) 報名教練課、(D) 申請工作，均不符標題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 169 題 | 核心考點：原因定位 (難易度：低)</div>
+                <div class="question-text">Q169. Why is Ms. Kinkade submitting the request?</div>
+                <table class="options-table">
+            <tr><td>(A) Because she has relocated to Chicago</td><td class="correct-option">(B) Due to a temporary international business trip <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Because she is dissatisfied with the gym</td><td>(D) Due to a physical injury</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為臨時國際商務出差。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>原因檢索題。定位表格原因欄。<br>
+                        <strong>2. 核心判定：</strong>表格最後一欄 "Reason for Request" 為 "Temporary international business trip"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 搬到芝加哥、(C) 不滿意健身房、(D) 身體受傷，均非表單上寫明的原因。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 170 題 | 核心考點：費用定位 (難易度：中)</div>
+                <div class="question-text">Q170. How much is the administrative fee for this request?</div>
+                <table class="options-table">
+            <tr><td>(A) $15</td><td class="correct-option">(B) $20 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) $25</td><td>(D) $30</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">20 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>費用細節檢索。定位備註。<br>
+                        <strong>2. 核心判定：</strong>備註指出 "A non-refundable $20 administrative fee applies"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(C)、(D) 是干擾金額。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 171 題 | 核心考點：時間點推論 (重新收費時間) (難易度：中)</div>
+                <div class="question-text">Q171. When will Ms. Kinkade's monthly billing resume?</div>
+                <table class="options-table">
+            <tr><td>(A) November 1</td><td>(B) December 1</td></tr>
+            <tr><td class="correct-option">(C) January 1 <span class="badge-correct">正確答案</span></td><td>(D) January 15</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">1 月 1 日。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨欄位時間點比對與計算。<br>
+                        <strong>2. 核心判定：</strong>表單顯示，暫停開始日期為 "November 1"（11月1日），暫停時間為 "2 Months"（2個月）。11月加2個月為12月和1月，意即 11 月、12 月暫停，月度扣款將在 2 個月結束後的 1 月 1 日自動恢復。對應 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 暫停開始日、(B) 暫停一個月後、(D) 干擾日期。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">pause</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">暫停，中止</td></tr><tr><td class="vocab-word">duration</td><td class="vocab-pos">n.</td><td class="vocab-meaning">期間，持續時間</td></tr><tr><td class="vocab-word">resume</td><td class="vocab-pos">v.</td><td class="vocab-meaning">恢復，重新開始</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 10 | Questions 172-175 refer to the following report. (172-175 題參照以下報告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="report-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">Annual Energy Efficiency Audit Report</h4>
+  <p class="mb-2">This report details the findings of our annual energy efficiency audit conducted in August across Vanguard's three manufacturing plants. Overall, our energy consumption has decreased by <b>12 percent</b> compared to last year, primarily due to the installation of modern solar arrays.</p>
+  <p class="mb-2">However, the report highlights one critical area for improvement: the insulation in the packaging warehouse at Plant 2. It was found that over 25 percent of heat loss occurs through the old doors of the loading dock. [1] In contrast, Plant 1 showed exceptional efficiency, with its new cooling system reducing power usage by 30 percent. [2]</p>
+  <p class="mb-2">To address the energy waste at Plant 2, we will install high-efficiency insulated doors early next year. [3] The project budget has already been approved by the board. [4]</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="report-box border p-4 bg-slate-50 rounded">
+  <h4 class="text-center font-bold text-lg mb-2">年度能源效率稽核報告</h4>
+  <p class="mb-2">本報告詳細說明了 8 月份在 Vanguard 三家製造廠進行的年度能源效率稽核結果。整體而言，與去年相比，我們的能源消耗減少了 <b>12%</b>，這主要歸功於安裝了現代化的太陽能電池陣列。</p>
+  <p class="mb-2">然而，報告強調了一個有待改進的關鍵領域：2 號廠包裝倉庫的隔熱性。研究發現，超過 25% 的熱量流失是通過裝卸貨平台的舊門發生的。[1] 相比之下，1 號廠表現出極佳的效率，其新冷卻系統使耗電量減少了 30%。[2]</p>
+  <p class="mb-2">為了解決 2 號廠的能源浪費問題，我們將在明年初安裝高效隔熱門。[3] 專案預算已獲得董事會批准。[4]</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 172 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q172. How much has Vanguard's overall energy consumption decreased compared to last year?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) 12 percent <span class="badge-correct">正確答案</span></td><td>(B) 20 percent</td></tr>
+            <tr><td>(C) 25 percent</td><td>(D) 30 percent</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">12%。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>數字檢索題。<br>
+                        <strong>2. 核心判定：</strong>第一段指出 "energy consumption has decreased by 12 percent"，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 股價漲幅、(C) 熱量流失比率、(D) 1號廠省電比率。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 173 題 | 核心考點：問題定位 (難易度：中)</div>
+                <div class="question-text">Q173. What issue was identified at Plant 2?</div>
+                <table class="options-table">
+            <tr><td>(A) A failure of the main generator</td><td class="correct-option">(B) Heat loss in the packaging warehouse <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A leak in the chemical storage room</td><td>(D) Frequent software glitches in the control system</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">包裝倉庫的熱量流失。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索與比對。定位第二段。<br>
+                        <strong>2. 核心判定：</strong>第二段提到 "insulation in the packaging warehouse at Plant 2... heat loss occurs through the old doors"，對應 (B) Heat loss in the packaging warehouse。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 發電機故障、(C) 化學品洩漏、(D) 軟體缺陷，均非廠區問題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 174 題 | 核心考點：解決方案細節理解 (難易度：中)</div>
+                <div class="question-text">Q174. What is the approved solution for the energy waste at Plant 2?</div>
+                <table class="options-table">
+            <tr><td>(A) Replacing the solar panel arrays</td><td class="correct-option">(B) Installing high-efficiency insulated doors <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Moving the warehouse to Seattle</td><td>(D) Hiring new property managers</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">安裝高效隔熱門。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>解決方案定位。定位第三段首句。<br>
+                        <strong>2. 核心判定：</strong>第三段指出 "install high-efficiency insulated doors early next year"，與選項 (B) 吻合。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 更換太陽能板、(C) 搬遷至西雅圖、(D) 聘請新經理。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 175 題 | 核心考點：插句位置判定 (難易度：最高)</div>
+                <div class="question-text">Q175. In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong?
+"This project will be scheduled during low-production periods to avoid operational disruptions."</div>
+                <table class="options-table">
+            <tr><td>(A) [1]</td><td>(B) [2]</td></tr>
+            <tr><td>(C) [3]</td><td class="correct-option">(D) [4] <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">[4] 的位置。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>插句位置判定。分析代名詞與邏輯指向。<br>
+                        <strong>2. 核心判定：</strong>待插入句子提到 "This project"（該專案）。前文 [4] 之前的句子提到 "The project budget has already been approved by the board"（專案預算已獲批准）。在此之後加入「此專案將被安排在低產期...」最為連貫合理，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>[1] 之前在講熱量流失問題、[2] 之前在講1號廠冷卻系統、[3] 之前在講安裝隔熱門的規劃（此時預算尚未交代，直接加細節稍顯突兀，且 [4] 才是完整總結專案批准與執行安排的最尾端）。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">efficiency</td><td class="vocab-pos">n.</td><td class="vocab-meaning">效率</td></tr><tr><td class="vocab-word">insulation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">隔熱，絕緣</td></tr><tr><td class="vocab-word">disruption</td><td class="vocab-pos">n.</td><td class="vocab-meaning">中斷，擾亂</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 11 | Questions 176-180 refer to the following e-mails. (176-180 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">First E-mail</p>
+  <p class="mb-1"><b>To:</b> Helen Shaw &lt;hshaw@vortexcorp.com&gt;</p>
+  <p class="mb-1"><b>From:</b> Diego Silva &lt;dsilva@midwestbank.com&gt;</p>
+  <p class="mb-3"><b>Date:</b> October 18</p>
+  <p class="mb-2">Dear Ms. Shaw,</p>
+  <p class="mb-2">I am writing on behalf of <b>Midwest Bank</b> regarding the IT security upgrade project. We received your initial technical specifications last week. Our security team has reviewed the proposed encryption protocols.</p>
+  <p class="mb-2">While the system layout is robust, we are concerned that the basic encryption package may not comply with the new federal financial regulations starting next January. We suggest upgrading to the <b>ProGuard Encryption Suite</b>, which features multi-factor authentication. This will ensure full compliance with the new guidelines.</p>
+  <p class="mb-2">Please let me know if we can proceed with this upgrade so we can adjust the contract pricing.</p>
+  <p class="mb-2">Best regards,</p>
+  <p>Diego Silva<br>IT Security Coordinator, Midwest Bank</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">Second E-mail</p>
+  <p class="mb-1"><b>To:</b> Diego Silva &lt;dsilva@midwestbank.com&gt;</p>
+  <p class="mb-1"><b>From:</b> Helen Shaw &lt;hshaw@vortexcorp.com&gt;</p>
+  <p class="mb-3"><b>Date:</b> October 19</p>
+  <p class="mb-2">Dear Mr. Silva,</p>
+  <p class="mb-2">Thank you for your prompt feedback on our technical specifications. We agree that upgrading to the <b>ProGuard Encryption Suite</b> is necessary to meet the upcoming federal financial regulations.</p>
+  <p class="mb-2">We have revised the project contract. Upgrading to the ProGuard suite will increase the equipment cost by <b>$8,000</b>. This brings the total contract value to <b>$48,000</b>. I have attached the revised contract to this email. Please sign it and return it to us before the end of the week so we can begin installation next month.</p>
+  <p class="mb-2">Best regards,</p>
+  <p>Helen Shaw<br>CTO, Vortex Corporation</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第一封電子郵件</p>
+  <p class="mb-1"><b>收件者：</b>Helen Shaw &lt;hshaw@vortexcorp.com&gt;</p>
+  <p class="mb-1"><b>寄件者：</b>Diego Silva &lt;dsilva@midwestbank.com&gt;</p>
+  <p class="mb-3"><b>日期：</b>10 月 18 日</p>
+  <p class="mb-2">親愛的 Shaw 小姐：</p>
+  <p class="mb-2">我代表<b>中西部銀行（Midwest Bank）</b>就 IT 安全升級專案給您致信。我們上週收到了您初步的技術規格。我們的安全團隊已經審查了擬議的加密協議。</p>
+  <p class="mb-2">雖然系統配置很強大，但我們擔心基礎加密套件可能不符合明年一月開始實施的聯邦金融新法規。我們建議升級至具有多重身分驗證功能的 <b>ProGuard 加密套件</b>。這將確保完全符合新指南的要求。</p>
+  <p class="mb-2">如果您希望繼續進行這項升級，請告訴我，以便我們調整合約定價。</p>
+  <p class="mb-2">祝好，</p>
+  <p>Diego Silva<br>IT安全協調員，中西部銀行</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">第二封電子郵件</p>
+  <p class="mb-1"><b>收件者：</b>Diego Silva &lt;dsilva@midwestbank.com&gt;</p>
+  <p class="mb-1"><b>寄件者：</b>Helen Shaw &lt;hshaw@vortexcorp.com&gt;</p>
+  <p class="mb-3"><b>日期：</b>10 月 19 日</p>
+  <p class="mb-2">親愛的 Silva 先生：</p>
+  <p class="mb-2">感謝您對我們的技術規格提供及時的回饋。我們也同意，為了符合即將實施的聯邦金融法規，升級至 ProGuard 加密套件是必要的。</p>
+  <p class="mb-2">我們已經修改了專案合約。升級至 ProGuard 套件將使設備成本增加 <b>8,000 美元</b>。這使總合約金額達到 <b>48,000 美元</b>。我已隨信附上修改後的合約。請在週末之前簽署並退回給我們，以便我們能在下個月開始安裝。</p>
+  <p class="mb-2">祝好，</p>
+  <p>Helen Shaw<br>技術長，Vortex Corporation</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 176 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q176. Why did Mr. Silva send the first e-mail?</div>
+                <table class="options-table">
+            <tr><td>(A) To apply for an IT security job at Vortex</td><td class="correct-option">(B) To suggest an upgrade to the security package <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To report a network failure at Midwest Bank</td><td>(D) To negotiate the contract signed last year</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">建議升級安全套件。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主旨理解題。定位第一封信。<br>
+                        <strong>2. 核心判定：</strong>Silva 建議升級到 ProGuard 套件以符合法規，這屬於建議升級安全套件，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 應徵工作、(C) 通報網路故障、(D) 協商去年合約，均不合信中語意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 177 題 | 核心考點：原因定位 (難易度：中)</div>
+                <div class="question-text">Q177. What is the main concern regarding the basic encryption package?</div>
+                <table class="options-table">
+            <tr><td>(A) It does not support multiple user accounts.</td><td class="correct-option">(B) It might fail to meet new federal financial regulations. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It is too expensive for Midwest Bank.</td><td>(D) It is incompatible with the server database.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">它可能無法滿足新的聯邦金融法規。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>原因檢索題。定位第一封信第二段。<br>
+                        <strong>2. 核心判定：</strong>第一封信指出 "basic encryption package may not comply with the new federal financial regulations"，對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 不支援多帳戶、(C) 價格太貴、(D) 與伺服器資料庫不相容，文中均無此陳述。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 178 題 | 核心考點：跨篇章交叉推論與計算 (原始合約價) (難易度：高)</div>
+                <div class="question-text">Q178. What was the total value of the original contract before the upgrade?</div>
+                <table class="options-table">
+            <tr><td>(A) $8,000</td><td class="correct-option">(B) $40,000 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) $48,000</td><td>(D) $56,000</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">40,000 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章數據交叉計算題。定位第二封信。<br>
+                        <strong>2. 核心判定：</strong>技術長 Helen Shaw 提到，升級 ProGuard 將增加設備成本 $8,000（increase the cost by $8,000），這使得總金額達到 $48,000（brings the total to $48,000）。由此可算出：原始合約總金額 = 新總金額 $48,000 - 升級費 $8,000 = $40,000，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 增加的費用、(C) 升級後的總合約金額、(D) 錯誤的加法計算。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 179 題 | 核心考點：時間比對與推論 (難易度：中)</div>
+                <div class="question-text">Q179. When is the installation of the security system scheduled to begin?</div>
+                <table class="options-table">
+            <tr><td>(A) This week</td><td class="correct-option">(B) Next month <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Next January</td><td>(D) By the end of the year</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">下個月。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間定位題。定位第二封信末段。<br>
+                        <strong>2. 核心判定：</strong>第二封信末句提到 "begin installation next month"，對意選項 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 本週是簽約截止日、(C) 一月是法規生效日、(D) 年底是完工期限（參考前一篇 Article 中的預估）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 180 題 | 核心考點：跨篇章人物職銜比對 (難易度：高)</div>
+                <div class="question-text">Q180. Who is Helen Shaw?</div>
+                <table class="options-table">
+            <tr><td>(A) Chief Financial Officer of Midwest Bank</td><td class="correct-option">(B) Chief Technology Officer of Vortex Corporation <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) IT Security Coordinator of Midwest Bank</td><td>(D) Facilities Manager of Apex Corporation</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Vortex Corporation 的技術長。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章職銜核對題。<br>
+                        <strong>2. 核心判定：</strong>第二封信的結尾署名為 "Helen Shaw, CTO, Vortex Corporation"，CTO 即 Chief Technology Officer，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 中西部銀行財務長（信中無此人，第一篇的 Helen 也是 Vortex 公司的人）、(C) 這是 Diego Silva 的職稱、(D) 設施經理是 notice 署名者。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">robust</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">健全的，結實的，強大耐用的</td></tr><tr><td class="vocab-word">federal</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">聯邦的</td></tr><tr><td class="vocab-word">prompt</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">及時的，迅速的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 12 | Questions 181-185 refer to the following advertisement and order form. (181-185 題參照以下廣告和訂購單。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">First Passage: Advertisement</p>
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard Fitness Center - Winter Promotion</h4>
+  <p class="mb-2">Get in shape for the winter season with our special membership options! Register online during the month of October to secure these rates:</p>
+  <table class="w-full border-collapse border border-slate-300 text-sm mb-3">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">Membership Type</td>
+      <td class="border border-slate-300 p-2">Regular Monthly Fee</td>
+      <td class="border border-slate-300 p-2">Promo Monthly Fee</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Basic Gym Access</td>
+      <td class="border border-slate-300 p-2">$50</td>
+      <td class="border border-slate-300 p-2"><b>$39</b></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Full Fitness Package</td>
+      <td class="border border-slate-300 p-2">$80</td>
+      <td class="border border-slate-300 p-2"><b>$69</b></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Premium VIP Access</td>
+      <td class="border border-slate-300 p-2">$120</td>
+      <td class="border border-slate-300 p-2"><b>$99</b></td>
+    </tr>
+  </table>
+  <p class="text-xs"><b>No sign-up fee</b> for annual contracts. Monthly contracts will incur a one-time sign-up processing fee of <b>$25</b>.</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">Second Passage: Order Form</p>
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard Fitness Center - Registration Form</h4>
+  <p class="text-sm mb-1"><b>Applicant:</b> Linda Kinkade</p>
+  <p class="text-sm mb-1"><b>Contact:</b> lkinkade@webmail.com</p>
+  <p class="text-sm mb-3"><b>Registration Date:</b> October 15</p>
+  <table class="w-full border-collapse border border-slate-300 text-sm mb-3">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">Selected Option</td>
+      <td class="border border-slate-300 p-2">Contract Type</td>
+      <td class="border border-slate-300 p-2">Monthly Fee Charged</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Full Fitness Package</td>
+      <td class="border border-slate-300 p-2">Annual Contract</td>
+      <td class="border border-slate-300 p-2">$69</td>
+    </tr>
+  </table>
+  <p class="text-xs font-bold">Total Bill: $69 (Sign-up fee: $0)</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第一篇：廣告</p>
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard 健身中心 - 冬季推廣</h4>
+  <p class="mb-2">用我們的特別會員方案，在冬季來臨前保持好身材！在十月份在線註冊以鎖定以下費率：</p>
+  <table class="w-full border-collapse border border-slate-300 text-sm mb-3">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">會員類型</td>
+      <td class="border border-slate-300 p-2">常規月費</td>
+      <td class="border border-slate-300 p-2">推廣月費</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">基礎健身房會員（Basic）</td>
+      <td class="border border-slate-300 p-2">$50</td>
+      <td class="border border-slate-300 p-2"><b>$39</b></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">完整健身方案（Full）</td>
+      <td class="border border-slate-300 p-2">$80</td>
+      <td class="border border-slate-300 p-2"><b>$69</b></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">尊榮 VIP 會員（Premium）</td>
+      <td class="border border-slate-300 p-2">$120</td>
+      <td class="border border-slate-300 p-2"><b>$99</b></td>
+    </tr>
+  </table>
+  <p class="text-xs">年度合約享<b>免入會費</b>。月度合約將收取一次性的 <b>25 美元</b>入會手續規費。</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">第二篇：註冊單</p>
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard 健身中心 - 註冊表單</h4>
+  <p class="text-sm mb-1"><b>申請人：</b>Linda Kinkade</p>
+  <p class="text-sm mb-1"><b>聯絡方式：</b>lkinkade@webmail.com</p>
+  <p class="text-sm mb-3"><b>註冊日期：</b>10 月 15 日</p>
+  <table class="w-full border-collapse border border-slate-300 text-sm mb-3">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">所選方案</td>
+      <td class="border border-slate-300 p-2">合約類型</td>
+      <td class="border border-slate-300 p-2">實收月費</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Full Fitness Package</td>
+      <td class="border border-slate-300 p-2">年度合約（Annual Contract）</td>
+      <td class="border border-slate-300 p-2">$69</td>
+    </tr>
+  </table>
+  <p class="text-xs font-bold">總費用：69 美元（入會費：0 美元）</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 181 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q181. In which month can users register online to secure the promo rates?</div>
+                <table class="options-table">
+            <tr><td>(A) September</td><td class="correct-option">(B) October <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) November</td><td>(D) December</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">十月。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間定位題。定位廣告第一段。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "during the month of October to secure these rates"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 9月、(C) 11月是新卡系統上線日、(D) 12月是註冊截止日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 182 題 | 核心考點：細節比對 (價格) (難易度：低)</div>
+                <div class="question-text">Q182. What is the regular monthly fee for the Full Fitness Package?</div>
+                <table class="options-table">
+            <tr><td>(A) $39</td><td>(B) $50</td></tr>
+            <tr><td>(C) $69</td><td class="correct-option">(D) $80 <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">80 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>表格數據定位題。<br>
+                        <strong>2. 核心判定：</strong>表格第二行 "Full Fitness Package" 的 Regular Monthly Fee（常規月費）欄位顯示為 $80，故對應選項 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 基礎特價、(B) 基礎常規價、(C) 完整方案特價。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 183 題 | 核心考點：細節檢索 (難易度：中)</div>
+                <div class="question-text">Q183. Who is the applicant on the registration form?</div>
+                <table class="options-table">
+            <tr><td>(A) Sarah Jenkins</td><td class="correct-option">(B) Linda Kinkade <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Helen Shaw</td><td>(D) Jane Adams</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Linda Kinkade。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>表單資訊檢索題。<br>
+                        <strong>2. 核心判定：</strong>註冊表上 "Applicant" 欄位為 "Linda Kinkade"，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 演講嘉賓、(C) 財務長/技術長、(D) 審查手冊的人。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 184 題 | 核心考點：跨篇章交叉比對與邏輯套用 (免收費條件) (難易度：高)</div>
+                <div class="question-text">Q184. Why was Linda Kinkade charged $0 for the sign-up fee?</div>
+                <table class="options-table">
+            <tr><td>(A) She submitted her registration offline.</td><td class="correct-option">(B) She signed up for an annual contract. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) She is an employee of Vanguard.</td><td>(D) She paid the fee before November 15.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為她簽署了年度合約。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章資訊對應與邏輯說明題。<br>
+                        <strong>2. 核心判定：</strong>根據註冊表，Linda 選擇了 "Annual Contract"（年度合約）。再對照廣告中的費用規則：「年度合約享免入會費（No sign-up fee for annual contracts）」，因此她被收取的入會手續費為 $0，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 線下註冊（應是線上）、(C) 為公司員工（文中無提及此項福利）、(D) 這是舊卡餘額免收費截止期。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 185 題 | 核心考點：跨篇章數據比對 (難易度：高)</div>
+                <div class="question-text">Q185. How much will Ms. Kinkade be billed monthly for her fitness package?</div>
+                <table class="options-table">
+            <tr><td>(A) $39</td><td class="correct-option">(B) $69 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) $80</td><td>(D) $94</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">69 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇表單數據讀取。<br>
+                        <strong>2. 核心判定：</strong>註冊表顯示，實收月費為 "$69"，且註冊日期為 10 月 15 日，落於十月份推廣特價區間。故對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 基礎特價、(C) 完整常規價、(D) 干擾數字。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">sign-up fee</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">註冊費，入會手續費</td></tr><tr><td class="vocab-word">VIP access</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">貴賓特權，高級存取限</td></tr><tr><td class="vocab-word">annual</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">年度的，一年的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 13 | Questions 186-190 refer to the following memo, email, and schedule. (186-190 題參照以下備忘錄、電子郵件和日程表。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="memo-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">First Passage: Memo</p>
+  <p class="mb-1"><b>To:</b> All Staff</p>
+  <p class="mb-1"><b>From:</b> HR Department</p>
+  <p class="mb-2"><b>Subject:</b> Annual Health Audits</p>
+  <p class="mb-2">To promote workplace wellness, Vanguard will host mandatory <b>two-hour health checkups</b> on <b>Friday, November 13</b>. Please consult the online schedule to find your assigned training/checkup slot and group.</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">Second Passage: E-mail</p>
+  <p class="mb-1"><b>To:</b> Health Audits Team &lt;wellness@vanguard.com&gt;</p>
+  <p class="mb-1"><b>From:</b> Linda Kinkade &lt;lkinkade@webmail.com&gt;</p>
+  <p class="mb-3"><b>Date:</b> November 10</p>
+  <p class="mb-2">Dear Wellness Team,</p>
+  <p class="mb-2">I noticed on the schedule that I am assigned to the <b>afternoon session (2:00 p.m. - 4:00 p.m.)</b> in Group B. Unfortunately, I have a scheduled international business trip starting that Friday evening, and I must leave for the airport by 3:00 p.m.</p>
+  <p class="mb-2">Would it be possible for me to switch to the morning session (9:00 a.m. - 11:00 a.m.)? My colleague, Sarah Jenkins, who is in Group A, has agreed to swap slots with me if you approve the change.</p>
+  <p class="mb-2">Thank you for your help.</p>
+  <p>Linda Kinkade<br>Administrative Department</p>
+</div>
+<div class="schedule-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">Third Passage: Schedule</p>
+  <h4 class="text-center font-bold text-sm mb-2">Health Checkup Groups - November 13</h4>
+  <table class="w-full border-collapse border border-slate-300 text-xs">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">Time</td>
+      <td class="border border-slate-300 p-2">Group</td>
+      <td class="border border-slate-300 p-2">Assigned Personnel</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">9:00 a.m. - 11:00 a.m.</td>
+      <td class="border border-slate-300 p-2">Group A (Sales & Marketing)</td>
+      <td class="border border-slate-300 p-2">Sarah Jenkins, Tom Green, others</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">2:00 p.m. - 4:00 p.m.</td>
+      <td class="border border-slate-300 p-2">Group B (Finance & Admin)</td>
+      <td class="border border-slate-300 p-2">Linda Kinkade, Mark Davis, others</td>
+    </tr>
+  </table>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="memo-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第一篇：備忘錄</p>
+  <p class="mb-1"><b>收件者：</b>全體員工</p>
+  <p class="mb-1"><b>寄件者：</b>人資部</p>
+  <p class="mb-2"><b>主旨：</b>年度健康稽核</p>
+  <p class="mb-2">為了促進職場健康，Vanguard 將於 <b>11 月 13 日週五</b> 舉辦強制性的 <b>兩小時健康檢查</b>。請參閱內部網絡公佈的日程表，了解您被分配的培訓/體檢時段和組別。</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第二篇：電子郵件</p>
+  <p class="mb-1"><b>收件者：</b>健康稽核小組 &lt;wellness@vanguard.com&gt;</p>
+  <p class="mb-1"><b>寄件者：</b>Linda Kinkade &lt;lkinkade@webmail.com&gt;</p>
+  <p class="mb-3"><b>日期：</b>11 月 10 日</p>
+  <p class="mb-2">親愛的健康促進團隊：</p>
+  <p class="mb-2">我注意到在日程表上，我被分配到了 B 組的<b>下午時段（下午 2:00 - 4:00）</b>。不幸的是，我有一場預定的國際商務出差在週五晚上出發，我必須在下午 3:00 前前往機場。</p>
+  <p class="mb-2">我是否有可能調整到上午時段（上午 9:00 - 11:00）？我的同事 Sarah Jenkins（在 A 組）已同意在您批准更改的情況下與我交換時段。</p>
+  <p class="mb-2">感謝您的協助。</p>
+  <p>Linda Kinkade<br>行政部</p>
+</div>
+<div class="schedule-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">第三篇：日程表</p>
+  <h4 class="text-center font-bold text-sm mb-2">健康體檢分組表 - 11 月 13 日</h4>
+  <table class="w-full border-collapse border border-slate-300 text-xs">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">時間</td>
+      <td class="border border-slate-300 p-2">組別</td>
+      <td class="border border-slate-300 p-2">分配人員</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">上午 9:00 - 11:00</td>
+      <td class="border border-slate-300 p-2">Group A（銷售與行銷）</td>
+      <td class="border border-slate-300 p-2">Sarah Jenkins, Tom Green, 其他人員</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">下午 2:00 - 4:00</td>
+      <td class="border border-slate-300 p-2">Group B（財務與行政）</td>
+      <td class="border border-slate-300 p-2">Linda Kinkade, Mark Davis, 其他人員</td>
+    </tr>
+  </table>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 186 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q186. What event is Vanguard hosting on November 13?</div>
+                <table class="options-table">
+            <tr><td>(A) An annual office relocation party</td><td class="correct-option">(B) Mandatory health checkups <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A budget review meeting</td><td>(D) A technical safety training session</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">強制性健康檢查。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>備忘錄細節定位。<br>
+                        <strong>2. 核心判定：</strong>備忘錄指出 "host mandatory two-hour health checkups on Friday, November 13"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 搬遷派對、(C) 預算審查會議、(D) 技術安全培訓，均不合備忘錄。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 187 題 | 核心考點：原因檢索 (難易度：中)</div>
+                <div class="question-text">Q187. Why is Ms. Kinkade unable to attend the afternoon checkup?</div>
+                <table class="options-table">
+            <tr><td>(A) She is on vacation that day.</td><td class="correct-option">(B) She must leave for a business trip. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) She has to attend a budget review.</td><td>(D) She is preparing a marketing report.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">她必須出發去出差。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>電子郵件原因定位。<br>
+                        <strong>2. 核心判定：</strong>Linda 在電子郵件中說明 "I have a scheduled international business trip starting that Friday evening, and I must leave for the airport by 3:00 p.m."，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 度假、(C) 預算審查、(D) 撰寫行銷報告。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 188 題 | 核心考點：跨篇章交叉比對與職系推論 (難易度：高)</div>
+                <div class="question-text">Q188. Which department does Sarah Jenkins most likely work in?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Sales <span class="badge-correct">正確答案</span></td><td>(B) Finance</td></tr>
+            <tr><td>(C) Information Technology</td><td>(D) Facilities Management</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">銷售部。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章關係核對與推論。<br>
+                        <strong>2. 核心判定：</strong>根據日程表，Sarah Jenkins 被分配在 Group A。而 Group A 的成員組成為 "Sales & Marketing（銷售與行銷）" 門。因此，Sarah Jenkins 最可能隸屬於銷售部或行銷部，選項中吻合的是 (A) Sales。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 財務部在 Group B、(C) IT 部、(D) 設施管理部。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 189 題 | 核心考點：時間點定位 (難易度：中)</div>
+                <div class="question-text">Q189. What time is the morning health checkup session scheduled?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) 9:00 a.m. - 11:00 a.m. <span class="badge-correct">正確答案</span></td><td>(B) 10:00 a.m. - 12:00 p.m.</td></tr>
+            <tr><td>(C) 2:00 p.m. - 4:00 p.m.</td><td>(D) 3:00 p.m. - 5:00 p.m.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">上午 9:00 - 11:00。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>日程表時間定位。<br>
+                        <strong>2. 核心判定：</strong>日程表顯示 Group A 的時間段為 "9:00 a.m. - 11:00 a.m."，故對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B)、(C) 下午時間、(D) 均不對。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 190 題 | 核心考點：跨篇章邏輯關係推論 (難易度：高)</div>
+                <div class="question-text">Q190. If the wellness team approves the request, who will attend the afternoon checkup session?</div>
+                <table class="options-table">
+            <tr><td>(A) Linda Kinkade</td><td class="correct-option">(B) Sarah Jenkins <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Diego Silva</td><td>(D) Mark Davis</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Sarah Jenkins。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章名額調換推論。<br>
+                        <strong>2. 核心判定：</strong>Linda 寫信要求將自己（原在下午）與上午組的 Sarah Jenkins 進行「時段交換（swap slots）」。如果獲得批准，則 Sarah Jenkins 將會被調換至下午時段，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) Linda 將去上午、(C) 西班牙IT安全人員、(D) Davis 原本就在下午組。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">wellness</td><td class="vocab-pos">n.</td><td class="vocab-meaning">健康，保健</td></tr><tr><td class="vocab-word">checkup</td><td class="vocab-pos">n.</td><td class="vocab-meaning">健康檢查，體檢</td></tr><tr><td class="vocab-word">swap</td><td class="vocab-pos">v.</td><td class="vocab-meaning">交換</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 14 | Questions 191-195 refer to the following invoice, email, and claim form. (191-195 題參照以下發票、電子郵件和索賠表單。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="invoice-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">First Passage: Invoice</p>
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard Office Furniture - Invoice</h4>
+  <p class="text-xs mb-1"><b>Invoice No:</b> VO-9045</p>
+  <p class="text-xs mb-3"><b>Date:</b> October 18</p>
+  <table class="w-full border-collapse border border-slate-300 text-xs mb-3">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">Item</td>
+      <td class="border border-slate-300 p-2">Quantity</td>
+      <td class="border border-slate-300 p-2">Price</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Steel Cabinet S</td>
+      <td class="border border-slate-300 p-2">1</td>
+      <td class="border border-slate-300 p-2">$120</td>
+    </tr>
+  </table>
+  <p class="text-xs font-bold">Total Billed: $120 (Paid)</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">Second Passage: E-mail</p>
+  <p class="mb-1"><b>To:</b> Customer Support &lt;support@vanguardfurniture.com&gt;</p>
+  <p class="mb-1"><b>From:</b> Linda Kinkade &lt;lkinkade@alphatech.com&gt;</p>
+  <p class="mb-3"><b>Date:</b> October 22</p>
+  <p class="mb-2">Dear Customer Support,</p>
+  <p class="mb-2">We received the <b>Steel Cabinet S</b> (Invoice VO-9045) yesterday. Unfortunately, upon opening the package, we noticed a major dent on the back panel of the cabinet.</p>
+  <p class="mb-2">I have submitted the return claim online and attached photos of the damage. Since we urgently need the storage cabinet, we would appreciate a replacement instead of a refund. Please process this as soon as possible.</p>
+  <p class="mb-2">Best regards,</p>
+  <p>Linda Kinkade</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">Third Passage: Claim Form</p>
+  <h4 class="text-center font-bold text-sm mb-2">Damage Claim Submission</h4>
+  <p class="text-xs mb-1"><b>Customer:</b> Alpha Tech Solutions</p>
+  <p class="text-xs mb-1"><b>Reference Invoice:</b> VO-9045</p>
+  <p class="text-xs mb-1"><b>Reported Issue:</b> Dent on the back panel</p>
+  <p class="text-xs mb-1"><b>Requested Resolution:</b> Replacement item</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="invoice-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第一篇：發票</p>
+  <h4 class="text-center font-bold text-lg mb-2">Vanguard 辦公家具 - 發票</h4>
+  <p class="text-xs mb-1"><b>發票號碼：</b>VO-9045</p>
+  <p class="text-xs mb-3"><b>日期：</b>10 月 18 日</p>
+  <table class="w-full border-collapse border border-slate-300 text-xs mb-3">
+    <tr class="bg-slate-100 font-bold">
+      <td class="border border-slate-300 p-2">項目名稱</td>
+      <td class="border border-slate-300 p-2">數量</td>
+      <td class="border border-slate-300 p-2">價格</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 p-2">Steel Cabinet S</td>
+      <td class="border border-slate-300 p-2">1</td>
+      <td class="border border-slate-300 p-2">$120</td>
+    </tr>
+  </table>
+  <p class="text-xs font-bold">總計金額：120 美元（已付）</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第二篇：電子郵件</p>
+  <p class="mb-1"><b>收件者：</b>客戶支援 &lt;support@vanguardfurniture.com&gt;</p>
+  <p class="mb-1"><b>寄件者：</b>Linda Kinkade &lt;lkinkade@alphatech.com&gt;</p>
+  <p class="mb-3"><b>日期：</b>10 月 22 日</p>
+  <p class="mb-2">親愛的客戶支援團隊：</p>
+  <p class="mb-2">我們昨天收到了 <b>Steel Cabinet S</b>（發票號碼 VO-9045）。不幸的是，在打開包裝後，我們發現鋼製櫃的背板上有嚴重的凹陷。</p>
+  <p class="mb-2">我已經在線上提交了退貨索賠，並附上了損壞部位的照片。由於我們急需這個儲物櫃，如果能更換新櫃子而非退款，我們將不勝感激。請儘快辦理此項業務。</p>
+  <p class="mb-2">祝好，</p>
+  <p>Linda Kinkade</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">第三篇：索賠表單</p>
+  <h4 class="text-center font-bold text-sm mb-2">損壞索賠提交</h4>
+  <p class="text-xs mb-1"><b>客戶名稱：</b>Alpha Tech Solutions</p>
+  <p class="text-xs mb-1"><b>參考發票號：</b>VO-9045</p>
+  <p class="text-xs mb-1"><b>回報問題：</b>背板凹陷</p>
+  <p class="text-xs mb-1"><b>要求解決方案：</b>更換品</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 191 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q191. What item was purchased on Invoice VO-9045?</div>
+                <table class="options-table">
+            <tr><td>(A) ErgoChair 300</td><td>(B) Executive Desk VX</td></tr>
+            <tr><td class="correct-option">(C) Steel Cabinet S <span class="badge-correct">正確答案</span></td><td>(D) Vanguard CRM 5.0</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Steel Cabinet S。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>發票細節比對。<br>
+                        <strong>2. 核心判定：</strong>發票項目列出 "Steel Cabinet S"，對應 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 工學椅、(B) 主管桌、(D) 軟體，均非發票品項。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 192 題 | 核心考點：日期推算 (送貨日期) (難易度：中)</div>
+                <div class="question-text">Q192. On what date was the cabinet delivered?</div>
+                <table class="options-table">
+            <tr><td>(A) October 15</td><td>(B) October 18</td></tr>
+            <tr><td class="correct-option">(C) October 21 <span class="badge-correct">正確答案</span></td><td>(D) October 22</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">10 月 21 日。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章日期推算。定位信件寄出日。<br>
+                        <strong>2. 核心判定：</strong>信件發送日期為 "October 22"（10月22日）。信中寫道 "We received the cabinet yesterday"（昨天收到）。22日的前一天為 21日，因此送達日期為 10 月 21 日，對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 註冊日、(B) 發票日、(D) 寫信日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 193 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q193. What issue was reported regarding the delivered item?</div>
+                <table class="options-table">
+            <tr><td>(A) The color was different from the ordered item.</td><td class="correct-option">(B) There was a major dent on the back panel. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) One of the drawer locks was broken.</td><td>(D) The delivery invoice was missing.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">背板上有嚴重的凹陷。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位題。定位信中第一段末句。<br>
+                        <strong>2. 核心判定：</strong>文中指出 "noticed a major dent on the back panel of the cabinet"，與選項 (B) 吻合。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 顏色不符、(C) 抽屜鎖壞了、(D) 發票遺失，均非回報問題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 194 題 | 核心考點：表單細節檢索 (難易度：中)</div>
+                <div class="question-text">Q194. According to the claim form, what resolution is requested?</div>
+                <table class="options-table">
+            <tr><td>(A) A cash refund</td><td class="correct-option">(B) A replacement item <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A repair service visit</td><td>(D) A discount store coupon</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">更換品（更換新櫃子）。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>索賠表單檢索。<br>
+                        <strong>2. 核心判定：</strong>表單最後一行 "Requested Resolution: Replacement item"，對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 退款（信中雖提過 refund，但最後選定 replacement）、(C) 維修服務、(D) 折價券。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 195 題 | 核心考點：跨篇章交叉比對 (難易度：高)</div>
+                <div class="question-text">Q195. What did Ms. Kinkade submit along with the claim form?</div>
+                <table class="options-table">
+            <tr><td>(A) The purchase invoice receipt</td><td class="correct-option">(B) Photographs of the damage <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A signed cargo receipt document</td><td>(D) A printed copy of the contract</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">損壞照片。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章細節聯結。定位信件中段。<br>
+                        <strong>2. 核心判定：</strong>信中提到 "attached photos of the damage"，表示附有損壞照片，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 發票收據、(C) 貨物簽收單、(D) 合約影本。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">dent</td><td class="vocab-pos">n.</td><td class="vocab-meaning">凹痕，凹陷</td></tr><tr><td class="vocab-word">claim form</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">索賠表單</td></tr><tr><td class="vocab-word">pending</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">懸而未決的，待處理的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 15 | Questions 196-200 refer to the following webpage, email, and survey. (196-200 題參照以下網頁、電子郵件和調查表。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs text-slate-400 mb-2">First Passage: Webpage</p>
+  <p class="text-xs mb-1"><b>URL:</b> www.vanguardproperties.com/careers</p>
+  <h4 class="font-bold text-lg mb-2">Join Our Team at Vanguard Properties</h4>
+  <p class="mb-2">Vanguard Properties is seeking a qualified <b>Assistant Property Manager</b> for our Seattle location. The successful candidate will coordinate tenant communications and manage local lease contracts.</p>
+  <p class="mb-2">Requirements include a degree in real estate administration and at least <b>three years</b> of property management experience in a commercial environment. Submit resumes to <b>hr@vanguardproperties.com</b>.</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">Second Passage: E-mail</p>
+  <p class="mb-1"><b>To:</b> HR Department &lt;hr@vanguardproperties.com&gt;</p>
+  <p class="mb-1"><b>From:</b> Linda Kinkade &lt;lkinkade@webmail.com&gt;</p>
+  <p class="mb-3"><b>Date:</b> October 20</p>
+  <p class="mb-2">Dear Hiring Committee,</p>
+  <p class="mb-2">I am writing to apply for the <b>Assistant Property Manager</b> position. I have a Bachelor's degree in Real Estate Administration and have spent the last <b>four years</b> as a supervisor at the Carlton Hotel in Chicago.</p>
+  <p class="mb-2">I have attached my resume and reference letters. I would be pleased to participate in an interview at your convenience.</p>
+  <p class="mb-2">Sincerely,</p>
+  <p>Linda Kinkade</p>
+</div>
+<div class="survey-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">Third Passage: Survey</p>
+  <h4 class="text-center font-bold text-sm mb-2">Applicant Interview Survey</h4>
+  <p class="text-xs mb-1"><b>Applicant:</b> Linda Kinkade</p>
+  <p class="text-xs mb-1"><b>Position Applied:</b> Assistant Property Manager</p>
+  <p class="text-xs mb-3"><b>Interview Date:</b> November 5</p>
+  <p class="text-xs mb-1"><b>Interviewer Rating:</b> Excellent (Highly qualified)</p>
+  <p class="text-xs"><b>Comments:</b> Strong background in client relations. Relocation package discussed; applicant confirmed readiness to move to Seattle by December 1.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第一篇：網頁</p>
+  <p class="text-xs mb-1"><b>網址：</b> www.vanguardproperties.com/careers</p>
+  <h4 class="font-bold text-lg mb-2">加入 Vanguard 物業團隊</h4>
+  <p class="mb-2">Vanguard 物業公司正在為我們的西雅圖分公司尋求一位合格的<b>副物業經理</b>。成功錄取的候選人將負責協調租戶溝通並管理當地租賃合約。</p>
+  <p class="mb-2">職缺要求包括房地產行政學位，以及至少 <b>三年</b> 商業環境下的物業管理經驗。請將簡歷發送至 <b>hr@vanguardproperties.com</b>。</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4">
+  <p class="text-xs font-bold text-slate-400 mb-2">第二篇：電子郵件</p>
+  <p class="mb-1"><b>收件者：</b>人資部 &lt;hr@vanguardproperties.com&gt;</p>
+  <p class="mb-1"><b>寄件者：</b>Linda Kinkade &lt;lkinkade@webmail.com&gt;</p>
+  <p class="mb-3"><b>日期：</b>10 月 20 日</p>
+  <p class="mb-2">親愛的招聘委員會：</p>
+  <p class="mb-2">我寫這封信是為了申請<b>副物業經理</b>職位。我擁有房地產行政學士學位，過去<b>四年</b>在芝加哥的卡爾頓飯店（Carlton Hotel）擔任主管。</p>
+  <p class="mb-2">我已隨信附上我的簡歷和推薦信。我很樂意在您方便的時間參加面試。</p>
+  <p class="mb-2">誠摯的，</p>
+  <p>Linda Kinkade</p>
+</div>
+<div class="survey-box border p-4 bg-slate-50 rounded">
+  <p class="text-xs font-bold text-slate-400 mb-2">第三篇：調查表</p>
+  <h4 class="text-center font-bold text-sm mb-2">求職者面試調查表</h4>
+  <p class="text-xs mb-1"><b>求職者：</b>Linda Kinkade</p>
+  <p class="text-xs mb-1"><b>申請職位：</b>副物業經理</p>
+  <p class="text-xs mb-3"><b>面試日期：</b>11 月 5 日</p>
+  <p class="text-xs mb-1"><b>面試官評級：</b>優秀（高度符合條件）</p>
+  <p class="text-xs"><b>備註：</b>在客戶關係方面有深厚的背景。討論了搬遷補助方案；求職者確認已準備好在 12 月 1 日前搬到西雅圖。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 196 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q196. What position is Vanguard Properties recruiting for?</div>
+                <table class="options-table">
+            <tr><td>(A) Hiring Coordinator</td><td class="correct-option">(B) Assistant Property Manager <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Hotel Manager</td><td>(D) Executive Secretary</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">副物業經理。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>職缺名稱檢索。<br>
+                        <strong>2. 核心判定：</strong>網頁指出招募 "Assistant Property Manager"，對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 招聘協調員、(C) 飯店經理（這是她之前的行業）、(D) 秘書。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 197 題 | 核心考點：背景履歷核對 (難易度：中)</div>
+                <div class="question-text">Q197. Where has Ms. Kinkade worked for the last four years?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) At the Carlton Hotel in Chicago <span class="badge-correct">正確答案</span></td><td>(B) At Vanguard Properties in Seattle</td></tr>
+            <tr><td>(C) At the Midwest Bank in Illinois</td><td>(D) At the Royal Plaza Hotel in New York</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">芝加哥的卡爾頓飯店。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>履歷細節檢索。定位信件中段。<br>
+                        <strong>2. 核心判定：</strong>Linda 提到過去四年 "at the Carlton Hotel in Chicago"，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 這是她應徵的新公司與新城市、(C) 這是另一篇主角工作地、(D) 這是 Test 3 中她舊履歷的背景。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 198 題 | 核心考點：跨篇章條件核對 (資歷條件符合) (難易度：高)</div>
+                <div class="question-text">Q198. How does Ms. Kinkade meet the qualifications listed on the webpage?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) She possesses a degree in Real Estate Administration and 4 years of experience. <span class="badge-correct">正確答案</span></td><td>(B) She is willing to relocate without any financial package.</td></tr>
+            <tr><td>(C) She has already worked as an assistant manager in Seattle.</td><td>(D) She has a background in solar array maintenance.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">她擁有房地產行政學位和 4 年的工作經驗。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章條件比對與確認。<br>
+                        <strong>2. 核心判定：</strong>網頁要求「房地產行政學位（degree in real estate administration）」以及「至少三年經驗（at least three years）」。信中 Linda 表明她擁有該學位，且有「四年經驗（four years）」，這兩者均滿足並超越要求，對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 她談妥了搬遷方案、(C) 她以前未在西雅圖做過副理、(D) 這是太陽能合約話題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 199 題 | 核心考點：時間點定位 (難易度：中)</div>
+                <div class="question-text">Q199. When did Ms. Kinkade's interview take place?</div>
+                <table class="options-table">
+            <tr><td>(A) October 20</td><td class="correct-option">(B) November 5 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) December 1</td><td>(D) November 13</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">11 月 5 日。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>日期定位題。定位面試調查表。<br>
+                        <strong>2. 核心判定：</strong>調查表上顯示 "Interview Date: November 5"，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 寄履歷日、(C) 約定搬遷日、(D) 體檢日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 200 題 | 核心考點：跨篇章關聯推論 (難易度：高)</div>
+                <div class="question-text">Q200. To which city does Ms. Kinkade intend to relocate by December 1?</div>
+                <table class="options-table">
+            <tr><td>(A) Chicago</td><td class="correct-option">(B) Seattle <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Brampton</td><td>(D) Madrid</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">西雅圖（Seattle）。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇章地理資訊關聯與推論。<br>
+                        <strong>2. 核心判定：</strong>根據網頁，Vanguard Properties 的職缺位於「西雅圖分公司（Seattle location）」。第三篇調查表註記中提到 Linda 確認已準備好「搬到西雅圖（move to Seattle）」。因此，她搬遷的目的地是西雅圖，對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 芝加哥是她原工作地、(C) 布蘭普頓、(D) 馬德里。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">real estate</td><td class="vocab-pos">n.</td><td class="vocab-meaning">房地產</td></tr><tr><td class="vocab-word">relocation package</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">搬遷補助方案</td></tr><tr><td class="vocab-word">hiring committee</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">招聘委員會</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 多益 Test 4 Part 7 閱讀理解解題要領</div>
+        <ul class="expert-list">
+            <li><strong>同義字代換的高頻考查：</strong>Q163 考查了 "strengthen" 的同義字。在網路防禦的上下文中，「加強防禦（strengthen defenses）」與 (A) "reinforce"（加強，鞏固）意思完全一致。平時必須熟記此類高頻商業同義詞。</li><li><strong>時間與動作區間的計算：</strong>Q151 要求計算資料庫升級時間。需比對起訖時間（週六 11:00 p.m. 至週日 5:00 a.m.），這考查了跨半夜的加減法能力（得出 6 小時）。</li><li><strong>跨篇章關聯題（雙篇/三篇）：</strong>Q178 考查了原始合約價。需結合第二篇升級 ProGuard 加密套件後「增加 8,000 美元後總價為 48,000 美元」，逆向推導出原始合約總金額為 40,000 美元。這屬於典型多益跨篇邏輯計算題。</li><li><strong>對話情境的句意理解 (Chat Sentence Meaning)：</strong>Q165 考查 "That will free up some space" 的意思。Jane 的前一句提到「刪除已關閉舊店的地址」，故該動作可「空出版面」，以利將字體調大，增加可讀性。對應 (B) 刪除過期資訊可使用更大字體。</li><li><strong>插句位置判定 (Sentence Placement)：</strong>Q175 的 "This project..."。待插入句中含有明確的主詞 "This project"，必須前接「專案預算獲得批准（The project budget has been approved...）」這項大前提，故置於其後的 [4] 位置最為順暢。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

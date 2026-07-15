@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新多益 TEST 5 - PART 5 單句填空互動特訓 (Q101-Q130)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body {
+  font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+  background-color: #f8fafc;
+}
+.custom-shadow {
+  box-shadow: 0 4px 20px -2px rgba(26, 54, 93, 0.08), 0 2px 8px -1px rgba(26, 54, 93, 0.04);
+}
+.flashcard {
+  perspective: 1000px;
+}
+.flashcard-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-flipped {
+  transform: rotateY(180deg);
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+</style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+
+<!-- 頂部導覽列 -->
+<nav class="bg-[#1a365d] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="hover:text-amber-400 transition flex items-center gap-1.5">
+        <i class="fa-solid fa-house-chimney text-lg"></i>
+      </a>
+      <div class="h-4 w-px bg-slate-500 mx-1"></div>
+      <span class="font-black text-sm sm:text-base tracking-wide uppercase">TOEIC TEST 5 - PART 5</span>
+    </div>
+    <div class="flex gap-2">
+      <button id="btn-quiz" onclick="switchTab('quiz')" class="px-4 py-1.5 rounded-full text-xs font-black bg-amber-500 text-[#1a365d] shadow transition">
+        <i class="fa-solid fa-gamepad mr-1"></i> 互動測驗
+      </button>
+      <button id="btn-cards" onclick="switchTab('cards')" class="px-4 py-1.5 rounded-full text-xs font-black text-slate-300 hover:text-white transition">
+        <i class="fa-solid fa-cube mr-1"></i> 記憶閃卡
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 頂部進度與指示器 -->
+<div id="progress-bar-container" class="bg-white border-b border-slate-200 py-3 shadow-sm relative z-40">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center gap-3">
+    <div class="flex items-center gap-3 w-full sm:w-auto">
+      <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Progress</span>
+      <div class="w-full sm:w-48 bg-slate-100 rounded-full h-2.5 overflow-hidden">
+        <div id="quiz-progress-bar" class="bg-emerald-505 bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+      <span id="quiz-progress-text" class="text-xs font-black text-emerald-600 whitespace-nowrap">已完成 0 / 30 題</span>
+    </div>
+  </div>
+</div>
+
+<!-- 主內容區 -->
+<main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 flex-grow">
+
+  <!-- 1. 互動測驗分頁 -->
+  <div id="tab-quiz" class="space-y-6">
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+      <div class="text-xs font-black text-slate-505 flex items-center justify-between">
+        <span>📊 答題狀態總覽 (點擊可快速跳轉)</span>
+        <span class="text-[10px] text-slate-450 font-bold">灰色: 未作答 | 琥珀色: 已選未送出 | 綠色: 答對 | 紅色: 答錯</span>
+      </div>
+      <div id="question-status-grid" class="flex flex-wrap gap-1.5 justify-start">
+        <!-- JS -->
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div class="lg:col-span-8 space-y-6" id="questions-list-container">
+        <!-- JS -->
+      </div>
+      
+      <div class="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200 custom-shadow lg:sticky lg:top-24 space-y-4">
+        <h3 class="font-extrabold text-[#1a365d] text-sm sm:text-base border-b pb-3 flex items-center gap-1.5">
+          <i class="fa-solid fa-chart-line"></i> 測驗統計
+        </h3>
+        <div id="score-card" class="hidden text-center space-y-4 py-2">
+          <div>
+            <span id="score-correct-num" class="text-4xl font-black text-emerald-600">0</span>
+            <span class="text-slate-400 text-sm font-bold mx-0.5">/ 30 題答對</span>
+          </div>
+          <p id="score-comment" class="text-xs font-semibold text-slate-500"></p>
+          <button onclick="resetQuiz()" class="w-full py-2.5 bg-[#1a365d] hover:bg-blue-800 text-white rounded-xl text-xs font-black shadow transition">
+            <i class="fa-solid fa-rotate-left mr-1"></i> 重新作答
+          </button>
+        </div>
+        <div id="score-placeholder" class="py-6 text-center text-xs text-slate-400 font-bold">
+          請點擊每題下方的「確認答案」以計算得分。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 記憶閃卡分頁 -->
+  <div id="tab-cards" class="hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-100 p-6 custom-shadow flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="space-y-1 text-center sm:text-left">
+        <h2 class="text-xl font-extrabold text-[#1a365d] flex items-center justify-center sm:justify-start gap-2">
+          <i class="fa-solid fa-cube"></i> Part 5 核心字彙記憶閃卡
+        </h2>
+        <p class="text-xs text-slate-455">
+          單擊閃卡即可翻面查看中文釋義與詞性。
+        </p>
+      </div>
+      <div class="flex gap-2 w-full sm:w-auto">
+        <button onclick="maskAllMeanings(true)" class="flex-grow sm:flex-initial px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-eye-slash mr-1"></i> 全部遮罩
+        </button>
+        <button onclick="maskAllMeanings(false)" class="flex-grow sm:flex-initial px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-eye mr-1"></i> 全部顯示
+        </button>
+      </div>
+    </div>
+    <div id="flashcards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <!-- JS -->
+    </div>
+  </div>
+
+</main>
+
+<section class="max-w-6xl w-full mx-auto px-4 sm:px-6 pb-12 mt-6">
+  <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 custom-shadow space-y-4">
+    <h3 class="text-[#1a365d] font-extrabold text-base flex items-center gap-2">
+      <i class="fa-solid fa-lightbulb"></i> 多益 Test 5 Part 5 核心高分思維
+    </h3>
+    <ul class="space-y-2 text-xs sm:text-sm text-slate-650 leading-relaxed pl-5 list-decimal">
+      <li><strong>主動與被動進行式的時間定位：</strong>Q111 考查了現在進行式的被動語態 `is being processed`。在遇到 processed 相關考點時，務必觀察時間指示詞（如 `at the moment`、`currently`），並判斷主語 application 的被動性質。</li><li><strong>比較級程度副詞的嚴格限定：</strong>Q127 考查了比較級的修飾詞。比較級修飾詞 `much`（或 `far`, `even`, `still`）能修飾 `more efficiently`，但 `very` 和 `so` 只能修飾副詞或形容詞的原級，不能修飾比較級。</li><li><strong>主詞與動詞的一致性判斷：</strong>Q115 考查了 `A wide range of + 複數名詞` 作為單數主詞的語法。核心詞是 `A range`（單數），因此謂語動詞必須是單數 `is`，不可被 options 誤導。</li><li><strong>動名詞與不定詞的後接結構：</strong>Q108 考查了 `decide to do` 結構。許多及物動詞有固定的不定詞或動名詞後接搭配，考生平時需將 `decide to postpone` 當作完整詞組記憶。</li><li><strong>虛擬語氣 (Subjunctive Mood) 規則：</strong>Q126 考查了 `recommend that sb (should) do`。主句動詞為建議/命令/要求時（如 `recommend`, `suggest`, `request`），that 子句中無論主語是單數還是複數，動詞一律使用原型 `update`。</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-xs">
+  <p>© 2026. All rights reserved.</p>
+</footer>
+
+<script>
+const QUESTIONS = [{"id": "q101", "num": 101, "difficulty": "低", "point": "主格代名詞", "sentence": "Although Mr. Lopez was busy, _______ agreed to review the project proposal before the end of the day.", "options": {"A": "he", "B": "him", "C": "his", "D": "himself"}, "correct": "A", "translation": "雖然 Lopez 先生很忙，但他同意在今天結束前審查專案提案。", "explanation": {"structure": "空格位於從屬子句後的獨立主句中，作動詞 agreed 的主詞，需要填入主格人稱代名詞。", "core": "對應先行詞 Mr. Lopez 的單數陽性主格人稱代名詞為 (A) he。", "distractors": "(B) him 是受格，(C) his 是所有格或所有格代名詞，(D) himself 是反身代名詞，均不能作為主詞。"}, "vocabulary": [{"word": "agree", "pos": "v.", "meaning": "同意"}, {"word": "proposal", "pos": "n.", "meaning": "提案，建議"}]}, {"id": "q102", "num": 102, "difficulty": "低", "point": "名詞位置判定", "sentence": "Please confirm your hotel _______ at least 48 hours before your scheduled arrival date.", "options": {"A": "reserve", "B": "reserved", "C": "reservation", "D": "reserving"}, "correct": "C", "translation": "請在您預計抵達日期的至少 48 小時前，確認您的飯店預訂。", "explanation": {"structure": "空格位於所有格 your 與名詞修飾語 hotel 之後，充當 confirm 的受詞。此處需要名詞。", "core": "「預訂」的名詞是 (C) reservation。常見搭配為 hotel reservation。", "distractors": "(A) reserve 是動詞，(B) reserved 是過去式/過去分詞，(D) reserving 是動名詞或分詞，均不符合。"}, "vocabulary": [{"word": "confirm", "pos": "v.", "meaning": "確認，證實"}, {"word": "scheduled", "pos": "adj.", "meaning": "預定的，排定的"}]}, {"id": "q103", "num": 103, "difficulty": "低", "point": "動詞詞彙", "sentence": "Deltatech Corporation plans to _______ its contracts with all local security providers next month.", "options": {"A": "renew", "B": "renewing", "C": "renewal", "D": "renewed"}, "correct": "A", "translation": "Deltatech 公司計劃下個月與所有當地安全服務商續簽合約。", "explanation": {"structure": "空格位於 \"plans to\" 之後，需要填入動詞原型構成不定詞。", "core": "表示「續簽，續訂（合約）」的動詞原型是 (A) renew。", "distractors": "(B) renewing 是動名詞/分詞，(C) renewal 是名詞，(D) renewed 是過去式/過去分詞，均不符合不定詞結構。"}, "vocabulary": [{"word": "contract", "pos": "n.", "meaning": "合約，契約"}, {"word": "provider", "pos": "n.", "meaning": "供應商，提供者"}]}, {"id": "q104", "num": 104, "difficulty": "中", "point": "時間介系詞 throughout", "sentence": "The laboratory maintains strict temperature control _______ the entire research process.", "options": {"A": "throughout", "B": "among", "C": "except", "D": "between"}, "correct": "A", "translation": "實驗室在整個研究過程中維持嚴格的溫度控制。", "explanation": {"structure": "空格後面接時間或過程的名詞短語 \"the entire research process\"。", "core": "表示「在整個期間中，自始至終」應使用介系詞 (A) throughout。", "distractors": "(B) among 用於三者或以上之間，(C) except 表示除了...之外，(D) between 用於兩者之間，均不符合語意。"}, "vocabulary": [{"word": "maintain", "pos": "v.", "meaning": "維持，保持"}, {"word": "entire", "pos": "adj.", "meaning": "整個的，全部的"}]}, {"id": "q105", "num": 105, "difficulty": "低", "point": "從屬連接詞 because", "sentence": "We decided to hire a consultant _______ our internal team lacked experience in international marketing.", "options": {"A": "because", "B": "despite", "C": "although", "D": "consequently"}, "correct": "A", "translation": "我們決定聘請顧問，因為我們的內部團隊缺乏國際行銷經驗。", "explanation": {"structure": "空格連接兩個完整子句，表示前句結果的「原因」，需要原因從屬連接詞。", "core": "選項中只有 (A) because（因為）是引導原因子句的從屬連接詞。", "distractors": "(B) despite 是介系詞，後接名詞；(C) although 表示雖然，語意相反；(D) consequently 是連接副詞，不能引導從屬子句。"}, "vocabulary": [{"word": "consultant", "pos": "n.", "meaning": "顧問"}, {"word": "lack", "pos": "v./n.", "meaning": "缺乏，缺少"}]}, {"id": "q106", "num": 106, "difficulty": "低", "point": "副詞修飾動詞", "sentence": "The customer service team _______ handled the massive influx of inquiries during the holiday season.", "options": {"A": "efficiency", "B": "efficient", "C": "efficiently", "D": "efficacious"}, "correct": "C", "translation": "客戶服務團隊在節日期間高效地處理了大量湧入的諮詢。", "explanation": {"structure": "空格位於主詞 team 與動詞 handled 之間，修飾動詞 handled，需要副詞。", "core": "選項中唯一副詞為 (C) efficiently（高效地）。", "distractors": "(A) efficiency 是名詞，(B) efficient 是形容詞，(D) efficacious 是形容詞（有效的），均不能修飾動詞。"}, "vocabulary": [{"word": "influx", "pos": "n.", "meaning": "湧入，匯集"}, {"word": "inquiry", "pos": "n.", "meaning": "詢問，諮詢"}]}, {"id": "q107", "num": 107, "difficulty": "中", "point": "形容詞詞彙", "sentence": "Vanguard Properties is looking for a _______ candidate to manage our new office in Seattle.", "options": {"A": "qualified", "B": "qualify", "C": "qualification", "D": "qualifying"}, "correct": "A", "translation": "Vanguard 物業公司正在尋找一位合格的候選人來管理我們在西雅圖的新辦公室。", "explanation": {"structure": "空格位於不定冠詞 a 與名詞 candidate 之間，需要形容詞修飾名詞。", "core": "表示「合格的，具備資格的」，常用過去分詞作形容詞 (A) qualified。", "distractors": "(B) qualify 是動詞，(C) qualification 是名詞（資格，執照），(D) qualifying 是現在分詞（取得資格的），均不及 qualified 常用作修飾 candidate。"}, "vocabulary": [{"word": "candidate", "pos": "n.", "meaning": "候選人，申請人"}, {"word": "manage", "pos": "v.", "meaning": "管理，經營"}]}, {"id": "q108", "num": 108, "difficulty": "中", "point": "動名詞與不定詞 (decide to do)", "sentence": "The board of directors decided _______ the launch of the new software application until early next year.", "options": {"A": "postpone", "B": "postponed", "C": "to postpone", "D": "postponing"}, "correct": "C", "translation": "董事會決定將新軟體應用程式的發布推遲到明年初。", "explanation": {"structure": "及物動詞 decided 後接賓語。decide 後面接 to 不定詞作為受詞。", "core": "「決定做某事」的固定搭配為 decide to do，故選 (C) to postpone。", "distractors": "(A) 是動詞原型，(B) 是過去式/分詞，(D) 是動名詞，均不符合 decide 的後接語法。"}, "vocabulary": [{"word": "launch", "pos": "n./v.", "meaning": "推出，發布"}, {"word": "board of directors", "pos": "phr.", "meaning": "董事會"}]}, {"id": "q109", "num": 109, "difficulty": "低", "point": "形容詞修飾名詞", "sentence": "Please submit a _______ receipt if you want to request reimbursement for business travel expenses.", "options": {"A": "original", "B": "originally", "C": "origin", "D": "originate"}, "correct": "A", "translation": "如果您想申請商務差旅費報銷，請提交原始收據。", "explanation": {"structure": "空格位於不定冠詞 a（此處句型因單字開頭元音關係，通常配對 an，但題目中為 simplified 表示，此處 receipt 前需要形容詞修飾）。", "core": "表示「原始的，最初的」，形容詞為 (A) original。符合 original receipt（原始收據）的商業搭配。", "distractors": "(B) originally 是副詞，(C) origin 是名詞（起源），(D) originate 是動詞（發源），均不符修飾名詞 receipt 的詞性。"}, "vocabulary": [{"word": "reimbursement", "pos": "n.", "meaning": "報銷，補償，退還"}, {"word": "receipt", "pos": "n.", "meaning": "收據"}]}, {"id": "q110", "num": 110, "difficulty": "中", "point": "副詞詞彙", "sentence": "The installation of the solar arrays has _______ reduced the factory's monthly electricity expenses.", "options": {"A": "significantly", "B": "significant", "C": "significance", "D": "signifying"}, "correct": "A", "translation": "太陽能板的安裝已顯著降低了工廠的月電費開支。", "explanation": {"structure": "空格位於助動詞 has 與過去分詞 reduced 之間，需要副詞修飾 reduced。", "core": "表示「顯著地，相當大地」，副詞為 (A) significantly。", "distractors": "(B) significant 是形容詞，(C) significance 是名詞（意義，重要性），(D) signifying 是分詞，均不符合。"}, "vocabulary": [{"word": "installation", "pos": "n.", "meaning": "安裝"}, {"word": "electricity expense", "pos": "phr.", "meaning": "電費開支"}]}, {"id": "q111", "num": 111, "difficulty": "中", "point": "現在進行式被動語態 is being processed", "sentence": "Please be patient, as your loan application _______ by our underwriting department at the moment.", "options": {"A": "processes", "B": "is being processed", "C": "has processed", "D": "processing"}, "correct": "B", "translation": "請耐心等待，因為您的貸款申請目前正由我們的核保部門處理中。", "explanation": {"structure": "主詞為單數名詞 your loan application，與動詞 process 之間為被動關係（申請是被處理的）。時間指標為 \"at the moment\"（目前，當下）。", "core": "此處需要現在進行式的被動語態 (is/are + being + p.p.)，故選 (B) is being processed。", "distractors": "(A) processes 是主動單數，(C) has processed 是完成式主動，(D) processing 是分詞，均不合被動或進行語態。"}, "vocabulary": [{"word": "underwriting", "pos": "n.", "meaning": "核保，保險業務"}, {"word": "patient", "pos": "adj.", "meaning": "有耐心的"}]}, {"id": "q112", "num": 112, "difficulty": "中", "point": "介系詞片語 prior to", "sentence": "All volunteers are requested to attend a brief orientation session _______ the start of the community event.", "options": {"A": "prior to", "B": "except for", "C": "as long as", "D": "in order that"}, "correct": "A", "translation": "所有志工均被要求在社區活動開始之前參加簡短的說明會。", "explanation": {"structure": "空格位於名詞短語 \"the start of the community event\" 之前，需要介系詞或介系詞片語。", "core": "表示「在...之前（相當於 before）」的介系詞片語為 (A) prior to。", "distractors": "(B) except for 表示除了...之外，(C) as long as 是連接詞，(D) in order that 是連接詞，均不符合語法或語意。"}, "vocabulary": [{"word": "orientation", "pos": "n.", "meaning": "說明會，方向引導"}, {"word": "volunteer", "pos": "n.", "meaning": "志工，志願者"}]}, {"id": "q113", "num": 113, "difficulty": "高", "point": "關係代名詞 who", "sentence": "We will offer a special discount to clients _______ refer new customers to our consultancy firm.", "options": {"A": "who", "B": "which", "C": "whom", "D": "whose"}, "correct": "A", "translation": "我們將向推薦新客戶給我們顧問公司的客戶提供特別折扣。", "explanation": {"structure": "關係子句修飾先行詞 clients（人，複數）。空格後緊接動詞 refer，說明空格需要主格關係代名詞。", "core": "指代人且作主格的關係代名詞是 (A) who。", "distractors": "(B) which 指代事物，(C) whom 是受格關係代名詞，(D) whose 是所有格關係代名詞，均不符。"}, "vocabulary": [{"word": "consultancy", "pos": "n.", "meaning": "顧問公司，諮詢服務"}, {"word": "refer", "pos": "v.", "meaning": "推薦，轉介"}]}, {"id": "q114", "num": 114, "difficulty": "中", "point": "名詞詞彙 (表現/績效)", "sentence": "The general manager praised the sales team for their outstanding _______ during the fiscal year.", "options": {"A": "perform", "B": "performance", "C": "performing", "D": "performed"}, "correct": "B", "translation": "總經理讚揚了銷售團隊在該財政年度的傑出表現。", "explanation": {"structure": "空格位於所有格 their 與形容詞 outstanding 之後，需要名詞作為介系詞 for 的受詞。", "core": "表示「表現，業績，績效」，名詞為 (B) performance。", "distractors": "(A) perform 是動詞，(C) performing 是分詞，(D) performed 是過去式/分詞，均不符合名詞位置。"}, "vocabulary": [{"word": "outstanding", "pos": "adj.", "meaning": "傑出的，優秀的"}, {"word": "fiscal year", "pos": "phr.", "meaning": "財政年度，會計年度"}]}, {"id": "q115", "num": 115, "difficulty": "中", "point": "主詞與動詞一致 (A wide range of...)", "sentence": "A wide range of membership options _______ available to accommodate the diverse needs of our guests.", "options": {"A": "is", "B": "are", "C": "be", "D": "being"}, "correct": "A", "translation": "我們提供廣泛的會員選擇，以滿足賓客的多樣化需求。", "explanation": {"structure": "主詞為 \"A wide range of membership options\"。核心主詞是單數名詞 \"A wide range\"（一整套，一系列）。", "core": "「A range of + 複數名詞」通常視為單數，因此謂語動詞用單數 (A) is。", "distractors": "(B) are 是複數 be 動詞，(C) be 是原型，(D) being 是分詞，均不符主動詞一致性。"}, "vocabulary": [{"word": "accommodate", "pos": "v.", "meaning": "迎合，適應，提供住宿"}, {"word": "diverse", "pos": "adj.", "meaning": "多樣的，不同的"}]}, {"id": "q116", "num": 116, "difficulty": "低", "point": "副詞修飾形容詞", "sentence": "The new shipping rates are _______ lower than those of our primary competitors.", "options": {"A": "significance", "B": "significantly", "C": "significant", "D": "signified"}, "correct": "B", "translation": "新的運輸費率明顯低於我們主要競爭對手的費率。", "explanation": {"structure": "空格位於 be 動詞 are 與比較級形容詞 lower 之間，需要副詞修飾比較級 lower。", "core": "選項中唯一副詞為 (B) significantly（顯著地，明顯地）。", "distractors": "(A) significance 是名詞，(C) significant 是形容詞，(D) signified 是分詞，均不能修飾形容詞。"}, "vocabulary": [{"word": "shipping rate", "pos": "phr.", "meaning": "運費，運輸費率"}, {"word": "competitor", "pos": "n.", "meaning": "競爭對手"}]}, {"id": "q117", "num": 117, "difficulty": "中", "point": "動詞詞彙", "sentence": "Brightwell Hotel strives to _______ all special dietary requests from our conference guests.", "options": {"A": "accommodate", "B": "accommodated", "C": "accommodation", "D": "accommodating"}, "correct": "A", "translation": "Brightwell 飯店努力滿足我們會議賓客的所有特殊飲食要求。", "explanation": {"structure": "空格位於 \"strives to\" 之後，需要填入動詞原型。後面接受詞 \"all special dietary requests\"。", "core": "表示「迎合，滿足（需求、請求）」的動詞原型是 (A) accommodate。", "distractors": "(B) accommodated 是過去式/分詞，(C) accommodation 是名詞，(D) accommodating 是形容詞或分詞，均不合結構。"}, "vocabulary": [{"word": "strive", "pos": "v.", "meaning": "努力，奮鬥"}, {"word": "dietary", "pos": "adj.", "meaning": "飲食的，膳食的"}]}, {"id": "q118", "num": 118, "difficulty": "中", "point": "相關連接詞 either...or", "sentence": "You can submit the survey form _______ online or by handing it to the reception desk.", "options": {"A": "either", "B": "neither", "C": "both", "D": "whether"}, "correct": "A", "translation": "您可以透過線上或親自交給接待處來提交調查表。", "explanation": {"structure": "空格與後面的連接詞 or 形成搭配。", "core": "「either...or...」為固定搭配，表示「二者擇一（或者...或者...）」，故選 (A) either。", "distractors": "(B) neither 搭配 nor，(C) both 搭配 and，(D) whether 搭配 or（但一般用於名詞子句引導，此處為 choose 結構中的並列副詞片語）。"}, "vocabulary": [{"word": "survey form", "pos": "phr.", "meaning": "調查表"}, {"word": "reception desk", "pos": "phr.", "meaning": "接待處"}]}, {"id": "q119", "num": 119, "difficulty": "中", "point": "現在分詞作為形容詞 remaining", "sentence": "All _______ tickets for the charity concert will be sold at a discounted price starting tomorrow.", "options": {"A": "remain", "B": "remaining", "C": "remained", "D": "remains"}, "correct": "B", "translation": "所有剩餘的慈善音樂會門票將從明天開始打折出售。", "explanation": {"structure": "空格位於定冠詞 All 與複數名詞 tickets 之間，需要形容詞或分詞修飾名詞。", "core": "表示「剩餘的」，在英文中固定使用現在分詞作形容詞 (B) remaining。", "distractors": "(A) remain 是動詞原型，(C) remained 是過去分詞（remain 是不及物動詞，無被動意義，不可用 past participle 作前置修飾語），(D) remains 是複數名詞，均不符。"}, "vocabulary": [{"word": "charity", "pos": "adj./n.", "meaning": "慈善的；慈善機構"}, {"word": "discounted", "pos": "adj.", "meaning": "打折的"}]}, {"id": "q120", "num": 120, "difficulty": "中", "point": "現在完成式 (since + 過去時間點/過去時態從句)", "sentence": "Our customer base _______ by nearly 40 percent since we launched the digital app last year.", "options": {"A": "has expanded", "B": "will expand", "C": "expanded", "D": "expands"}, "correct": "A", "translation": "自從我們去年推出數位應用程式以來，我們的客戶群已經擴大了將近 40%。", "explanation": {"structure": "主詞為單數名詞 customer base。從句為 \"since we launched...\"（since 引導過去時間的起點）。", "core": "當主句動作從過去某點（launched）持續到現在時，主句應使用現在完成式，故選 (A) has expanded。", "distractors": "(B) will expand 是未來式，(C) expanded 是一般過去式，(D) expands 是一般現在式，均不符 since 的時態搭配。"}, "vocabulary": [{"word": "customer base", "pos": "phr.", "meaning": "客戶群，客戶基礎"}, {"word": "launch", "pos": "v.", "meaning": "推出，發布"}]}, {"id": "q121", "num": 121, "difficulty": "中", "point": "名詞詞彙 (運送/運輸)", "sentence": "Apex Logistics guaranteed that the shipment would not experience any _______ during transit.", "options": {"A": "delay", "B": "delays", "C": "delayed", "D": "delaying"}, "correct": "B", "translation": "Apex 物流保證貨物在運輸過程中不會遇到任何延誤。", "explanation": {"structure": "空格位於 any 之後，此處需要名詞作 experience 的受詞。", "core": "表示「延誤」，此處 count noun 可使用複數形式 (B) delays。any 常用於否定句修飾複數名詞或不可數名詞。", "distractors": "(A) delay 是單數可數名詞，缺少冠詞時不宜直接置於 any 後面作可數受詞；(C) delayed 是形容詞/分詞，(D) delaying 是分詞，均不符合名詞位置。"}, "vocabulary": [{"word": "guarantee", "pos": "v.", "meaning": "保證"}, {"word": "transit", "pos": "n.", "meaning": "運輸，載運"}]}, {"id": "q122", "num": 122, "difficulty": "低", "point": "名詞位置（主詞）", "sentence": "An official _______ from the regulatory board will be published on our corporate website next Tuesday.", "options": {"A": "announce", "B": "announcement", "C": "announced", "D": "announcing"}, "correct": "B", "translation": "監管委員會的官方公告將於下週二在我們的公司網站上發布。", "explanation": {"structure": "空格位於冠詞 An 與形容詞 official 之後，充當句子的主詞。此處需要單數名詞。", "core": "「公告」的名詞是 (B) announcement。", "distractors": "(A) announce 是動詞，(C) announced 是過去式/分詞，(D) announcing 是分詞，均不符合主詞位置。"}, "vocabulary": [{"word": "regulatory board", "pos": "phr.", "meaning": "監管委員會"}, {"word": "corporate", "pos": "adj.", "meaning": "企業的，公司的"}]}, {"id": "q123", "num": 123, "difficulty": "中", "point": "介系詞 regarding (關於)", "sentence": "Any questions _______ the upcoming office relocation should be submitted to the facilities manager.", "options": {"A": "regarding", "B": "throughout", "C": "between", "D": "alongside"}, "correct": "A", "translation": "任何關於即將進行的辦公室搬遷的問題都應提交給設施經理。", "explanation": {"structure": "空格位於名詞 Any questions 與受詞 the upcoming office relocation 之間，需要一個介系詞連接。", "core": "表示「關於...（相當於 about 或 concerning）」的介系詞為 (A) regarding。", "distractors": "(B) throughout 表示遍及，(C) between 表示在兩者之間，(D) alongside 表示在...旁邊，均不合語意。"}, "vocabulary": [{"word": "facilities manager", "pos": "phr.", "meaning": "設施經理"}, {"word": "relocation", "pos": "n.", "meaning": "搬遷，重新安置"}]}, {"id": "q124", "num": 124, "difficulty": "中", "point": "助動詞 would / 過去未來式與主句時態呼應", "sentence": "The market analyst forecast that online retail sales _______ increase by 15 percent next quarter.", "options": {"A": "would", "B": "will", "C": "must", "D": "should"}, "correct": "A", "translation": "市場分析師預測，下季度線上零售銷售額將增長 15%。", "explanation": {"structure": "賓語從句中，主語是 online retail sales，後接動詞原型 increase。主句動詞是過去式 forecast（forecast 的過去式亦為 forecast）。", "core": "在主句為過去式時，從句中表示未來的 will 應改為過去式 (A) would 以保持時態呼應。", "distractors": "(B) will 是現在/未來式，(C) must 表示必須，(D) should 表示應該，均不符時態呼應或預測語氣。"}, "vocabulary": [{"word": "forecast", "pos": "v./n.", "meaning": "預測"}, {"word": "retail", "pos": "adj./n.", "meaning": "零售的；零售"}]}, {"id": "q125", "num": 125, "difficulty": "高", "point": "形容詞詞彙", "sentence": "The committee has drawn up a _______ schedule for the project, subject to change depending on budget approvals.", "options": {"A": "tentative", "B": "tentatively", "C": "tentativeness", "D": "tented"}, "correct": "A", "translation": "委員會已起草了該專案的暫定日程表，具體取決於預算批准情況，可能會有所變動。", "explanation": {"structure": "空格位於不定冠詞 a 與名詞 schedule 之間，需要形容詞修飾名詞。", "core": "表示「暫定的，臨時的」，形容詞為 (A) tentative。常見搭配為 tentative schedule。", "distractors": "(B) tentatively 是副詞，(C) tentativeness 是名詞，(D) tented 是形容詞（有帳篷的），均不符合語意與語法。"}, "vocabulary": [{"word": "tentative", "pos": "adj.", "meaning": "暫定的，臨時的"}, {"word": "subject to change", "pos": "phr.", "meaning": "易變的，取決於...的"}]}, {"id": "q126", "num": 126, "difficulty": "高", "point": "祈使語句/命令動詞後的 that 子句 (省略 should 之動詞原型)", "sentence": "The safety inspector recommended that the factory manager _______ all warning labels on the machinery.", "options": {"A": "update", "B": "updates", "C": "updated", "D": "updating"}, "correct": "A", "translation": "安全稽查員建議工廠經理更新機器上的所有警告標籤。", "explanation": {"structure": "主句動詞 recommended（建議）後接 that 子句，子句中的動詞必須使用動詞原型（即省略 should 的虛擬語氣）。", "core": "根據此文法規則，應填入動詞原型 (A) update。", "distractors": "(B) updates 是單數限定動詞，(C) updated 是過去式，(D) updating 是分詞，均不符合該 subjunctive 結構。"}, "vocabulary": [{"word": "machinery", "pos": "n.", "meaning": "機器，機械（總稱）"}, {"word": "warning label", "pos": "phr.", "meaning": "警告標籤"}]}, {"id": "q127", "num": 127, "difficulty": "高", "point": "修飾比較級的副詞 much", "sentence": "The newly proposed logistics system runs _______ more efficiently than the older one.", "options": {"A": "much", "B": "very", "C": "more", "D": "so"}, "correct": "A", "translation": "新提出的物流系統運行效率比舊系統高得多。", "explanation": {"structure": "空格後面是比較級副詞 phrase \"more efficiently\"，此處需要填入修飾比較級的程度副詞。", "core": "能用來修飾比較級（more efficiently）的副詞有 much, far, even, still, a lot 等。選項中只有 (A) much 符合。", "distractors": "(B) very、(D) so 只能用來修飾原級；(C) more 本身即為比較級標誌，重複使用為錯誤語法。"}, "vocabulary": [{"word": "logistics", "pos": "n.", "meaning": "物流，後勤"}, {"word": "efficiently", "pos": "adv.", "meaning": "高效地"}]}, {"id": "q128", "num": 128, "difficulty": "中", "point": "動詞詞彙", "sentence": "The administrative team was tasked to _______ the workflow to eliminate redundant processes.", "options": {"A": "streamline", "B": "streamlining", "C": "streamlined", "D": "streamlines"}, "correct": "A", "translation": "行政團隊的任務是簡化工作流程，以消除冗餘的步驟。", "explanation": {"structure": "空格位於 to 之後，需要填入動詞原型。後面接受詞 \"the workflow\"。", "core": "表示「精簡，使效率化（流程）」，動詞原型為 (A) streamline。", "distractors": "(B) streamlining 是動名詞/分詞，(C) streamlined 是過去式/分詞，(D) streamlines 是第三人稱單數，均不符合不定詞結構。"}, "vocabulary": [{"word": "redundant", "pos": "adj.", "meaning": "多餘的，冗餘的"}, {"word": "workflow", "pos": "n.", "meaning": "工作流程"}]}, {"id": "q129", "num": 129, "difficulty": "中", "point": "形容詞與副詞修飾關係", "sentence": "The auditor reported that the annual tax file was _______ compiled and contained multiple errors.", "options": {"A": "careless", "B": "carelessly", "C": "carelessness", "D": "care"}, "correct": "B", "translation": "審計師報告稱，年度稅務文件編製得非常粗心，且包含多處錯誤。", "explanation": {"structure": "空格位於 be 動詞 was 與過去分詞 compiled 之間，需要副詞修飾 compiled。", "core": "選項中 (B) carelessly（粗心地，草率地）為副詞，修飾 compiled。", "distractors": "(A) careless 是形容詞，(C) carelessness 是名詞，(D) care 是名詞/動詞，均不能修飾分詞。"}, "vocabulary": [{"word": "auditor", "pos": "n.", "meaning": "審計師，查帳員"}, {"word": "compile", "pos": "v.", "meaning": "編纂，編製"}]}, {"id": "q130", "num": 130, "difficulty": "高", "point": "目的連接詞 so that (以便)", "sentence": "We updated the customer database _______ team members could access records in real time.", "options": {"A": "so that", "B": "in order to", "C": "provided that", "D": "as though"}, "correct": "A", "translation": "我們更新了客戶資料庫，以便團隊成員可以即時存取紀錄。", "explanation": {"structure": "空格連接兩個完整子句，後半句含有助動詞 could。此處需要引導目的子句的連接詞。", "core": "表示「以便，為了使...」的連接詞為 (A) so that，後接完整子句，通常帶有 can/could/may/might 等情態動詞。", "distractors": "(B) in order to 後面只能接動詞原型，不能接子句；(C) provided that 表示只要，(D) as though 表示彷彿，均不符語意邏輯。"}, "vocabulary": [{"word": "database", "pos": "n.", "meaning": "資料庫"}, {"word": "real time", "pos": "phr.", "meaning": "即時"}]}];
+const FLASHCARDS = [{"word": "agree", "pos": "v.", "meaning": "同意"}, {"word": "proposal", "pos": "n.", "meaning": "提案，建議"}, {"word": "confirm", "pos": "v.", "meaning": "確認，證實"}, {"word": "scheduled", "pos": "adj.", "meaning": "預定的，排定的"}, {"word": "contract", "pos": "n.", "meaning": "合約，契約"}, {"word": "provider", "pos": "n.", "meaning": "供應商，提供者"}, {"word": "maintain", "pos": "v.", "meaning": "維持，保持"}, {"word": "entire", "pos": "adj.", "meaning": "整個的，全部的"}, {"word": "consultant", "pos": "n.", "meaning": "顧問"}, {"word": "lack", "pos": "v./n.", "meaning": "缺乏，缺少"}, {"word": "influx", "pos": "n.", "meaning": "湧入，匯集"}, {"word": "inquiry", "pos": "n.", "meaning": "詢問，諮詢"}, {"word": "candidate", "pos": "n.", "meaning": "候選人，申請人"}, {"word": "manage", "pos": "v.", "meaning": "管理，經營"}, {"word": "launch", "pos": "n./v.", "meaning": "推出，發布"}, {"word": "board of directors", "pos": "phr.", "meaning": "董事會"}, {"word": "reimbursement", "pos": "n.", "meaning": "報銷，補償，退還"}, {"word": "receipt", "pos": "n.", "meaning": "收據"}, {"word": "installation", "pos": "n.", "meaning": "安裝"}, {"word": "electricity expense", "pos": "phr.", "meaning": "電費開支"}, {"word": "underwriting", "pos": "n.", "meaning": "核保，保險業務"}, {"word": "patient", "pos": "adj.", "meaning": "有耐心的"}, {"word": "orientation", "pos": "n.", "meaning": "說明會，方向引導"}, {"word": "volunteer", "pos": "n.", "meaning": "志工，志願者"}, {"word": "consultancy", "pos": "n.", "meaning": "顧問公司，諮詢服務"}, {"word": "refer", "pos": "v.", "meaning": "推薦，轉介"}, {"word": "outstanding", "pos": "adj.", "meaning": "傑出的，優秀的"}, {"word": "fiscal year", "pos": "phr.", "meaning": "財政年度，會計年度"}, {"word": "accommodate", "pos": "v.", "meaning": "迎合，適應，提供住宿"}, {"word": "diverse", "pos": "adj.", "meaning": "多樣的，不同的"}, {"word": "shipping rate", "pos": "phr.", "meaning": "運費，運輸費率"}, {"word": "competitor", "pos": "n.", "meaning": "競爭對手"}, {"word": "strive", "pos": "v.", "meaning": "努力，奮鬥"}, {"word": "dietary", "pos": "adj.", "meaning": "飲食的，膳食的"}, {"word": "survey form", "pos": "phr.", "meaning": "調查表"}, {"word": "reception desk", "pos": "phr.", "meaning": "接待處"}, {"word": "charity", "pos": "adj./n.", "meaning": "慈善的；慈善機構"}, {"word": "discounted", "pos": "adj.", "meaning": "打折的"}, {"word": "customer base", "pos": "phr.", "meaning": "客戶群，客戶基礎"}, {"word": "guarantee", "pos": "v.", "meaning": "保證"}, {"word": "transit", "pos": "n.", "meaning": "運輸，載運"}, {"word": "regulatory board", "pos": "phr.", "meaning": "監管委員會"}, {"word": "corporate", "pos": "adj.", "meaning": "企業的，公司的"}, {"word": "facilities manager", "pos": "phr.", "meaning": "設施經理"}, {"word": "relocation", "pos": "n.", "meaning": "搬遷，重新安置"}, {"word": "forecast", "pos": "v./n.", "meaning": "預測"}, {"word": "retail", "pos": "adj./n.", "meaning": "零售的；零售"}, {"word": "tentative", "pos": "adj.", "meaning": "暫定的，臨時的"}, {"word": "subject to change", "pos": "phr.", "meaning": "易變的，取決於...的"}, {"word": "machinery", "pos": "n.", "meaning": "機器，機械（總稱）"}, {"word": "warning label", "pos": "phr.", "meaning": "警告標籤"}, {"word": "logistics", "pos": "n.", "meaning": "物流，後勤"}, {"word": "efficiently", "pos": "adv.", "meaning": "高效地"}, {"word": "redundant", "pos": "adj.", "meaning": "多餘的，冗餘的"}, {"word": "workflow", "pos": "n.", "meaning": "工作流程"}, {"word": "auditor", "pos": "n.", "meaning": "審計師，查帳員"}, {"word": "compile", "pos": "v.", "meaning": "編纂，編製"}, {"word": "database", "pos": "n.", "meaning": "資料庫"}, {"word": "real time", "pos": "phr.", "meaning": "即時"}];
+
+const userAnswers = {};
+const confirmedAnswers = {};
+
+function switchTab(tab) {
+  if (tab === 'quiz') {
+    document.getElementById('tab-quiz').classList.remove('hidden');
+    document.getElementById('tab-cards').classList.add('hidden');
+    document.getElementById('progress-bar-container').classList.remove('hidden');
+    document.getElementById('btn-quiz').className = "px-4 py-1.5 rounded-full text-xs font-black bg-amber-500 text-[#1a365d] shadow transition";
+    document.getElementById('btn-cards').className = "px-4 py-1.5 rounded-full text-xs font-black text-slate-300 hover:text-white transition";
+  } else {
+    document.getElementById('tab-quiz').classList.add('hidden');
+    document.getElementById('tab-cards').classList.remove('hidden');
+    document.getElementById('progress-bar-container').classList.add('hidden');
+    document.getElementById('btn-quiz').className = "px-4 py-1.5 rounded-full text-xs font-black text-slate-300 hover:text-white transition";
+    document.getElementById('btn-cards').className = "px-4 py-1.5 rounded-full text-xs font-black bg-amber-500 text-[#1a365d] shadow transition";
+    renderFlashcards();
+  }
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-list-container');
+  container.innerHTML = '';
+  
+  QUESTIONS.forEach(q => {
+    const qNum = q.num;
+    const isConfirmed = confirmedAnswers[qNum] || false;
+    const selected = userAnswers[qNum] || null;
+    
+    let optionsHtml = '';
+    const optionKeys = ['A', 'B', 'C', 'D'];
+    
+    optionKeys.forEach(key => {
+      const text = q.options[key];
+      let btnClass = "border border-slate-200 hover:bg-slate-50 text-slate-700";
+      let icon = "";
+      
+      if (selected === key) {
+        btnClass = "border-2 border-blue-500 bg-blue-50/50 text-blue-700 font-bold";
+      }
+      
+      if (isConfirmed) {
+        if (key === q.correct) {
+          btnClass = "border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold";
+          icon = '<i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>';
+        } else if (selected === key) {
+          btnClass = "border-2 border-red-500 bg-red-50 text-red-800 font-bold";
+          icon = '<i class="fa-solid fa-circle-xmark text-red-500 text-base"></i>';
+        } else {
+          btnClass = "border border-slate-200 text-slate-400 opacity-60";
+        }
+      }
+      
+      const clickAction = isConfirmed ? '' : `onclick="selectOption(${qNum}, '${key}')"`;
+      optionsHtml += `<button ${clickAction} class="w-full text-left p-3 rounded-xl text-xs sm:text-sm font-medium transition flex items-center justify-between gap-3 ${btnClass}"><span><strong class="mr-1 text-[#1a365d]">${key}</strong> ${text}</span>${icon}</button>`;
+    });
+    
+    let analysisHtml = '';
+    if (isConfirmed) {
+      const isCorrect = selected === q.correct;
+      const statusBadge = isCorrect 
+        ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2.5 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> 答對</span>'
+        : `<span class="bg-red-100 text-red-800 text-[10px] font-black px-2.5 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> 答錯 (正確: ${q.correct})</span>`;
+        
+      analysisHtml = `
+        <div class="border-t border-slate-100 pt-3 mt-3 space-y-3">
+          <div class="flex items-center justify-between">${statusBadge}</div>
+          <div class="space-y-2 text-xs sm:text-sm text-slate-650">
+            <div>
+              <h4 class="font-bold text-[#1a365d]">【中文翻譯】</h4>
+              <p class="bg-slate-50 border p-2 rounded-xl text-slate-500 font-medium">${q.translation}</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-[#1a365d]">【解題深度邏輯】</h4>
+              <div class="space-y-1 leading-relaxed">
+                <p><strong>1. 結構：</strong>${q.explanation.structure}</p>
+                <p><strong>2. 核心：</strong>${q.explanation.core}</p>
+                <p><strong>3. 排除：</strong>${q.explanation.distractors}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    let submitBtn = '';
+    if (!isConfirmed) {
+      const disabledAttr = selected ? '' : 'disabled';
+      submitBtn = `<button id="btn-submit-${qNum}" onclick="confirmAnswer(${qNum})" ${disabledAttr} class="w-full mt-3 py-2.5 bg-[#1a365d] hover:bg-blue-800 disabled:opacity-40 text-white rounded-xl text-xs font-black shadow transition">確認答案</button>`;
+    }
+    
+    const cardHtml = `
+      <div id="q-card-${qNum}" class="bg-white rounded-2xl border p-5 custom-shadow">
+        <h3 class="text-slate-805 font-extrabold text-xs mb-1.5 flex items-center gap-1.5">
+          <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${qNum}</span>
+          考點：${q.point}
+        </h3>
+        <p class="text-slate-805 font-bold text-base mb-3 font-serif leading-relaxed">${q.sentence.replace('_______', '<span class="underline decoration-2 decoration-blue-500 px-4 font-mono font-black text-blue-600">_______</span>')}</p>
+        <div class="space-y-2">${optionsHtml}</div>
+        ${submitBtn}
+        ${analysisHtml}
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', cardHtml);
+  });
+}
+
+function selectOption(qNum, optionKey) {
+  userAnswers[qNum] = optionKey;
+  renderQuestions();
+  renderStatusGrid();
+}
+
+function renderStatusGrid() {
+  const grid = document.getElementById('question-status-grid');
+  grid.innerHTML = '';
+  QUESTIONS.forEach(q => {
+    const qNum = q.num;
+    const isConfirmed = confirmedAnswers[qNum] || false;
+    const selected = userAnswers[qNum] || null;
+    let btnClass = "w-8 h-8 rounded-lg text-xs font-black flex items-center justify-center border cursor-pointer ";
+    if (isConfirmed) {
+      btnClass += (selected === q.correct) ? "bg-emerald-100 text-emerald-800 border-emerald-200" : "bg-red-100 text-red-800 border-red-200";
+    } else if (selected) {
+      btnClass += "bg-amber-100 text-amber-800 border-amber-200 animate-pulse";
+    } else {
+      btnClass += "bg-slate-50 text-slate-500 border-slate-200";
+    }
+    grid.insertAdjacentHTML('beforeend', `<button onclick="scrollToQuestion(${qNum})" class="${btnClass}">${qNum}</button>`);
+  });
+}
+
+function scrollToQuestion(qNum) {
+  const cardEl = document.getElementById(`q-card-${qNum}`);
+  if (cardEl) {
+    cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    cardEl.classList.add('ring-4', 'ring-blue-400');
+    setTimeout(() => cardEl.classList.remove('ring-4', 'ring-blue-400'), 1500);
+  }
+}
+
+function confirmAnswer(qNum) {
+  confirmedAnswers[qNum] = true;
+  updateProgress();
+  renderQuestions();
+  renderStatusGrid();
+  scrollToQuestion(qNum);
+}
+
+function updateProgress() {
+  const totalQuestions = QUESTIONS.length;
+  let answeredCount = 0;
+  let correctCount = 0;
+  
+  QUESTIONS.forEach(q => {
+    if (confirmedAnswers[q.num]) {
+      answeredCount++;
+      if (userAnswers[q.num] === q.correct) {
+        correctCount++;
+      }
+    }
+  });
+  
+  const percentage = (answeredCount / totalQuestions) * 100;
+  document.getElementById('quiz-progress-bar').style.width = `${percentage}%`;
+  document.getElementById('quiz-progress-text').innerText = `已完成 ${answeredCount} / ${totalQuestions} 題`;
+  
+  if (answeredCount > 0) {
+    document.getElementById('score-placeholder').classList.add('hidden');
+    const scoreCard = document.getElementById('score-card');
+    scoreCard.classList.remove('hidden');
+    document.getElementById('score-correct-num').innerText = correctCount;
+    
+    let comment = '';
+    if (answeredCount === totalQuestions) {
+      comment = (correctCount === totalQuestions) ? '👑 太棒了！全部答對！' : `測驗結束！答對率：${Math.round((correctCount / totalQuestions) * 100)}%`;
+    } else {
+      comment = `作答中...目前正確率：${Math.round((correctCount / answeredCount) * 100)}%`;
+    }
+    document.getElementById('score-comment').innerText = comment;
+  }
+}
+
+function resetQuiz() {
+  QUESTIONS.forEach(q => {
+    delete userAnswers[q.num];
+    delete confirmedAnswers[q.num];
+  });
+  document.getElementById('score-card').classList.add('hidden');
+  document.getElementById('score-placeholder').classList.remove('hidden');
+  updateProgress();
+  renderQuestions();
+  renderStatusGrid();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function flipCard(cardEl) {
+  cardEl.classList.toggle('flashcard-flipped');
+}
+
+function maskAllMeanings(shouldMask) {
+  document.querySelectorAll('#flashcards-container .flashcard-back .meaning-text').forEach(el => {
+    if (shouldMask) el.classList.add('text-transparent', 'bg-slate-200/80');
+    else el.classList.remove('text-transparent', 'bg-slate-200/80');
+  });
+}
+
+function renderFlashcards() {
+  const container = document.getElementById('flashcards-container');
+  container.innerHTML = '';
+  FLASHCARDS.forEach(item => {
+    container.insertAdjacentHTML('beforeend', `
+      <div class="flashcard w-full h-44 cursor-pointer" onclick="flipCard(this.querySelector('.flashcard-inner'))">
+        <div class="flashcard-inner relative w-full h-full [transform-style:preserve-3d] shadow-sm border rounded-2xl transition duration-300">
+          <div class="flashcard-front absolute inset-0 w-full h-full [backface-visibility:hidden] bg-white rounded-2xl p-5 flex flex-col justify-between items-center">
+            <span class="self-start text-[9px] font-black text-slate-400 tracking-widest uppercase">Word Card</span>
+            <span class="text-lg font-serif font-black text-[#1a365d]">${item.word}</span>
+            <span class="text-[10px] text-slate-400">點擊卡片翻面</span>
+          </div>
+          <div class="flashcard-back absolute inset-0 w-full h-full [backface-visibility:hidden] bg-amber-50/90 border border-amber-100 rounded-2xl p-5 flex flex-col justify-between items-center rotate-y-180">
+            <span class="self-start text-[9px] font-bold text-amber-700 tracking-widest uppercase">Meaning</span>
+            <div class="text-center py-1">
+              <span class="text-xs text-amber-600 font-bold italic mr-1">${item.pos}</span>
+              <span class="meaning-text text-base text-slate-800 font-extrabold">${item.meaning}</span>
+            </div>
+            <span class="text-[9px] text-amber-600">再次點擊翻回</span>
+          </div>
+        </div>
+      </div>
+    `);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderQuestions();
+  renderStatusGrid();
+});
+</script>
+</body>
+</html>

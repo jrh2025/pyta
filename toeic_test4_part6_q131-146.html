@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Test 4 Part 6 短文填空";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-inside: avoid; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 8px 12px;
+    font-weight: bold; 
+    font-size: 10pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 10px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 12px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    padding-right: 12px !important;
+    text-align: justify;
+}
+.blank-line {
+    font-weight: bold;
+    color: #2b6cb0;
+    text-decoration: underline;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    padding-left: 12px !important;
+    text-align: justify;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 12px;
+}
+.question-item {
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 12px;
+}
+.question-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 9pt;
+    margin-bottom: 6px;
+}
+
+.options-table { 
+    width: 100%; 
+    margin-bottom: 6px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 4px 6px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 9.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 7.5pt; 
+    padding: 1px 4px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 4px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #1a365d;
+    padding: 8px 10px;
+    margin-top: 6px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+}
+.exp-title {
+    font-weight: bold;
+    color: #2c5282;
+    margin-bottom: 3px;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 8.5pt;
+    padding: 5px 6px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 4px 6px; 
+    font-size: 8.5pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 20px; 
+    padding: 12px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 10pt; 
+    margin-bottom: 6px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 15px; 
+    font-size: 8.5pt; 
+    color: #2d3748; 
+    line-height: 1.45;
+}
+.expert-list li { 
+    margin-bottom: 5px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 4 - PART 6 短文填空精選解析 (第 131 – 146 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 131-134 refer to the following notice. (131-134 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4"><b>Metro Transit Authority Access Card Update</b></p>
+<p class="mb-4">Beginning November 1, Metro Transit will <span class="blank-line">(131) _______</span> a new digital access card system at all subway stations. This upgraded system is designed to provide faster entry and improve passenger security. <span class="blank-line">(132) _______</span>. Existing paper tickets will no longer be accepted at the gates after this date.</p>
+<p class="mb-4">Passengers can exchange their remaining paper tickets for the new digital access cards at any station ticket counter. This exchange will be processed <span class="blank-line">(133) _______</span> additional charge until November 15. After that date, a $5 activation fee will apply. We advise all commuters to obtain their new cards as soon as possible to avoid long lines. Please note that old access cards will be <span class="blank-line">(134) _______</span> on November 1.</p>
+<p>Thank you for your patience as we work to modernize our public transit infrastructure.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4"><b>地鐵運輸局門禁卡更新通知</b></p>
+<p class="mb-4">自 11 月 1 日起，地鐵運輸局將在所有地鐵站啟用新的數位門禁卡系統。這個升級後的系統旨在提供更快速的進站並提高乘客安全性。因此，所有通勤者都必須在該日期之前換取新卡。在此日期之後，閘口將不再接受現有的紙質車票。</p>
+<p class="mb-4">乘客可在任何車站售票櫃檯將剩餘的紙質車票更換為新的數位門禁卡。在 11 月 15 日之前，此更換將免費辦理。在該日期之後，將收取 5 美元的啟用費。我們建議所有通勤者儘快取得新卡，以避免排長隊。請注意，舊門禁卡將於 11 月 1 日起停用。</p>
+<p>感謝您在我們努力實現公共運輸基礎設施現代化過程中的耐心體諒。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 131 題 | 核心考點：動詞詞彙 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) implement <span class="badge-correct">正確答案</span></td><td>(B) fluctuate</td></tr>
+            <tr><td>(C) induce</td><td>(D) postpone</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">自 11 月 1 日起，地鐵運輸局將在所有地鐵站啟用（實施）新的數位門禁卡系統。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於助動詞 will 之後，此處需要填入動詞原型。後面接新系統 a new digital access card system 作為受詞。<br>
+                        <strong>2. 核心判定：</strong>表示「實施，啟用（新系統、新政策）」的及物動詞原型是 (A) implement。<br>
+                        <strong>3. 干擾項排除：</strong>(B) fluctuate 表示波動，(C) induce 表示引起，(D) postpone 表示延期，均不符合啟用新系統的語境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 132 題 | 核心考點：篇章插句題 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Consequently, all commuters must obtain the new cards prior to that date. <span class="badge-correct">正確答案</span></td><td>(B) Alternatively, you can purchase paper tickets at a discounted rate.</td></tr>
+            <tr><td>(C) Previously, the transit rates had been adjusted twice.</td><td>(D) Instead, security guards will manually inspect all bags at the entrance.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因此，所有通勤者都必須在該日期之前換取新卡。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>篇章插句題。前句提到「11月1日啟用數位門禁系統，提高安全性」，後句提到「該日期之後閘口不再接受紙質車票」。<br>
+                        <strong>2. 核心判定：</strong>前後文的核心是「啟用新系統並廢除舊車票的日期限制」，因此最順暢的過渡句是 (A) Consequently, all commuters must obtain the new cards prior to that date（因此，所有通勤者必須在該日期前取得新卡）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 提到折價買紙票，與廢除紙票矛盾；(C) 提到以前費率調整，偏離主題；(D) 提到人工安檢包包，與門禁系統無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 133 題 | 核心考點：介系詞片語 without additional charge (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) without <span class="badge-correct">正確答案</span></td><td>(B) against</td></tr>
+            <tr><td>(C) except</td><td>(D) despite</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">此更換將免費（無額外費用）辦理。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於名詞短語 "additional charge" 之前，構成修飾動詞 be processed 的介系詞片語。<br>
+                        <strong>2. 核心判定：</strong>表示「免費，無額外費用」，固定用法為 without additional charge，故選 (A) without。<br>
+                        <strong>3. 干擾項排除：</strong>(B) against（反對，對抗）、(C) except（除了...之外）、(D) despite（儘管），均不能與 additional charge 搭配表示免費。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 134 題 | 核心考點：動詞詞彙/被動語態 (deactivate) (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) deactivated <span class="badge-correct">正確答案</span></td><td>(B) demolished</td></tr>
+            <tr><td>(C) dismissed</td><td>(D) discarded</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">請注意，舊門禁卡將於 11 月 1 日起停用（去活性化）。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為 be 動詞 (will be)，此處填入過去分詞構成被動語態。主詞為 old access cards。<br>
+                        <strong>2. 核心判定：</strong>數位卡片系統的關閉與「停用（deactivate）」，被動為 (A) deactivated。<br>
+                        <strong>3. 干擾項排除：</strong>(B) demolished 表示拆除（建築物），(C) dismissed 表示解雇或駁回，(D) discarded 表示拋棄，皆非電子卡片系統「停用」的最精準用語。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">implement</td><td class="vocab-pos">v.</td><td class="vocab-meaning">實施，啟用</td></tr><tr><td class="vocab-word">commuter</td><td class="vocab-pos">n.</td><td class="vocab-meaning">通勤者</td></tr><tr><td class="vocab-word">deactivate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">使無效，停用</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 135-138 refer to the following e-mail. (135-138 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">To: Arthur Pendelton &lt;apendelton@webmail.com&gt;<br>From: Laura Higgins &lt;lhiggins@brightwellhotel.com&gt;<br>Subject: Refund Confirmation<br>Date: December 14</p>
+<p class="mb-4">Dear Mr. Pendelton,</p>
+<p class="mb-4">I am writing to apologize for the billing error on your invoice during your recent stay at the Brightwell Hotel. We discovered that you were accidentally charged twice for the room service on December 10. <span class="blank-line">(135) _______</span>.</p>
+<p class="mb-4">We have already initiated a <span class="blank-line">(136) _______</span> of the duplicate amount ($45) back to your credit card. Please allow 3 to 5 business days for the transaction to appear on your bank statement. <span class="blank-line">(137) _______</span>, we have enclosed a $20 voucher for your next stay as a gesture of our goodwill. We value your business and hope to have the <span class="blank-line">(138) _______</span> of welcoming you back to our hotel in the future.</p>
+<p class="mb-4">Sincerely,<br>Laura Higgins<br>Billing Manager</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">收件者：Arthur Pendelton &lt;apendelton@webmail.com&gt;<br>寄件者：Laura Higgins &lt;lhiggins@brightwellhotel.com&gt;<br>主旨：退款確認<br>日期：12 月 14 日</p>
+<p class="mb-4">親愛的 Pendelton 先生：</p>
+<p class="mb-4">我寫這封信是為了對您最近入住 Brightwell 飯店期間發票上的帳單錯誤表示歉意。我們發現您在 12 月 10 日被意外收取了兩次客房服務費。我們保證這種失誤非常少見，且我們已立即採取措施進行修正。</p>
+<p class="mb-4">我們已開始為您的信用卡辦理重複扣款金額（45 美元）的退款。請留出 3 到 5 個工作天，以便該筆交易出現在您的銀行對帳單上。此外，我們還隨信附上了一張 20 美元的折價券，可用於您下一次入住，以表達我們的善意。我們珍視您的光臨，並希望未來能有機會再次歡迎您光臨我們的飯店。</p>
+<p class="mb-4">謹啟，<br>Laura Higgins<br>帳務經理</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 135 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) We assure you that this oversight is highly unusual and we have taken steps to correct it. <span class="badge-correct">正確答案</span></td><td>(B) Unfortunately, we are unable to verify your room number in our registry database.</td></tr>
+            <tr><td>(C) Consequently, we require you to submit a physical receipt for the transaction.</td><td>(D) Please note that room service is only available during specific hours.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們保證這種失誤非常少見，且我們已立即採取措施進行修正。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>篇章插句題。前句為「對近期的帳務錯誤致歉，我們發現您被重複收取客房服務費」。後句為「我們已開始退款重複的金額」。<br>
+                        <strong>2. 核心判定：</strong>在致歉後、退款前，應有一句保證服務品質並表達糾正態度的話。正確答案 (A) We assure you that this oversight is highly unusual... 語意最為得體、合理。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 提到無法確認房號（那如何退款？與後文矛盾）；(C) 提到要求提供紙質收據（飯店自承重複扣款，無須強求收據）；(D) 提到客房服務時段，偏離主題。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 136 題 | 核心考點：名詞詞彙 (退款) (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) refund <span class="badge-correct">正確答案</span></td><td>(B) donation</td></tr>
+            <tr><td>(C) fine</td><td>(D) deposit</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們已開始為您的信用卡辦理重複扣款金額的退款。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前為不定冠詞 a，後接介系詞 of。此處需要名詞作 initiated 的受詞。<br>
+                        <strong>2. 核心判定：</strong>根據帳單重複扣款，退還多扣的錢在商業上稱為 (A) refund（退款）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) donation 是捐款，(C) fine 是罰金，(D) deposit 是押金/存款，均不合退還溢扣金額之情境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 137 題 | 核心考點：連接副詞 (In addition / Additionally) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) In addition <span class="badge-correct">正確答案</span></td><td>(B) Conversely</td></tr>
+            <tr><td>(C) Otherwise</td><td>(D) Nevertheless</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">此外，我們還隨信附上了一張 20 美元的折價券。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於句首且接逗號，此處需要連接副詞。<br>
+                        <strong>2. 核心判定：</strong>前句說明了「信用卡退款（45美元）」，本句說明了「隨信附贈 20 美元折價券」，兩者為遞進與附加關係，因此選 (A) In addition（此外）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) Conversely 表示相反，(C) Otherwise 表示否則，(D) Nevertheless 表示儘管如此，均不合遞進邏輯。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 138 題 | 核心考點：名詞詞彙與搭配 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) opportunity <span class="badge-correct">正確答案</span></td><td>(B) opposition</td></tr>
+            <tr><td>(C) obligation</td><td>(D) omission</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">並希望未來能有機會再次歡迎您光臨我們的飯店。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格前有定冠詞 the，後接 of welcoming...。此處需要名詞。<br>
+                        <strong>2. 核心判定：</strong>「有機會做某事」的固定搭配為 have the opportunity of doing / to do，故 (A) opportunity 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(B) opposition 是反對，(C) obligation 是義務（have the obligation of...語意不妥），(D) omission 是遺漏，均不合搭配。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">billing error</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">帳單錯誤</td></tr><tr><td class="vocab-word">duplicate</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">重複的，複製的</td></tr><tr><td class="vocab-word">bank statement</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">銀行對帳單</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 139-142 refer to the following letter. (139-142 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4">September 20</p>
+<p class="mb-4">Dr. Sarah Jenkins<br>Institute of Environmental Sciences<br>Chicago, IL 60605</p>
+<p class="mb-4">Dear Dr. Jenkins,</p>
+<p class="mb-4">On behalf of the Chicago Business Forum, I am pleased to invite you to be our guest speaker at our annual summit on <b>November 12</b>. We <span class="blank-line">(139) _______</span> to have you share your insights on renewable energy technologies with our audience.</p>
+<p class="mb-4"><span class="blank-line">(140) _______</span>. We will also arrange lodging at the Carlton Hotel for two nights. We understand you have a busy schedule, so we would be grateful if you could <span class="blank-line">(141) _______</span> your availability by October 10. You can submit your response by replying directly to <span class="blank-line">(142) _______</span> email.</p>
+<p class="mb-4">Sincerely,<br>Mark Davis<br>Event Coordinator</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4">9 月 20 日</p>
+<p class="mb-4">Sarah Jenkins 博士<br>環境科學研究所<br>芝加哥，伊利諾州 60605</p>
+<p class="mb-4">親愛的 Jenkins 博士：</p>
+<p class="mb-4">我代表芝加哥商業論壇，很高興邀請您擔任我們 11 月 12 日年度峰會的客座演講嘉賓。如果能邀請到您與我們的聽眾分享您對可再生能源技術的見解，我們將深感榮幸。</p>
+<p class="mb-4">我們將為您支付所有交通費，並提供往返機票。我們還將在卡爾頓飯店為您安排兩晚的住宿。我們知道您的日程安排很忙，因此如果您能在 10 月 10 日之前確認您的時間，我們將不勝感激。您可以直接回覆此電子郵件提交您的回覆。</p>
+<p class="mb-4">謹啟，<br>Mark Davis<br>活動協調員</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 139 題 | 核心考點：動詞詞彙與語態 would be honored (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) would be honored <span class="badge-correct">正確答案</span></td><td>(B) honoring</td></tr>
+            <tr><td>(C) honors</td><td>(D) will honor</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果能邀請到您，我們將深感榮幸。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主詞為 We，空格後接 to 不定詞 "to have you share..."。<br>
+                        <strong>2. 核心判定：</strong>「感到榮幸做某事」的被動語態常用 would be honored to do，這是一種禮貌的邀請語氣，故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) honoring 是分詞，(C) honors 是單數動詞，(D) will honor 是主動語態（我們將使...感到榮幸，主客顛倒且不符搭配）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 140 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) We will cover all of your travel expenses, including round-trip airfare. <span class="badge-correct">正確答案</span></td><td>(B) Unfortunately, the registration fee for the summit is non-refundable.</td></tr>
+            <tr><td>(C) Consequently, we have already booked a flight to New York for you.</td><td>(D) Please note that presentation materials must be submitted in advance.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們將為您支付所有交通費，並提供往返機票。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>篇章插句題。前文是邀請演講，後句提到「我們還將在 Carlton Hotel 安排兩晚住宿（We will also arrange lodging...）」。<br>
+                        <strong>2. 核心判定：</strong>後句有 "also arrange lodging"（也安排住宿），這表明前句必須有另一項「飯店提供的接待承諾（如交通費、機票）」。(A) We will cover all of your travel expenses... 完美與 also lodging 呼應，形成完整的招待內容。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 提到註冊費不退（對客座貴賓而言極不禮貌且無關）；(C) 提到訂了去紐約的機票（論壇在芝加哥，且未確認前不應擅自訂票）；(D) 提到提報投影片，與 also lodging 的接待話題無法順暢過渡。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 141 題 | 核心考點：動詞詞彙 (確認) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) confirm <span class="badge-correct">正確答案</span></td><td>(B) cancel</td></tr>
+            <tr><td>(C) distribute</td><td>(D) exceed</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果您能在 10 月 10 日之前確認您的時間，我們將不勝感激。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 could 之後，需要動詞原型。後接受詞 your availability。<br>
+                        <strong>2. 核心判定：</strong>邀請信中要求受邀者在截止日期前「確認（confirm）」是否能出席（confirm availability）。故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) cancel 表示取消，(C) distribute 表示分發，(D) exceed 表示超越，均不合句意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 142 題 | 核心考點：指示代名詞 this (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) this <span class="badge-correct">正確答案</span></td><td>(B) these</td></tr>
+            <tr><td>(C) those</td><td>(D) our</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">您可以直接回覆此（這封）電子郵件提交您的回覆。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格修飾單數名詞 email，此處需要指示代名詞。<br>
+                        <strong>2. 核心判定：</strong>「回覆這封信」在信件結尾常用 reply directly to this email，this 指代當下這封信，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) these 修飾複數，(C) those 修飾複數，(D) our 為所有格，語意均不及 this 自然。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">summit</td><td class="vocab-pos">n.</td><td class="vocab-meaning">峰會，高峰會議</td></tr><tr><td class="vocab-word">insight</td><td class="vocab-pos">n.</td><td class="vocab-meaning">洞察力，見解</td></tr><tr><td class="vocab-word">lodging</td><td class="vocab-pos">n.</td><td class="vocab-meaning">住宿，寄宿</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 143-146 refer to the following memorandum. (143-146 題參照以下備忘錄（公告）。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <p class="mb-4"><b>MEMORANDUM</b></p>
+<p class="mb-4">To: All Office Personnel<br>From: Corporate Security Office<br>Subject: Clean Desk Policy Implementation<br>Date: October 15</p>
+<p class="mb-4">To safeguard our company's proprietary information, we will strictly enforce a new Clean Desk Policy starting next week. All staff members are required to secure any <span class="blank-line">(143) _______</span> documents before leaving their desks at the end of the day.</p>
+<p class="mb-4"><span class="blank-line">(144) _______</span>. Please make sure that all printed reports and files are locked in the designated cabinets. Furthermore, computers must be locked or shut down whenever you are away from your workspace. The Corporate Security Office expects full <span class="blank-line">(145) _______</span> with these rules. Inspectors will conduct random audits after hours. Failure to comply may <span class="blank-line">(146) _______</span> in formal warning notices.</p>
+<p>Thank you for your cooperation in protecting our corporate assets.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="mb-4"><b>備忘錄</b></p>
+<p class="mb-4">收件者：所有辦公室人員<br>寄件者：公司安全辦公室<br>主旨：實施桌面清理政策<br>日期：10 月 15 日</p>
+<p class="mb-4">為了保護我們公司的專利資訊，我們將從下週開始嚴格執行新的「桌面清理政策」。所有員工都必須在每天下班離開辦公桌前，妥善保管好所有機密文件。</p>
+<p class="mb-4">這意味著敏感檔案不應留在無人看管的桌面上。請確保所有列印的報告和檔案都鎖在指定的櫃子中。此外，每當您離開工作區時，必須將電腦鎖定或關閉。公司安全辦公室期望大家完全遵守這些規則。稽查人員將在下班後進行抽樣稽核。未能遵守可能會導致正式警告通知。</p>
+<p>感謝您的合作，共同保護我們的公司資產。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 143 題 | 核心考點：形容詞詞彙 (機密的) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) confidential <span class="badge-correct">正確答案</span></td><td>(B) compulsory</td></tr>
+            <tr><td>(C) conspicuous</td><td>(D) cooperative</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">妥善保管好所有機密文件。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 secure 之後，修飾複數名詞 documents，需要填入形容詞。<br>
+                        <strong>2. 核心判定：</strong>根據 Clean Desk Policy 旨在保護公司財產安全（safeguard proprietary information），員工應收好「機密的（confidential）」文件，故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) compulsory 表示強制的（通常不修飾文件），(C) conspicuous 表示顯眼的，(D) cooperative 表示合作的，均不合語意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 144 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) This means that no sensitive files should be left unattended on desks. <span class="badge-correct">正確答案</span></td><td>(B) Consequently, additional filing cabinets will be delivered tomorrow.</td></tr>
+            <tr><td>(C) We ask that you submit your keys to the security desk instead.</td><td>(D) Previously, the policy was only applied to the accounting staff.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這意味著敏感檔案不應留在無人看管的桌面上。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>篇章插句題。前文提到「下班前需保管好機密文件」，後句提到「請確保報告和檔案鎖在櫃子中，離開時鎖定電腦」。<br>
+                        <strong>2. 核心判定：</strong>空格應為 Clean Desk Policy 的核心詮釋句。正確答案 (A) This means that no sensitive files should be left unattended on desks（這意味著桌上不能留有任何無人看管的敏感檔案），完美銜接了前後句對機密檔案保管的具體規定。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 提到明天送來新櫃子、(C) 提到把鑰匙交給保安、(D) 提到以前只適用會計，均不合安全政策說明的脈絡。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 145 題 | 核心考點：名詞詞彙 (遵守/合規) (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) compliance <span class="badge-correct">正確答案</span></td><td>(B) compliment</td></tr>
+            <tr><td>(C) complicity</td><td>(D) completion</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">公司安全辦公室期望大家完全遵守這些規則。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於形容詞 full 之後，且後接介系詞 with，此處需要填入名詞作 expects 的受詞。<br>
+                        <strong>2. 核心判定：</strong>與介系詞 with 搭配，且表示「遵守，合規」的名詞是 (A) compliance (compliance with rules)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) compliment 表示稱讚，(C) complicity 表示共謀，(D) completion 表示完成，均不符搭配與語意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 146 題 | 核心考點：動詞與介系詞搭配 result in (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) result <span class="badge-correct">正確答案</span></td><td>(B) resulting</td></tr>
+            <tr><td>(C) results</td><td>(D) resulted</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">未能遵守可能會導致正式警告通知。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於助動詞 may 之後，後面接介系詞 in，此處需要動詞原型。<br>
+                        <strong>2. 核心判定：</strong>與介系詞 in 搭配且表示「導致，結果為」的動詞原型為 (A) result (result in)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) resulting 是分詞，(C) results 是單數動詞，(D) resulted 是過去式，均不能接在 may 後面。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">safeguard</td><td class="vocab-pos">v.</td><td class="vocab-meaning">保護，維護</td></tr><tr><td class="vocab-word">proprietary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">專利的，所有的，專有的</td></tr><tr><td class="vocab-word">compliance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">遵守，合規</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 多益 Test 4 Part 6 解題思維總結</div>
+        <ul class="expert-list">
+            <li><strong>商業情境名詞與片語的選用：</strong>Q145 考查了與 with 搭配的名詞 compliance (compliance with rules)。在商業辦公室政策的語境中，「遵守規則」是極其常見的表達，考生應牢記 in compliance with / compliance with 的用法。</li><li><strong>篇章插句題 (Sentence Insertion) 解題法：</strong>Q144 考查了詮釋與定義的銜接。前文提到 policy，後句給出具體鎖櫃子規定，故中間插入 (A) This means that no sensitive files...（這意味著不能留有敏感檔案）作詮釋句，邏輯最為順暢。</li><li><strong>時間介系詞與固定片語的搭配：</strong>Q133 考查了 without additional charge（不加收額外費用/免費）。這在票務系統、訂閱更新或售後服務中都是高頻出現的商業片語。</li><li><strong>動詞被動語態與語意精準度：</strong>Q134 的 deactivated。對於地鐵门禁卡或電子帳戶的「停用」， deactive 是最專業、精準的詞彙，而非 demolished（拆除）或 dismissed（解雇）。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

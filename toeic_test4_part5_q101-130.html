@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Test 4 Part 5 單句填空";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.question-block { 
+    page-break-inside: avoid; 
+    margin-bottom: 25px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.question-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 8px 12px;
+    font-weight: bold; 
+    font-size: 10pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 10px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 12px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 11pt; 
+    line-height: 1.45; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    padding-right: 12px !important;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.5; 
+    color: #4a5568; 
+    padding-left: 12px !important;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 12px;
+}
+.options-table { 
+    width: 100%; 
+    margin-bottom: 8px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 4px 6px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 7.5pt; 
+    padding: 1px 4px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 4px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #1a365d;
+    padding: 8px 10px;
+    margin-top: 8px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+}
+.exp-title {
+    font-weight: bold;
+    color: #2c5282;
+    margin-bottom: 4px;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.4;
+}
+
+.passage-vocab-section {
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 8.5pt;
+    padding: 5px 6px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 4px 6px; 
+    font-size: 8.5pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 20px; 
+    padding: 12px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 10pt; 
+    margin-bottom: 6px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 15px; 
+    font-size: 8.5pt; 
+    color: #2d3748; 
+    line-height: 1.45;
+}
+.expert-list li { 
+    margin-bottom: 5px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 4 - PART 5 單句填空精選解析 (第 101 – 130 題)</div>
+</div>
+
+        <div class="question-block">
+            <div class="question-header">第 101 題 | 核心考點：代名詞所有格修飾名詞 (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Mr. Henderson requested that all employees submit <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> travel expense reports by Friday afternoon.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">Henderson 先生要求所有員工在週五下午之前提交他們的差旅費報銷報告。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) they</td><td>(B) them</td></tr>
+        <tr><td class="correct-option">(C) their <span class="badge-correct">正確答案</span></td><td>(D) theirs</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於名詞短語 "travel expense reports" 之前，需要所有格代名詞來修飾名詞。<br>
+                        <strong>2. 核心判定：</strong>修飾名詞 reports 需要所有格形容詞，選項中 (C) their（他們的）是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) they 是主格，(B) them 是受格，(D) theirs 是所有格代名詞（相當於 their + 名詞），均不能修飾名詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">request</td><td class="vocab-pos">v.</td><td class="vocab-meaning">要求，請求</td></tr><tr><td class="vocab-word">submit</td><td class="vocab-pos">v.</td><td class="vocab-meaning">提交，呈交</td></tr><tr><td class="vocab-word">expense</td><td class="vocab-pos">n.</td><td class="vocab-meaning">費用，開支</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 102 題 | 核心考點：副詞修飾形容詞 (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The new office building in downtown Seattle is <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> convenient for employees commuting by public transit.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">西雅圖市中心的新辦公大樓對於搭乘大眾運輸工具通勤的員工來說極為便利。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) extreme</td><td class="correct-option">(B) extremely <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) extremity</td><td>(D) extremes</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 be 動詞 (is) 與形容詞 (convenient) 之間，需要副詞修飾形容詞 convenient。<br>
+                        <strong>2. 核心判定：</strong>選項中唯一副詞為 (B) extremely（極其地，極端地），能修飾 adjective convenient。<br>
+                        <strong>3. 干擾項排除：</strong>(A) extreme 是形容詞，(C) extremity 是名詞（極端，極度），(D) extremes 是名詞複數，均無法修飾形容詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">commute</td><td class="vocab-pos">v.</td><td class="vocab-meaning">通勤</td></tr><tr><td class="vocab-word">public transit</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">大眾運輸</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 103 題 | 核心考點：動詞詞彙判定 (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Vanguard Corporation plans to <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> a new product line of eco-friendly office stationery next month.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">Vanguard 公司計劃下個月推出環保辦公文具的新產品線。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) launch <span class="badge-correct">正確答案</span></td><td>(B) launching</td></tr>
+        <tr><td>(C) launched</td><td>(D) launcher</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 "plans to" 之後，需要填入動詞原型。後面有名詞短語 a new product line 作為受詞。<br>
+                        <strong>2. 核心判定：</strong>與 to 構成不定詞且表示「推出（新產品）」的動詞原型是 (A) launch。<br>
+                        <strong>3. 干擾項排除：</strong>(B) launching 是動名詞或分詞，(C) launched 是過去式或過去分詞，(D) launcher 是名詞（發射器，啟動器），均不符合不定詞結構。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">stationery</td><td class="vocab-pos">n.</td><td class="vocab-meaning">文具</td></tr><tr><td class="vocab-word">eco-friendly</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">環保的，對生態友好的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 104 題 | 核心考點：時間介系詞 within (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The legal department expects to complete the contract review <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> three business days.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">法律部預計在三個工作天內完成合約審查。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) within <span class="badge-correct">正確答案</span></td><td>(B) during</td></tr>
+        <tr><td>(C) since</td><td>(D) between</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格後接時間段 "three business days"。此處需要一個時間範圍介系詞。<br>
+                        <strong>2. 核心判定：</strong>表示「在...期限之內」應使用介系詞 (A) within。<br>
+                        <strong>3. 干擾項排除：</strong>(B) during 表示「在...期間」，常接表示事件的名詞（如 during the meeting）；(C) since 表示「自從」；(D) between 表示「在兩者之間」，一般搭配 between A and B。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">contract review</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">合約審查</td></tr><tr><td class="vocab-word">business day</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">工作日，營業日</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 105 題 | 核心考點：副詞子句連接詞 although (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed"><span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> the training program was voluntary, nearly all of the employees decided to attend.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">雖然該培訓計劃是自願性的，但幾乎所有員工都決定參加。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) Although <span class="badge-correct">正確答案</span></td><td>(B) Despite</td></tr>
+        <tr><td>(C) Unless</td><td>(D) Therefore</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格引導讓步副詞子句 "the training program was voluntary"，主句為 "nearly all..."。空格處需要從屬連接詞。<br>
+                        <strong>2. 核心判定：</strong>表示讓步「雖然...」，且後面引導完整子句，應選連接詞 (A) Although。<br>
+                        <strong>3. 干擾項排除：</strong>(B) Despite 是介系詞（儘管），後接名詞片語；(C) Unless 表示「除非」，語意不符；(D) Therefore 是副詞（因此），不能連接子句。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">voluntary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">自願的，志願的</td></tr><tr><td class="vocab-word">nearly</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">幾乎，接近</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 106 題 | 核心考點：名詞位置判定 (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The customer service representative offered a sincere <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> for the delay in processing the order.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">客戶服務代表對訂單處理延誤表達了誠摯的歉意。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) apologize</td><td class="correct-option">(B) apology <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) apologetic</td><td>(D) apologetically</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於不定冠詞 a 與形容詞 sincere 之後，需要填入單數名詞作為 offered 的受詞。<br>
+                        <strong>2. 核心判定：</strong>選項中 (B) apology（道歉，歉意）為名詞，符合 offered a sincere apology（表達誠摯道歉）的常見搭配。<br>
+                        <strong>3. 干擾項排除：</strong>(A) apologize 是動詞，(C) apologetic 是形容詞（道歉的，抱歉的），(D) apologetically 是副詞，均不符合名詞位置。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">sincere</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">誠摯的，真誠的</td></tr><tr><td class="vocab-word">delay</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">延誤，延期</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 107 題 | 核心考點：形容詞詞彙 (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">To guarantee entry to the exclusive gala, guests must present a <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> invitation at the reception desk.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">為了保證進入專屬盛會，賓客必須在接待處出示有效的邀請函。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) valid <span class="badge-correct">正確答案</span></td><td>(B) validate</td></tr>
+        <tr><td>(C) validation</td><td>(D) validly</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於不定冠詞 a 與名詞 invitation 之間，需要形容詞修飾 invitation。<br>
+                        <strong>2. 核心判定：</strong>選項中 (A) valid（有效的，合法的）為形容詞，符合句型與「有效邀請函」之意。<br>
+                        <strong>3. 干擾項排除：</strong>(B) validate 是動詞（證實，使有效），(C) validation 是名詞（驗證，確認），(D) validly 是副詞，均不能修飾名詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">guarantee</td><td class="vocab-pos">v./n.</td><td class="vocab-meaning">保證</td></tr><tr><td class="vocab-word">exclusive</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">排他的，專屬的，高級的</td></tr><tr><td class="vocab-word">reception desk</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">接待處</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 108 題 | 核心考點：動詞不定詞結構 hesitate to do (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Please do not <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> to contact our support team if you experience any issues with the new software.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">如果您在使用新軟體時遇到任何問題，請不要猶豫，立即與我們的支援團隊聯絡。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) hesitate <span class="badge-correct">正確答案</span></td><td>(B) hesitation</td></tr>
+        <tr><td>(C) hesitant</td><td>(D) hesitated</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 "Please do not [108] to contact..." 中。do not 後接動詞原型以構成否定祈使句。<br>
+                        <strong>2. 核心判定：</strong>表示「猶豫」的動詞原型是 (A) hesitate，常與 to 不定詞搭配構成 hesitate to do（猶豫做某事）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) hesitation 是名詞，(C) hesitant 是形容詞，(D) hesitated 是過去式/過去分詞，均不合語意與語法。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">hesitate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">猶豫，遲疑</td></tr><tr><td class="vocab-word">contact</td><td class="vocab-pos">v.</td><td class="vocab-meaning">聯絡，接觸</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 109 題 | 核心考點：形容詞修飾名詞 (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The purchasing manager requested a <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> estimate of the project costs before approving the contract.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">採購經理在批准合約之前，要求提供專案成本的詳細估算。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) detail</td><td class="correct-option">(B) detailed <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) detailing</td><td>(D) details</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於不定冠詞 a 與名詞 estimate 之間，需要形容詞修飾名詞。<br>
+                        <strong>2. 核心判定：</strong>表示「詳細的（估算、計畫）」，常用過去分詞當形容詞 (B) detailed（詳細的）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) detail 是名詞或動詞，(C) detailing 是分詞（進行細節設計），(D) details 是名詞複數，均不及 detailed 適合修飾 estimate。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">purchasing manager</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">採購經理</td></tr><tr><td class="vocab-word">estimate</td><td class="vocab-pos">n.</td><td class="vocab-meaning">估算，估計</td></tr><tr><td class="vocab-word">approve</td><td class="vocab-pos">v.</td><td class="vocab-meaning">批准，贊成</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 110 題 | 核心考點：副詞詞彙 (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The board of directors <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> approved the proposed merger after a lengthy discussion last night.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">董事會昨晚經過漫長的討論後，一致通過了擬議的合併案。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) unanimously <span class="badge-correct">正確答案</span></td><td>(B) unanimous</td></tr>
+        <tr><td>(C) unanimity</td><td>(D) unanimated</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於主詞 The board of directors 與動詞 approved 之間，修飾動詞 approved。此處需要副詞。<br>
+                        <strong>2. 核心判定：</strong>選項中唯一副詞為 (A) unanimously（全體一致地），符合商業會議中「一致投票通過」的場景。<br>
+                        <strong>3. 干擾項排除：</strong>(B) unanimous 是形容詞，(C) unanimity 是名詞（全體一致），(D) unanimated 是形容詞（無生氣的），均不能修飾動詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">unanimously</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">全體一致地</td></tr><tr><td class="vocab-word">merger</td><td class="vocab-pos">n.</td><td class="vocab-meaning">合併</td></tr><tr><td class="vocab-word">lengthy</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">漫長的，冗長的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 111 題 | 核心考點：被動語態時態 was established (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Greenfield Organic Farm <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> in 2012 to supply fresh, organic produce to local communities.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">Greenfield 有機農場創立於 2012 年，旨在向當地社群供應新鮮的有機農產品。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) established</td><td class="correct-option">(B) was established <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) establishing</td><td>(D) has established</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主詞 Greenfield Organic Farm 與動詞 establish（創立）之間為被動關係（農場是被創立的）。且時間點為過去的 "in 2012"。<br>
+                        <strong>2. 核心判定：</strong>此處需要過去式被動語態，選項中唯一符合的是 (B) was established。<br>
+                        <strong>3. 干擾項排除：</strong>(A) established 是過去主動式，缺少 be 動詞且語意不通；(C) establishing 是分詞；(D) has established 是現在完成式主動語態，皆不合語法。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">establish</td><td class="vocab-pos">v.</td><td class="vocab-meaning">建立，創立</td></tr><tr><td class="vocab-word">produce</td><td class="vocab-pos">n.</td><td class="vocab-meaning">農產品；v. 生產</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 112 題 | 核心考點：介系詞片語 due to (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The flight delay was <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> severe weather conditions at the departing airport.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">航班延誤是由於起飛機場的惡劣天氣條件。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) due to <span class="badge-correct">正確答案</span></td><td>(B) instead of</td></tr>
+        <tr><td>(C) as long as</td><td>(D) because</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 be 動詞 (was) 之後，後接名詞片語 "severe weather conditions"。此處需要一個能表示原因且能置於 be 動詞後當表語的介系詞片語。<br>
+                        <strong>2. 核心判定：</strong>「due to」可作形容詞片語，置於 be 動詞後表示「由於，歸因於」，對應 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) instead of 表示「代替」，語意不符；(C) as long as 是連接詞（只要）；(D) because 是連接詞，後面必須接完整子句，在此不能直接接名詞片語。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">departing</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">出發的，起飛的</td></tr><tr><td class="vocab-word">severe</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">嚴重的，惡劣的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 113 題 | 核心考點：關係代名詞所有格 whose (難易度：高)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">We are looking for a marketing consultant <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> primary focus is digital brand building.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">我們正在尋找一位主要專注於數位品牌建立的行銷顧問。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) who</td><td>(B) whom</td></tr>
+        <tr><td class="correct-option">(C) whose <span class="badge-correct">正確答案</span></td><td>(D) which</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格引導關係子句修飾先行詞 a marketing consultant。子句中的主詞是名詞短語 primary focus。<br>
+                        <strong>2. 核心判定：</strong>空格處需要關係代名詞所有格 whose 來修飾 focus（consultant 的主要專注點：whose primary focus），故 (C) 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) who 是主格關係代名詞，後應接動詞；(B) whom 是受格關係代名詞；(D) which 用於先行詞是事物的情況。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">consultant</td><td class="vocab-pos">n.</td><td class="vocab-meaning">顧問</td></tr><tr><td class="vocab-word">primary focus</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">主要焦點，主要專注點</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 114 題 | 核心考點：名詞詞彙 (代表/代理人) (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">A customer service <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> will be available to answer your technical questions starting at 9:00 a.m.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">從上午 9:00 開始，將有客戶服務代表為您解答技術問題。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) represent</td><td class="correct-option">(B) representative <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) representation</td><td>(D) representing</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於不定冠詞 A 與名詞修飾語 customer service 之後，此處需要填入可數人物名詞作為句子的主詞。<br>
+                        <strong>2. 核心判定：</strong>表示「（客服）代表」，常用名詞為 (B) representative。<br>
+                        <strong>3. 干擾項排除：</strong>(A) represent 是動詞，(C) representation 是抽象名詞（代表，呈現），(D) representing 是分詞，均不能指代客服專員本身。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">representative</td><td class="vocab-pos">n.</td><td class="vocab-meaning">代表，代理人</td></tr><tr><td class="vocab-word">technical</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">技術的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 115 題 | 核心考點：主詞動詞一致 (Each of...) (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Each of the regional managers <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> requested to submit a monthly sales report to the headquarters.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">每位區域經理都被要求向總部提交月度銷售報告。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) is <span class="badge-correct">正確答案</span></td><td>(B) are</td></tr>
+        <tr><td>(C) have</td><td>(D) be</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句子的主詞是 "Each of the regional managers"，核心主詞是單數代名詞 "Each"。空格後接過去分詞 requested 構成被動結構。<br>
+                        <strong>2. 核心判定：</strong>因為主詞 Each 是單數，所以動詞必須用單數 (A) is。<br>
+                        <strong>3. 干擾項排除：</strong>(B) are 是複數 be 動詞，(C) have 是複數助動詞，(D) be 是動詞原型，均不符主詞與動詞的一致性。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">regional</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">地區的，區域的</td></tr><tr><td class="vocab-word">headquarters</td><td class="vocab-pos">n.</td><td class="vocab-meaning">總部</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 116 題 | 核心考點：副詞修飾動詞 (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The legal team reviewed the contract terms <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> before recommending that the CEO sign it.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">法律團隊在建議執行長簽字之前，極其謹慎地審查了合約條款。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) cautious</td><td class="correct-option">(B) cautiously <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) caution</td><td>(D) cautiousness</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於及物動詞的受詞 contract terms 之後，修飾動詞 reviewed，需要副詞。<br>
+                        <strong>2. 核心判定：</strong>選項中唯一副詞為 (B) cautiously（謹慎地，小心地），修飾 reviewed。<br>
+                        <strong>3. 干擾項排除：</strong>(A) cautious 是形容詞，(C) caution 是名詞或動詞，(D) cautiousness 是名詞，均不符合修飾動詞之詞性。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">cautiously</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">謹慎地</td></tr><tr><td class="vocab-word">recommend</td><td class="vocab-pos">v.</td><td class="vocab-meaning">推薦，建議</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 117 題 | 核心考點：動詞詞彙 (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Apex Logistics aims to <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> its shipping operations to reduce transit times for international orders.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">Apex 物流旨在簡化其運輸流程，以縮短國際訂單的運輸時間。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) streamline <span class="badge-correct">正確答案</span></td><td>(B) streamlined</td></tr>
+        <tr><td>(C) streamlining</td><td>(D) streamlines</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 "aims to" 之後，需要填入動詞原型。後面接受詞 its shipping operations。<br>
+                        <strong>2. 核心判定：</strong>表示「簡化，精簡（流程）」的動詞原型是 (A) streamline。<br>
+                        <strong>3. 干擾項排除：</strong>(B) streamlined 是過去式/分詞，(C) streamlining 是動名詞/分詞，(D) streamlines 是第三人稱單數，均不符合不定詞結構。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">streamline</td><td class="vocab-pos">v.</td><td class="vocab-meaning">簡化，使效率化</td></tr><tr><td class="vocab-word">transit time</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">運輸時間</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 118 題 | 核心考點：相關連接詞 neither...nor (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The new policy is <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> complicated nor difficult to follow once you read the guidelines.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">一旦你閱讀了指南，就會發現新政策既不複雜也不難遵守。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) neither <span class="badge-correct">正確答案</span></td><td>(B) either</td></tr>
+        <tr><td>(C) both</td><td>(D) whether</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格與後面的連接詞 nor 形成相關連接詞對應。<br>
+                        <strong>2. 核心判定：</strong>「neither...nor...」是固定搭配，表示「既不...也不...」，因此選擇 (A) neither。<br>
+                        <strong>3. 干擾項排除：</strong>(B) either 應與 or 搭配，(C) both 應與 and 搭配，(D) whether 應與 or 搭配。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">guideline</td><td class="vocab-pos">n.</td><td class="vocab-meaning">指南，指導方針</td></tr><tr><td class="vocab-word">complicated</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">複雜的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 119 題 | 核心考點：過去分詞作為形容詞修飾名詞 updated (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> schedule for the annual conference is now available on our official website.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">年度會議的更新版日程表現已可在我們的官方網站上查閱。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) update</td><td>(B) updating</td></tr>
+        <tr><td class="correct-option">(C) updated <span class="badge-correct">正確答案</span></td><td>(D) updates</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於定冠詞 The 與名詞 schedule 之間，需要形容詞或分詞修飾名詞 schedule。<br>
+                        <strong>2. 核心判定：</strong>表示日程表是「被更新的」，應用過去分詞當形容詞修飾，(C) updated 是正確答案。<br>
+                        <strong>3. 干擾項排除：</strong>(A) update 是動詞或名詞，(B) updating 是現在分詞（主動成長中，不符日程表性質），(D) updates 是複數名詞，均不符合。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">annual conference</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">年度會議</td></tr><tr><td class="vocab-word">available</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">可得到的，可查閱的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 120 題 | 核心考點：現在完成式 (over the past year) (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Vanguard Corporation's stock price <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> by more than 20 percent over the past year.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">在過去的一年中，Vanguard 公司的股價上漲了20%以上。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) has increased <span class="badge-correct">正確答案</span></td><td>(B) will increase</td></tr>
+        <tr><td>(C) increases</td><td>(D) is increasing</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主詞為單數名詞 stock price，時間狀語為 "over the past year"（在過去的一年裡，通常指從過去某點持續到現在）。<br>
+                        <strong>2. 核心判定：</strong>對於 "over the past year / in the last year" 等時間指示詞，動詞應使用現在完成式，故選 (A) has increased。<br>
+                        <strong>3. 干擾項排除：</strong>(B) will increase 是未來式，(C) increases 是一般現在式，(D) is increasing 是現在進行式，均不符該時間片語的時態要求。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">stock price</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">股價</td></tr><tr><td class="vocab-word">over the past year</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">在過去的一年中</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 121 題 | 核心考點：名詞詞彙 (交易/處理) (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The online banking system is temporarily unavailable due to routine database <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> maintenance.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">由於例行的資料庫交易維護，線上銀行系統暫時無法使用。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) transaction <span class="badge-correct">正確答案</span></td><td>(B) translation</td></tr>
+        <tr><td>(C) transition</td><td>(D) transmission</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 database 與 maintenance 之間，與其構成複合名詞。<br>
+                        <strong>2. 核心判定：</strong>在銀行金融系統的上下文中，「資料庫交易維護（database transaction maintenance）」是最契合的商業詞彙，故選 (A) transaction。<br>
+                        <strong>3. 干擾項排除：</strong>(B) translation（翻譯）、(C) transition（過渡）、(D) transmission（傳輸），均與銀行帳戶業務或資料庫核心交易無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">temporarily</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">暫時地</td></tr><tr><td class="vocab-word">routine</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">例行的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 122 題 | 核心考點：名詞位置（主詞） (難易度：低)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">A written <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> from the store manager is required to obtain a refund for opened merchandise.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">需要商店經理的書面授權才能對已拆封的商品辦理退款。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) authorize</td><td>(B) authorized</td></tr>
+        <tr><td class="correct-option">(C) authorization <span class="badge-correct">正確答案</span></td><td>(D) authorizing</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於不定冠詞 A 與形容詞 written 之後，且後接介系詞片語 "from the store manager"，此處需要填入單數名詞作為句子的主詞。<br>
+                        <strong>2. 核心判定：</strong>選項中唯一名詞為 (C) authorization（授權，核准）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) authorize 是動詞，(B) authorized 是形容詞/分詞，(D) authorizing 是分詞，均不符合主詞名詞位置。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">merchandise</td><td class="vocab-pos">n.</td><td class="vocab-meaning">商品，貨物</td></tr><tr><td class="vocab-word">refund</td><td class="vocab-pos">n.</td><td class="vocab-meaning">退款</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 123 題 | 核心考點：介系詞 concerning (關於) (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">Any questions <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> the new employee benefits package should be directed to the HR department.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">任何關於新員工福利方案的問題都應直接反映給人力資源部。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) concerning <span class="badge-correct">正確答案</span></td><td>(B) throughout</td></tr>
+        <tr><td>(C) between</td><td>(D) alongside</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於名詞 Any questions 與受詞 the new employee... 之間，需要一個介系詞連接。<br>
+                        <strong>2. 核心判定：</strong>表示「關於...（相當於 regarding 或 about）」的介系詞是 (A) concerning。<br>
+                        <strong>3. 干擾項排除：</strong>(B) throughout 表示遍及，(C) between 表示在兩者之間，(D) alongside 表示在...旁邊，均不合語意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">benefits package</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">福利方案</td></tr><tr><td class="vocab-word">direct to</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">轉寄給，引導至</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 124 題 | 核心考點：助動詞 would / 過去未來式與主句時態呼應 (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The marketing consultant predicted that the new campaign <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> attract younger consumers.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">行銷顧問預測，新活動將吸引年輕消費者。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) would <span class="badge-correct">正確答案</span></td><td>(B) will</td></tr>
+        <tr><td>(C) must</td><td>(D) should</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>that 引導的賓語子句中，主詞是 the new campaign，後面接動詞原型 attract。主句動詞是過去式 predicted。<br>
+                        <strong>2. 核心判定：</strong>在主句是過去式時，從屬子句中表示未來的 will 應改為過去式 (A) would 以保持時態一致。<br>
+                        <strong>3. 干擾項排除：</strong>(B) will 是現在/未來式，(C) must 表示必須，(D) should 表示應該，均不符時態呼應或語氣。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">predict</td><td class="vocab-pos">v.</td><td class="vocab-meaning">預測，預言</td></tr><tr><td class="vocab-word">consumer</td><td class="vocab-pos">n.</td><td class="vocab-meaning">消費者</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 125 題 | 核心考點：形容詞詞彙 (難易度：高)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The finance committee requested a <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> analysis of the potential investment risks before making a decision.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">財務委員會在做出決定之前，要求對潛在的投資風險進行嚴格的分析。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) compulsory</td><td class="correct-option">(B) rigorous <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) perpetual</td><td>(D) temporary</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於不定冠詞 a 與名詞 analysis 之間，需要填入形容詞。<br>
+                        <strong>2. 核心判定：</strong>分析投資風險需要「嚴格的、嚴密的」審查，選項中 (B) rigorous（嚴格的，嚴密的）最符合語境。<br>
+                        <strong>3. 干擾項排除：</strong>(A) compulsory 表示強制的，(C) perpetual 表示永久的，(D) temporary 表示臨時的，均與分析品質的修飾不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">rigorous</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">嚴格的，嚴密的</td></tr><tr><td class="vocab-word">potential</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">潛在的，可能的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 126 題 | 核心考點：祈使語句/命令動詞後的 that 子句 (省略 should 之動詞原型) (難易度：高)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The CEO suggested that the marketing director <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> the campaign proposals before the board meeting.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">執行長建議，行銷總監應在董事會會議之前審查活動提案。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) review <span class="badge-correct">正確答案</span></td><td>(B) reviews</td></tr>
+        <tr><td>(C) reviewed</td><td>(D) reviewing</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>句型為 "The CEO suggested that the marketing director [126]..."。主句動詞 suggested 表示建議，後接 that 子句時，子句動詞須使用動詞原型（即 should + 動詞原型，should 省略）。<br>
+                        <strong>2. 核心判定：</strong>根據此文法規則，應填入動詞原型 (A) review。<br>
+                        <strong>3. 干擾項排除：</strong>(B) reviews 是單數限定動詞，(C) reviewed 是過去式，(D) reviewing 是分詞，均不符合該 subjunctive 結構。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">suggest</td><td class="vocab-pos">v.</td><td class="vocab-meaning">建議，提議</td></tr><tr><td class="vocab-word">proposal</td><td class="vocab-pos">n.</td><td class="vocab-meaning">提案，建議</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 127 題 | 核心考點：修飾比較級的副詞 much (難易度：高)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The newly upgraded conveyor belt in the factory runs <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> faster than the older model.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">工廠中新升級的傳送帶運行速度比舊型號快得多。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) much <span class="badge-correct">正確答案</span></td><td>(B) very</td></tr>
+        <tr><td>(C) more</td><td>(D) so</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格後面是比較級副詞 faster，此處需要填入一個修飾比較級的程度副詞。<br>
+                        <strong>2. 核心判定：</strong>能用來修飾比較級（faster）的副詞有 much, far, even, still, a lot 等。選項中只有 (A) much 符合。<br>
+                        <strong>3. 干擾項排除：</strong>(B) very、(D) so 只能用來修飾原級形容詞或副詞；(C) more 本身就是比較級標誌，與 faster 構成雙重比較級為語法錯誤。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">conveyor belt</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">傳送帶，輸送帶</td></tr><tr><td class="vocab-word">fast</td><td class="vocab-pos">adv./adj.</td><td class="vocab-meaning">快速地；快速的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 128 題 | 核心考點：動詞詞彙 (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The administrative assistant was hired to <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> daily office activities and coordinate schedules.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">雇用行政助理是為了監督日常辦公室活動並協調日程表。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) oversee <span class="badge-correct">正確答案</span></td><td>(B) overlooked</td></tr>
+        <tr><td>(C) oversight</td><td>(D) overseer</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 to 之後，需要填入動詞原型。後面接受詞 "daily office activities"。<br>
+                        <strong>2. 核心判定：</strong>表示「監督，管理（活動）」的動詞原型是 (A) oversee。<br>
+                        <strong>3. 干擾項排除：</strong>(B) overlooked 是過去式或過去分詞（且意思多指「忽略」），(C) oversight 是名詞（疏忽，監督），(D) overseer 是名詞（監督者），均不符。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">administrative</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">行政的</td></tr><tr><td class="vocab-word">coordinate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">協調</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 129 題 | 核心考點：形容詞與副詞修飾關係 (難易度：中)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The auditor pointed out that the financial statement was <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> prepared and lacked supporting documentation.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">審計師指出，該財務報表製作得過於倉促，且缺乏佐證文件。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td>(A) hasty</td><td class="correct-option">(B) hastily <span class="badge-correct">正確答案</span></td></tr>
+        <tr><td>(C) haste</td><td>(D) hastiness</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格位於 be 動詞 was 與過去分詞 prepared 之間，需要副詞修飾 prepared。<br>
+                        <strong>2. 核心判定：</strong>選項中 (B) hastily（倉促地，急忙地）為副詞，修飾 prepared。<br>
+                        <strong>3. 干擾項排除：</strong>(A) hasty 是形容詞，(C) haste 是名詞，(D) hastiness 是名詞，均不能修飾分詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">auditor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">審計師，查帳員</td></tr><tr><td class="vocab-word">hastily</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">倉促地，急忙地</td></tr><tr><td class="vocab-word">documental</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">文件的，證書的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question-header">第 130 題 | 核心考點：條件連接詞 provided that (只要) (難易度：高)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Sentence</div>
+                        <p class="font-serif text-lg leading-relaxed">The bank will approve the loan application <span style="text-decoration: underline; font-weight: bold; color: #2b6cb0; padding: 0 4px;">_______</span> the applicant provides a valid proof of income.</p>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <p class="text-sm leading-relaxed text-slate-600">只要申請人提供有效的收入證明，銀行就會批准其貸款申請。</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <table class="options-table">
+        <tr><td class="correct-option">(A) provided that <span class="badge-correct">正確答案</span></td><td>(B) in order that</td></tr>
+        <tr><td>(C) as though</td><td>(D) even if</td></tr>
+        </table>
+                <div class="explanation-box">
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>空格連接兩個完整子句 "The bank will approve..." 與 "the applicant provides..."。<br>
+                        <strong>2. 核心判定：</strong>表示條件「只要...，在...條件下（相當於 as long as 或 if）」的從屬連接詞是 (A) provided that。<br>
+                        <strong>3. 干擾項排除：</strong>(B) in order that 表示目的（為了...），(C) as though 表示讓步（彷彿...），(D) even if 表示讓步（即使...），均不符合句意邏輯。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">approve</td><td class="vocab-pos">v.</td><td class="vocab-meaning">批准</td></tr><tr><td class="vocab-word">proof of income</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">收入證明</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 多益 Test 4 Part 5 核心考點與解題思維</div>
+        <ul class="expert-list">
+            <li><strong>主詞與動詞的一致性 (Subject-Verb Agreement)：</strong>Q115 考查了核心主詞的判斷。當主詞是 "Each of the + 複數名詞" 時，核心主詞是代名詞 "Each"（單數），因此謂語動詞必須用單數 (is)，不可被複數名詞 managers 誤導。</li><li><strong>比較級程度修飾副詞 (Comparative Modifiers)：</strong>Q127 考查了比較級的修飾詞。在多益中，形容詞/副詞比較級（如 faster）前面需要程度修飾副詞時，只能用 much, far, even, still, a lot，絕對不能用 very 或 so，這是極高頻的文法陷阱。</li><li><strong>表示建議/命令之動詞 that 子句 (Subjunctive Mood)：</strong>Q126 考查了 "suggest that sb (should) do" 句型。當主句動詞為 suggest, recommend, request, demand 時，從句中不論主詞是第三人稱單數還是複數，動詞一概使用原型 (review)。</li><li><strong>易混淆的介系詞與連接詞原因判定：</strong>Q112 考查了 due to。 due to 可作為形容詞片語置於 be 動詞後作表語。此外，需注意 because of 也是介系詞，而 because 則是連接詞。作答時必須嚴格判定空格後是「名詞片語」還是「有動詞的子句」。</li><li><strong>關係代名詞所有格 (Relative Possessive Pronoun)：</strong>Q113 考查了 whose 的用法。當先行詞在關係子句中扮演「所有格」（...的焦點：consultant's primary focus）時，必須使用 whose 連接。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>
