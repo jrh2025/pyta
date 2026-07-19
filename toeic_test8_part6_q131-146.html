@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Test 8 Part 6 短文填空";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-inside: avoid; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 8px 12px;
+    font-weight: bold; 
+    font-size: 10pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 10px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 12px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    padding-right: 12px !important;
+    text-align: justify;
+}
+.blank-line {
+    font-weight: bold;
+    color: #2b6cb0;
+    text-decoration: underline;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    padding-left: 12px !important;
+    text-align: justify;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 12px;
+}
+.question-item {
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 12px;
+}
+.question-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 9pt;
+    margin-bottom: 6px;
+}
+
+.options-table { 
+    width: 100%; 
+    margin-bottom: 6px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 4px 6px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 9.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 7.5pt; 
+    padding: 1px 4px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 4px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #1a365d;
+    padding: 8px 10px;
+    margin-top: 6px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+}
+.exp-title {
+    font-weight: bold;
+    color: #2c5282;
+    margin-bottom: 3px;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 8.5pt;
+    padding: 5px 6px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 4px 6px; 
+    font-size: 8.5pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 20px; 
+    padding: 12px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 10pt; 
+    margin-bottom: 6px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 15px; 
+    font-size: 8.5pt; 
+    color: #2d3748; 
+    line-height: 1.45;
+}
+.expert-list li { 
+    margin-bottom: 5px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 8 - PART 6 短文填空精選解析 (第 131 – 146 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 131-134 refer to the following e-mail. (131-134 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>To:</b> All Staff &lt;staff@velologistics.com&gt;<br>
+    <b>From:</b> Marcus Thorne &lt;mthorne@velologistics.com&gt;<br>
+    <b>Date:</b> July 18<br>
+    <b>Subject:</b> Security Access System Upgrade
+  </p>
+  <p class="mb-2">Dear Colleagues,</p>
+  <p class="mb-2">Please be informed that Velo Logistics is upgrading its facility entrance security. A new biometric scan system will be <b>131. (_______)</b> at all entry points next week. This upgrade is necessary <b>132. (_______)</b> enhancing our physical security measures and protecting sensitive corporate databanks. <b>133. (_______)</b>. <b>134. (_______)</b>, employees must register their fingerprints at the security office on the ground floor beforehand.</p>
+  <p class="mb-2">Thank you for your cooperation in making our workplace safer.</p>
+  <p>Sincerely,<br>Marcus Thorne<br>Operations Director, Velo Logistics</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>收件者：</b>全體員工 &lt;staff@velologistics.com&gt;<br>
+    <b>寄件者：</b>Marcus Thorne &lt;mthorne@velologistics.com&gt;<br>
+    <b>日期：</b>7 月 18 日<br>
+    <b>主旨：</b>安全門禁系統升級
+  </p>
+  <p class="mb-2">親愛的同仁：</p>
+  <p class="mb-2">請注意，Velo Logistics 正在升級其設施入口安全性。下週將在所有入口處安裝全新的生物辨識掃描系統。這次升級對於增強我們的物理安全措施並保護敏感的公司數據庫是必要的。<b>[133]</b>。<b>[134]</b>，員工必須事先在大樓一樓的安全辦公室登記指紋。</p>
+  <p class="mb-2">感謝您在使我們的工作場所更安全方面的配合。</p>
+  <p>謹啟，<br>Marcus Thorne<br>Velo Logistics 營運總監</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 131 題 | 核心考點：詞性判定 - 被動態動詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) install</td><td class="correct-option">(B) installed <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) installation</td><td>(D) installer</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">下週將在所有入口處安裝全新的生物辨識掃描系統。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>will be (助動詞被動標記) + _______ (過去分詞作主要動詞)。<br>
+                        <strong>2. 核心判定：</strong>句子表示被動動作（系統「被安裝」），因此 should select 過去分詞 installed。選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) install 為動詞原形，(C) installation 為名詞，(D) installer 為名詞安裝者。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 132 題 | 核心考點：介系詞 - 語意搭配 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) for <span class="badge-correct">正確答案</span></td><td>(B) with</td></tr>
+            <tr><td>(C) to</td><td>(D) in</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這次升級對於增強我們的物理安全措施是必要的。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>necessary (形容詞) + _______ (介系詞) + enhancing (動名詞)。<br>
+                        <strong>2. 核心判定：</strong>「對於...是必要的」通常搭配介系詞 for，即 necessary for doing something。故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) necessary with 不合搭配，(C) to 與 (D) in 亦不能與 necessary 搭配表達此意。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 133 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) The old keycards will no longer function after Friday. <span class="badge-correct">正確答案</span></td><td>(B) Velo Logistics has reported high-volume logistics revenue.</td></tr>
+            <tr><td>(C) A detailed blueprint of the warehouse is attached.</td><td>(D) All office desks must be rearranged beforehand.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">舊的感應卡在週五之後將不再起作用。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>前句提到「新生物辨識系統將被安裝」，後句提到「員工必須登記指紋」。中間插入關於舊系統淘汰的說明最順暢。<br>
+                        <strong>2. 核心判定：</strong>「舊的感應卡將不再起作用（no longer function）」正好銜接了新系統的安裝，說明更換門禁的緊迫性。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 物流收入無關、(C) 倉庫藍圖無關、(D) 重新排列辦公桌無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 134 題 | 核心考點：連接詞 - 連接副詞的因果邏輯 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Consequently <span class="badge-correct">正確答案</span></td><td>(B) However</td></tr>
+            <tr><td>(C) Although</td><td>(D) Otherwise</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因此，員工必須事先在安全辦公室登記指紋。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>_______ (副詞) + 逗號 (,) + employees must register... (結果子句)。<br>
+                        <strong>2. 核心判定：</strong>前文說明了舊卡即將失效並改用新指紋掃描，此句是「因此，員工必須登記指紋」的結論。適合的因果連接副詞為 Consequently (因此/結果)。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) However 表示轉折，(C) Although 為從屬連接詞（後面不能直接加逗號），(D) Otherwise 否則。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">biometric</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">生物辨識的</td></tr><tr><td class="vocab-word">consequently</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">因此，結果</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 135-138 refer to the following notice. (135-138 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-1">Apex Tech Solutions - Maintenance Advisory</h4>
+  <p class="mb-2">To maintain the highest level of network stability, Apex Tech Solutions <b>135. (_______)</b> routine server database backup maintenance on Saturday, July 25. The maintenance window is scheduled from 10:00 p.m. to 2:00 a.m. the following morning.</p>
+  <p class="mb-2">We anticipate minimal <b>136. (_______)</b> to your cloud operations during this process. However, to prevent any potential data loss, we strongly recommend that you save all active files and log out of <b>137. (_______)</b> portals before the maintenance begins. <b>138. (_______)</b>.</p>
+  <p class="text-xs">Apex IT Support Team</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-1">Apex Tech Solutions - 維護公告</h4>
+  <p class="mb-2">為維持最高水準的網路穩定性，Apex Tech Solutions 將於 7 月 25 日星期六 <b>[135]</b> 例行伺服器資料庫備份維護。維護窗口時間定於晚上 10:00 至次日凌晨 2:00。</p>
+  <p class="mb-2">在此過程中，我們預計對您的雲端作業干擾最小 <b>[136]</b>。然而，為了防止任何潛在的數據遺失，我們強烈建議您在維護開始前保存所有使用中的檔案，並登出 <b>[137]</b> 的入口網站。<b>[138]</b>。</p>
+  <p class="text-xs">Apex IT 支援團隊</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 135 題 | 核心考點：時態與語態 - 未來式動詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) conduct</td><td class="correct-option">(B) will conduct <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) conducted</td><td>(D) conducting</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Apex Tech Solutions 將於 7 月 25 日星期六進行例行伺服器資料庫備份維護。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Apex Tech Solutions (單數主詞) + _______ (未來式動詞) + routine maintenance + on Saturday, July 25 (未來時間點)。<br>
+                        <strong>2. 核心判定：</strong>該維護安排在未來的 July 25，應選未來式 (B) will conduct。<br>
+                        <strong>3. 干擾項排除：</strong>(A) conduct 為原形動詞（主詞為單數，不可用 conduct），(C) conducted 為過去式，(D) conducting 為分詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 136 題 | 核心考點：商務字彙 - 名詞語意搭配 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) disruption <span class="badge-correct">正確答案</span></td><td>(B) compliance</td></tr>
+            <tr><td>(C) threshold</td><td>(D) appreciation</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在此過程中，我們預計對您的雲端作業干擾最小。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>minimal (形容詞) + _______ (受詞名詞) + to your cloud operations.<br>
+                        <strong>2. 核心判定：</strong>在伺服器維修公告中，常指對客戶業務帶來「干擾/中斷（disruption）」。minimal disruption 為固定說法。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) compliance 遵守，(C) threshold 門檻，(D) appreciation 感激。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 137 題 | 核心考點：代名詞 - 所有格修飾名詞 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td>(A) you</td><td class="correct-option">(B) your <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) yours</td><td>(D) yourself</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">登出您的入口網站。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>log out of (及物動詞片語) + _______ (所有格修飾名詞) + portals (複數名詞)。<br>
+                        <strong>2. 核心判定：</strong>修飾後方名詞 portals，應使用所有格代名詞 your (您的)。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) you 為主/受格，(C) yours 為所有格代名詞，(D) yourself 為反身代名詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 138 題 | 核心考點：篇章插句題 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Thank you for your patience and cooperation as we upgrade our systems. <span class="badge-correct">正確答案</span></td><td>(B) Please purchase four ergonomic chairs for the tech office.</td></tr>
+            <tr><td>(C) The billing statement must be reviewed by the operations director.</td><td>(D) A new menu has been added to the organic café.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">感謝您在我們升級系統時的耐心與配合。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>置於維修通知的結尾，適合作為結尾客套話。<br>
+                        <strong>2. 核心判定：</strong>「感謝耐心與配合（patience and cooperation）」是典型的系統升級通知結尾。對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 買人體工學椅無關、(C) 審閱帳單報表無關、(D) 咖啡館新菜單無關。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">stability</td><td class="vocab-pos">n.</td><td class="vocab-meaning">穩定性</td></tr><tr><td class="vocab-word">anticipate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">預期，期望</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 139-142 refer to the following notice. (139-142 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Luminary Co-working - Building Announcement</h4>
+  <p class="mb-2">Dear Tenants,</p>
+  <p class="mb-2">We are pleased to announce that new office furniture is arriving this week. The <b>139. (_______)</b> of the new boardroom tables will begin on Wednesday morning. Please expect some <b>140. (_______)</b> noise in the shared workspace during the installation process.</p>
+  <p class="mb-2">The technicians are scheduled to work <b>141. (_______)</b> 9:00 a.m. and 12:00 p.m. to complete the setup. We apologize for this temporary inconvenience. <b>142. (_______)</b>. Thank you for your cooperation.</p>
+  <p class="text-xs">Sarah Jenkins<br>Community Manager, Luminary Co-working</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Luminary 共享辦公空間 - 大樓公告</h4>
+  <p class="mb-2">親愛的租戶們：</p>
+  <p class="mb-2">我們很高興地宣布，本週將有新的辦公家具送達。新會議桌的 <b>[139]</b> 將於週三上午開始。在安裝過程中，請預期共享工作空間中會有一些 <b>[140]</b> 的噪音。</p>
+  <p class="mb-2">技術人員安排在上午 9:00 <b>[141]</b> 中午 12:00 之間工作，以完成安裝設定。對於這次臨時帶來的不便，我們深表歉意。<b>[142]</b>。感謝您的配合。</p>
+  <p class="text-xs">Sarah Jenkins<br>Luminary 共享辦公社區經理</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 139 題 | 核心考點：詞性判定 - 名詞作主詞 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td>(A) assemble</td><td class="correct-option">(B) assembly <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) assembled</td><td>(D) assembler</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">新會議桌的組裝將於週三上午開始。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>The (定冠詞) + _______ (名詞主詞) + of the new boardroom tables will begin...<br>
+                        <strong>2. 核心判定：</strong>空格處為名詞作主詞，表示組裝的動作，應選 (B) assembly。<br>
+                        <strong>3. 干擾項排除：</strong>(A) assemble 為動詞，(C) assembled 為過去式/分詞，(D) assembler 為裝配工（不合語意）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 140 題 | 核心考點：詞性判定 - 形容詞修飾名詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) temporary <span class="badge-correct">正確答案</span></td><td>(B) temporarily</td></tr>
+            <tr><td>(C) temporaryness</td><td>(D) temporariness</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在安裝過程中，請預期共享工作空間中會有一些臨時的噪音。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>some + _______ (形容詞修飾名詞) + noise (名詞) + in the shared workspace.<br>
+                        <strong>2. 核心判定：</strong>空格修飾名詞 noise，應為形容詞。故選 (A) temporary (臨時的/暫時的)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) temporarily 為副詞，(C) 與 (D) 為拼寫錯誤或不常見的名詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 141 題 | 核心考點：介系詞 - 時間介系詞搭配 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td>(A) from</td><td class="correct-option">(B) between <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) among</td><td>(D) through</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">技術人員安排在上午 9:00 到中午 12:00 之間工作。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>work + _______ (介系詞) + 9:00 a.m. and 12:00 p.m. (兩個時間點並列)。<br>
+                        <strong>2. 核心判定：</strong>後接 A and B，對應的介系詞為 between ... and ... (在...與...之間)。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) from 常用搭配為 from A to B，(C) among 用於三者（以上）之中，(D) through 穿過/直到。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 142 題 | 核心考點：篇章插句題 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) We advise using the quiet zones on the third floor if you require silence. <span class="badge-correct">正確答案</span></td><td>(B) Our sales department is offering a 10% discount this month.</td></tr>
+            <tr><td>(C) Bidding documents must be uploaded to the portal by Friday.</td><td>(D) Please sign a one-year database hosting agreement.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果您需要安靜，我們建議使用三樓的安靜區域。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>前文提到「會有臨時噪音，表示歉意」，此句提供租戶應對噪音的解決方案。<br>
+                        <strong>2. 核心判定：</strong>「建議使用三樓的安靜區域（quiet zones）」與前面噪音公告邏輯上完美呼應。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 促銷折扣無關、(C) 投標文件無關、(D) 資料庫協議無關。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">assembly</td><td class="vocab-pos">n.</td><td class="vocab-meaning">組裝，集會</td></tr><tr><td class="vocab-word">temporary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">臨時的，暫時的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 143-146 refer to the following memo. (143-146 題參照以下備忘錄。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-2">
+    <b>To:</b> Department Directors<br>
+    <b>From:</b> Julian Vance, Finance Department<br>
+    <b>Date:</b> August 25<br>
+    <b>Subject:</b> Travel Expense Approval Changes
+  </p>
+  <p class="mb-2">This memo is to notify you that the travel expense reimbursement approval process <b>143. (_______)</b> to improve efficiency. Under the updated policy, all individual dining claims that <b>144. (_______)</b> $50 require an original receipt. <b>145. (_______)</b>. Your strict <b>146. (_______)</b> with these new measures is highly appreciated.</p>
+  <p>Thank you for your cooperation in implementing this system transition.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-2">
+    <b>收件者：</b>部門主管<br>
+    <b>寄件者：</b>Julian Vance，財務部<br>
+    <b>日期：</b>8 月 25 日<br>
+    <b>主旨：</b>差旅費核准變更
+  </p>
+  <p class="mb-2">本備忘錄旨在通知您，差旅費報銷核准流程 <b>[143]</b> 以提高效率。根據更新後的政策，所有超過 50 美元的個人用餐報銷申請 <b>[144]</b> 都需要原始收據。<b>[145]</b>。非常感謝您嚴格 <b>[146]</b> 這些新措施。</p>
+  <p>感謝您在實施此系統過渡時的配合。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 143 題 | 核心考點：時態與語態 - 現在完成式被動態 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) modify</td><td>(B) modifies</td></tr>
+            <tr><td>(C) was modified</td><td class="correct-option">(D) has been modified <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">差旅費報銷核准流程已被修改以提高效率。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>the travel expense... process (主詞) + _______ (動詞) + to improve (不定詞目的)。<br>
+                        <strong>2. 核心判定：</strong>流程「被修改」是從過去持續到現在的影響，表示目前政策已被改動，應使用現在完成式被動態 has been modified。選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) modify 為複數動詞，(B) modifies 為主動單三，(C) was modified 為過去式被動（此處 emphasize 已經完成的狀態，現在完成式更優）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 144 題 | 核心考點：商務字彙 - 動詞語意搭配 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) exceed <span class="badge-correct">正確答案</span></td><td>(B) audit</td></tr>
+            <tr><td>(C) comply</td><td>(D) transition</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">所有超過 50 美元的個人用餐報銷申請都需要原始收據。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>dining claims that (關係子句主格) + _______ (動詞) + $50 (受詞金額)。<br>
+                        <strong>2. 核心判定：</strong>「金額超過 50 美元」，選及物動詞 exceed (超過/多於)。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) audit 審計，(C) comply 遵守（不及物，需配 with），(D) transition 轉渡。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 145 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Furthermore, department directors must sign all claim forms beforehand. <span class="badge-correct">正確答案</span></td><td>(B) Technicians are currently resolving database connection issues.</td></tr>
+            <tr><td>(C) All saving accounts will receive a deposit credit of $50.</td><td>(D) A community welcome event is scheduled for Wednesday.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">此外，部門主管必須事先在所有報銷表上簽名。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>接在「報銷收據要求政策」之後，說明主管的審核職責。<br>
+                        <strong>2. 核心判定：</strong>「此外，部門主管必須事先簽核（Furthermore, department directors must sign...）」是報銷流程政策的進一步說明。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 資料庫連線無關、(C) 開戶存款額度無關、(D) 社區歡迎活動無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 146 題 | 核心考點：商務字彙 - 名詞語意搭配與介系詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) compliance <span class="badge-correct">正確答案</span></td><td>(B) threshold</td></tr>
+            <tr><td>(C) breakdown</td><td>(D) constraint</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">非常感謝您嚴格遵守這些新措施。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Your strict + _______ (名詞) + with these new measures (介系詞搭配)。<br>
+                        <strong>2. 核心判定：</strong>名詞與介系詞 with 搭配，且表示「遵守」，應選 compliance (compliance with...)。選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) threshold 門檻，(C) breakdown 明細，(D) constraint 限制。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">exceed</td><td class="vocab-pos">v.</td><td class="vocab-meaning">超過，多於</td></tr><tr><td class="vocab-word">compliance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">遵守，符合</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 TEST 8 PART 6 核心考點</div>
+        <ul class="expert-list">
+            <li><strong>主被動態與完成式被動的判定：</strong>Part 6 完形填空極度偏好時態與被動語態的結合。例如新系統「將被安裝」（will be installed），核准流程「已被修改」（has been modified），作答時需藉助上下文的時間關聯性來推導出正確的被動時態。</li><li><strong>上下文因果銜接的連接副詞：</strong>例如 Consequently（因此）、However（然而）。在引導結論句時，需理清前後句的因果關係（如感應卡停用，所以「因此」需要辦理指紋登記）。</li><li><strong>介系詞與搭配結構的熟記：</strong>許多題目考查特定動名詞或名詞前的介系詞。例如 necessary for doing sth（對於做某事是必要的），between A and B（在 A 與 B 之間），以及 compliance with（對...的遵守）。</li><li><strong>段落插句的逻辑承接與指代：</strong>插句通常扮演「進一步說明（Furthermore）」或「提供替代方案（We advise using quiet zones）」的角色。解題時應尋找插句中是否有指代詞或語意承接，使其能平滑融入段落中。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

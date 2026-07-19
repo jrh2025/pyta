@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新多益 READING TEST 9 - 100題完整模擬試卷</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body {
+  font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+  background-color: #f1f5f9;
+}
+.custom-shadow {
+  box-shadow: 0 4px 20px -2px rgba(26, 54, 93, 0.06), 0 2px 8px -1px rgba(26, 54, 93, 0.03);
+}
+.active-nav {
+  background-color: #1a365d;
+  color: #white;
+  font-weight: 900;
+}
+.inactive-nav {
+  color: #4a5568;
+}
+.inactive-nav:hover {
+  background-color: #e2e8f0;
+}
+.correct-option {
+  border-color: #10b981 !important;
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+}
+.incorrect-option {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+  color: #991b1b !important;
+}
+.unselected-option {
+  opacity: 0.6;
+  border-color: #e2e8f0;
+}
+</style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+
+<!-- 頂部精美導覽列 -->
+<nav class="bg-[#1a365d] text-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="hover:text-amber-400 transition flex items-center gap-1.5">
+        <i class="fa-solid fa-house-chimney text-lg"></i>
+      </a>
+      <div class="h-4 w-px bg-slate-500 mx-1"></div>
+      <span class="font-black text-sm sm:text-base tracking-wider uppercase text-amber-400">TOEIC TEST 9 模擬測驗</span>
+    </div>
+    
+    <!-- 計時器面板 -->
+    <div class="flex items-center gap-4 bg-slate-900/50 px-4 py-1.5 rounded-full border border-slate-700 backdrop-blur-sm">
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid fa-clock text-amber-400 text-sm animate-pulse"></i>
+        <span id="timer-display" class="font-mono text-base font-black text-white">75:00</span>
+      </div>
+      <button id="btn-timer-toggle" onclick="toggleTimer()" class="text-xs font-bold text-slate-300 hover:text-white transition">
+        <i class="fa-solid fa-pause mr-0.5"></i> 暫停
+      </button>
+      <div class="w-px bg-slate-700 h-3"></div>
+      <button onclick="confirmSubmitQuiz()" class="text-xs font-black text-emerald-400 hover:text-emerald-300 transition">
+        <i class="fa-solid fa-paper-plane mr-0.5"></i> 交卷結算
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 頂部各 Part 切換 -->
+<div id="part-nav" class="bg-white border-b border-slate-200 shadow-sm sticky top-[61px] z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex justify-between items-center gap-4">
+    <div class="flex gap-1.5 bg-slate-100 p-1 rounded-xl">
+      <button id="btn-part5" onclick="switchPart(5)" class="px-3.5 py-2 rounded-lg text-xs font-black transition active-nav">
+        Part 5 單句填空
+      </button>
+      <button id="btn-part6" onclick="switchPart(6)" class="px-3.5 py-2 rounded-lg text-xs font-black transition inactive-nav">
+        Part 6 短文填空
+      </button>
+      <button id="btn-part7" onclick="switchPart(7)" class="px-3.5 py-2 rounded-lg text-xs font-black transition inactive-nav">
+        Part 7 閱讀理解
+      </button>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="completion-badge" class="bg-slate-100 text-slate-600 text-[10px] font-black px-2.5 py-1 rounded-full">
+        已答 0 / 100 題 (0%)
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 主內容區 -->
+<main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex-grow">
+  
+  <!-- A. 模擬測驗作答區 -->
+  <div id="exam-mode-container" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    
+    <!-- 左/中欄：題目內容區 -->
+    <div class="lg:col-span-8 space-y-6">
+      
+      <!-- PART 5 區塊 -->
+      <div id="part5-container" class="space-y-6">
+        <div class="bg-amber-50/50 border border-amber-200/50 p-4 rounded-2xl">
+          <h2 class="font-extrabold text-[#1a365d] text-base mb-1">Part 5 單句填空 (第 101 - 130 題)</h2>
+          <p class="text-xs text-slate-500 leading-relaxed">請在每題的四個選項中選出最適合填入空格的答案。</p>
+        </div>
+        <div id="part5-questions-list" class="space-y-6">
+          <!-- JS -->
+        </div>
+      </div>
+
+      <!-- PART 6 區塊 -->
+      <div id="part6-container" class="hidden space-y-6">
+        <div class="bg-purple-50/50 border border-purple-200/50 p-4 rounded-2xl flex justify-between items-center">
+          <div>
+            <h2 class="font-extrabold text-[#1a365d] text-base mb-1">Part 6 短文填空 (第 131 - 146 題)</h2>
+            <p id="part6-passage-indicator" class="text-xs text-slate-500 leading-relaxed">請在短文中的空格選出最適當的字詞或句子。</p>
+          </div>
+          <div class="flex gap-1" id="part6-passage-nav">
+            <!-- JS -->
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div class="md:col-span-6 bg-white p-6 rounded-2xl border border-slate-200/80 custom-shadow leading-relaxed text-base">
+            <h3 class="font-black text-[#1a365d] border-b pb-2 mb-4 flex items-center justify-between text-sm sm:text-base">
+              <span id="part6-passage-title-en"></span>
+              <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">Part 6 Article</span>
+            </h3>
+            <div id="part6-passage-en-content" class="text-slate-800 space-y-4 text-justify">
+              <!-- JS -->
+            </div>
+          </div>
+          <div class="md:col-span-6 space-y-4" id="part6-questions-list">
+            <!-- JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 7 區塊 -->
+      <div id="part7-container" class="hidden space-y-6">
+        <div class="bg-emerald-50/50 border border-emerald-200/50 p-4 rounded-2xl flex flex-wrap justify-between items-center gap-2">
+          <div>
+            <h2 class="font-extrabold text-[#1a365d] text-base mb-1">Part 7 閱讀理解 (第 147 - 200 題)</h2>
+            <p id="part7-passage-indicator" class="text-xs text-slate-500 leading-relaxed">請根據單篇或多篇閱讀長文回答問題。</p>
+          </div>
+          <div class="flex flex-wrap gap-1" id="part7-passage-nav">
+            <!-- JS -->
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div class="md:col-span-6 bg-white p-6 rounded-2xl border border-slate-200/80 custom-shadow leading-relaxed text-base">
+            <h3 class="font-black text-[#1a365d] border-b pb-2 mb-4 flex items-center justify-between text-sm sm:text-base">
+              <span id="part7-passage-title-en"></span>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Part 7 Article</span>
+            </h3>
+            <div id="part7-passage-en-content" class="text-slate-850 space-y-4 text-justify">
+              <!-- JS -->
+            </div>
+          </div>
+          <div class="md:col-span-6 space-y-4" id="part7-questions-list">
+            <!-- JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 右欄：101-200 題答題狀態卡片 -->
+    <div class="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200 custom-shadow lg:sticky lg:top-[128px]">
+      <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <h3 class="font-extrabold text-[#1a365d] text-sm sm:text-base">
+          <i class="fa-solid fa-list-check mr-1.5"></i> 答題狀態總覽 (101-200)
+        </h3>
+      </div>
+      
+      <div class="space-y-4 max-h-[500px] overflow-y-auto pr-1">
+        <div>
+          <div class="text-[10px] font-bold text-slate-400 mb-1.5">PART 5 單句填空</div>
+          <div id="grid-status-part5" class="grid grid-cols-6 gap-1.5 text-center">
+            <!-- JS -->
+          </div>
+        </div>
+        <div class="border-t pt-3">
+          <div class="text-[10px] font-bold text-slate-400 mb-1.5">PART 6 短文填空</div>
+          <div id="grid-status-part6" class="grid grid-cols-6 gap-1.5 text-center">
+            <!-- JS -->
+          </div>
+        </div>
+        <div class="border-t pt-3">
+          <div class="text-[10px] font-bold text-slate-400 mb-1.5">PART 7 閱讀理解</div>
+          <div id="grid-status-part7" class="grid grid-cols-6 gap-1.5 text-center">
+            <!-- JS -->
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-slate-100 pt-4 mt-4">
+        <button onclick="confirmSubmitQuiz()" class="w-full py-3 bg-[#1a365d] hover:bg-blue-800 text-white rounded-xl text-xs font-black shadow transition">
+          <i class="fa-solid fa-paper-plane mr-1"></i> 確認交卷，結算分數
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- B. 測驗結果報告 (交卷後解鎖) -->
+  <div id="report-mode-container" class="hidden space-y-8">
+    
+    <!-- 成績卡片與能力指標 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- 總分卡 -->
+      <div class="bg-gradient-to-br from-[#1a365d] to-[#2c5282] text-white rounded-2xl p-6 flex flex-col justify-between custom-shadow relative overflow-hidden">
+        <div class="absolute -right-4 -bottom-4 text-white/5 text-9xl font-black">TOEIC</div>
+        <div class="space-y-1">
+          <span class="text-xs font-black text-amber-400 uppercase tracking-widest">Mock Exam Result</span>
+          <h3 class="text-lg font-black">測驗得分報告</h3>
+        </div>
+        <div class="py-4 text-center">
+          <span id="report-score" class="text-6xl font-black text-amber-400">0</span>
+          <span class="text-slate-300 text-lg font-bold mx-1">/ 100 題</span>
+        </div>
+        <div class="border-t border-white/10 pt-3 flex justify-between items-center text-xs">
+          <span>預估多益閱讀成績:</span>
+          <span id="report-score-range" class="font-black text-emerald-400">--- 分</span>
+        </div>
+      </div>
+
+      <!-- 進度與弱點分析 -->
+      <div class="md:col-span-2 bg-white rounded-2xl p-6 border border-slate-200 custom-shadow flex flex-col justify-between">
+        <div class="space-y-1">
+          <h3 class="font-extrabold text-[#1a365d] text-base"><i class="fa-solid fa-chart-pie mr-1"></i> 多維度能力分析</h3>
+          <p class="text-xs text-slate-400">分析您在各個 Part 的正確率，找出您的弱點單元。</p>
+        </div>
+        
+        <div class="space-y-4 py-4">
+          <!-- Part 5 -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-slate-600">
+              <span>Part 5 單句填空 (文法與字彙基礎)</span>
+              <span id="lbl-correct-p5">0 / 30 題 (0%)</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-p5" class="bg-amber-500 h-full rounded-full transition-all duration-1000" style="width: 0%"></div>
+            </div>
+          </div>
+          <!-- Part 6 -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-slate-600">
+              <span>Part 6 短文填空 (上下文語境邏輯)</span>
+              <span id="lbl-correct-p6">0 / 16 題 (0%)</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-p6" class="bg-purple-500 h-full rounded-full transition-all duration-1000" style="width: 0%"></div>
+            </div>
+          </div>
+          <!-- Part 7 -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs font-bold text-slate-600">
+              <span>Part 7 閱讀理解 (長篇多重線索比對)</span>
+              <span id="lbl-correct-p7">0 / 54 題 (0%)</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+              <div id="bar-p7" class="bg-emerald-500 h-full rounded-full transition-all duration-1000" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-[10px] text-slate-400 font-bold border-t pt-2">
+          💡 建議：優先複習正確率低於 75% 的單元，透過下方「錯題解析特訓區」補強。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 錯題特訓與完整報告分欄 -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- 錯題深度特訓區 (左側) -->
+      <div class="lg:col-span-8 space-y-6">
+        <div class="bg-red-50 border border-red-200/50 p-6 rounded-2xl custom-shadow flex justify-between items-center flex-wrap gap-4">
+          <div class="space-y-1">
+            <h3 class="text-red-800 font-black text-lg flex items-center gap-2">
+              <i class="fa-solid fa-triangle-exclamation"></i> 錯題精準特訓區
+            </h3>
+            <p class="text-xs text-red-600 font-medium">系統已為您自動彙整並集中展開所有答錯題目，包含詳盡的中文翻譯與專家解題深度邏輯。</p>
+          </div>
+          <div>
+            <button onclick="toggleShowOnlyWrong()" id="btn-toggle-wrong" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-black shadow transition">
+              只看錯題：開
+            </button>
+          </div>
+        </div>
+
+        <div id="wrong-questions-container" class="space-y-6">
+          <!-- JS -->
+        </div>
+      </div>
+
+      <!-- 100 題作答卡片列表 (右側) -->
+      <div class="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200 custom-shadow lg:sticky lg:top-[128px]">
+        <h3 class="font-extrabold text-[#1a365d] text-sm sm:text-base border-b pb-3 mb-4 flex justify-between items-center">
+          <span><i class="fa-solid fa-square-poll-vertical mr-1"></i> 全面答題明細</span>
+          <span class="text-[10px] font-medium text-slate-400">點擊查看錯題解析</span>
+        </h3>
+        
+        <div id="report-details-grid" class="grid grid-cols-5 gap-2 max-h-[500px] overflow-y-auto pr-1 text-center">
+          <!-- JS -->
+        </div>
+
+        <div class="border-t border-slate-100 pt-4 mt-4 flex gap-2">
+          <button onclick="resetQuizState()" class="flex-grow py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black transition text-center shadow-md">
+            <i class="fa-solid fa-rotate-left mr-1"></i> 重新模擬測驗
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-xs">
+  <p>© 2026. All rights reserved.</p>
+</footer>
+
+<script>
+// 加載 100 題完整教材數據
+const PART5_DATA = [{"id": "q101", "num": 101, "difficulty": "低", "point": "詞性判定 - 副詞修飾動詞", "sentence": "Ms. Lin _______ resolved the routing issue to ensure the package reached the customer on time.", "options": {"A": "prompt", "B": "promptly", "C": "promptness", "D": "prompted"}, "correct": "B", "translation": "Lin 女士迅速解決了路徑問題，以確保包裹準時送達客戶手中。", "explanation": {"structure": "Ms. Lin (主詞) + _______ (修飾 resolved 的副詞) + resolved (動詞) + the routing issue (受詞)。", "core": "空格修飾動詞 resolved，應選擇副詞。故選 (B) promptly。", "distractors": "(A) prompt 形容詞/動詞，(C) promptness 名詞，(D) prompted 過去式/分詞。"}, "vocabulary": [{"word": "promptly", "pos": "adv.", "meaning": "迅速地，準時地"}, {"word": "resolve", "pos": "v.", "meaning": "解決，決定，解析"}]}, {"id": "q102", "num": 102, "difficulty": "低", "point": "介系詞 - 時間與期限", "sentence": "All solar energy reports must be finalized _______ the end of the fiscal year.", "options": {"A": "within", "B": "along", "C": "before", "D": "among"}, "correct": "C", "translation": "所有太陽能報告必須在會計年度結束前敲定。", "explanation": {"structure": "主詞 (reports) + 助動詞 (must be finalized) + 介系詞片語 (_______ the end of the fiscal year)。", "core": "根據文意，報告必須在年度結束「之前」完成。故選 (C) before。", "distractors": "(A) within 表示在...之內，後面接時間段而非特定時間點；(B) along 沿著；(D) among 在...之中。"}, "vocabulary": [{"word": "finalize", "pos": "v.", "meaning": "敲定，完成"}, {"word": "fiscal", "pos": "adj.", "meaning": "財政的，會計的"}]}, {"id": "q103", "num": 103, "difficulty": "低", "point": "代名詞 - 所有格", "sentence": "The board members expressed _______ gratitude for Mr. Vance's exceptional service during the restructuring.", "options": {"A": "they", "B": "them", "C": "their", "D": "themselves"}, "correct": "C", "translation": "董事會成員對 Vance 先生在重組期間的卓越服務表示感激。", "explanation": {"structure": "The board members (主詞) + expressed (動詞) + _______ (所有格修飾名詞) + gratitude (受詞名詞)。", "core": "空格後為名詞 gratitude，前應填入所有格代名詞，代指 The board members。故選 (C) their。", "distractors": "(A) they 主格，(B) them 受格，(D) themselves 反身代名詞。"}, "vocabulary": [{"word": "gratitude", "pos": "n.", "meaning": "感激，感謝"}, {"word": "restructuring", "pos": "n.", "meaning": "企業重組，結構調整"}]}, {"id": "q104", "num": 104, "difficulty": "中", "point": "詞性判定 - 名詞作受詞", "sentence": "Helios Solar offers a wide _______ of green energy solutions for commercial properties.", "options": {"A": "select", "B": "selection", "C": "selective", "D": "selectively"}, "correct": "B", "translation": "Helios Solar 為商業資產提供廣泛的綠色能源解決方案選擇。", "explanation": {"structure": "wide (形容詞) + _______ (需填名詞) + of green energy...", "core": "冠詞 a 與 形容詞 wide 後方應接單數可數名詞。a selection of 表示「各式各樣的/多種選擇」。故選 (B) selection。", "distractors": "(A) select 動詞/形容詞，(C) selective 形容詞，(D) selectively 副詞。"}, "vocabulary": [{"word": "commercial", "pos": "adj.", "meaning": "商業的，商務的"}, {"word": "selection", "pos": "n.", "meaning": "選擇，選集"}]}, {"id": "q105", "num": 105, "difficulty": "低", "point": "商務字彙 - 形容詞語意搭配", "sentence": "Pinnacle Coworking Hub is proud to offer a highly _______ rate for private offices.", "options": {"A": "competitive", "B": "reluctant", "C": "coincidental", "D": "repetitive"}, "correct": "A", "translation": "Pinnacle 共享辦公中心很榮幸為獨立辦公室提供極具競爭力的價格。", "explanation": {"structure": "a highly (副詞) + _______ (形容詞修飾 rate) + rate (名詞價格)。", "core": "在商務英語中，competitive rate 意為「具競爭力的價格（划算的價格）」，最符合 context。選 (A)。", "distractors": "(B) reluctant 不情願的，(C) coincidental 巧合的，(D) repetitive 重複的。"}, "vocabulary": [{"word": "competitive", "pos": "adj.", "meaning": "競爭的，有競爭力的"}, {"word": "private", "pos": "adj.", "meaning": "私人的，獨立的"}]}, {"id": "q106", "num": 106, "difficulty": "中", "point": "連接詞 - 讓步從屬連接詞", "sentence": "_______ the budget constraints were severe, the marketing team did not cancel the promotional event.", "options": {"A": "Although", "B": "Despite", "C": "However", "D": "In spite of"}, "correct": "A", "translation": "雖然預算限制非常嚴格，但行銷團隊並未取消促銷活動。", "explanation": {"structure": "_______ (從屬連接詞) + budget constraints were severe (完整子句) , the marketing team did not cancel...", "core": "空格後引導一個含有主詞與動詞的完整子句，表示讓步關係（雖然...），應選從屬連接詞 (A) Although。", "distractors": "(B) Despite 與 (D) In spite of 為介系詞，後接名詞片語；(C) However 為連接副詞，不能引導子句且通常用逗號隔開。"}, "vocabulary": [{"word": "constraint", "pos": "n.", "meaning": "限制，約束"}, {"word": "promotional", "pos": "adj.", "meaning": "促銷的，宣傳的"}]}, {"id": "q107", "num": 107, "difficulty": "低", "point": "時態與語態 - 過去式時態", "sentence": "Last month, Zephyr Aviation _______ a new loyalty program that gained thousands of members.", "options": {"A": "launches", "B": "launched", "C": "will launch", "D": "launching"}, "correct": "B", "translation": "上個月，Zephyr 航空推出了一項新的會員忠誠計劃，獲得了數千名會員。", "explanation": {"structure": "Last month (過去時間指標) + Zephyr Aviation (主詞) + _______ (過去式動詞) + a new loyalty program...", "core": "時間副詞 Last month 明確指出時間點在過去，主句動詞應使用過去式。故選 (B) launched。", "distractors": "(A) launches 現在單三，(C) will launch 未来式，(D) launching 現在分詞。"}, "vocabulary": [{"word": "loyalty", "pos": "n.", "meaning": "忠誠，忠實"}, {"word": "gain", "pos": "v./n.", "meaning": "獲得，增加"}]}, {"id": "q108", "num": 108, "difficulty": "低", "point": "詞性判定 - 形容詞修飾名詞", "sentence": "The support agent provided a _______ explanation of the reservation booking steps.", "options": {"A": "clear", "B": "clearly", "C": "clarity", "D": "cleared"}, "correct": "A", "translation": "客服專員對預訂步驟提供了清晰的解釋。", "explanation": {"structure": "a (冠詞) + _______ (形容詞修飾名詞) + explanation (受詞名詞)。", "core": "空格處修飾名詞 explanation，應使用形容詞。故選 (A) clear。", "distractors": "(B) clearly 為副詞，(C) clarity 為名詞，(D) cleared 為過去分詞。"}, "vocabulary": [{"word": "reservation", "pos": "n.", "meaning": "預訂，預約"}, {"word": "explanation", "pos": "n.", "meaning": "解釋，說明"}]}, {"id": "q109", "num": 109, "difficulty": "低", "point": "代名詞 - 代替事物受格", "sentence": "Please return the signed leasing agreement to Mr. Vance as soon as you have reviewed _______.", "options": {"A": "its", "B": "it", "C": "she", "D": "hers"}, "correct": "B", "translation": "審閱完簽署好的租賃協議後，請立即將其退還給 Vance 先生。", "explanation": {"structure": "as soon as you have reviewed (及物動詞完成) + _______ (受格代名詞)。", "core": "空格處作為 reviewed 的受格，代指前面的單數名詞 the signed leasing agreement。故選 (B) it。", "distractors": "(A) its 所有格，(C) she 主格，(D) hers 所有格代名詞。"}, "vocabulary": [{"word": "leasing", "pos": "n./adj.", "meaning": "租賃，租借"}, {"word": "agreement", "pos": "n.", "meaning": "協議，同意"}]}, {"id": "q110", "num": 110, "difficulty": "中", "point": "介系詞 - 方位介系詞", "sentence": "The bakery is located directly _______ the public library on Maple Street.", "options": {"A": "opposite", "B": "through", "C": "into", "D": "without"}, "correct": "A", "translation": "麵包店直接位於楓樹街公共圖書館的對面。", "explanation": {"structure": "is located (動詞) + directly (副詞) + _______ (介系詞) + the public library (受詞)。", "core": "表示地理位置在圖書館的「對面」，合適的方位介系詞是 (A) opposite。", "distractors": "(B) through 穿過，(C) into 進入，(D) without 沒有。"}, "vocabulary": [{"word": "bakery", "pos": "n.", "meaning": "麵包店，麵包坊"}, {"word": "opposite", "pos": "prep./adj.", "meaning": "在...對面，相反的"}]}, {"id": "q111", "num": 111, "difficulty": "低", "point": "詞性判定 - 動詞原形", "sentence": "The IT director plans to _______ the new network encryption policy during the meeting tomorrow.", "options": {"A": "announce", "B": "announcement", "C": "announcing", "D": "announced"}, "correct": "A", "translation": "資訊總監計劃在明天的會議上宣布新的網路加密政策。", "explanation": {"structure": "plans (動詞) + to (不定詞標記) + _______ (接動詞原形) + the new network encryption policy (受詞)。", "core": "不定詞 to 後接動詞原形。故選 (A) announce。", "distractors": "(B) announcement 為名詞，(C) announcing 為現在分詞，(D) announced 為動詞過去式或過去分詞。"}, "vocabulary": [{"word": "encryption", "pos": "n.", "meaning": "加密"}, {"word": "policy", "pos": "n.", "meaning": "政策，方針"}]}, {"id": "q112", "num": 112, "difficulty": "中", "point": "連接詞 - 副詞連接詞與邏輯因果", "sentence": "The server backup is complete; _______, employees can now log in to the portal.", "options": {"A": "therefore", "B": "whereas", "C": "although", "D": "in order to"}, "correct": "A", "translation": "伺服器備份已完成；因此，員工現在可以登入入口網站。", "explanation": {"structure": "分號 (;) + _______ (副詞連接詞) + 逗號 (,)，後面引導表示結果的句子。", "core": "前半句為原因，後半句為結果。適合的因果關係連接詞為 (A) therefore (因此)。", "distractors": "(B) whereas 然則/對比，(C) although 雖然，(D) in order to 為了（後接動詞原形）。"}, "vocabulary": [{"word": "backup", "pos": "n./adj.", "meaning": "備份，支持"}, {"word": "portal", "pos": "n.", "meaning": "入口網站，門戶"}]}, {"id": "q113", "num": 113, "difficulty": "低", "point": "時態與語態 - 被動態與主動詞一致性", "sentence": "All high-efficiency filters at Meridian Logistics _______ replaced every six months.", "options": {"A": "are", "B": "is", "C": "being", "D": "has been"}, "correct": "A", "translation": "Meridian 物流的所有高效能過濾網每六個月更換一次。", "explanation": {"structure": "All high-efficiency filters (複數主詞) + _______ + replaced (過去分詞被動) every six months (時間頻率)。", "core": "主詞為複數名詞 filters，且表示週期性的被動動作（被更換），使用複數現在式 be 動詞 are。故選 (A) are。", "distractors": "(B) is 用於單數主詞，(C) being 分詞不能單獨作動詞，(D) has been 單數完成式。"}, "vocabulary": [{"word": "efficiency", "pos": "n.", "meaning": "效率，效能"}, {"word": "filter", "pos": "n./v.", "meaning": "過濾網，過濾"}]}, {"id": "q114", "num": 114, "difficulty": "中", "point": "詞性判定 - 複數名詞作主詞", "sentence": "Any _______ to the flight schedule must be approved by the aviation coordinator.", "options": {"A": "modify", "B": "modification", "C": "modifications", "D": "modified"}, "correct": "C", "translation": "對航班日程表的任何修改都必須得到航空協調員的核准。", "explanation": {"structure": "Any + _______ (主詞名詞) + to the flight schedule + must be approved (動詞)。", "core": "空格處為名詞作主詞。Any 可接複數可數名詞或不可數名詞。依句意「對航班日程的修改」通常是複數，故選 (C) modifications 最合適。", "distractors": "(A) modify 動詞，(B) modification 單數名詞，(D) modified 過去分詞。"}, "vocabulary": [{"word": "aviation", "pos": "n.", "meaning": "航空，飛行"}, {"word": "coordinator", "pos": "n.", "meaning": "協調員，統籌者"}]}, {"id": "q115", "num": 115, "difficulty": "中", "point": "商務字彙 - 形容詞語意搭配", "sentence": "The marketing division conducts _______ surveys to assess brand awareness.", "options": {"A": "periodic", "B": "confidential", "C": "initial", "D": "approximate"}, "correct": "A", "translation": "行銷部門定期進行調查，以評估品牌知名度。", "explanation": {"structure": "conducts (動詞) + _______ (形容詞修飾 surveys) + surveys (複數名詞)。", "core": "表示「定期的」調查，使用形容詞 periodic 最符合商業情境。故選 (A) periodic。", "distractors": "(B) confidential 機密的，(C) initial 最初的，(D) approximate 大約的。"}, "vocabulary": [{"word": "conduct", "pos": "v.", "meaning": "進行，實施"}, {"word": "awareness", "pos": "n.", "meaning": "意識，認識，知名度"}]}, {"id": "q116", "num": 116, "difficulty": "低", "point": "介系詞 - 固定片語搭配", "sentence": "Ms. Lin is responsible _______ coordinating the safety audit for the new solar facility.", "options": {"A": "for", "B": "to", "C": "with", "D": "at"}, "correct": "A", "translation": "Lin 女士負責協調新太陽能設施的安全審計。", "explanation": {"structure": "is responsible (形容詞) + _______ (介系詞) + coordinating (動名詞)。", "core": "「負責某事」固定搭配為 be responsible for。故選 (A) for。", "distractors": "(B) to、(C) with、(D) at 均不與 responsible 搭配表示負責。"}, "vocabulary": [{"word": "responsible", "pos": "adj.", "meaning": "負責任的"}, {"word": "safety audit", "pos": "phr.", "meaning": "安全審計，安全稽核"}]}, {"id": "q117", "num": 117, "difficulty": "低", "point": "代名詞 - 反身代名詞同位語修飾", "sentence": "Alistair Vance _______ inspected the aircraft before signing the charter agreement.", "options": {"A": "him", "B": "himself", "C": "his", "D": "he"}, "correct": "B", "translation": "Alistair Vance 親自檢查了飛機，然後簽署了包機協議。", "explanation": {"structure": "Alistair Vance (主詞) + _______ (反身代名詞同位語) + inspected (動詞) + the aircraft (受詞)。", "core": "空格處為加強主詞「人名」語氣，表示「親自」，應使用反身代名詞 himself。故選 (B)。", "distractors": "(A) him 受格，(C) his 所有格，(D) he 主格。"}, "vocabulary": [{"word": "aircraft", "pos": "n.", "meaning": "航空器，飛機"}, {"word": "charter", "pos": "n./v./adj.", "meaning": "包租（飛機或船），特許狀"}]}, {"id": "q118", "num": 118, "difficulty": "低", "point": "詞性判定 - 形容詞修飾名詞", "sentence": "Helios Solar provides _______ energy solutions for residential developments.", "options": {"A": "comprehensive", "B": "comprehensively", "C": "comprehend", "D": "comprehension"}, "correct": "A", "translation": "Helios Solar 為住宅開發項目提供全面的能源解決方案。", "explanation": {"structure": "provides + _______ (形容詞修飾 solutions) + energy solutions (名詞受詞)。", "core": "空格處修飾名詞 energy solutions，應使用形容詞。故選 (A) comprehensive (全面的/綜合的)。", "distractors": "(B) comprehensively 為副詞，(C) comprehend 為動詞，(D) comprehension 為名詞。"}, "vocabulary": [{"word": "comprehensive", "pos": "adj.", "meaning": "全面的，綜合的"}, {"word": "residential", "pos": "adj.", "meaning": "住宅的，居住的"}]}, {"id": "q119", "num": 119, "difficulty": "低", "point": "時態與語態 - 結合不定詞作為動詞受詞", "sentence": "The committee decided _______ the annual general meeting due to the impending storm.", "options": {"A": "postpone", "B": "to postpone", "C": "postponing", "D": "postponed"}, "correct": "B", "translation": "由於即將到來的暴風雨，委員會決定推遲年度股東大會。", "explanation": {"structure": "decided (及物動詞) + _______ (作受詞的不定詞) + the annual general meeting.", "core": "動詞 decide 後固定接 to-V 不定詞作受詞。故選 (B) to postpone。", "distractors": "(A) postpone 原形，(C) postponing 動名詞，(D) postponed 過去式。"}, "vocabulary": [{"word": "impending", "pos": "adj.", "meaning": "即將發生的，逼近的"}, {"word": "committee", "pos": "n.", "meaning": "委員會"}]}, {"id": "q120", "num": 120, "difficulty": "中", "point": "連接詞與介系詞 - 讓步關係介系詞", "sentence": "_______ the unexpected increase in fuel costs, the aviation company remained profitable.", "options": {"A": "Despite", "B": "Although", "C": "Even though", "D": "Whereas"}, "correct": "A", "translation": "儘管燃料成本意外增加，這家航空公司依然保持獲利。", "explanation": {"structure": "_______ (介系詞) + the unexpected increase in fuel costs (名詞片語) , the company remained...", "core": "空格後引導的是名詞片語（the unexpected increase），表示轉折關係（儘管...），應填入介系詞。故選 (A) Despite。", "distractors": "(B) Although、(C) Even though 皆為從屬連接詞，後需接完整子句；(D) Whereas 為從屬連接詞，亦需接子句。"}, "vocabulary": [{"word": "fuel", "pos": "n./v.", "meaning": "燃料，加燃料"}, {"word": "profitable", "pos": "adj.", "meaning": "有利潤的，賺錢的"}]}, {"id": "q121", "num": 121, "difficulty": "中", "point": "詞性判定 - 名詞作主詞補語", "sentence": "The consultant's main _______ was to streamline the international routing system.", "options": {"A": "propose", "B": "proposal", "C": "proposing", "D": "proposed"}, "correct": "B", "translation": "顧問的主要提案是簡化國際航線網絡。", "explanation": {"structure": "The consultant's (所有格) + main (形容詞) + _______ (名詞主詞) + was (動詞) + to streamline...", "core": "空格處需要名詞作為句子主詞。故選 (B) proposal。", "distractors": "(A) propose 動詞，(C) proposing 現在分詞，(D) proposed 過去分詞。"}, "vocabulary": [{"word": "proposal", "pos": "n.", "meaning": "提案，建議"}, {"word": "streamline", "pos": "v.", "meaning": "簡化，使效率化"}]}, {"id": "q122", "num": 122, "difficulty": "低", "point": "商務字彙 - 動詞語意搭配", "sentence": "The operations manual requires all pilots to _______ with aviation regulations.", "options": {"A": "comply", "B": "exceed", "C": "transition", "D": "audit"}, "correct": "A", "translation": "操作手冊要求所有飛行員隨時遵守航空法規。", "explanation": {"structure": "requires (動詞) + all pilots (受詞) + to _______ (不定詞動詞原形) + with aviation regulations.", "core": "在商務多益中，「遵守法規/規定」通常與介系詞 with 搭配，為 comply with。故選 (A) comply。", "distractors": "(B) exceed 超過（及物動詞），(C) transition 轉渡，(D) audit 審計。"}, "vocabulary": [{"word": "comply", "pos": "v.", "meaning": "遵守，符合"}, {"word": "regulation", "pos": "n.", "meaning": "規章，法規"}]}, {"id": "q123", "num": 123, "difficulty": "中", "point": "時態與語態 - 現在完成式", "sentence": "Over the past three years, Helios Solar _______ its production capacity by forty percent.", "options": {"A": "increases", "B": "has increased", "C": "was increasing", "D": "will increase"}, "correct": "B", "translation": "在過去三年中，Helios Solar 已經將其生產能力提高了百分之四十。", "explanation": {"structure": "Over the past three years (現在完成式時間指標) + Helios Solar (單數主詞) + _______ (現在完成式動詞) + its production capacity.", "core": "「Over the past/last + 時間段」表示從過去持續到現在的狀態，句中動詞必須使用現在完成式。故選 (B) has increased。", "distractors": "(A) increases 現在單三，(C) was increasing 過去進行式，(D) will increase 未來式。"}, "vocabulary": [{"word": "capacity", "pos": "n.", "meaning": "容量，能力，生產力"}]}, {"id": "q124", "num": 124, "difficulty": "低", "point": "詞性判定 - 副詞修飾過去分詞", "sentence": "The ingredients for the organic bread are _______ sourced from regional cooperatives.", "options": {"A": "direct", "B": "directly", "C": "direction", "D": "directness"}, "correct": "B", "translation": "有機麵包的原料是直接採購自地區合作社。", "explanation": {"structure": "are (be動詞) + _______ (修飾 sourced 的副詞) + sourced (過去分詞被動) + from...", "core": "空格處修飾被動態中的過去分詞 sourced，應填副詞。故選 (B) directly。", "distractors": "(A) direct 形容詞/動詞，(C) direction 名詞，(D) directness 名詞。"}, "vocabulary": [{"word": "ingredient", "pos": "n.", "meaning": "原料，要素，成分"}, {"word": "directly", "pos": "adv.", "meaning": "直接地"}]}, {"id": "q125", "num": 125, "difficulty": "中", "point": "代名詞 - 不定代名詞", "sentence": "_______ who wishes to apply for the solar subsidy must submit the form by Friday.", "options": {"A": "Anyone", "B": "Several", "C": "Those", "D": "Other"}, "correct": "A", "translation": "任何希望申請太陽能補助的人必須在週五之前提交表格。", "explanation": {"structure": "_______ (不定代名詞主詞) + who wishes (關係代名詞子句引導單數動詞) + must submit (動詞)。", "core": "關係子句中的動詞為單數 wishes，說明先行詞必須是單數。Anyone 常用於「任何...的人」並配單數動詞。故選 (A)。", "distractors": "(B) Several、(C) Those 後接複數動詞 wish；(D) Other 不能直接作此代名詞主詞。"}, "vocabulary": [{"word": "subsidy", "pos": "n.", "meaning": "補助金，津貼"}, {"word": "submit", "pos": "v.", "meaning": "提交，呈遞"}]}, {"id": "q126", "num": 126, "difficulty": "低", "point": "介系詞 - 時間段落", "sentence": "The system upgrade will be completed _______ the holiday to avoid downtime.", "options": {"A": "during", "B": "inside", "C": "toward", "D": "between"}, "correct": "A", "translation": "系統升級將在假期期間完成，以避免停機時間。", "explanation": {"structure": "will be completed (動詞) + _______ (介系詞時間) + the holiday (名詞時間段)。", "core": "「在假期期間」最合適的介系詞為 during。故選 (A) during。", "distractors": "(B) inside 內部，(C) toward 朝向，(D) between 介於...之間。"}, "vocabulary": [{"word": "holiday", "pos": "n.", "meaning": "假日，假期"}, {"word": "downtime", "pos": "n.", "meaning": "（機器或電腦）停機時間"}]}, {"id": "q127", "num": 127, "difficulty": "低", "point": "詞性判定 - 複數名詞作受詞", "sentence": "The new trade agreement will create many _______ for global logistics expansion.", "options": {"A": "opportunities", "B": "opportune", "C": "opportunely", "D": "opportunism"}, "correct": "A", "translation": "新的貿易協定將為全球物流擴張創造許多機會。", "explanation": {"structure": "create (動詞) + many (形容詞) + _______ (名詞複數受詞) + for global logistics...", "core": "空格處作及物動詞 create 的受詞，且受 many 修飾，應為名詞。表示機會（複數），選 (A) opportunities。", "distractors": "(B) opportune 形容詞，(C) opportunely 副詞，(D) opportunism 不合語意。"}, "vocabulary": [{"word": "expansion", "pos": "n.", "meaning": "擴張，擴展"}, {"word": "opportunity", "pos": "n.", "meaning": "機會"}]}, {"id": "q128", "num": 128, "difficulty": "中", "point": "商務字彙 - 形容詞語意搭配", "sentence": "Pricing data regarding the bidding process must remain strictly _______ until negotiations close.", "options": {"A": "confidential", "B": "primary", "C": "baseline", "D": "alternative"}, "correct": "A", "translation": "在談判結束之前，有關投標過程的定價數據必須嚴格保密。", "explanation": {"structure": "must remain (動詞) + strictly (副詞) + _______ (作主詞補語的形容詞)。", "core": "「保持機密/保密」是商務多益中極常見的說法 remain/keep confidential，故選 (A) confidential。", "distractors": "(B) primary 主要的，(C) baseline 基準的，(D) alternative 可替代的。"}, "vocabulary": [{"word": "confidential", "pos": "adj.", "meaning": "機密的，保密的"}, {"word": "negotiation", "pos": "n.", "meaning": "談判，協商"}]}, {"id": "q129", "num": 129, "difficulty": "低", "point": "時態與語態 - 未來時態與動詞原形", "sentence": "The new check-in system _______ airport boarding operations and reduce wait times.", "options": {"A": "streamline", "B": "will streamline", "C": "streamlined", "D": "streamlining"}, "correct": "B", "translation": "新的報到系統將簡化機場登機作業並減少等待時間。", "explanation": {"structure": "The new check-in system (主詞) + _______ (主要動詞) + airport boarding operations and reduce...", "core": "後方有並列動詞 reduce（原形），說明前面空格應與其形成語意並列，代表未來的事實，應選 (B) will streamline。", "distractors": "(A) streamline 原形，(C) streamlined 過去式，(D) streamlining 動名詞/分詞。"}, "vocabulary": [{"word": "boarding", "pos": "n./adj.", "meaning": "登機，上船；寄宿"}, {"word": "wait time", "pos": "phr.", "meaning": "等待時間"}]}, {"id": "q130", "num": 130, "difficulty": "低", "point": "連接詞 - 對等相關連接詞", "sentence": "The campaign was designed not only to attract new passengers _______ to reward loyal ones.", "options": {"A": "but also", "B": "and", "C": "or", "D": "either"}, "correct": "A", "translation": "該活動的設計不僅是為了吸引新乘客，也是為了回饋忠實乘客。", "explanation": {"structure": "was designed + not only (相關連接詞) to attract... + _______ + to reward...", "core": "對等相關連接詞固定搭配為 not only... but also... (不僅...而且...)。故選 (A) but also。", "distractors": "(B) and、(C) or、(D) either 均不與 not only 進行此類固定配對。"}, "vocabulary": [{"word": "reward", "pos": "v./n.", "meaning": "回饋，報酬，獎勵"}, {"word": "loyal", "pos": "adj.", "meaning": "忠誠的，忠實的"}]}];
+const PART6_DATA = [{"id": "p1", "type": "E-mail", "start": 131, "end": 134, "title_en": "Questions 131-134 refer to the following e-mail.", "title_zh": "131-134 題參照以下電子郵件。", "passage_en_template": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>To:</b> All Staff &lt;staff@zephyraviation.com&gt;<br>\n    <b>From:</b> Alistair Vance &lt;avance@zephyraviation.com&gt;<br>\n    <b>Date:</b> July 18<br>\n    <b>Subject:</b> Boarding Access System Upgrade\n  </p>\n  <p class=\"mb-2\">Dear Colleagues,</p>\n  <p class=\"mb-2\">Please be informed that Zephyr Aviation is upgrading its facility entrance security. A new biometric scan system will be <b>131. (_______)</b> at all entry points next week. This upgrade is necessary <b>132. (_______)</b> enhancing our physical security measures and protecting sensitive corporate databanks. <b>133. (_______)</b>. <b>134. (_______)</b>, employees must register their fingerprints at the security office on the ground floor beforehand.</p>\n  <p class=\"mb-2\">Thank you for your cooperation in making our workplace safer.</p>\n  <p>Sincerely,<br>Alistair Vance<br>Operations Director, Zephyr Aviation</p>\n</div>", "passage_zh": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>收件者：</b>全體員工 &lt;staff@zephyraviation.com&gt;<br>\n    <b>寄件者：</b>Alistair Vance &lt;avance@zephyraviation.com&gt;<br>\n    <b>日期：</b>7 月 18 日<br>\n    <b>主旨：</b>登機安全門禁系統升級\n  </p>\n  <p class=\"mb-2\">親愛的同仁：</p>\n  <p class=\"mb-2\">請注意，Zephyr Aviation 正在升級其設施入口安全性。下週將在所有入口處安裝全新的生物辨識掃描系統。這次升級對於增強我們的物理安全措施並保護敏感的公司數據庫是必要的。<b>[133]</b>。<b>[134]</b>，員工必須事先在大樓一樓的安全辦公室登記指紋。</p>\n  <p class=\"mb-2\">感謝您在使我們的工作場所更安全方面的配合。</p>\n  <p>謹啟，<br>Alistair Vance<br>Zephyr Aviation 營運總監</p>\n</div>", "questions": [{"num": 131, "difficulty": "中", "point": "詞性判定 - 被動態動詞", "options": {"A": "install", "B": "installed", "C": "installation", "D": "installer"}, "correct": "B", "translation": "下週將在所有入口處安裝全新的生物辨識掃描系統。", "explanation": {"structure": "will be (助動詞被動標記) + _______ (過去分詞作主要動詞)。", "core": "句子表示被動動作（系統「被安裝」），因此應選擇過去分詞 installed。選 (B)。", "distractors": "(A) install 原形動詞，(C) installation 名詞，(D) installer 安裝人。"}}, {"num": 132, "difficulty": "中", "point": "介系詞 - 語意搭配", "options": {"A": "for", "B": "with", "C": "to", "D": "in"}, "correct": "A", "translation": "這次升級對於增強我們的物理安全措施是必要的。", "explanation": {"structure": "necessary (形容詞) + _______ (介系詞) + enhancing (動名詞)。", "core": "「對於...是必要的」通常搭配介系詞 for，即 necessary for doing something。故選 (A)。", "distractors": "(B) necessary with 不合搭配，(C) to 與 (D) in 亦不能與 necessary 搭配表達此意。"}}, {"num": 133, "difficulty": "高", "point": "篇章插句題", "options": {"A": "The old keycards will no longer function after Friday.", "B": "Zephyr Aviation has reported high-volume logistics revenue.", "C": "A detailed blueprint of the hangar is attached.", "D": "All office desks must be rearranged beforehand."}, "correct": "A", "translation": "舊的感應卡在週五之後將不再起作用。", "explanation": {"structure": "前句提到「新生物辨識系統將被安裝」，後句提到「員工必須登記指紋」。中間插入關於舊系統淘汰的說明最順暢。", "core": "「舊的感應卡將不再起作用（no longer function）」正好銜接了新系統的安裝，說明更換門禁的緊迫性。選 (A)。", "distractors": "(B) 航空收入無關、(C) 機庫藍圖無關、(D) 重新排列辦公桌無關。"}}, {"num": 134, "difficulty": "高", "point": "連接詞 - 連接副詞的因果邏輯", "options": {"A": "Consequently", "B": "However", "C": "Although", "D": "Otherwise"}, "correct": "A", "translation": "因此，員工必須事先在安全辦公室登記指紋。", "explanation": {"structure": "_______ (副詞) + 逗號 (,) + employees must register... (結果子句)。", "core": "前文說明了舊卡即將失效並改用新指紋掃描，此句是「因此，員工必須登記指紋」的結論。適合的因果連接副詞為 Consequently (因此/結果)。選 (A)。", "distractors": "(B) However 表示轉折，(C) Although 為從屬連接詞，(D) Otherwise 否則。"}}], "vocabulary": [{"word": "biometric", "pos": "adj.", "meaning": "生物辨識的"}, {"word": "consequently", "pos": "adv.", "meaning": "因此，結果"}]}, {"id": "p2", "type": "Notice", "start": 135, "end": 138, "title_en": "Questions 135-138 refer to the following notice.", "title_zh": "135-138 題參照以下通知。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Helios Solar Energy - Maintenance Advisory</h4>\n  <p class=\"mb-2\">To maintain the highest level of network stability, Helios Solar Energy <b>135. (_______)</b> routine server database backup maintenance on Saturday, July 25. The maintenance window is scheduled from 10:00 p.m. to 2:00 a.m. the following morning.</p>\n  <p class=\"mb-2\">We anticipate minimal <b>136. (_______)</b> to your solar monitoring operations during this process. However, to prevent any potential data loss, we strongly recommend that you save all active files and log out of <b>137. (_______)</b> portals before the maintenance begins. <b>138. (_______)</b>.</p>\n  <p class=\"text-xs\">IT Support Team</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Helios Solar Energy - 維護公告</h4>\n  <p class=\"mb-2\">為維持最高水準的網路穩定性，Helios Solar Energy 將於 7 月 25 日星期六 <b>[135]</b> 例行伺服器資料庫備份維護。維護窗口時間定於晚上 10:00至次日凌晨 2:00。</p>\n  <p class=\"mb-2\">在此過程中，我們預計對您的太陽能監測作業干擾最小 <b>[136]</b>。然而，為了防止任何潛在的數據遺失，我們強烈建議您在維護開始前保存所有使用中的檔案，並登出 <b>[137]</b> 的入口網站。<b>[138]</b>。</p>\n  <p class=\"text-xs\">IT 支援團隊</p>\n</div>", "questions": [{"num": 135, "difficulty": "中", "point": "時態與語態 - 未來式動詞", "options": {"A": "conduct", "B": "will conduct", "C": "conducted", "D": "conducting"}, "correct": "B", "translation": "Helios Solar Energy 將於 7 月 25 日星期六進行例行伺服器資料庫備份維護。", "explanation": {"structure": "Helios Solar (單數主詞) + _______ (未來式動詞) + routine maintenance + on Saturday, July 25 (未來時間點)。", "core": "該維護安排在未來的 July 25，應選未來式 (B) will conduct。", "distractors": "(A) conduct 原形動詞，(C) conducted 過去式，(D) conducting 現在分詞。"}}, {"num": 136, "difficulty": "Ref.", "point": "商務字彙 - 名詞語意搭配", "options": {"A": "disruption", "B": "compliance", "C": "threshold", "D": "appreciation"}, "correct": "A", "translation": "在此過程中，我們預計對您的太陽能監測作業干擾最小。", "explanation": {"structure": "minimal (形容詞) + _______ (受詞名詞) + to your operations.", "core": "在伺服器維修公告中，常指對客戶業務帶來「干擾/中斷（disruption）」。minimal disruption 為固定說法。選 (A)。", "distractors": "(B) compliance 遵守，(C) threshold 門檻，(D) appreciation 感激。"}}, {"num": 137, "difficulty": "低", "point": "代名詞 - 所有格修飾名詞", "options": {"A": "you", "B": "your", "C": "yours", "D": "yourself"}, "correct": "B", "translation": "登出您的入口網站。", "explanation": {"structure": "log out of (及物動詞片語) + _______ (所有格修飾名詞) + portals (複數名詞)。", "core": "修飾後方名詞 portals，應使用所有格代名詞 your (您的)。故選 (B)。", "distractors": "(A) you 受格，(C) yours 所有格代名詞，(D) yourself 反身代名詞。"}}, {"num": 138, "difficulty": "中", "point": "篇章插句題", "options": {"A": "Thank you for your patience and cooperation as we upgrade our systems.", "B": "Please purchase four ergonomic chairs for the tech office.", "C": "The billing statement must be reviewed by the operations director.", "D": "A new menu has been added to the organic café."}, "correct": "A", "translation": "感謝您在我們升級系統時的耐心與配合。", "explanation": {"structure": "置於維修通知的結尾，適合作為結尾客套話。", "core": "「感謝耐心與配合（patience and cooperation）」是典型的系統升級通知結尾。對意 (A)。", "distractors": "(B) 買人體工學椅無關、(C) 審閱帳單報表無關、(D) 咖啡館新菜單無關。"}}], "vocabulary": [{"word": "stability", "pos": "n.", "meaning": "穩定性"}, {"word": "anticipate", "pos": "v.", "meaning": "預期，期望"}]}, {"id": "p3", "type": "Notice", "start": 139, "end": 142, "title_en": "Questions 139-142 refer to the following notice.", "title_zh": "139-142 題參照以下通知。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Pinnacle Coworking Hub - Building Announcement</h4>\n  <p class=\"mb-2\">Dear Tenants,</p>\n  <p class=\"mb-2\">We are pleased to announce that new office furniture is arriving this week. The <b>139. (_______)</b> of the new boardroom tables will begin on Wednesday morning. Please expect some <b>140. (_______)</b> noise in the shared workspace during the installation process.</p>\n  <p class=\"mb-2\">The technicians are scheduled to work <b>141. (_______)</b> 9:00 a.m. and 12:00 p.m. to complete the setup. We apologize for this temporary inconvenience. <b>142. (_______)</b>. Thank you for your cooperation.</p>\n  <p class=\"text-xs\">David Vance<br>Community Manager, Pinnacle Coworking Hub</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Pinnacle 共享辦公中心 - 大樓公告</h4>\n  <p class=\"mb-2\">親愛的租戶們：</p>\n  <p class=\"mb-2\">我們很高興地宣布，本週將有新的辦公家具送達。新會議桌的 <b>[139]</b> 將於週三上午開始。在安裝過程中，請預期共享工作空間中會有一些 <b>[140]</b> 的噪音。</p>\n  <p class=\"mb-2\">技術人員安排在上午 9:00 <b>[141]</b> 中午 12:00 之間工作，以完成安裝設定。對於這次臨時帶來的不便，我們深表歉意。<b>[142]</b>。感謝您的配合。</p>\n  <p class=\"text-xs\">David Vance<br>Pinnacle 共享辦公社區經理</p>\n</div>", "questions": [{"num": 139, "difficulty": "低", "point": "詞性判定 - 名詞作主詞", "options": {"A": "assemble", "B": "assembly", "C": "assembled", "D": "assembler"}, "correct": "B", "translation": "新會議桌的組裝將於週三上午開始。", "explanation": {"structure": "The (定冠詞) + _______ (名詞主詞) + of the new boardroom tables will begin...", "core": "空格處為名詞作主詞，表示組裝的動作，應選 (B) assembly。", "distractors": "(A) assemble 為動詞，(C) assembled 為過去式/分詞，(D) assembler 裝配工（不合語意）。"}}, {"num": 140, "difficulty": "中", "point": "詞性判定 - 形容詞修飾名詞", "options": {"A": "temporary", "B": "temporarily", "C": "temporaryness", "D": "temporariness"}, "correct": "A", "translation": "在安裝過程中，請預期共享工作空間中會有一些臨時的噪音。", "explanation": {"structure": "some + _______ (形容詞修飾名詞) + noise (名詞) + in the shared workspace.", "core": "空格修飾名詞 noise，應為形容詞。故選 (A) temporary (臨時的/暫時的)。", "distractors": "(B) temporarily 副詞，(C) 與 (D) 為拼寫錯誤的名詞。"}}, {"num": 141, "difficulty": "低", "point": "介系詞 - 時間介系詞搭配", "options": {"A": "from", "B": "between", "C": "among", "D": "through"}, "correct": "B", "translation": "技術人員安排在上午 9:00 到中午 12:00 之間工作。", "explanation": {"structure": "work + _______ (介系詞) + 9:00 a.m. and 12:00 p.m. (兩個時間點並列)。", "core": "後接 A and B，對應的介系詞為 between ... and ... (在...與...之間)。故選 (B)。", "distractors": "(A) from 常用搭配為 from A to B，(C) among 用於三者（以上）之中，(D) through 直到。"}}, {"num": 142, "difficulty": "中", "point": "篇章插句題", "options": {"A": "We advise using the quiet zones on the third floor if you require silence.", "B": "Our sales department is offering a 10% discount this month.", "C": "Bidding documents must be uploaded to the portal by Friday.", "D": "Please sign a one-year database hosting agreement."}, "correct": "A", "translation": "如果您需要安靜，我們建議使用三樓的安靜區域。", "explanation": {"structure": "前文提到「會有臨時噪音，表示歉意」，此句提供租戶應對噪音的解決方案。", "core": "「建議使用三樓的安靜區域（quiet zones）」與前面噪音公告邏輯上完美呼應。選 (A)。", "distractors": "(B) 折扣無關、(C) 招標文件無關、(D) 資料庫協議無關。"}}], "vocabulary": [{"word": "assembly", "pos": "n.", "meaning": "組裝，集會"}, {"word": "temporary", "pos": "adj.", "meaning": "臨時的，暫時的"}]}, {"id": "p4", "type": "Memo", "start": 143, "end": 146, "title_en": "Questions 143-146 refer to the following memo.", "title_zh": "143-146 題參照以下備忘錄。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-2\">\n    <b>To:</b> Department Directors<br>\n    <b>From:</b> Sarah Thorne, Finance Department<br>\n    <b>Date:</b> August 25<br>\n    <b>Subject:</b> Travel Expense Approval Changes\n  </p>\n  <p class=\"mb-2\">This memo is to notify you that the travel expense reimbursement approval process <b>143. (_______)</b> to improve efficiency. Under the updated policy, all individual dining claims that <b>144. (_______)</b> $50 require an original receipt. <b>145. (_______)</b>. Your strict <b>146. (_______)</b> with these new measures is highly appreciated.</p>\n  <p>Thank you for your cooperation in implementing this system transition.</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-2\">\n    <b>收件者：</b>部門主管<br>\n    <b>寄件者：</b>Sarah Thorne，財務部<br>\n    <b>日期：</b>8 月 25 日<br>\n    <b>主旨：</b>差旅費核准變更\n  </p>\n  <p class=\"mb-2\">本備忘錄旨在通知您，差旅費報銷核准流程 <b>[143]</b> 以提高效率。根據更新後的政策，所有超過 50 美元的個人用餐報銷申請 <b>[144]</b> 都需要原始收據。<b>[145]</b>。非常感謝您嚴格 <b>[146]</b> 這些新措施。</p>\n  <p>感謝您在實施此系統過渡時的配合。</p>\n</div>", "questions": [{"num": 143, "difficulty": "中", "point": "時態與語態 - 現在完成式被動態", "options": {"A": "modify", "B": "modifies", "C": "was modified", "D": "has been modified"}, "correct": "D", "translation": "差旅費報銷核准流程已被修改以提高效率。", "explanation": {"structure": "the travel expense... process (主詞) + _______ (動詞) + to improve (不定詞目的)。", "core": "流程「被修改」是從過去持續到現在的影響，表示目前政策已被改動，應使用現在完成式被動態 has been modified。選 (D)。", "distractors": "(A) modify 為複數動詞，(B) modifies 為主動單三，(C) was modified 過去被動。"}}, {"num": 144, "difficulty": "中", "point": "商務字彙 - 動詞語意搭配", "options": {"A": "exceed", "B": "audit", "C": "comply", "D": "transition"}, "correct": "A", "translation": "所有超過 50 美元的個人用餐報銷申請都需要原始收據。", "explanation": {"structure": "dining claims that (關係子句主格) + _______ (動詞) + $50 (受詞金額)。", "core": "「金額超過 50 美元」，選及物動詞 exceed (超過/多於)。選 (A)。", "distractors": "(B) audit 審計，(C) comply 遵守，(D) transition 轉渡。"}}, {"num": 145, "difficulty": "高", "point": "篇章插句題", "options": {"A": "Furthermore, department directors must sign all claim forms beforehand.", "B": "Technicians are currently resolving database connection issues.", "C": "All saving accounts will receive a deposit credit of $50.", "D": "A community welcome event is scheduled for Wednesday."}, "correct": "A", "translation": "此外，部門主管必須事先在所有報銷表上簽名。", "explanation": {"structure": "接在「報銷收據要求政策」之後，說明主管的審核職責。", "core": "「此外，部門主管必須事先簽核（Furthermore, department directors must sign...）」是報銷流程政策的進一步說明。選 (A)。", "distractors": "(B) 資料庫連線無關、(C) 存款額度無關、(D) 歡迎活動無關。"}}, {"num": 146, "difficulty": "中", "point": "商務字彙 - 名詞語意搭配與介系詞", "options": {"A": "compliance", "B": "threshold", "C": "breakdown", "D": "constraint"}, "correct": "A", "translation": "非常感謝您嚴格遵守這些新措施。", "explanation": {"structure": "Your strict + _______ (名詞) + with these new measures (介系詞搭配)。", "core": "名詞與介系詞 with 搭配，且表示「遵守」，應選 compliance。選 (A)。", "distractors": "(B) threshold 門檻，(C) breakdown 明細，(D) constraint 限制。"}}], "vocabulary": [{"word": "exceed", "pos": "v.", "meaning": "超過，多於"}, {"word": "compliance", "pos": "n.", "meaning": "遵守，符合"}]}];
+const PART7_DATA = [{"id": "p1", "type": "Text Message Chain", "start": 147, "end": 148, "title_en": "Questions 147-148 refer to the following text message chain.", "title_zh": "147-148 題參照以下簡訊對話。", "passage_en_template": "<div class=\"chat-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <div class=\"msg mb-2\"><b>Alistair Vance</b> <span class=\"text-gray-400\">(9:15 a.m.)</span>: Hi David, is Boardroom A available at 2:00 p.m. today? We have a sudden aviation safety audit and need a private space.</div>\n  <div class=\"msg mb-2\"><b>David Vance</b> <span class=\"text-gray-400\">(9:17 a.m.)</span>: Hi Alistair, unfortunately Boardroom A is closed today because of the internet router maintenance. The technicians are working on the cables.</div>\n  <div class=\"msg mb-2\"><b>Alistair Vance</b> <span class=\"text-gray-400\">(9:18 a.m.)</span>: Ah, I forgot about that notice. What about Boardroom B? Is it free?</div>\n  <div class=\"msg\"><b>David Vance</b> <span class=\"text-gray-400\">(9:20 a.m.)</span>: Yes, Boardroom B is free until 4:00 p.m. I will register the reservation for you right now.</div>\n</div>", "passage_zh": "<div class=\"chat-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <div class=\"msg mb-2\"><b>Alistair Vance</b> <span class=\"text-gray-400\">(上午 9:15)</span>: 嗨 David，今天下午 2:00 會議室 A 有空嗎？我們有一次突發的航空安全審計，需要一個私密空間。</div>\n  <div class=\"msg mb-2\"><b>David Vance</b> <span class=\"text-gray-400\">(上午 9:17)</span>: 嗨 Alistair，不幸的是，由於網絡路由器維護，會議室 A 今天關閉。技術人員正在處理電纜。</div>\n  <div class=\"msg mb-2\"><b>Alistair Vance</b> <span class=\"text-gray-400\">(上午 9:18)</span>: 啊，我忘了那個通知。會議室 B 呢？有空嗎？</div>\n  <div class=\"msg\"><b>David Vance</b> <span class=\"text-gray-400\">(上午 9:20)</span>: 有的，會議室 B 在下午 4:00 之前有空。我現在立刻幫你登記預約。</div>\n</div>", "questions": [{"num": 147, "difficulty": "低", "point": "細節理解", "question": "Why is Boardroom A unavailable today?", "translation": "因為正在進行網路路由器維護。", "options": {"A": "It is being painted.", "B": "Internet router maintenance is being performed.", "C": "It has been reserved by the CEO.", "D": "A new server room is being set up."}, "correct": "B", "translation_zh": "開會室A今天因為網路維護而關閉。", "explanation": {"structure": "細節定位。定位 David 在 9:17 a.m. 的回覆 \"Boardroom A is closed today because of the internet router maintenance\"。", "core": "\"internet router maintenance\" 指網路路由器維護，對意 (B)。", "distractors": "(A) 油漆中、(C) 被執行長預約、(D) 設立新伺服器室。"}}, {"num": 148, "difficulty": "中", "point": "細節定位", "question": "What will David Vance do next?", "translation": "幫 Alistair 登記預約會議室 B。", "options": {"A": "Postpone the aviation audit", "B": "Submit an expense claim form", "C": "Reserve Boardroom B", "D": "Inspect the newly installed cables"}, "correct": "C", "translation_zh": "幫 Alistair 預約會議室 B。", "explanation": {"structure": "細節理解。定位 David 在 9:20 a.m. 的最後一句話 \"I will register the reservation for you right now.\"（指代 Boardroom B）。", "core": "「預約會議室 B」對意 (C)。", "distractors": "(A) 推遲審計、(B) 提交報銷、(D) 檢查新電纜。"}}], "vocabulary": [{"word": "available", "pos": "adj.", "meaning": "可得到的，空閒的"}, {"word": "register", "pos": "v.", "meaning": "登記，註冊"}, {"word": "reservation", "pos": "n.", "meaning": "預約，保留"}]}, {"id": "p2", "type": "Advertisement", "start": 149, "end": 150, "title_en": "Questions 149-150 refer to the following advertisement.", "title_zh": "149-150 題參照以下廣告。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-2\">Summer Organic Bread - Aurora Organic Bakery</h4>\n  <p class=\"mb-2\">Are you looking for fresh and nutritious meal options near your workspace? Aurora Organic Bakery offers a comprehensive selection of seasonal healthy sets designed to keep you energized. Our meals are prepared with organic ingredients directly sourced from local family-owned farms.</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>Basic Salad Combo:</b> Organic greens with homemade dressing. $12.</li>\n    <li><b>Wellness Lunch Set:</b> Includes a hot quinoa bowl and a fresh green smoothie. $18.</li>\n  </ul>\n  <p>Order by July 31 to receive a 15% discount on your first online purchase. Contact us at 555-0188 or visit www.aurorabakery.com.</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-2\">夏季有機麵包 - Aurora Organic Bakery</h4>\n  <p class=\"mb-2\">您正在工作空間附近尋找新鮮且營養的餐點選擇嗎？Aurora Organic Bakery 提供豐富的季節性午餐套餐，旨在讓您保持活力。我們的餐點均採用直接從當地家族經營農場採購的有機食材準備而成。</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>基本沙拉套餐：</b>有機蔬菜搭配手作醬料。12 美元。</li>\n    <li><b>健康午餐套餐：</b>包括一碗熱藜麥飯和一杯新鮮綠拿鐵。18 美元。</li>\n  </ul>\n  <p>在 7 月 31 日之前訂購，即可享有首筆線上購買 15% 的折扣。請致電 555-0188 聯絡我們，或造訪 www.aurorabakery.com。</p>\n</div>", "questions": [{"num": 149, "difficulty": "低", "point": "細節理解", "question": "What is included in the Wellness Lunch Set?", "translation": "一碗熱藜麥飯和一杯綠拿鐵。", "options": {"A": "Free boardroom delivery", "B": "A hot quinoa bowl and a green smoothie", "C": "A complimentary coffee upgrade", "D": "Unlimited salad bar access"}, "correct": "B", "translation_zh": "包括熱藜麥飯和綠拿鐵。", "explanation": {"structure": "細節定位。定位 Wellness Lunch Set 清單 \"Includes a hot quinoa bowl and a fresh green smoothie\"。", "core": "選 (B)。", "distractors": "(A) 免費送餐、(C) 升級咖啡、(D) 沙拉吧。"}}, {"num": 150, "difficulty": "中", "point": "細節定位 - 優惠條件", "question": "How can customers get a discount on the lunch set?", "translation": "在 7 月 31 日之前在線上訂購。", "options": {"A": "By purchasing a co-working day pass", "B": "By ordering online before July 31", "C": "By signing a long-term corporate contract", "D": "By referring another business client"}, "correct": "B", "translation_zh": "在 7 月 31 日之前線上訂購。", "explanation": {"structure": "細節理解。定位末段 \"Order by July 31 to receive a 15% discount on your first online purchase\"。", "core": "「7/31前線上購買」對意 (B)。", "distractors": "(A) 買通票、(C) 簽長約、(D) 推薦客戶。"}}], "vocabulary": [{"word": "nutritious", "pos": "adj.", "meaning": "有營養的，營養豐富的"}, {"word": "organic", "pos": "adj.", "meaning": "有機的，器官的"}]}, {"id": "p3", "type": "Letter", "start": 151, "end": 152, "title_en": "Questions 151-152 refer to the following letter.", "title_zh": "151-152 題參照以下信件。", "passage_en_template": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"text-right\">July 10</p>\n  <p class=\"mb-2\">Customer Service Department<br>Meridian Global Logistics Inc.<br>400 Industrial Parkway<br>Chicago, IL</p>\n  <p class=\"mb-2\">Dear Customer Service,</p>\n  <p class=\"mb-2\">I recently contacted your sales office regarding the shipping fees for transporting four solar panels (Model APX-200) from our facility at Helios Solar Energy to our branch in Toronto. While we are satisfied with your basic rates, one of the routes quote seems to exceed our budget guidelines.</p>\n  <p class=\"mb-2\">Since Meridian Logistics is our primary logistics provider, I would like to inquire if we qualify for a corporate discount or if we can establish a customized rate contract for our monthly shipments. I have attached the original rate quote to this letter.</p>\n  <p class=\"mb-2\">Thank you for your assistance with this matter.</p>\n  <p class=\"text-xs\">Sincerely,<br>Maya Lin<br>Operations Manager, Helios Solar Energy</p>\n</div>", "passage_zh": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"text-right\">7 月 10 日</p>\n  <p class=\"mb-2\">客戶服務部<br>Meridian Global Logistics 公司<br>400 號工業園區路<br>芝加哥，伊利諾州</p>\n  <p class=\"mb-2\">親愛的客服部門：</p>\n  <p class=\"mb-2\">我最近聯絡了貴公司的銷售辦公室，諮詢將四個太陽能電池板（型號 APX-200）從 Helios Solar Energy 的設施運送到我們多倫多分部的運費。雖然我們對你們的基本費率感到滿意，但其中一條路線的報價似乎超出了我們的預算指南。</p>\n  <p class=\"mb-2\">由於 Meridian Logistics 是我們的主要物流供應商，我想詢問我們是否符合企業折扣的資格，或者我們是否可以為我們的月度發貨建立定製費率合約。我已將原始費率報價隨信附上。</p>\n  <p class=\"mb-2\">感謝您對此事的協助。</p>\n  <p class=\"text-xs\">謹啟，<br>Maya Lin<br>Helios Solar Energy 營運經理</p>\n</div>", "questions": [{"num": 151, "difficulty": "低", "point": "細節理解", "question": "What is the main purpose of the letter?", "translation": "詢問運送費用與折扣。", "options": {"A": "To request a pricing quote for custom office furniture", "B": "To inquire about shipping discounts or custom rates", "C": "To cancel a database hosting contract", "D": "To apply for a customer service job at Meridian"}, "correct": "B", "translation_zh": "詢問是否有運費折扣或定制費率。", "explanation": {"structure": "主旨理解。Maya 寫信說明目前的物流報價超出了預算，並詢問是否有 corporate discount 或建立 customized rate contract。", "core": "「詢問運費折扣或定製費率」對意 (B)。", "distractors": "(A) 家具詢價、(C) 取消合約、(D) 應徵客服。"}}, {"num": 152, "difficulty": "中", "point": "細節定位", "question": "What has Ms. Lin enclosed with the letter?", "translation": "原始報價單。", "options": {"A": "A copy of the warranty terms", "B": "The broken solar panel parts", "C": "The original rate quote", "D": "A blueprint of her server room layout"}, "correct": "C", "translation_zh": "隨信附上原始費率報價單。", "explanation": {"structure": "細節理解。定位信件倒數第二句 \"I have attached the original rate quote to this letter.\"。", "core": "「隨信附上原始報價單」對意 (C)。", "distractors": "(A) 保固條款、(B) 損壞零件、(D) 佈置圖。"}}], "vocabulary": [{"word": "transport", "pos": "v.", "meaning": "運送，運輸"}, {"word": "qualify", "pos": "v.", "meaning": "有資格，使合格"}]}, {"id": "p4", "type": "Notice", "start": 153, "end": 154, "title_en": "Questions 153-154 refer to the following notice.", "title_zh": "153-154 題參照以下通知。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Pinnacle Coworking Hub - Building Notice</h4>\n  <p class=\"mb-2\">Dear Tenants,</p>\n  <p class=\"mb-2\">Please be informed that local electrical contractors will conduct a mandatory power grid maintenance audit of our facility on Saturday, July 25, between 9:00 p.m. and 11:30 p.m.</p>\n  <p class=\"mb-2\">During the maintenance window, all power in the building will be shut down periodically. Please ensure that all your electronic hardware is turned off beforehand. Additionally, wireless internet service will be temporarily unavailable during these hours.</p>\n  <p>We apologize for this temporary disruption and thank you for your cooperation. If you have any concerns, please contact the community manager beforehand.</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Pinnacle 共享辦公空間 - 大樓通知</h4>\n  <p class=\"mb-2\">親愛的租戶們：</p>\n  <p class=\"mb-2\">請注意，當地電力承包商將於 7 月 25 日星期六晚上 9:00 至 11:30 之間對我們的設施進行強制性電網維護審計。</p>\n  <p class=\"mb-2\">在維護窗口期間，大樓內的所有電源都將定期關閉。請確保事先關閉您所有的電子硬體。此外，在這些時段內，無線網路服務將暫時無法使用。</p>\n  <p>我們對這項臨時干擾表示歉意，並感謝您的配合。如果您有任何疑慮，請事先與社區經理聯絡。</p>\n</div>", "questions": [{"num": 153, "difficulty": "低", "point": "細節理解", "question": "When will the power grid maintenance audit take place?", "translation": "7 月 25 日星期六晚上。", "options": {"A": "Wednesday, July 22 morning", "B": "Saturday, July 25 evening", "C": "Saturday, July 25 morning", "D": "Sunday, July 26 afternoon"}, "correct": "B", "translation_zh": "於 7 月 25 日星期六晚上進行。", "explanation": {"structure": "時間定位。定位 notice 第一段 \"on Saturday, July 25, between 9:00 p.m. and 11:30 p.m.\"。", "core": "晚上 9:00 至 11:30 為 evening。選 (B)。", "distractors": "(A) 7/22 上午、(C) 7/25 上午、(D) 7/26 下午。"}}, {"num": 154, "difficulty": "中", "point": "細節定位", "question": "What service will be temporarily unavailable during the audit?", "translation": "無線網路服務。", "options": {"A": "Wireless internet access", "B": "Elevator service", "C": "Hot water supply", "D": "Central HVAC ventilation"}, "correct": "A", "translation_zh": "無線網路服務將暫時無法使用。", "explanation": {"structure": "細節理解。定位第二段最後一句 \"Additionally, wireless internet service will be temporarily unavailable...\"。", "core": "「無線網路服務」對意 (A)。", "distractors": "(B) 電梯、(C) 熱水、(D) 空調。"}}], "vocabulary": [{"word": "mandatory", "pos": "adj.", "meaning": "強制的，義務的"}, {"word": "periodically", "pos": "adv.", "meaning": "定期地，週期性地"}]}, {"id": "p5", "type": "Memo", "start": 155, "end": 157, "title_en": "Questions 155-157 refer to the following memo.", "title_zh": "155-157 題參照以下備忘錄。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-2\">\n    <b>To:</b> Department Managers<br>\n    <b>From:</b> Alistair Vance, Finance Department<br>\n    <b>Date:</b> August 25<br>\n    <b>Subject:</b> Dining and Meeting Catering Expense Reimbursement Policy Changes\n  </p>\n  <p class=\"mb-2\">This memo serves to notify all department managers of key changes to our Dining and Meeting Catering Expense Reimbursement Policy, effective September 1. Please ensure that all staff members in your department are informed of these updates beforehand.</p>\n  <p class=\"mb-2\">Under the new guidelines, original receipts are now strictly required for any dining or meeting catering expense item exceeding $50. Any claims that do not include the original receipt will be rejected without exception.</p>\n  <p class=\"mb-2\">Additionally, the submission window for reimbursement claims has been shortened. All claims must now be submitted to the finance portal within 15 days of the purchase date. Thank you for your cooperation in implementing these measures.</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-2\">\n    <b>收件者：</b>部門經理<br>\n    <b>寄件者：</b>財務部 Alistair Vance<br>\n    <b>日期：</b>8 月 25 日<br>\n    <b>主旨：</b>用餐與會議餐飲費用報銷政策變更\n  </p>\n  <p class=\"mb-2\">本備忘錄旨在通知所有部門經理，我們的用餐與會議餐飲費用報銷政策將於 9 月 1 日起進行關鍵變更。請確保您部門內的所有員工在事前都知悉這些更新。</p>\n  <p class=\"mb-2\">根據新指南，現在任何超過 50 美元的用餐或會議餐飲支出項目都嚴格要求提供原始收據。任何未包含原始收據的申請都將被無例外地退回。</p>\n  <p class=\"mb-2\">此外，費用報銷申請的提交窗口已縮短。所有申請現在必須在購買日期後 15 天內提交至財務入口網站。感謝您在實施這些措施方面的配合。</p>\n</div>", "questions": [{"num": 155, "difficulty": "低", "point": "細節理解", "question": "When will the new reimbursement policy take effect?", "translation": "9 月 1 日。", "options": {"A": "August 25", "B": "September 1", "C": "September 15", "D": "October 12"}, "correct": "B", "translation_zh": "政策將於 9 月 1 日生效。", "explanation": {"structure": "生效日期定位。第一段第一句寫道 \"effective September 1\"。", "core": "「9 月 1 日」對意 (B)。", "distractors": "(A) 發信日、(C) 15天窗口期、(D) 維修日。"}}, {"num": 156, "difficulty": "中", "point": "細節定位", "question": "According to the memo, what happens to dining claims exceeding $50 that missing receipts?", "translation": "它們將被退回。", "options": {"A": "They are subject to a $15 late fee.", "B": "They will be automatically rejected.", "C": "They require the CFO's special signature.", "D": "They will be processed after a 30-day delay."}, "correct": "B", "translation_zh": "沒有原始收據的申請將被拒絕。", "explanation": {"structure": "細節定位。第二段第二句 \"Any claims that do not include the original receipt will be rejected...\"。", "core": "「將被自動退回」對意 (B)。", "distractors": "(A) 罰款、(C) 財務長簽名、(D) 延遲處理。"}}, {"num": 157, "difficulty": "高", "point": "細節定位 - 報銷憑證條件", "question": "What is the maximum dining claim amount that does NOT strictly require a receipt?", "translation": "50 美元。", "options": {"A": "$12", "B": "$18", "C": "$50", "D": "$100"}, "correct": "C", "translation_zh": "不高於 50 美元不嚴格要求收據。", "explanation": {"structure": "細節與邏輯推論。第二段第一句 \"original receipts are now strictly required for any dining ... exceeding $50\"。", "core": "超過 $50 才需要收據，也就是不高於 $50 不需要。因此不嚴格要求收據的最大金額為 $50。故選 (C)。", "distractors": "(A) 沙拉費、(B) 午餐套餐費、(D) 舊額度。"}}], "vocabulary": [{"word": "catering", "pos": "n.", "meaning": "餐飲承辦，餐飲服務"}, {"word": "shorten", "pos": "v.", "meaning": "變短，縮短"}]}, {"id": "p6", "type": "Webpage", "start": 158, "end": 160, "title_en": "Questions 158-160 refer to the following webpage.", "title_zh": "158-160 題參照以下網頁。", "passage_en_template": "<div class=\"webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-1\"><b>URL:</b> www.heliossolar.com/support/biometric</p>\n  <h4 class=\"font-bold text-base mb-1\">Helios IT Support - Resetting Biometric Security Settings</h4>\n  <p class=\"mb-2\">To maintain facility security, employees are required to update their security access profiles every 90 days. If your scanner access is suspended or you need to update your registered fingerprint profile, follow these steps:</p>\n  <ol class=\"list-decimal pl-5 mb-2\">\n    <li>Navigate to the employee portal and select \"Security Profile\".</li>\n    <li>Enter your corporate email and click \"Request Access Reset\".</li>\n    <li>Click on the secure reset link sent to your inbox. The link is valid for 15 minutes.</li>\n    <li>Create a secure PIN that includes at least 6 digits and a special character, then visit the ground floor security desk for fingerprint scanning.</li>\n  </ol>\n  <p>If you do not receive the email within 5 minutes, check your spam folder or contact the IT Help Desk at extension 4088.</p>\n</div>", "passage_zh": "<div class=\"webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-1\"><b>網址：</b> www.heliossolar.com/support/biometric</p>\n  <h4 class=\"font-bold text-base mb-1\">Helios IT 服務台 - 重設生物辨識安全設定</h4>\n  <p class=\"mb-2\">為了維護設施安全，員工必須每 90 天更新一次其安全存取檔案。如果您的掃描器存取權被暫停，或您需要更新註冊的指紋檔案，請按照以下步驟操作：</p>\n  <ol class=\"list-decimal pl-5 mb-2\">\n    <li>進入員工入口網站並選擇「安全設定」。</li>\n    <li>輸入您的公司電子郵件，然後點擊「要求重設存取權」。</li>\n    <li>點擊發送到您收件匣的安全重設連結。該連結在 15 分鐘內有效。</li>\n    <li>創建一個包含至少 6 位數字和一個特殊字元的安全 PIN 碼，然後前往一樓安全服務台進行指紋掃描。</li>\n  </ol>\n  <p>如果您在 5 分鐘內未收到電子郵件，請檢查垃圾郵件資料夾，或撥打分機 4088 聯絡 IT 服務台。</p>\n</div>", "questions": [{"num": 158, "difficulty": "低", "point": "細節理解", "question": "How often must employees update their security access profiles?", "translation": "每 90 天。", "options": {"A": "Every 15 days", "B": "Every 30 days", "C": "Every 90 days", "D": "Every year"}, "correct": "C", "translation_zh": "每 90 天更新一次。", "explanation": {"structure": "細節定位。定位首段第一句 \"required to update their security access profiles every 90 days\"。", "core": "「每 90 天」對意 (C)。", "distractors": "(A) 15分鐘、(B) 30天、(D) 每年。"}}, {"num": 159, "difficulty": "中", "point": "細節定位", "question": "How long is the secure reset link valid?", "translation": "15 分鐘。", "options": {"A": "For 5 minutes", "B": "For 15 minutes", "C": "For 1 hour", "D": "For 24 hours"}, "correct": "B", "translation_zh": "重設連結在 15 分鐘內有效。", "explanation": {"structure": "細節定位。定位第三步 \"The link is valid for 15 minutes.\"。", "core": "「15 分鐘」對意 (B)。", "distractors": "(A) 郵件等待時間、(C) 一小時、(D) 24小時。"}}, {"num": 160, "difficulty": "中", "point": "推論題", "question": "What should an employee do if the reset email does not arrive after 5 minutes?", "translation": "檢查垃圾郵件資料夾或撥打分機 4088。", "options": {"A": "Submit a paper reimbursement claim form", "B": "Check their spam folder or call extension 4088", "C": "Register for a new corporate email address", "D": "Visit the ground floor security desk directly"}, "correct": "B", "translation_zh": "檢查垃圾郵件資料夾，或聯絡分機 4088。", "explanation": {"structure": "細節理解。定位網頁最後一句 \"check your spam folder or contact the IT Help Desk at extension 4088.\"。", "core": "對意 (B)。", "distractors": "(A) 報銷表、(C) 註冊新郵件、(D) 直接去一樓。"}}], "vocabulary": [{"word": "suspend", "pos": "v.", "meaning": "暫停，中止"}, {"word": "profile", "pos": "n.", "meaning": "檔案，簡介，概況"}]}, {"id": "p7", "type": "Letter", "start": 161, "end": 163, "title_en": "Questions 161-163 refer to the following letter.", "title_zh": "161-163 題參照以下信件。", "passage_en_template": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"text-right\">July 18</p>\n  <p class=\"mb-2\">Maya Lin<br>Operations Manager<br>Helios Solar Energy Inc.<br>700 Broadway Avenue<br>New York, NY</p>\n  <p class=\"mb-2\">Dear Ms. Lin,</p>\n  <p class=\"mb-2\">On behalf of Zephyr Aviation, I am writing to invite you to be the guest keynote speaker at our annual Security and Logistics Seminar, which will be held at Pinnacle Coworking Hub on Friday, September 10. Your extensive experience in network database encryption and cloud safety would be highly valuable to our team.</p>\n  <p class=\"mb-2\">We would request a 45-minute presentation on \"Future Trends in Database Security\" on the morning of September 10, followed by a Q&A session. Zephyr Aviation will cover all your travel expenses and provide an honorarium of $1,000.</p>\n  <p class=\"mb-2\">Please let us know if you are available by August 10 so we can finalize the schedule. We sincerely hope you will accept our invitation.</p>\n  <p class=\"text-xs\">Sincerely,<br>Alistair Vance<br>Operations Director, Zephyr Aviation</p>\n</div>", "passage_zh": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"text-right\">7 月 18 日</p>\n  <p class=\"mb-2\">Maya Lin<br>營運經理<br>Helios Solar Energy 公司<br>700 號百老匯大道<br>紐約市，紐約州</p>\n  <p class=\"mb-2\">親愛的 Lin 女士：</p>\n  <p class=\"mb-2\">我代表 Zephyr Aviation，寫信邀請您擔任我們年度安全與物流研討會的客座主題演講嘉賓，該研討會將於 9 月 10 日星期五在 Pinnacle 共享辦公空間舉行。您在網絡資料庫加密和雲端安全方面的廣泛經驗對我們的團隊來說將非常有價值。</p>\n  <p class=\"mb-2\">我們希望您能在 9 月 10 日上午進行一場為期 45 分鐘、主題為「資料庫安全未來趨勢」的簡報，隨後是問答環節。Zephyr Aviation 將支付您的所有差旅費用，並提供 1,000 美元的演講酬勞。</p>\n  <p class=\"mb-2\">請在 8 月 10 日前讓我們知道您是否有空，以便我們敲定日程表。我們真誠地希望您能接受我們的邀請。</p>\n  <p class=\"text-xs\">謹啟，<br>Alistair Vance<br>Zephyr Aviation 營運總監</p>\n</div>", "questions": [{"num": 161, "difficulty": "低", "point": "細節理解", "question": "What is the purpose of the letter?", "translation": "邀請 Ms. Lin 在研討會上演講。", "options": {"A": "To submit a bid for a server access contract", "B": "To invite Ms. Lin to speak at a seminar", "C": "To request a reimbursement for hotel expenses", "D": "To complain about a delay in server shipments"}, "correct": "B", "translation_zh": "邀請 Ms. Lin 在研討會上演講。", "explanation": {"structure": "主旨理解。信件開頭 \"invite you to be the guest keynote speaker at our annual Security and Logistics Seminar\"。", "core": "「邀請 Ms. Lin 演講」對意 (B)。", "distractors": "(A) 投標、(C) 費用報銷、(D) 延遲投訴。"}}, {"num": 162, "difficulty": "中", "point": "細節定位", "question": "What topic is Ms. Lin asked to present on?", "translation": "資料庫安全的未來趨勢。", "options": {"A": "Ergonomic Office Furniture Design", "B": "Network Security and PIN Resets", "C": "Future Trends in Database Security", "D": "Fire Safety and Emergency Audits"}, "correct": "C", "translation_zh": "進行關於「資料庫安全未來趨勢」的演講。", "explanation": {"structure": "細節定位。定位第二段第一句 \"presentation on 'Future Trends in Database Security'\"。", "core": "對意 (C)。", "distractors": "(A) 家具設計、(B) 重設 PIN、(D) 消防稽核。"}}, {"num": 163, "difficulty": "高", "point": "同義字替換", "question": "In the letter, the word \"finalize\" in paragraph 3 is closest in meaning to", "translation": "完成，決定。", "options": {"A": "cancel", "B": "complete", "C": "postpone", "D": "extend"}, "correct": "B", "translation_zh": "finalize 意為「完成，敲定」。", "explanation": {"structure": "詞彙代換。\"finalize the schedule\" 意為敲定或完成時程。", "core": "complete 在此語境下與 finalize 最接近。故選 (B)。", "distractors": "(A) 取消、(C) 延期、(D) 延長。"}}], "vocabulary": [{"word": "seminar", "pos": "n.", "meaning": "研討會，座談會"}, {"word": "finalize", "pos": "v.", "meaning": "完成，敲定"}]}, {"id": "p8", "type": "Notice", "start": 164, "end": 167, "title_en": "Questions 164-167 refer to the following notice.", "title_zh": "164-167 題參照以下通知。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Prism Marketing - Seattle Office Grand Opening</h4>\n  <p class=\"mb-2\">Prism Marketing is proud to announce the grand opening of our new regional branch in Seattle. [1]. To mark this special occasion, we are holding a community consulting day on Friday, September 10, from 10:00 a.m. to 3:00 p.m.</p>\n  <p class=\"mb-2\">During this event, local business owners are invited to visit the branch to tour our state-of-the-art marketing studio and meet our senior consultants. [2]. In addition, the first 50 visitors who register for a new promotional analysis will receive a complimentary $100 service credit. [3].</p>\n  <p class=\"mb-2\">Free refreshments and organic beverages will be served throughout the day. [4]. We look forward to strengthening our presence in Seattle and serving the local business community.</p>\n  <p class=\"text-xs\">Seattle Branch Management</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Prism Marketing - 西雅圖辦公室盛大開幕</h4>\n  <p class=\"mb-2\">Prism Marketing 很榮幸宣布我們在西雅圖的新區域分部盛大開幕。【[1]】。為了紀念這個特別的時刻，我們將於 9 月 10 日星期五上午 10:00 至下午 3:00 舉行社區諮詢日。</p>\n  <p class=\"mb-2\">在此活動期間，誠摯邀請當地企業主參觀分部，參觀我們最先進的行銷工作室並與我們的資深顧問會面。【[2]】。此外，前 50 名註冊新促銷分析的訪客將獲得免費的 100 美元服務額度。【[3]】。</p>\n  <p class=\"mb-2\">全天將提供免費茶點和有機飲料。【[4]】。我們期待增強我們在西雅圖的地位並服務當地企業社區。</p>\n</div>", "questions": [{"num": 164, "difficulty": "低", "point": "細節理解", "question": "When is the welcome event scheduled to occur?", "translation": "9 月 10 日星期五。", "options": {"A": "Friday, September 10", "B": "Wednesday, July 22", "C": "Saturday, July 25", "D": "Friday, July 31"}, "correct": "A", "translation_zh": "於 9 月 10 日星期五舉行。", "explanation": {"structure": "日期定位。定位第一段最後一句 \"Friday, September 10\"。", "core": "選 (A)。", "distractors": "(B) 7/22、(C) 電力維修日、(D) 優惠日。"}}, {"num": 165, "difficulty": "中", "point": "細節定位 - 優惠條件", "question": "What will the first 50 visitors who register receive?", "translation": "100 美元的服務額度。", "options": {"A": "An organic salad bowl", "B": "A VIP access keycard", "C": "A $100 service credit", "D": "A complimentary business auditing textbook"}, "correct": "C", "translation_zh": "將獲得免費的 100 美元服務額度。", "explanation": {"structure": "優惠細節定位。定位第二段第二句 \"the first 50 visitors who register for a new promotional analysis will receive a complimentary $100 service credit.\"。", "core": "「100 美元服務額度」對意 (C)。", "distractors": "(A) 沙拉碗、(B) 感應卡、(D) 審計書。"}}, {"num": 166, "difficulty": "中", "point": "細節定位", "question": "What is NOT mentioned as being available at the event?", "translation": "免費的無線網絡設備（未提及）。", "options": {"A": "Free refreshments and organic beverages", "B": "A tour of the new studio", "C": "Meetings with senior consultants", "D": "Free wireless internet routers"}, "correct": "D", "translation_zh": "無線網路路由器並未提及。", "explanation": {"structure": "排除題。比對文中項。", "core": "(A) 茶點、(B) 工作室、(C) 顧問均有，(D) 路由器未提，選 (D)。", "distractors": "其餘均被提到。"}}, {"num": 167, "difficulty": "高", "point": "插句位置判定", "question": "In which of the positions [1], [2], [3], or [4] does the following sentence best belong?\n\"This credit will be automatically applied to your project invoice within 24 hours.\"", "options": {"A": "[1]", "B": "[2]", "C": "[3]", "D": "[4]"}, "correct": "C", "translation": "位置 [3]。", "translation_zh": "此句最適宜放置於位置 [3]。", "explanation": {"structure": "插句定位。句子提到 \"This credit...\"。前文必須有關於額度的描述。", "core": "位置 [3] 之前的一句話為 \"receive a complimentary $100 service credit.\"，正好引入了 credit。選 (C)。", "distractors": "[1] 介紹開幕、[2] 講參觀、[4] 講茶點。"}}], "vocabulary": [{"word": "complimentary", "pos": "adj.", "meaning": "免費贈送的，讚賞的"}, {"word": "credit", "pos": "n.", "meaning": "信用，服務額度，學分"}]}, {"id": "p9", "type": "Webpage", "start": 168, "end": 171, "title_en": "Questions 168-171 refer to the following webpage.", "title_zh": "168-171 題參照以下網頁。", "passage_en_template": "<div class=\"webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-1\"><b>URL:</b> www.meridianlogistics.com/tenders/security</p>\n  <h4 class=\"font-bold text-base mb-1\">Meridian Global Logistics - Call for Security Access System Installation Proposals</h4>\n  <p class=\"mb-2\">Meridian Global Logistics is seeking comprehensive proposals from established technology integration firms to upgrade and manage our facility access control security systems. [1]. The selected partner will be responsible for installing biometric scanning equipment and secure entrance gates at our Chicago logistics center.</p>\n  <p class=\"mb-2\">Proposals must meet the following baseline requirements to be considered: [2].</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li>Have at least 3 years of experience in corporate security integration services.</li>\n    <li>Provide 24/7 technical support and maintenance response.</li>\n    <li>Submit detailed monthly billing rate projections by the deadline.</li>\n  </ul>\n  <p class=\"mb-2\">The deadline for submitting all bidding documents is Friday, October 15, at 5:00 p.m. [3]. Late submissions will be rejected without review. Detailed templates and security specifications can be downloaded from our portal. [4].</p>\n</div>", "passage_zh": "<div class=\"webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-1\"><b>網址：</b> www.meridianlogistics.com/tenders/security</p>\n  <h4 class=\"font-bold text-base mb-1\">Meridian Global Logistics - 安全存取系統安裝提案招標公告</h4>\n  <p class=\"mb-2\">Meridian Global Logistics 正在尋求信譽良好的技術整合公司的完整提案，以升級和管理我們的設施門禁安全系統。【[1]】。入選的合作夥伴將負責在我們的芝加哥物流中心安裝生物辨識掃描設備和安全入口大門。</p>\n  <p class=\"mb-2\">提案必須滿足以下基準要求才能被納入考慮：【[2]】。</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li>在企業安全整合服務方面擁有至少 3 年的經驗。</li>\n    <li>提供 24/7 的技術支援與維護響應。</li>\n    <li>在截止日期前提交詳細的月費預估。</li>\n  </ul>\n  <p class=\"mb-2\">提交所有投標文件的截止日期是 10 月 15 日星期五下午 5:00。【[3]】。逾期提交的申請將不予審查。詳細的模板與安全規格可從我們的入口網站下載。【[4]】。</p>\n</div>", "questions": [{"num": 168, "difficulty": "低", "point": "細節理解", "question": "What is Meridian Logistics seeking in the tender notice?", "translation": "門禁安全系統安裝提案。", "options": {"A": "An internal travel expense software developer", "B": "Proposals for installing security access systems", "C": "Ergonomic boardroom tables for executive staff", "D": "A new advertising agency for social media campaigns"}, "correct": "B", "translation_zh": "尋求安全存取系統安裝提案。", "explanation": {"structure": "主旨理解。定位網頁標題及第一句 \"seeking comprehensive proposals ... to upgrade and manage our facility access control security systems\"。", "core": "「尋求門禁安全系統的安裝與升級」對意 (B)。", "distractors": "(A) 軟體、(C) 會議桌、(D) 行銷。"}}, {"num": 169, "difficulty": "中", "point": "細節定位 - 資格要求", "question": "What is one of the requirements for candidate firms?", "translation": "至少 3 年的企業安全整合經驗。", "options": {"A": "At least 3 years of security integration experience", "B": "An office location based in Seattle", "C": "Familiarity with organic bread ingredients", "D": "A database registry under 50 square feet"}, "correct": "A", "translation_zh": "需有至少 3 年的安全整合經驗。", "explanation": {"structure": "細節檢索。定位列表第一項 \"Have at least 3 years of experience in corporate security integration services\"。", "core": "對意 (A)。", "distractors": "(B) 辦公室在西雅圖、(C) 麵包原料、(D) 資料庫大小。"}}, {"num": 170, "difficulty": "中", "point": "細節定位", "question": "When is the deadline for submitting bidding documents?", "translation": "10 月 15 日星期五下午 5:00。", "options": {"A": "Wednesday, July 22 at 9:00 a.m.", "B": "Friday, October 15 at 5:00 p.m.", "C": "Saturday, July 25 at 11:30 p.m.", "D": "Friday, September 10 at 3:00 p.m."}, "correct": "B", "translation_zh": "截止日期是 10 月 15 日下午 5:00。", "explanation": {"structure": "截止時間定位。定位第三段第一句 \"Friday, October 15, at 5:00 p.m.\"。", "core": "選 (B)。", "distractors": "(A) 上午、(C) 電力維修結束、(D) 諮詢日結束。"}}, {"num": 171, "difficulty": "高", "point": "插句位置判定", "question": "In which of the positions [1], [2], [3], or [4] does the following sentence best belong?\n\"Please note that the portal registration requires an active corporate technology account.\"", "options": {"A": "[1]", "B": "[2]", "C": "[3]", "D": "[4]"}, "correct": "D", "translation_zh": "此句最適宜放置於位置 [4]。", "translation": "位置 [4]。", "explanation": {"structure": "插句定位。句子提到 \"the portal registration...\"（入口網站註冊）。前句應有關於入口網站（portal）下載的說明。", "core": "第四段最後一句提到 \"can be downloaded from our portal.\"（可從入口網站下載模板），之後放置位置 [4] 正好說明了該 portal 的註冊要求。選 (D)。", "distractors": "[1] 在講系統升級、[2] 在講基準要求、[3] 在講投標截止。"}}], "vocabulary": [{"word": "integration", "pos": "n.", "meaning": "整合，一體化"}, {"word": "specification", "pos": "n.", "meaning": "規格，說明書，詳情"}]}, {"id": "p10", "type": "Letter", "start": 172, "end": 175, "title_en": "Questions 172-175 refer to the following letter.", "title_zh": "172-175 題參照以下信件。", "passage_en_template": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"text-right\">September 12</p>\n  <p class=\"mb-2\">Maya Lin<br>IT Department<br>Helios Solar Energy Inc.<br>Chicago, IL</p>\n  <p class=\"mb-2\">Dear Ms. Lin,</p>\n  <p class=\"mb-2\">I am writing on behalf of the Finance Department regarding your travel expense claim OPT-9082 for $120, which you submitted on September 10. [1]. While your claim form was signed by Marketing Director Alistair Vance and submitted within the 15-day window, we are currently unable to process it. [2].</p>\n  <p class=\"mb-2\">Our review indicated that the receipt for your client dinner with Meridian Tech on September 1 is missing. Under company policy, any individual travel expense item exceeding $50 strictly requires an original receipt. [3]. Your train ticket on August 31 for $45 does not require a receipt, but the dinner item of $75 does. [4].</p>\n  <p class=\"mb-2\">Please upload the missing receipt to the finance portal at your earliest convenience so we can approve and process your reimbursement. Thank you.</p>\n  <p class=\"text-xs\">Sincerely,<br>Alistair Vance<br>Finance Director, Prism Marketing</p>\n</div>", "passage_zh": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"text-right\">9 月 12 日</p>\n  <p class=\"mb-2\">Maya Lin<br>資訊部<br>Helios Solar Energy 公司<br>芝加哥，伊利諾州</p>\n  <p class=\"mb-2\">親愛的 Lin 女士：</p>\n  <p class=\"mb-2\">我代表財務部寫信，關於您於 9 月 10 日提交的 120 美元差旅費報銷申請 OPT-9082。【[1]】。雖然您的報銷單已由行銷總監 Alistair Vance 簽名且在 15 天的窗口期內提交，但我們目前無法處理它。【[2]】。</p>\n  <p class=\"mb-2\">我們的審查指出，您 9 月 1 日與 Meridian Tech 的客戶晚宴收據遺失了。根據公司政策，任何超過 50 美元的單項差旅支出項目都嚴格要求提供原始收據。【[3]】。您 8 月 31 日 45 美元的火車票不需要收據，但 75 美元的晚宴項目需要。【[4]】。【[4]】。</p>\n  <p class=\"mb-2\">請儘快將遺失的收據上傳至財務入口網站，以便我們核准並處理您的報銷。謝謝。</p>\n  <p class=\"text-xs\">謹啟，<br>Alistair Vance<br>Prism Marketing 財務總監</p>\n</div>", "questions": [{"num": 172, "difficulty": "低", "point": "細節理解", "question": "What is the amount of the travel claim submitted by Ms. Lin?", "translation": "120 美元。", "options": {"A": "$45", "B": "$75", "C": "$120", "D": "$210"}, "correct": "C", "translation_zh": "申請報銷金額是 120 美元。", "explanation": {"structure": "金額定位。第一段第一句 \"travel expense claim OPT-9082 for $120\"。", "core": "「120 美元」對意 (C)。", "distractors": "(A) 火車票、(B) 晚餐、(D) 其他。"}}, {"num": 173, "difficulty": "中", "point": "細節定位", "question": "Who approved Ms. Lin's claim form before it was submitted?", "translation": "Alistair Vance。", "options": {"A": "Maya Lin", "B": "Alistair Vance", "C": "Sarah Jenkins", "D": "Elena Rostova"}, "correct": "B", "translation_zh": "由行銷總監 Alistair Vance 簽核。", "explanation": {"structure": "人物定位。第一段第二句 \"signed by Marketing Director Alistair Vance\"。", "core": "「Alistair Vance」對意 (B)。", "distractors": "(A) 申請人、(C) 社區經理、(D) 資訊總監。"}}, {"num": 174, "difficulty": "高", "point": "推論與邏輯分析", "question": "According to the letter, why does the train ticket NOT require a receipt?", "translation": "因為金額低於 50 美元的門檻。", "options": {"A": "Because it was booked under the Basic Plan", "B": "Because its amount does not exceed the $50 threshold", "C": "Because it was approved by the IT Director", "D": "Because the travel occurred on a weekend"}, "correct": "B", "translation_zh": "因為火車票金額未超過 50 美元的限制。", "explanation": {"structure": "政策邏輯推論。第二段提到「超過 $50 需提供收據」且「$45 的火車票不需要收據，但 $75 的晚宴需要」。", "core": "因為 $45 低於 $50 政策限額。故選 (B)。", "distractors": "(A) 方案、(C) IT 總監、(D) 週末旅行。"}}, {"num": 175, "difficulty": "高", "point": "插句位置判定", "question": "In which of the positions [1], [2], [3], or [4] does the following sentence best belong?\n\"This receipt must show the date, food items purchased, and tax breakdown.\"", "options": {"A": "[1]", "B": "[2]", "C": "[3]", "D": "[4]"}, "correct": "C", "translation_zh": "最適宜放置於位置 [3]。", "translation": "位置 [3]。", "explanation": {"structure": "插句定位。句子提到 \"This receipt...\"（此收據）。前文必須有提及收據（receipt）要求。", "core": "第二段第二句提到 \"strictly requires an original receipt.\"（嚴格要求原始收據），之後放置位置 [3] 說明了收據的格式要求（This receipt must show...）。選 (C)。", "distractors": "[1] 總額、[2] 申請被卡住、[4] 比對。"}}], "vocabulary": [{"word": "expenditure", "pos": "n.", "meaning": "支出，開支，消費"}, {"word": "breakdown", "pos": "n.", "meaning": "明細，分析，故障"}]}, {"id": "p11", "type": "Double Passage", "start": 176, "end": 180, "title_en": "Questions 176-180 refer to the following advertisement and e-mail.", "title_zh": "176-180 題參照以下廣告與電子郵件。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Helios Solar Energy - Commercial Safety Audit Services</h4>\n  <p class=\"mb-2\">Are you looking to secure your corporate solar grid? Helios Solar Energy provides state-of-the-art power safety audits and solar upgrades. Our monthly service plans are designed to meet any business scale:</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>Standard Solar Plan:</b> 2 kW capacity. Includes 24/5 support. Rate: $200/month.</li>\n    <li><b>Advanced Solar Plan:</b> 5 kW capacity. Includes 24/7 support. Rate: $400/month.</li>\n    <li><b>Enterprise Grid Plan:</b> 20 kW capacity. Includes full facility power audits. Rate: $800/month.</li>\n  </ul>\n  <p>Sign a one-year agreement by October 31 to receive a 10% discount on monthly bills. Contact us at 555-0199 or visit www.heliossolar.com.</p>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded text-xs\">\n  <p class=\"meta mb-2\">\n    <b>To:</b> Sales Department &lt;sales@heliossolar.com&gt;<br>\n    <b>From:</b> Alistair Vance &lt;avance@zephyraviation.com&gt;<br>\n    <b>Date:</b> October 12<br>\n    <b>Subject:</b> Inquiry about Solar Safety Upgrade\n  </p>\n  <p class=\"mb-2\">Dear Sales Department,</p>\n  <p class=\"mb-2\">I am writing to inquire about your Commercial Safety Audit Services. Zephyr Aviation is interested in upgrading its hangar roof solar safety. We require a minimum of 5 kW of capacity. Because our hangar operates 24/7 for global charter services, 24/7 technical support is an absolute necessity for our team.</p>\n  <p class=\"mb-2\">We would like to sign a one-year service agreement to take advantage of the discount mentioned in your advertisement. Please send us a draft contract and instructions on how to proceed. Thank you.</p>\n  <p>Sincerely,<br>Alistair Vance<br>Operations Director, Zephyr Aviation</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Helios Solar Energy - 商業安全審計服務</h4>\n  <p class=\"mb-2\">您想保護您的企業太陽能電網嗎？Helios Solar Energy 提供最先進的電力安全審計與太陽能升級。我們的月費服務方案旨在滿足任何業務規模：</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>標準太陽能方案：</b>2 kW 容量。包含 24/5 支援。費用：每月 200 美元。</li>\n    <li><b>進階太陽能方案：</b>5 kW 容量。包含 24/7 支援。費用：每月 400 美元。</li>\n    <li><b>企業電網方案：</b>20 kW 容量。包含全設施電力審計。費用：每月 800 美元。</li>\n  </ul>\n  <p>於 10 月 31 日前簽署一年期合約，即可享有月帳單 10% 的折扣。請致電 555-0199 聯絡我們，或造訪 www.heliossolar.com。</p>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded text-xs\">\n  <p class=\"meta mb-2\">\n    <b>收件者：</b>銷售部門 &lt;sales@heliossolar.com&gt;<br>\n    <b>寄件者：</b>Alistair Vance &lt;avance@zephyraviation.com&gt;<br>\n    <b>日期：</b>10 月 12 日<br>\n    <b>主旨：</b>關於太陽能安全升級的詢問\n  </p>\n  <p class=\"mb-2\">親愛的銷售部門：</p>\n  <p class=\"mb-2\">我寫這封信是為了詢問貴公司的商業安全審計服務。Zephyr Aviation 有意升級其機棚屋頂太陽能安全。我們需要至少 5 kW 的容量。因為我們的機棚為了全球包機服務而 24/7 運作，所以 24/7 的技術支援對我們的團隊來說是絕對必要的。</p>\n  <p class=\"mb-2\">我們希望簽署一份為期一年的服務協議，以享受您廣告中提到的折扣。請向我們發送一份合約草案以及如何進行的說明。謝謝。</p>\n  <p>謹啟，<br>Alistair Vance<br>Zephyr Aviation 營運總監</p>\n</div>", "questions": [{"num": 176, "difficulty": "低", "point": "細節理解", "question": "According to the advertisement, what is included in the Enterprise Grid Plan?", "translation": "全設施電力審計。", "options": {"A": "24/5 technical support", "B": "Full facility power audits", "C": "Free database hardware setup", "D": "A complimentary office furniture upgrade"}, "correct": "B", "translation_zh": "全設施電力審計。", "explanation": {"structure": "細節定位。定位廣告中 \"Enterprise Grid Plan\" 描述 \"Includes full facility power audits\"。", "core": "「全設施電力審計」對意 (B)。", "distractors": "(A) 24/5 支援是標準方案、(C) 硬件設定、(D) 家具升級。"}}, {"num": 177, "difficulty": "中", "point": "跨篇章比對", "question": "Which service plan is most suitable for Zephyr Aviation?", "translation": "進階太陽能方案。", "options": {"A": "Standard Solar Plan", "B": "Advanced Solar Plan", "C": "Enterprise Grid Plan", "D": "VIP Database Plan"}, "correct": "B", "translation_zh": "進階太陽能方案。", "explanation": {"structure": "跨篇比對。第二篇提到需要至少 5 kW 的容量，且必須有 24/7 支援。", "core": "對照第一篇廣告，符合「5 kW 容量且含 24/7 支援」的方案是 (B) Advanced Solar Plan。", "distractors": "(A) 標準方案僅 2 kW 與 24/5 支援、(C) 企業方案雖然容量大但未註明 24/7 支援且費用較高、(D) 干擾項。"}}, {"num": 178, "difficulty": "中", "point": "細節定位", "question": "Why does Zephyr Aviation require 24/7 technical support?", "translation": "因為他們的機棚全天候運作。", "options": {"A": "Because their hangar operates 24/7", "B": "Because their server rooms are in Seattle", "C": "Because they experienced a database encryption failure", "D": "Because their staff works only on weekends"}, "correct": "A", "translation_zh": "因為他們的機棚全天候運作。", "explanation": {"structure": "細節檢索。定位第二篇中段 \"Because our hangar operates 24/7 for global charter services, 24/7 technical support is...\"。", "core": "「機棚全天候運作」對意 (A)。", "distractors": "(B) 辦公室在西雅圖、(C) 加密失敗、(D) 員工僅週末工作。"}}, {"num": 179, "difficulty": "高", "point": "跨篇章比對", "question": "How much will Zephyr Aviation save on its monthly bill with the discount?", "translation": "每月 40 美元。", "options": {"A": "$20", "B": "$40", "C": "$80", "D": "$100"}, "correct": "B", "translation_zh": "每月 40 美元。", "explanation": {"structure": "跨篇計算。Zephyr 適用的 Advanced Solar Plan 月費為 $400。廣告提到 10 月 31 日前簽約可享 10% 折扣。", "core": "計算 $400 * 10% = $40。故選 (B)。", "distractors": "(A) 標準方案折扣額、(C) 企業方案折扣額、(D) VIP 折扣額。"}}, {"num": 180, "difficulty": "中", "point": "細節理解", "question": "What does Mr. Vance request the sales department to send?", "translation": "合約草案。", "options": {"A": "A detailed billing statement", "B": "A draft contract", "C": "A list of corporate consultants", "D": "A new server room blueprint"}, "correct": "B", "translation_zh": "合約草案。", "explanation": {"structure": "細節檢索。定位第二篇末尾 \"Please send us a draft contract...\"。", "core": "「合約草案」對意 (B)。", "distractors": "(A) 帳單、(C) 顧問名單、(D) 伺服器室藍圖。"}}], "vocabulary": [{"word": "necessity", "pos": "n.", "meaning": "必要，必需品"}, {"word": "hangar", "pos": "n.", "meaning": "機棚，飛機庫"}]}, {"id": "p12", "type": "Double Passage", "start": 181, "end": 185, "title_en": "Questions 181-185 refer to the following announcement and order form.", "title_zh": "181-185 題參照以下公告與訂購單。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Pinnacle Coworking - Autumn Workspace Setup Sale</h4>\n  <p class=\"mb-2\">Refresh your workspace! Pinnacle Coworking is offering special discounts on our bestselling office room setup services from September 1 to October 15:</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>Boardroom B Rental:</b> $400/day (Regular: $500)</li>\n    <li><b>Premium Chair Setup:</b> $100 (Regular: $125)</li>\n    <li><b>Projector Rental:</b> $200/day (Regular: $250)</li>\n  </ul>\n  <p>Enter promo code <b>AUTUMN15</b> at checkout to save an additional 15% on orders exceeding $500. Free delivery and setup are included for all corporate tenants.</p>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded text-xs\">\n  <h4 class=\"text-center font-bold mb-2\">Pinnacle Coworking - Corporate Reservation Form</h4>\n  <p class=\"mb-2\"><b>Reservation ID:</b> OPT-9082<br><b>Customer:</b> Alistair Vance (Zephyr Aviation Inc.)<br><b>Date:</b> September 22</p>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">Item Description</th>\n        <th class=\"border border-gray-300 p-1\">Unit Price</th>\n        <th class=\"border border-gray-300 p-1\">Qty</th>\n        <th class=\"border border-gray-300 p-1\">Total</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Boardroom B Rental (1 Day)</td>\n        <td class=\"border border-gray-300 p-1\">$400</td>\n        <td class=\"border border-gray-300 p-1\">1</td>\n        <td class=\"border border-gray-300 p-1\">$400</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Projector Rental (1 Day)</td>\n        <td class=\"border border-gray-300 p-1\">$200</td>\n        <td class=\"border border-gray-300 p-1\">1</td>\n        <td class=\"border border-gray-300 p-1\">$200</td>\n      </tr>\n    </tbody>\n  </table>\n  <p class=\"mb-1\"><b>Subtotal:</b> $600</p>\n  <p class=\"mb-1\"><b>Discount Applied:</b> AUTUMN15 (15% off)</p>\n  <p class=\"mb-1\"><b>Setup Fee:</b> $0 (Free Corporate Setup)</p>\n  <p class=\"font-bold text-blue-700\"><b>Total Paid:</b> $510</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Pinnacle 共享辦公空間 - 秋季工作空間配置特賣</h4>\n  <p class=\"mb-2\">更新您的工作空間！Pinnacle Coworking 將於 9 月 1 日至 10 月 15 日期間，為我們最暢銷的辦公室空間配置服務提供特別折扣：</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>會議室 B 租借：</b>每日 400 美元（原價：500 美元）</li>\n    <li><b>進階座椅配置：</b>100 美元（原價：125 美元）</li>\n    <li><b>投影機租借：</b>每日 200 美元（原價：250 美元）</li>\n  </ul>\n  <p>結帳時輸入促銷代碼 <b>AUTUMN15</b>，訂單金額超過 500 美元即可額外節省 15%。所有企業租戶均包含免費運送與安裝服務。</p>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded text-xs\">\n  <h4 class=\"text-center font-bold mb-2\">Pinnacle 共享辦公空間 - 企業預約單</h4>\n  <p class=\"mb-2\"><b>預約編號：</b>OPT-9082<br><b>客戶：</b>Alistair Vance (Zephyr Aviation 公司)<br><b>日期：</b>9 月 22 日</p>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">商品描述</th>\n        <th class=\"border border-gray-300 p-1\">單價</th>\n        <th class=\"border border-gray-300 p-1\">數量</th>\n        <th class=\"border border-gray-300 p-1\">總計</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">會議室 B 租借（1 天）</td>\n        <td class=\"border border-gray-300 p-1\">400 美元</td>\n        <td class=\"border border-gray-300 p-1\">1</td>\n        <td class=\"border border-gray-300 p-1\">400 美元</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">投影機租借（1 天）</td>\n        <td class=\"border border-gray-300 p-1\">200 美元</td>\n        <td class=\"border border-gray-300 p-1\">1</td>\n        <td class=\"border border-gray-300 p-1\">200 美元</td>\n      </tr>\n    </tbody>\n  </table>\n  <p class=\"mb-1\"><b>小計：</b>600 美元</p>\n  <p class=\"mb-1\"><b>套用折扣：</b>AUTUMN15（15% 折扣）</p>\n  <p class=\"mb-1\"><b>安裝費：</b>0 美元（免費企業安裝）</p>\n  <p class=\"font-bold text-blue-700\"><b>實際付款總額：</b>510 美元</p>\n</div>", "questions": [{"num": 181, "difficulty": "低", "point": "細節定位", "question": "What is the regular price of the Projector Rental?", "translation": "250 美元。", "options": {"A": "$125", "B": "$200", "C": "$250", "D": "$500"}, "correct": "C", "translation_zh": "250 美元。", "explanation": {"structure": "細節檢索。第一篇公告中 \"Projector Rental: $200/day (Regular: $250)\"。", "core": "「原價 250 美元」對意 (C)。", "distractors": "(A) 椅子原價、(B) 投影機特惠價、(D) 会議室原價。"}}, {"num": 182, "difficulty": "中", "point": "折扣條件比對", "question": "Why was the discount code AUTUMN15 applied to Alistair Vance's reservation?", "translation": "因為訂單小計超過了 500 美元。", "options": {"A": "Because he reserved more than five items", "B": "Because the reservation subtotal exceeded $500", "C": "Because he registered for a VIP support portal", "D": "Because the rental was scheduled for October 15"}, "correct": "B", "translation_zh": "因為訂單小計超過了 500 美元。", "explanation": {"structure": "跨篇條件比對。第一篇說明 \"exceeding $500\" 可享有 15% 折扣。", "core": "第二篇顯示預約單 Subtotal 為 $600，超過 $500 門檻。選 (B)。", "distractors": "(A) 租五個項目、(C) 註冊入口網站、(D) 10/15租用。"}}, {"num": 183, "difficulty": "高", "point": "跨篇章比對 - 折扣計算", "question": "How much did Zephyr Aviation save in total compared to the regular prices of the services?", "translation": "240 美元。", "options": {"A": "$90", "B": "$150", "C": "$240", "D": "$300"}, "correct": "C", "translation_zh": "240 美元。", "explanation": {"structure": "跨篇計算。預約服務的原價總額：會議室 B（原價 $500）+ 投影機（原價 $250）= $750。實際付款總額為 $510。", "core": "計算 $750 - $510 = $240。故選 (C)。", "distractors": "(A) 折抵券省下金額 ($600 * 15% = $90)、(B) 單純特價省下金額 ($750 - $600 = $150)、(D) VIP 折扣額。"}}, {"num": 184, "difficulty": "低", "point": "細節比對", "question": "According to the reservation form, when was the booking made?", "translation": "9 月 22 日。", "options": {"A": "September 1", "B": "September 22", "C": "October 12", "D": "October 15"}, "correct": "B", "translation_zh": "9 月 22 日。", "explanation": {"structure": "日期檢索。定位第二篇表頭 \"Date: September 22\"。", "core": "選 (B)。", "distractors": "(A) 特賣開始日、(C) 信件日期、(D) 特賣結束日。"}}, {"num": 185, "difficulty": "中", "point": "跨篇章比對", "question": "Why was the setup fee listed as $0?", "translation": "因為這是一筆企業租戶預約。", "options": {"A": "Because he entered a special free shipping promo code", "B": "Because it was a corporate tenant reservation", "C": "Because he reserved boardroom tables", "D": "Because the items were shipped to Seattle"}, "correct": "B", "translation_zh": "因為這是一筆企業租戶預約。", "explanation": {"structure": "跨篇邏輯。第一篇註明 \"Free delivery and setup are included for all corporate tenants.\"。第二篇為 Corporate Reservation Form，客戶為 Zephyr Aviation。", "core": "「因為是企業租戶預約」對意 (B)。", "distractors": "(A) 免安裝代碼、(C) 會議室、(D) 運送到西雅圖。"}}], "vocabulary": [{"word": "workspace", "pos": "n.", "meaning": "工作空間"}, {"word": "promo code", "pos": "phr.", "meaning": "促銷代碼"}]}, {"id": "p13", "type": "Triple Passage", "start": 186, "end": 190, "title_en": "Questions 186-190 refer to the following schedule, e-mail, and feedback form.", "title_zh": "186-190 題參照以下日程表、電子郵件與反饋表。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Helios Solar Energy - Annual Staff Development retreat Schedule</h4>\n  <p class=\"mb-2 text-center\">Location: Pinnacle Coworking space | Dates: October 12–14</p>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">Time</th>\n        <th class=\"border border-gray-300 p-1\">October 12 (Day 1)</th>\n        <th class=\"border border-gray-300 p-1\">October 13 (Day 2)</th>\n        <th class=\"border border-gray-300 p-1\">October 14 (Day 3)</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">9:00 a.m. - 11:30 a.m.</td>\n        <td class=\"border border-gray-300 p-1\">Opening Keynote</td>\n        <td class=\"border border-gray-300 p-1\">Session A: Solar Grid Technology</td>\n        <td class=\"border border-gray-300 p-1\">Session C: Energy Budgeting</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">1:00 p.m. - 3:30 p.m.</td>\n        <td class=\"border border-gray-300 p-1\">Team Building Activity</td>\n        <td class=\"border border-gray-300 p-1\">Session B: Network Encryption</td>\n        <td class=\"border border-gray-300 p-1\">Closing Panel</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>To:</b> Assistant &lt;assistant@heliossolar.com&gt;<br>\n    <b>From:</b> Maya Lin &lt;mlin@heliossolar.com&gt;<br>\n    <b>Date:</b> October 8<br>\n    <b>Subject:</b> Retreat Schedule Modification\n  </p>\n  <p class=\"mb-2\">Hi Team,</p>\n  <p class=\"mb-2\">Due to a sudden scheduling conflict for our speaker, we must swap the times for <b>Session B (Network Encryption)</b> and <b>Session C (Energy Budgeting)</b>. All other sessions, including the opening and closing panels, will remain as originally scheduled. Please ensure that the updated digital schedule is uploaded to the portal today. Thanks!</p>\n  <p>Maya Lin</p>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Staff Development Retreat - Participant Feedback Form</h4>\n  <p class=\"mb-1\"><b>Participant Name:</b> Elena Rostova<br><b>Department:</b> IT Department</p>\n  <p class=\"mb-2\"><b>Feedback comments:</b> The retreat was highly beneficial. However, because of the scheduling change, I was unable to attend the session on Network Encryption on the final day because I had to check out of my hotel early to catch my flight. The Team Building Activity on the first afternoon was fantastic!</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Helios Solar Energy - 年度員工發展研習營日程表</h4>\n  <p class=\"mb-2 text-center\">地點：Pinnacle 共享空間 | 日期：10 月 12 日– 14 日</p>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">時間</th>\n        <th class=\"border border-gray-300 p-1\">10 月 12 日 (第一天)</th>\n        <th class=\"border border-gray-300 p-1\">10 月 13 日 (第二天)</th>\n        <th class=\"border border-gray-300 p-1\">10 月 14 日 (第三天)</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">上午 9:00 - 上午 11:30</td>\n        <td class=\"border border-gray-300 p-1\">開幕主題演講</td>\n        <td class=\"border border-gray-300 p-1\">單元 A：太陽能電網技術</td>\n        <td class=\"border border-gray-300 p-1\">單元 C：能源預算</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">下午 1:00 - 下午 3:30</td>\n        <td class=\"border border-gray-300 p-1\">團隊建設活動</td>\n        <td class=\"border border-gray-300 p-1\">單元 B：網絡加密</td>\n        <td class=\"border border-gray-300 p-1\">閉幕小組討論</td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>收件者：</b>助理 &lt;assistant@heliossolar.com&gt;<br>\n    <b>寄件者：</b>Maya Lin &lt;mlin@heliossolar.com&gt;<br>\n    <b>日期：</b>10 月 8 日<br>\n    <b>主旨：</b>研習營時程修改\n  </p>\n  <p class=\"mb-2\">嗨 團隊：</p>\n  <p class=\"mb-2\">由於我們講者的日程突然發生衝突，我們必須將 <b>單元 B（網絡加密）</b> 和 <b>單元 C（能源預算）</b> 的時間對調。所有其他單元，包括開幕和閉幕小組，都將保持原定計劃。請確保今天將更新後的數位時程表上傳到入口網站。謝謝！</p>\n  <p>Maya Lin</p>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">員工發展研習營 - 參與者反饋表</h4>\n  <p class=\"mb-1\"><b>參與者姓名：</b>Elena Rostova<br><b>部門：</b>IT 部門</p>\n  <p class=\"mb-2\"><b>反饋意見：</b>這次研習營非常有益。然而，由於時程變更，我無法參加最後一天的網絡加密單元，因為我必須提早辦理退房去趕飛機。第一天下午的團隊建設活動棒極了！</p>\n</div>", "questions": [{"num": 186, "difficulty": "低", "point": "細節理解", "question": "According to the original schedule, when was Session B scheduled to take place?", "translation": "10 月 13 日下午。", "options": {"A": "October 12 afternoon", "B": "October 13 morning", "C": "October 13 afternoon", "D": "October 14 morning"}, "correct": "C", "translation_zh": "10 月 13 日下午。", "explanation": {"structure": "細節定位。對照第一篇表格，Session B 在 10 月 13 日 (Day 2) 下午 1:00 - 3:30。", "core": "「10 月 13 日下午」對意 (C)。", "distractors": "(A) 第一天下午、(B) 第二天上午、(D) 第三天上午。"}}, {"num": 187, "difficulty": "高", "point": "跨篇章比對", "question": "When did the Session on Network Encryption actually take place?", "translation": "10 月 14 日上午。", "options": {"A": "October 12 morning", "B": "October 13 afternoon", "C": "October 14 morning", "D": "October 14 afternoon"}, "correct": "C", "translation_zh": "10 月 14 日上午。", "explanation": {"structure": "跨篇比對。第一篇顯示 Session C (Energy Budgeting) 原定於 10月14日上午舉行，Session B (Network Encryption) 在 10月13日下午舉行。", "core": "第二篇指出將 Session B 與 Session C 的時間「對調（swap）」。因此，Session B (Network Encryption) 實際在原 Session C 的時間舉行，即 October 14 morning。選 (C)。", "distractors": "(A) 第一天上午、(B) 第二天下午、(D) 第三天下午。"}}, {"num": 188, "difficulty": "高", "point": "跨篇章比對", "question": "Why did Elena Rostova miss the Session on Network Encryption?", "translation": "因為她在最後一天必須提早辦理飯店退房以趕飛機。", "options": {"A": "Because she had to check out of the hotel early to catch her flight", "B": "Because she had to present a logistics audit report", "C": "Because the session was cancelled due to safety tests", "D": "Because she had to return to Chicago beforehand"}, "correct": "A", "translation_zh": "因為他在最後一天必須提早辦理飯店退房。", "explanation": {"structure": "細節檢索。定位第三篇 \"unable to attend the session on Network Encryption on the final day because I had to check out of my hotel early to catch my flight\"。", "core": "「提早辦退房趕飛機」對意 (A)。", "distractors": "(B) 報告、(C) 安全測試取消、(D) 提早回芝加哥。"}}, {"num": 189, "difficulty": "中", "point": "細節理解", "question": "What activity did Ms. Rostova enjoy on October 12?", "translation": "團隊建設活動。", "options": {"A": "Opening Keynote", "B": "Team Building Activity", "C": "Session A: Solar Grid Technology", "D": "Session B: Network Encryption"}, "correct": "B", "translation_zh": "團隊建設活動。", "explanation": {"structure": "跨篇比對。第三篇提到 \"The Team Building Activity on the first afternoon was fantastic!\"。", "core": "第一天（October 12）下午的活動在日程表上對應 \"Team Building Activity\"。故選 (B)。", "distractors": "(A) 上午的開幕演講、(C) 10/13上午的 Session A、(D) 10/13下午的 Session B。"}}, {"num": 190, "difficulty": "中", "point": "細節定位", "question": "Who was instructed to upload the updated schedule?", "translation": "Maya Lin 的助理。", "options": {"A": "Maya's assistant", "B": "Alistair Vance", "C": "Elena Rostova", "D": "David Vance"}, "correct": "A", "translation_zh": "Maya Lin 的助理。", "explanation": {"structure": "指令檢索。第二篇信件寫道 \"Please ensure that the updated digital schedule is uploaded to the portal today.\"。信件的收件人是 Assistant。", "core": "選 (A)。", "distractors": "(B) Alistair、(C) IT 總監 Elena、(D) 社區經理 David。"}}], "vocabulary": [{"word": "swap", "pos": "v.", "meaning": "交換"}, {"word": "conflict", "pos": "n./v.", "meaning": "衝突，爭執"}]}, {"id": "p14", "type": "Triple Passage", "start": 191, "end": 195, "title_en": "Questions 191-195 refer to the following policy guidelines, expense report, and e-mail.", "title_zh": "191-195 題參照以下報銷政策、報銷單與電子郵件。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Prism Marketing - Travel Expense Reimbursement Policy</h4>\n  <p class=\"mb-2\">Employees must follow these guidelines to request reimbursement for business travel expenses:</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>Submission Window:</b> All claims must be submitted to the finance portal within 15 days of returning from travel.</li>\n    <li><b>Receipt Requirements:</b> Original receipts are strictly required for any individual expense item exceeding $50.</li>\n    <li><b>Approvals:</b> Claims must be signed by the department director before submission to the Finance department.</li>\n  </ul>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-2\">Prism Marketing - Travel Expense Claim Form</h4>\n  <p class=\"mb-1\"><b>Claimant:</b> Elena Rostova (IT Department)<br><b>Date of Return:</b> September 2<br><b>Submission Date:</b> September 10</p>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">Expense Item</th>\n        <th class=\"border border-gray-300 p-1\">Date</th>\n        <th class=\"border border-gray-300 p-1\">Description</th>\n        <th class=\"border border-gray-300 p-1\">Amount</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Train Ticket</td>\n        <td class=\"border border-gray-300 p-1\">Aug 31</td>\n        <td class=\"border border-gray-300 p-1\">Travel to retreat</td>\n        <td class=\"border border-gray-300 p-1\">$45</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Client Dinner</td>\n        <td class=\"border border-gray-300 p-1\">Sept 1</td>\n        <td class=\"border border-gray-300 p-1\">Dinner with Velo Tech</td>\n        <td class=\"border border-gray-300 p-1\">$75</td>\n      </tr>\n    </tbody>\n  </table>\n  <p class=\"mb-1\"><b>Department Director Approval:</b> <i>Approved by Alistair Vance (Finance Director)</i></p>\n  <p class=\"font-bold text-blue-700\"><b>Total Claimed:</b> $120</p>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded text-xs\">\n  <p class=\"meta mb-2\">\n    <b>To:</b> Elena Rostova &lt;erostova@prismmarketing.com&gt;<br>\n    <b>From:</b> Finance Department &lt;finance@prismmarketing.com&gt;<br>\n    <b>Date:</b> September 12<br>\n    <b>Subject:</b> Expense Claim OPT-9082 Rejected\n  </p>\n  <p class=\"mb-2\">Dear Ms. Rostova,</p>\n  <p class=\"mb-2\">We have reviewed your travel expense claim for $120 submitted on September 10. Unfortunately, we are unable to process this claim at this time because we did not receive the required receipt for the dinner on September 1.</p>\n  <p class=\"mb-2\">Please upload the missing receipt to the finance portal so we can approve your claim. Thank you.</p>\n    <p>Finance Department</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Prism Marketing - 差旅費報銷政策</h4>\n  <p class=\"mb-2\">員工必須遵守以下指南以申請商務差旅費的報銷：</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li><b>提交窗口：</b>所有報銷申請必須在差旅歸國後 15 天內提交至財務入口網站。</li>\n    <li><b>收據要求：</b>任何超過 50 美元的單項支出，必須提供原始收據。</li>\n    <li><b>核准：</b>報銷單在提交給財務部之前，必須由部門主管簽字。</li>\n  </ul>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-2\">Prism Marketing - 差旅費報銷申請單</h4>\n  <p class=\"mb-1\"><b>報銷人：</b>Elena Rostova (IT 部門)<br><b>返回日期：</b>9 月 2 日<br><b>提交日期：</b>9 月 10 日</p>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">支出項目</th>\n        <th class=\"border border-gray-300 p-1\">日期</th>\n        <th class=\"border border-gray-300 p-1\">描述</th>\n        <th class=\"border border-gray-300 p-1\">金額</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">火車票</td>\n        <td class=\"border border-gray-300 p-1\">8 月 31 日</td>\n        <td class=\"border border-gray-300 p-1\">前往研習營</td>\n        <td class=\"border border-gray-300 p-1\">45 美元</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">客戶晚宴</td>\n        <td class=\"border border-gray-300 p-1\">9 月 1 日</td>\n        <td class=\"border border-gray-300 p-1\">與 Velo Tech 的晚宴</td>\n        <td class=\"border border-gray-300 p-1\">75 美元</td>\n      </tr>\n    </tbody>\n  </table>\n  <p class=\"mb-1\"><b>部門主管核准：</b> <i>由 Alistair Vance (財務總監) 核准</i></p>\n  <p class=\"font-bold text-blue-700\"><b>申請總額：</b>120 美元</p>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded text-xs\">\n  <p class=\"meta mb-2\">\n    <b>收件者：</b>Elena Rostova &lt;erostova@prismmarketing.com&gt;<br>\n    <b>寄件者：</b>財務部 &lt;finance@prismmarketing.com&gt;<br>\n    <b>日期：</b>9 月 12 日<br>\n    <b>主旨：</b>報銷申請 OPT-9082 被退回\n  </p>\n  <p class=\"mb-2\">親愛的 Rostova 女士：</p>\n  <p class=\"mb-2\">我們已審查了您於 9 月 10 日提交的 120 美元差旅費報銷申請。不幸的是，由於我們沒有收到 9 月 1 日晚宴所需的收據，我們目前無法處理此報銷。</p>\n  <p class=\"mb-2\">請將缺失的收據上傳到財務入口網站，以便我們批准您的申請。謝謝。</p>\n  <p>財務部</p>\n</div>", "questions": [{"num": 191, "difficulty": "低", "point": "細節比對", "question": "How many days after returning from travel must claims be submitted?", "translation": "15 天內。", "options": {"A": "Within 5 days", "B": "Within 10 days", "C": "Within 15 days", "D": "Within 30 days"}, "correct": "C", "translation_zh": "15 天內。", "explanation": {"structure": "細節定位。第一篇報銷政策中提到 \"within 15 days of returning from travel\"。", "core": "「15 天內」對意 (C)。", "distractors": "(A) 5天、(B) 10天（這是 Elena 實際提交的時間差，並不是限制）、(D) 30天。"}}, {"num": 192, "difficulty": "高", "point": "跨篇章比對 - 政策與實施", "question": "Why did Elena Rostova's claim comply with the submission window policy?", "translation": "因為她在返回後 8 天就提交了。", "options": {"A": "Because she submitted the form 8 days after returning", "B": "Because the total claimed amount was under $50", "C": "Because she attached all required original receipts", "D": "Because it was approved by the IT Director"}, "correct": "A", "translation_zh": "因為他在返回後 8 天就提交了。", "explanation": {"structure": "跨篇邏輯與日期計算。第二篇報銷單顯示，返回日期為 September 2，提交日期為 September 10，相差 8 天。第一篇政策規定必須在返回後 15 天內提交。", "core": "「在返回 8 天後提交」符合 15 天內的政策。故選 (A)。", "distractors": "(B) 總額為 $120 大於 $50、(C) 她漏了收據、(D) 由財務總監 Alistair 簽署。"}}, {"num": 193, "difficulty": "高", "point": "跨篇章比對", "question": "According to the policy, why was the receipt for the dinner on September 1 required?", "translation": "因為金額超過了 50 美元。", "options": {"A": "Because the subtotal exceeded $500", "B": "Because the dinner occurred on a weekend", "C": "Because the expense amount was $75", "D": "Because the dinner was with Velo Tech"}, "correct": "C", "translation_zh": "因為該筆支出金額為 75 美元。", "explanation": {"structure": "跨篇邏輯與計算。第一篇政策規定「單項支出超過 50 美元需提供原始收據」。第二篇報銷單顯示，9 月 1 日的 Client Dinner 金額為 $75。", "core": "$75 超過了 $50，因此必須提供收據。故選 (C)。", "distractors": "(A) 滿五百折扣、(B) 週末支出、(D) 晚宴對象。"}}, {"num": 194, "difficulty": "中", "point": "細節理解", "question": "Who approved Ms. Rostova's claim form before submission to the Finance department?", "translation": "Alistair Vance。", "options": {"A": "Maya Lin", "B": "Alistair Vance", "C": "Sarah Jenkins", "D": "David Vance"}, "correct": "B", "translation_zh": "Alistair Vance。", "explanation": {"structure": "核准人檢索。第二篇報銷單下方顯示 \"Approved by Alistair Vance (Finance Director)\"。", "core": "「Alistair Vance」對意 (B)。", "distractors": "(A) 營運經理 Maya、(C) 社區經理 Sarah、(D) 大樓經理 David。"}}, {"num": 195, "difficulty": "中", "point": "細節定位", "question": "What is Ms. Rostova instructed to do in the e-mail?", "translation": "上傳缺失的收據。", "options": {"A": "Reschedule her business trip to Toronto", "B": "Upload the missing receipt to the portal", "C": "Pay a $25 administrative registration fee", "D": "Nominate a senior representative"}, "correct": "B", "translation_zh": "上傳缺失的收據。", "explanation": {"structure": "指令檢索。第三篇信件寫道 \"Please upload the missing receipt to the finance portal...\"。", "core": "「上傳缺少的收據」對意 (B)。", "distractors": "(A) 重新安排出差、(C) 繳費、(D) 指定代表。"}}], "vocabulary": [{"word": "reimbursement", "pos": "n.", "meaning": "報銷，補償"}, {"word": "claimant", "pos": "n.", "meaning": "申請報銷者"}]}, {"id": "p15", "type": "Triple Passage", "start": 196, "end": 200, "title_en": "Questions 196-200 refer to the following webpage, e-mail, and survey.", "title_zh": "196-200 題參照以下網頁、電子郵件與調查。", "passage_en_template": "<div class=\"webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-1\"><b>URL:</b> www.zephyraviation.com/tenders/solar</p>\n  <h4 class=\"font-bold text-base mb-1\">Zephyr Aviation - Call for Solar Support Tenders</h4>\n  <p class=\"mb-2\">Zephyr Aviation is seeking proposals from external service providers to manage our solar roof security and maintenance operations. The selected provider must meet the following criteria:</p>\n  <ul class=\"list-disc pl-5 mb-2 text-xs\">\n    <li>Provide 24/7 live security monitoring and emergency support for our hangar grid.</li>\n    <li>Have at least 3 years of experience in corporate solar maintenance services.</li>\n    <li>Submit proposals including monthly rates by October 15.</li>\n  </ul>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>To:</b> Tenders Committee &lt;tenders@zephyraviation.com&gt;<br>\n    <b>From:</b> Helios Solar Energy &lt;bids@heliossolar.com&gt;<br>\n    <b>Date:</b> October 10<br>\n    <b>Subject:</b> Tender Proposal for Hangar Solar Maintenance\n  </p>\n  <p class=\"mb-2\">Dear Tenders Committee,</p>\n  <p class=\"mb-2\">Helios Solar Energy is pleased to submit our proposal for your solar roof maintenance. We have 5 years of experience providing solar power services to corporate clients globally. Our team is fully equipped to deliver 24/7 emergency support. Our proposed rate for managing your solar grid maintenance is $400/month.</p>\n  <p class=\"mb-2\">We hope to collaborate with you. Please review our attached detailed business credentials.</p>\n  <p>Sincerely,<br>Maya Lin<br>Operations Manager, Helios Solar Energy</p>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Zephyr Aviation - Internal Tender Evaluation</h4>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">Provider Name</th>\n        <th class=\"border border-gray-300 p-1\">Meets 24/7 Support</th>\n        <th class=\"border border-gray-300 p-1\">Years of Exp.</th>\n        <th class=\"border border-gray-300 p-1\">Monthly Rate</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Helios Solar Energy</td>\n        <td class=\"border border-gray-300 p-1\">Yes</td>\n        <td class=\"border border-gray-300 p-1\">5 years</td>\n        <td class=\"border border-gray-300 p-1\">$400</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Pinnacle Coworking</td>\n        <td class=\"border border-gray-300 p-1\">No (24/5 only)</td>\n        <td class=\"border border-gray-300 p-1\">4 years</td>\n        <td class=\"border border-gray-300 p-1\">$350</td>\n      </tr>\n    </tbody>\n  </table>\n  <p class=\"font-bold text-blue-700\">Evaluation Decision: Helios Solar Energy is selected because it meets all critical criteria, especially the 24/7 global support availability requirement.</p>\n</div>", "passage_zh": "<div class=\"webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-1\"><b>網址：</b> www.zephyraviation.com/tenders/solar</p>\n  <h4 class=\"font-bold text-base mb-1\">Zephyr Aviation - 太陽能服務外包招標公告</h4>\n  <p class=\"mb-2\">Zephyr Aviation 正在尋求外部服務提供商的提案，以管理我們的太陽能屋頂安全與維護業務。入選的提供商必須滿足以下標準：</p>\n  <ul class=\"list-disc pl-5 mb-2\">\n    <li>為我們的機棚電網提供 24/7 的即時安全監控與緊急支援。</li>\n    <li>在企業太陽能維護服務方面擁有至少 3 年的經驗。</li>\n    <li>在 10 月 15 日之前提交包含月費的提案。</li>\n  </ul>\n</div>\n<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>收件者：</b>招標委員會 &lt;tenders@zephyraviation.com&gt;<br>\n    <b>寄件者：</b>Helios Solar Energy &lt;bids@heliossolar.com&gt;<br>\n    <b>日期：</b>10 月 10 日<br>\n    <b>主旨：</b>機棚太陽能維護的投標提案\n  </p>\n  <p class=\"mb-2\">親愛的招標委員會：</p>\n  <p class=\"mb-2\">Helios Solar Energy 很高興能為貴公司的太陽能屋頂維護業務提交我們的提案。我們在為全球企業客戶提供太陽能電力服務方面擁有 5 年的經驗。我們的團隊配備齊全，可提供 24/7 緊急支援。我們提議的維修月費是每月 400 美元。</p>\n  <p class=\"mb-2\">我們希望與您合作。請審查我們隨附的詳細業務憑證。</p>\n  <p>誠摯的，<br>Maya Lin<br>Helios Solar Energy 營運經理</p>\n</div>\n<div class=\"form-box border p-4 bg-slate-50 rounded text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Zephyr Aviation - 內部招標評估表</h4>\n  <table class=\"w-full text-left border-collapse border border-gray-300 mb-2\">\n    <thead>\n      <tr class=\"bg-gray-100\">\n        <th class=\"border border-gray-300 p-1\">提供商名稱</th>\n        <th class=\"border border-gray-300 p-1\">符合 24/7 支援</th>\n        <th class=\"border border-gray-300 p-1\">經驗年資</th>\n        <th class=\"border border-gray-300 p-1\">月費</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Helios Solar Energy</td>\n        <td class=\"border border-gray-300 p-1\">是</td>\n        <td class=\"border border-gray-300 p-1\">5 年</td>\n        <td class=\"border border-gray-300 p-1\">400 美元</td>\n      </tr>\n      <tr>\n        <td class=\"border border-gray-300 p-1\">Pinnacle Coworking</td>\n        <td class=\"border border-gray-300 p-1\">否 (僅 24/5)</td>\n        <td class=\"border border-gray-300 p-1\">4 年</td>\n        <td class=\"border border-gray-300 p-1\">350 美元</td>\n      </tr>\n    </tbody>\n  </table>\n  <p class=\"font-bold text-blue-700\">評估決定：選擇了 Helios Solar Energy，因為它符合所有關鍵標準，特別是 24/7 全球支援可用性要求。</p>\n</div>", "questions": [{"num": 196, "difficulty": "低", "point": "細節定位", "question": "What experience is required for candidates in the tender notice?", "translation": "至少 3 年。", "options": {"A": "At least 1 year", "B": "At least 3 years", "C": "At least 4 years", "D": "At least 5 years"}, "correct": "B", "translation_zh": "至少 3 年。", "explanation": {"structure": "年資定位。第一篇公告提到 \"At least 3 years of experience\"。", "core": "「至少 3 年」對應 (B)。", "distractors": "(A) 1年、(C) 4年是 Pinnacle 的年資、(D) 5年是 Helios 的實際年資。"}}, {"num": 197, "difficulty": "中", "point": "細節定位", "question": "What monthly rate did Helios Solar Energy propose in its e-mail?", "translation": "每月 400 美元。", "options": {"A": "$200", "B": "$350", "C": "$400", "D": "$800"}, "correct": "C", "translation_zh": "每月 400 美元。", "explanation": {"structure": "費用檢索。第二篇信件寫道 \"Our proposed rate ... is $400/month\"。", "core": "「400 美元」對意 (C)。", "distractors": "(A) 標準方案費用、(B) Pinnacle 的投標費用、(D) 企業電網方案費用。"}}, {"num": 198, "difficulty": "高", "point": "跨篇章比對 - 招標合規比對", "question": "Why was Pinnacle Coworking rejected by Zephyr Aviation?", "translation": "因為他們不提供 24/7 支援服務。", "options": {"A": "Because their monthly rate exceeded $400", "B": "Because they do not provide 24/7 support services", "C": "Because they have less than 3 years of experience", "D": "Because their proposal was submitted after October 15"}, "correct": "B", "translation_zh": "因為他們不提供 24/7 支援服務。", "explanation": {"structure": "跨篇比對。第一篇招標需求是 \"Provide 24/7 live security monitoring...\"。第三篇評估表顯示 Pinnacle Coworking 不符合該項要求（標示為 No (24/5 only)）。", "core": "「因為他們不能提供 24/7 支援」對意 (B)。", "distractors": "(A) 價格（其價格為 $350，反而更便宜）、(C) 經驗（其年資為 4 年，大於要求的 3 年）、(D) 逾期提交。"}}, {"num": 199, "difficulty": "中", "point": "細節比對", "question": "According to the evaluation form, which company was selected by the Tenders Committee?", "translation": "Helios Solar Energy。", "options": {"A": "Helios Solar Energy", "B": "Pinnacle Coworking", "C": "Zephyr Aviation", "D": "Prism Marketing"}, "correct": "A", "translation_zh": "Helios Solar Energy。", "explanation": {"structure": "決策定位。第三篇中指出 \"Helios Solar Energy is selected...\"。", "core": "選取商為 (A)。", "distractors": "(B) Pinnacle 未獲選、(C) Zephyr 是招標主、(D) Prism 是干擾項。"}}, {"num": 200, "difficulty": "高", "point": "跨篇章比對 - 人物與關係", "question": "Who is the Operations Manager at Helios Solar Energy?", "translation": "Maya Lin。", "options": {"A": "Maya Lin", "B": "Elena Rostova", "C": "Alistair Vance", "D": "David Vance"}, "correct": "A", "translation_zh": "Maya Lin。", "explanation": {"structure": "人物身分跨篇檢索。第二篇信件末尾簽名為 \"Maya Lin, Operations Manager, Helios Solar Energy\"。", "core": "「Maya Lin」對意 (A)。", "distractors": "(B) IT 專員 Elena、(C) Zephyr 營運總監 Alistair、(D) 大樓經理 David。"}}], "vocabulary": [{"word": "tender", "pos": "n.", "meaning": "投標"}, {"word": "evaluation", "pos": "n.", "meaning": "評估，評價"}]}];
+
+// 狀態控制
+let currentPart = 5;
+let currentPart6PassageIdx = 0;
+let currentPart7PassageIdx = 0;
+const userAnswers = {};
+let examFinished = false;
+
+// 計時器變數
+let timeRemaining = 75 * 60; // 75分鐘
+let timerInterval = null;
+let isTimerRunning = false;
+
+// 錯題顯示模式
+let showOnlyWrong = true;
+
+// -------------------------------------------------------------
+// 計時器邏輯
+// -------------------------------------------------------------
+function startTimer() {
+  if (isTimerRunning) return;
+  isTimerRunning = true;
+  document.getElementById('btn-timer-toggle').innerHTML = '<i class="fa-solid fa-pause mr-0.5"></i> 暫停';
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+    updateTimerDisplay();
+    if (timeRemaining <= 0) {
+      clearInterval(timerInterval);
+      alert("測驗時間到！系統將為您自動交卷。");
+      submitQuiz();
+    }
+  }, 1000);
+}
+
+function toggleTimer() {
+  if (isTimerRunning) {
+    clearInterval(timerInterval);
+    isTimerRunning = false;
+    document.getElementById('btn-timer-toggle').innerHTML = '<i class="fa-solid fa-play mr-0.5"></i> 開始';
+  } else {
+    startTimer();
+  }
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeRemaining / 60);
+  const seconds = timeRemaining % 60;
+  const formattedMinutes = minutes.toString().padStart(2, '0');
+  const formattedSeconds = seconds.toString().padStart(2, '0');
+  document.getElementById('timer-display').innerText = `${formattedMinutes}:${formattedSeconds}`;
+}
+
+// -------------------------------------------------------------
+// 本地進度儲存 (Local Storage)
+// -------------------------------------------------------------
+function saveAnswers() {
+  localStorage.setItem('toeic_test9_mock_answers', JSON.stringify(userAnswers));
+}
+
+function loadAnswers() {
+  const saved = localStorage.getItem('toeic_test9_mock_answers');
+  if (saved) {
+    try {
+      Object.assign(userAnswers, JSON.parse(saved));
+    } catch(e) {}
+  }
+}
+
+// -------------------------------------------------------------
+// 頁面主路由控制
+// -------------------------------------------------------------
+function switchPart(partNum) {
+  currentPart = partNum;
+  
+  // 導覽按鈕高亮
+  document.getElementById('btn-part5').className = (partNum === 5) ? "px-3.5 py-2 rounded-lg text-xs font-black transition active-nav" : "px-3.5 py-2 rounded-lg text-xs font-black transition inactive-nav";
+  document.getElementById('btn-part6').className = (partNum === 6) ? "px-3.5 py-2 rounded-lg text-xs font-black transition active-nav" : "px-3.5 py-2 rounded-lg text-xs font-black transition inactive-nav";
+  document.getElementById('btn-part7').className = (partNum === 7) ? "px-3.5 py-2 rounded-lg text-xs font-black transition active-nav" : "px-3.5 py-2 rounded-lg text-xs font-black transition inactive-nav";
+  
+  // 顯示對應容器
+  document.getElementById('part5-container').classList.toggle('hidden', partNum !== 5);
+  document.getElementById('part6-container').classList.toggle('hidden', partNum !== 6);
+  document.getElementById('part7-container').classList.toggle('hidden', partNum !== 7);
+  
+  if (partNum === 5) renderPart5();
+  if (partNum === 6) renderPart6();
+  if (partNum === 7) renderPart7();
+}
+
+// -------------------------------------------------------------
+// Part 5 渲染邏輯
+// -------------------------------------------------------------
+function renderPart5() {
+  const container = document.getElementById('part5-questions-list');
+  container.innerHTML = '';
+  
+  PART5_DATA.forEach(q => {
+    const qNum = q.num;
+    const selected = userAnswers[qNum] || null;
+    let optionsHtml = '';
+    
+    ['A', 'B', 'C', 'D'].forEach(key => {
+      const text = q.options[key];
+      let btnClass = "border border-slate-200 hover:bg-slate-50 text-slate-700";
+      if (selected === key) {
+        btnClass = "border-2 border-blue-500 bg-blue-50/50 text-blue-700 font-bold";
+      }
+      optionsHtml += `
+        <button onclick="selectOption(${qNum}, '${key}')" class="w-full text-left p-3 rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-2 ${btnClass}">
+          <strong class="text-[#1a365d]">${key}</strong> ${text}
+        </button>
+      `;
+    });
+    
+    container.insertAdjacentHTML('beforeend', `
+      <div id="q-card-${qNum}" class="bg-white rounded-2xl border p-5 border-slate-200/80 custom-shadow space-y-3">
+        <h3 class="text-slate-800 font-extrabold text-xs flex items-center gap-1.5">
+          <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${qNum}</span>
+          單句填空
+        </h3>
+        <p class="text-slate-800 font-bold text-base font-serif leading-relaxed">${q.sentence.replace('_______', '<span class="underline decoration-2 decoration-blue-500 px-4 font-mono font-black text-blue-600">_______</span>')}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${optionsHtml}</div>
+      </div>
+    `);
+  });
+}
+
+// -------------------------------------------------------------
+// Part 6 渲染邏輯
+// -------------------------------------------------------------
+function renderPart6() {
+  // 渲染分頁按鈕
+  const nav = document.getElementById('part6-passage-nav');
+  nav.innerHTML = '';
+  PART6_DATA.forEach((p, idx) => {
+    const isCurrent = idx === currentPart6PassageIdx;
+    const btnClass = isCurrent 
+      ? "w-8 h-8 rounded-lg text-xs font-black bg-purple-600 text-white shadow"
+      : "w-8 h-8 rounded-lg text-xs font-bold bg-white text-purple-700 border border-slate-200 hover:bg-slate-50";
+    nav.insertAdjacentHTML('beforeend', `<button onclick="jumpToPart6Passage(${idx})" class="${btnClass}">${idx + 1}</button>`);
+  });
+  
+  const p = PART6_DATA[currentPart6PassageIdx];
+  document.getElementById('part6-passage-title-en').innerText = p.title_en;
+  
+  // 處理英文短文，把空格改成帶底線的 Badge 樣式，並綁定點擊跳轉
+  let htmlText = p.passage_en_template;
+  p.questions.forEach(q => {
+    const selectedText = userAnswers[q.num] ? `[${q.num}: ${userAnswers[q.num]}]` : `[${q.num} _______]`;
+    const badgeClass = userAnswers[q.num] ? "text-purple-600 font-extrabold underline px-1 cursor-pointer" : "text-slate-400 font-extrabold underline px-1 cursor-pointer";
+    htmlText = htmlText.replace(`[${q.num}] _______`, `<span onclick="scrollToQuestion(${q.num})" class="${badgeClass}">${selectedText}</span>`);
+  });
+  
+  document.getElementById('part6-passage-en-content').innerHTML = htmlText;
+  
+  // 右半側題目卡
+  const qList = document.getElementById('part6-questions-list');
+  qList.innerHTML = '';
+  p.questions.forEach(q => {
+    const qNum = q.num;
+    const selected = userAnswers[qNum] || null;
+    let optionsHtml = '';
+    
+    ['A', 'B', 'C', 'D'].forEach(key => {
+      const text = q.options[key];
+      let btnClass = "border border-slate-200 hover:bg-slate-50 text-slate-700";
+      if (selected === key) {
+        btnClass = "border-2 border-blue-500 bg-blue-50/50 text-blue-700 font-bold";
+      }
+      optionsHtml += `
+        <button onclick="selectOption(${qNum}, '${key}')" class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${btnClass}">
+          <strong class="text-[#1a365d]">${key}</strong> ${text}
+        </button>
+      `;
+    });
+    
+    qList.insertAdjacentHTML('beforeend', `
+      <div id="q-card-${qNum}" class="bg-white rounded-2xl border p-4 border-slate-200/80 custom-shadow space-y-2">
+        <h4 class="text-slate-800 font-extrabold text-xs flex items-center gap-1.5">
+          <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${qNum}</span>
+          短文填空 | 考點：${q.point}
+        </h4>
+        <div class="space-y-1.5">${optionsHtml}</div>
+      </div>
+    `);
+  });
+  
+  document.getElementById('part6-passage-indicator').innerText = `篇章 ${currentPart6PassageIdx + 1} / ${PART6_DATA.length} (第 ${p.start} - ${p.end} 題)`;
+}
+
+function jumpToPart6Passage(idx) {
+  currentPart6PassageIdx = idx;
+  renderPart6();
+}
+
+// -------------------------------------------------------------
+// Part 7 閱讀理解渲染
+// -------------------------------------------------------------
+function renderPart7() {
+  const nav = document.getElementById('part7-passage-nav');
+  nav.innerHTML = '';
+  PART7_DATA.forEach((p, idx) => {
+    const isCurrent = idx === currentPart7PassageIdx;
+    const btnClass = isCurrent 
+      ? "w-8 h-8 rounded-lg text-xs font-black bg-emerald-600 text-white shadow"
+      : "w-8 h-8 rounded-lg text-xs font-bold bg-white text-emerald-700 border border-slate-200 hover:bg-slate-50";
+    nav.insertAdjacentHTML('beforeend', `<button onclick="jumpToPart7Passage(${idx})" class="${btnClass}">${idx + 1}</button>`);
+  });
+  
+  const p = PART7_DATA[currentPart7PassageIdx];
+  document.getElementById('part7-passage-title-en').innerText = p.title_en;
+  document.getElementById('part7-passage-en-content').innerHTML = p.passage_en_template;
+  
+  // 右半側題目卡
+  const qList = document.getElementById('part7-questions-list');
+  qList.innerHTML = '';
+  p.questions.forEach(q => {
+    const qNum = q.num;
+    const selected = userAnswers[qNum] || null;
+    let optionsHtml = '';
+    
+    ['A', 'B', 'C', 'D'].forEach(key => {
+      const text = q.options[key];
+      let btnClass = "border border-slate-200 hover:bg-slate-50 text-slate-700";
+      if (selected === key) {
+        btnClass = "border-2 border-blue-500 bg-blue-50/50 text-blue-700 font-bold";
+      }
+      optionsHtml += `
+        <button onclick="selectOption(${qNum}, '${key}')" class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${btnClass}">
+          <strong class="text-[#1a365d]">${key}</strong> ${text}
+        </button>
+      `;
+    });
+    
+    qList.insertAdjacentHTML('beforeend', `
+      <div id="q-card-${qNum}" class="bg-white rounded-2xl border p-4 border-slate-200/80 custom-shadow space-y-2">
+        <h4 class="text-slate-800 font-extrabold text-xs flex items-center gap-1.5">
+          <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${qNum}</span>
+          閱讀理解
+        </h4>
+        <p class="text-slate-800 font-bold text-xs font-serif leading-relaxed">${q.question}</p>
+        <div class="space-y-1.5">${optionsHtml}</div>
+      </div>
+    `);
+  });
+  
+  document.getElementById('part7-passage-indicator').innerText = `篇章 ${currentPart7PassageIdx + 1} / ${PART7_DATA.length} (第 ${p.start} - ${p.end} 題)`;
+}
+
+function jumpToPart7Passage(idx) {
+  currentPart7PassageIdx = idx;
+  renderPart7();
+}
+
+// -------------------------------------------------------------
+// 選項點擊事件
+// -------------------------------------------------------------
+function selectOption(qNum, key) {
+  if (examFinished) return;
+  userAnswers[qNum] = key;
+  saveAnswers();
+  updateStatusGrid();
+  updateProgressBadge();
+  
+  // 更新當前 Part 的視圖
+  if (currentPart === 5) renderPart5();
+  if (currentPart === 6) renderPart6();
+  if (currentPart === 7) renderPart7();
+}
+
+function updateProgressBadge() {
+  let answeredCount = Object.keys(userAnswers).length;
+  let pct = Math.round((answeredCount / 100) * 100);
+  document.getElementById('completion-badge').innerText = `已答 ${answeredCount} / 100 題 (${pct}%)`;
+}
+
+// -------------------------------------------------------------
+// 101-200 題號狀態網格更新
+// -------------------------------------------------------------
+function updateStatusGrid() {
+  // Part 5 (101-130)
+  const g5 = document.getElementById('grid-status-part5');
+  g5.innerHTML = '';
+  for (let q = 101; q <= 130; q++) {
+    let btnClass = getStatusBtnClass(q);
+    g5.insertAdjacentHTML('beforeend', `<button onclick="scrollToQuestion(${q})" class="${btnClass}">${q}</button>`);
+  }
+  
+  // Part 6 (131-146)
+  const g6 = document.getElementById('grid-status-part6');
+  g6.innerHTML = '';
+  for (let q = 131; q <= 146; q++) {
+    let btnClass = getStatusBtnClass(q);
+    g6.insertAdjacentHTML('beforeend', `<button onclick="scrollToQuestion(${q})" class="${btnClass}">${q}</button>`);
+  }
+  
+  // Part 7 (147-200)
+  const g7 = document.getElementById('grid-status-part7');
+  g7.innerHTML = '';
+  for (let q = 147; q <= 200; q++) {
+    let btnClass = getStatusBtnClass(q);
+    g7.insertAdjacentHTML('beforeend', `<button onclick="scrollToQuestion(${q})" class="${btnClass}">${q}</button>`);
+  }
+}
+
+function getStatusBtnClass(q) {
+  let base = "py-1.5 rounded text-[10px] font-black border transition ";
+  if (userAnswers[q]) {
+    base += "bg-blue-100 text-blue-800 border-blue-200";
+  } else {
+    base += "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100";
+  }
+  return base;
+}
+
+// -------------------------------------------------------------
+// 題號點擊跳轉邏輯 (跨 Part、跨篇章)
+// -------------------------------------------------------------
+function scrollToQuestion(qNum) {
+  // 判斷屬於哪個 Part
+  if (qNum >= 101 && qNum <= 130) {
+    if (currentPart !== 5) switchPart(5);
+    setTimeout(() => {
+      const el = document.getElementById(`q-card-${qNum}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  } else if (qNum >= 131 && qNum <= 146) {
+    const pIdx = PART6_DATA.findIndex(p => qNum >= p.start && qNum <= p.end);
+    if (currentPart !== 6) switchPart(6);
+    if (currentPart6PassageIdx !== pIdx) jumpToPart6Passage(pIdx);
+    setTimeout(() => {
+      const el = document.getElementById(`q-card-${qNum}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  } else if (qNum >= 147 && qNum <= 200) {
+    const pIdx = PART7_DATA.findIndex(p => qNum >= p.start && qNum <= p.end);
+    if (currentPart !== 7) switchPart(7);
+    if (currentPart7PassageIdx !== pIdx) jumpToPart7Passage(pIdx);
+    setTimeout(() => {
+      const el = document.getElementById(`q-card-${qNum}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
+}
+
+// -------------------------------------------------------------
+// 交卷與結算分數邏輯
+// -------------------------------------------------------------
+function confirmSubmitQuiz() {
+  let answeredCount = Object.keys(userAnswers).length;
+  if (answeredCount < 100) {
+    if (!confirm(`您還有 ${100 - answeredCount} 題尚未填答！確定要交卷結算分數嗎？`)) return;
+  } else {
+    if (!confirm("確定要結束測驗並交卷嗎？")) return;
+  }
+  submitQuiz();
+}
+
+function submitQuiz() {
+  examFinished = true;
+  clearInterval(timerInterval);
+  isTimerRunning = false;
+  
+  // 隱藏作答區與頂部導覽
+  document.getElementById('exam-mode-container').classList.add('hidden');
+  document.getElementById('part-nav').classList.add('hidden');
+  
+  // 顯示報告區
+  document.getElementById('report-mode-container').classList.remove('hidden');
+  
+  // 計算分數
+  let correctCount = 0;
+  let p5Correct = 0;
+  let p6Correct = 0;
+  let p7Correct = 0;
+  
+  // 比對 Part 5
+  PART5_DATA.forEach(q => {
+    if (userAnswers[q.num] === q.correct) {
+      correctCount++;
+      p5Correct++;
+    }
+  });
+  // 比對 Part 6
+  PART6_DATA.forEach(p => {
+    p.questions.forEach(q => {
+      if (userAnswers[q.num] === q.correct) {
+        correctCount++;
+        p6Correct++;
+      }
+    });
+  });
+  // 比對 Part 7
+  PART7_DATA.forEach(p => {
+    p.questions.forEach(q => {
+      if (userAnswers[q.num] === q.correct) {
+        correctCount++;
+        p7Correct++;
+      }
+    });
+  });
+  
+  // 渲染報告分數
+  document.getElementById('report-score').innerText = correctCount;
+  
+  // 換算分數 (粗估多益閱讀成績對照表)
+  let rawScore = correctCount;
+  let scoreRange = "--- 分";
+  if (rawScore >= 97) scoreRange = "485 - 495 分";
+  else if (rawScore >= 95) scoreRange = "470 - 480 分";
+  else if (rawScore >= 90) scoreRange = "445 - 465 分";
+  else if (rawScore >= 85) scoreRange = "415 - 440 分";
+  else if (rawScore >= 80) scoreRange = "385 - 410 分";
+  else if (rawScore >= 70) scoreRange = "325 - 380 分";
+  else if (rawScore >= 60) scoreRange = "270 - 320 分";
+  else if (rawScore >= 50) scoreRange = "215 - 265 分";
+  else if (rawScore >= 40) scoreRange = "160 - 210 分";
+  else scoreRange = "100 - 155 分";
+  document.getElementById('report-score-range').innerText = scoreRange;
+  
+  // 進度條正確率
+  const p5Pct = Math.round((p5Correct / 30) * 100);
+  const p6Pct = Math.round((p6Correct / 16) * 100);
+  const p7Pct = Math.round((p7Correct / 54) * 100);
+  
+  document.getElementById('lbl-correct-p5').innerText = `${p5Correct} / 30 題 (${p5Pct}%)`;
+  document.getElementById('lbl-correct-p6').innerText = `${p6Correct} / 16 題 (${p6Pct}%)`;
+  document.getElementById('lbl-correct-p7').innerText = `${p7Correct} / 54 題 (${p7Pct}%)`;
+  
+  document.getElementById('bar-p5').style.width = `${p5Pct}%`;
+  document.getElementById('bar-p6').style.width = `${p6Pct}%`;
+  document.getElementById('bar-p7').style.width = `${p7Pct}%`;
+  
+  // 渲染右半部明細列表
+  renderResultDetailsGrid();
+  
+  // 渲染錯題特訓專區
+  renderWrongQuestionsZone();
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// -------------------------------------------------------------
+// 渲染交卷後的結果明細 (紅/綠題號卡)
+// -------------------------------------------------------------
+function renderResultDetailsGrid() {
+  const container = document.getElementById('report-details-grid');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  const checkAnswer = (qNum, qObj) => {
+    if (!qObj) return; // 防禦性檢查
+    const isCorrect = userAnswers[qNum] === qObj.correct;
+    const bgClass = isCorrect ? "bg-emerald-500 text-white border-emerald-600" : "bg-red-500 text-white border-red-600";
+    container.insertAdjacentHTML('beforeend', `
+      <button onclick="scrollToWrongQuestion(${qNum})" class="py-2.5 rounded-xl font-bold border text-xs shadow-sm hover:scale-105 transition ${bgClass}">
+        ${qNum}
+      </button>
+    `);
+  };
+  
+  for (let q = 101; q <= 130; q++) {
+    checkAnswer(q, PART5_DATA.find(item => item.num === q));
+  }
+  for (let q = 131; q <= 146; q++) {
+    const p = PART6_DATA.find(item => item.questions.some(qi => qi.num === q));
+    if (p) {
+      checkAnswer(q, p.questions.find(qi => qi.num === q));
+    }
+  }
+  for (let q = 147; q <= 200; q++) {
+    const p = PART7_DATA.find(item => item.questions.some(qi => qi.num === q));
+    if (p) {
+      checkAnswer(q, p.questions.find(qi => qi.num === q));
+    }
+  }
+}
+
+// -------------------------------------------------------------
+// 渲染錯題精準特訓區
+// -------------------------------------------------------------
+function renderWrongQuestionsZone() {
+  const container = document.getElementById('wrong-questions-container');
+  container.innerHTML = '';
+  
+  let wrongCount = 0;
+  
+  const addQuestionMarkup = (q, partName, contextHtml = "") => {
+    const isCorrect = userAnswers[q.num] === q.correct;
+    if (showOnlyWrong && isCorrect) return; // 篩選只看錯題
+    
+    wrongCount++;
+    const selected = userAnswers[q.num] || "未作答";
+    const statusText = isCorrect 
+      ? '<span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-full"><i class="fa-solid fa-circle-check"></i> 答對</span>'
+      : `<span class="bg-red-100 text-red-800 text-xs font-black px-2.5 py-1 rounded-full"><i class="fa-solid fa-circle-xmark"></i> 答錯 (正確: ${q.correct})</span>`;
+      
+    // 渲染選項與標記
+    let optsHtml = "";
+    ['A', 'B', 'C', 'D'].forEach(key => {
+      const text = q.options[key];
+      let itemStyle = "border border-slate-200 text-slate-700";
+      let checkIcon = "";
+      
+      if (key === q.correct) {
+        itemStyle = "correct-option border-2 font-black";
+        checkIcon = '<i class="fa-solid fa-circle-check text-emerald-500"></i>';
+      } else if (selected === key) {
+        itemStyle = "incorrect-option border-2 font-black";
+        checkIcon = '<i class="fa-solid fa-circle-xmark text-red-500"></i>';
+      } else if (selected !== "未作答") {
+        itemStyle = "unselected-option border text-slate-400";
+      }
+      optsHtml += `
+        <div class="p-3 rounded-xl flex items-center justify-between text-xs sm:text-sm font-medium border ${itemStyle}">
+          <span><strong>${key}</strong> ${text}</span>
+          ${checkIcon}
+        </div>
+      `;
+    });
+    
+    container.insertAdjacentHTML('beforeend', `
+      <div id="wrong-q-${q.num}" class="bg-white rounded-2xl border p-6 border-slate-200 custom-shadow space-y-4">
+        <div class="flex justify-between items-center border-b pb-3">
+          <h4 class="font-extrabold text-slate-800 flex items-center gap-1.5">
+            <span class="w-6 h-6 rounded-full bg-slate-800 text-white flex items-center justify-center font-bold text-xs">${q.num}</span>
+            <span class="text-xs text-slate-500">【${partName}】</span>
+            考點：${q.point}
+          </h4>
+          ${statusText}
+        </div>
+        
+        ${contextHtml}
+        
+        <div class="space-y-2">
+          <p class="text-slate-850 font-black text-sm font-serif">${q.question || q.sentence}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${optsHtml}</div>
+        </div>
+        
+        <div class="border-t border-slate-100 pt-4 space-y-3">
+          <div>
+            <h5 class="text-xs font-extrabold text-[#1a365d] mb-1">【單題中文翻譯】</h5>
+            <p class="p-3 bg-slate-50 border rounded-xl text-slate-550 text-xs leading-relaxed font-semibold">${q.translation}</p>
+          </div>
+          <div>
+            <h5 class="text-xs font-extrabold text-[#1a365d] mb-1">【解題深度邏輯】</h5>
+            <div class="text-xs text-slate-600 space-y-1.5 leading-relaxed bg-amber-50/20 p-3 rounded-xl border border-amber-100/50">
+              <p><strong>1. 語法/文章結構：</strong>${q.explanation.structure}</p>
+              <p><strong>2. 核心判定要點：</strong>${q.explanation.core}</p>
+              <p><strong>3. 干擾項詳細排除：</strong>${q.explanation.distractors}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+  };
+  
+  // 篩選 Part 5
+  PART5_DATA.forEach(q => {
+    addQuestionMarkup(q, "Part 5 單句填空");
+  });
+  
+  // 篩選 Part 6
+  PART6_DATA.forEach(p => {
+    p.questions.forEach(q => {
+      const context = `
+        <div class="p-4 bg-purple-50/20 border border-purple-100 rounded-xl text-xs text-slate-650 leading-relaxed max-h-[160px] overflow-y-auto mb-2 text-justify">
+          <strong>相關文章片段：</strong><br>${p.passage_en_template}
+        </div>
+      `;
+      addQuestionMarkup(q, "Part 6 短文填空", context);
+    });
+  });
+  
+  // 篩選 Part 7
+  PART7_DATA.forEach(p => {
+    p.questions.forEach(q => {
+      const context = `
+        <div class="p-4 bg-emerald-50/20 border border-emerald-100 rounded-xl text-xs text-slate-650 leading-relaxed max-h-[180px] overflow-y-auto mb-2 text-justify">
+          <strong>相關文章內容：</strong><br>${p.passage_en_template}
+        </div>
+      `;
+      addQuestionMarkup(q, "Part 7 閱讀理解", context);
+    });
+  });
+  
+  if (wrongCount === 0) {
+    container.innerHTML = `
+      <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-8 rounded-2xl text-center space-y-2 shadow-sm">
+        <i class="fa-solid fa-crown text-4xl text-amber-500 animate-bounce"></i>
+        <h4 class="font-extrabold text-base">恭喜您！沒有答錯任何題目。</h4>
+        <p class="text-xs text-emerald-600">您的答題狀況非常完美！請繼續保持高分表現。</p>
+      </div>
+    `;
+  }
+}
+
+function toggleShowOnlyWrong() {
+  showOnlyWrong = !showOnlyWrong;
+  document.getElementById('btn-toggle-wrong').innerText = showOnlyWrong ? "只看錯題：開" : "只看錯題：關";
+  document.getElementById('btn-toggle-wrong').className = showOnlyWrong
+    ? "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-black shadow transition"
+    : "px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white rounded-xl text-xs font-black shadow transition";
+  renderWrongQuestionsZone();
+}
+
+function scrollToWrongQuestion(qNum) {
+  const targetId = `wrong-q-${qNum}`;
+  const el = document.getElementById(targetId);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('ring-4', 'ring-red-400');
+    setTimeout(() => el.classList.remove('ring-4', 'ring-red-400'), 1500);
+  } else {
+    // 若不存在，可能是因為「只看錯題：開」模式被隱藏了 (代表該題答對)，因此改為只看錯題:關
+    if (showOnlyWrong) {
+      toggleShowOnlyWrong();
+      setTimeout(() => scrollToWrongQuestion(qNum), 1500);
+    }
+  }
+}
+
+// -------------------------------------------------------------
+// 重新測試狀態重置
+// -------------------------------------------------------------
+function resetQuizState() {
+  if (!confirm("確定要重置作答進度並重新開始模擬測驗嗎？")) return;
+  
+  // 清理資料
+  for (let q = 101; q <= 200; q++) {
+    delete userAnswers[q];
+  }
+  localStorage.removeItem('toeic_test9_mock_answers');
+  
+  examFinished = false;
+  timeRemaining = 75 * 60;
+  isTimerRunning = false;
+  
+  // 顯示作答區
+  document.getElementById('exam-mode-container').classList.remove('hidden');
+  document.getElementById('part-nav').classList.remove('hidden');
+  document.getElementById('report-mode-container').classList.add('hidden');
+  
+  currentPart = 5;
+  currentPart6PassageIdx = 0;
+  currentPart7PassageIdx = 0;
+  
+  // 重新渲染並啟動計時
+  updateTimerDisplay();
+  updateProgressBadge();
+  updateStatusGrid();
+  renderPart5();
+  startTimer();
+}
+
+// -------------------------------------------------------------
+// 初始化
+// -------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  loadAnswers();
+  updateTimerDisplay();
+  updateProgressBadge();
+  updateStatusGrid();
+  renderPart5();
+  startTimer(); // 一進頁面即開始計時
+});
+</script>
+</body>
+</html>

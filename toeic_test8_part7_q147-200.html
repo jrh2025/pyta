@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Part 7 閱讀理解";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-after: always; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-block:last-of-type {
+    page-break-after: avoid;
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 10px 15px;
+    font-weight: bold; 
+    font-size: 11pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 15px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 15px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    tracking-wider: 0.05em;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 11pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    text-align: justify;
+    padding-right: 15px !important;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    text-align: justify;
+    padding-left: 15px !important;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px;
+}
+.section-main-title {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 11pt;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 4px;
+}
+.question-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #2c5282;
+    font-size: 9.5pt;
+    margin-bottom: 8px;
+    background-color: #ebf8ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.question-text {
+    font-weight: bold;
+    font-size: 11pt;
+    color: #1a202c;
+    margin-bottom: 8px;
+    font-family: "Times New Roman", Times, serif;
+}
+.options-table { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 5px 8px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 8pt; 
+    padding: 1px 5px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 6px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #f7fafc;
+    border-left: 3px solid #cbd5e1;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 9pt;
+}
+.exp-title {
+    font-weight: bold;
+    color: #4a5568;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    text-decoration: underline;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    background-color: #edf2f7;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 15px;
+    border-top: 1px solid #e2e8f0;
+    page-break-inside: avoid;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 5px; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 9pt;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 5px 8px; 
+    font-size: 9pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 25px; 
+    padding: 15px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 11pt; 
+    margin-top: 0;
+    margin-bottom: 8px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 18px; 
+    font-size: 9pt; 
+    color: #2d3748; 
+    line-height: 1.5;
+}
+.expert-list li { 
+    margin-bottom: 6px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 8 - PART 7 閱讀理解精選解析 (第 147 – 200 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 147-148 refer to the following text message chain. (147-148 題參照以下簡訊對話。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="chat-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <div class="msg mb-2"><b>Marcus Thorne</b> <span class="text-gray-400">(9:15 a.m.)</span>: Hi Sarah, is Boardroom A available at 2:00 p.m. today? We have a sudden logistics safety audit and need a private space.</div>
+  <div class="msg mb-2"><b>Sarah Jenkins</b> <span class="text-gray-400">(9:17 a.m.)</span>: Hi Marcus, unfortunately Boardroom A is closed today because of the internet router maintenance. The technicians are working on the cables.</div>
+  <div class="msg mb-2"><b>Marcus Thorne</b> <span class="text-gray-400">(9:18 a.m.)</span>: Ah, I forgot about that notice. What about Boardroom B? Is it free?</div>
+  <div class="msg"><b>Sarah Jenkins</b> <span class="text-gray-400">(9:20 a.m.)</span>: Yes, Boardroom B is free until 4:00 p.m. I will register the reservation for you right now.</div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="chat-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <div class="msg mb-2"><b>Marcus Thorne</b> <span class="text-gray-400">(上午 9:15)</span>: 嗨 Sarah，今天下午 2:00 會議室 A 有空嗎？我們有一次突發的物流安全審計，需要一個私密空間。</div>
+  <div class="msg mb-2"><b>Sarah Jenkins</b> <span class="text-gray-400">(上午 9:17)</span>: 嗨 Marcus，不幸的是，由於網絡路由器維護，會議室 A 今天關閉。技術人員正在處理電纜。</div>
+  <div class="msg mb-2"><b>Marcus Thorne</b> <span class="text-gray-400">(上午 9:18)</span>: 啊，我忘了那個通知。會議室 B 呢？有空嗎？</div>
+  <div class="msg"><b>Sarah Jenkins</b> <span class="text-gray-400">(上午 9:20)</span>: 有的，會議室 B 在下午 4:00 之前有空。我現在立刻幫你登記預約。</div>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 147 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q147. Why is Boardroom A unavailable today?</div>
+                <table class="options-table">
+            <tr><td>(A) It is being painted.</td><td class="correct-option">(B) Internet router maintenance is being performed. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It has been reserved by the CEO.</td><td>(D) A new server room is being set up.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為正在進行網路路由器維護。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。定位 Sarah 在 9:17 a.m. 的回覆 "Boardroom A is closed today because of the internet router maintenance"。<br>
+                        <strong>2. 核心判定：</strong>"internet router maintenance" 指網路路由器維護，對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 油漆中、(C) 被執行長預約、(D) 設立新伺服器室。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 148 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q148. What will Sarah Jenkins do next?</div>
+                <table class="options-table">
+            <tr><td>(A) Postpone the logistics audit</td><td>(B) Submit an expense claim form</td></tr>
+            <tr><td class="correct-option">(C) Reserve Boardroom B <span class="badge-correct">正確答案</span></td><td>(D) Inspect the newly installed cables</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">幫 Marcus 登記預約會議室 B。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節理解。定位 Sarah 在 9:20 a.m. 的最後一句話 "I will register the reservation for you right now."（指代 Boardroom B）。<br>
+                        <strong>2. 核心判定：</strong>「預約會議室 B」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 推遲審計、(B) 提交報銷、(D) 檢查新安裝的電纜。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">available</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">可得到的，空閒的</td></tr><tr><td class="vocab-word">register</td><td class="vocab-pos">v.</td><td class="vocab-meaning">登記，註冊</td></tr><tr><td class="vocab-word">reservation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">預約，保留</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 149-150 refer to the following advertisement. (149-150 題參照以下廣告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-2">Summer Health Lunches - Verdant Organic Café</h4>
+  <p class="mb-2">Are you looking for fresh and nutritious meal options near your workspace? Verdant Organic Café offers a comprehensive selection of seasonal lunch sets designed to keep you energized. Our meals are prepared with organic ingredients directly sourced from local family-owned farms.</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>Basic Salad Combo:</b> Organic greens with homemade dressing. $12.</li>
+    <li><b>Wellness Lunch Set:</b> Includes a hot quinoa bowl and a fresh green smoothie. $18.</li>
+  </ul>
+  <p>Order by July 31 to receive a 15% discount on your first online purchase. Contact us at 555-0188 or visit www.verdantcafe.com.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-2">夏季健康午餐 - Verdant Organic Café</h4>
+  <p class="mb-2">您正在工作空間附近尋找新鮮且營養的餐點選擇嗎？Verdant Organic Café 提供豐富的季節性午餐套餐，旨在讓您保持活力。我們的餐點均採用直接從當地家族經營農場採購的有機食材準備而成。</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>基本沙拉套餐：</b>有機蔬菜搭配手作醬料。12 美元。</li>
+    <li><b>健康午餐套餐：</b>包括一碗熱藜麥飯和一杯新鮮綠拿鐵。18 美元。</li>
+  </ul>
+  <p>在 7 月 31 日之前訂購，即可享有首筆線上購買 15% 的折扣。請致電 555-0188 聯絡我們，或造訪 www.verdantcafe.com。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 149 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q149. What is included in the Wellness Lunch Set?</div>
+                <table class="options-table">
+            <tr><td>(A) Free boardroom delivery</td><td class="correct-option">(B) A hot quinoa bowl and a green smoothie <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A complimentary coffee upgrade</td><td>(D) Unlimited salad bar access</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">一碗熱藜麥飯和一杯綠拿鐵。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。定位 Wellness Lunch Set 清單 "Includes a hot quinoa bowl and a fresh green smoothie"。<br>
+                        <strong>2. 核心判定：</strong>選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 免費送餐、(C) 免費升級咖啡、(D) 沙拉吧吃到飽。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 150 題 | 核心考點：細節定位 - 優惠條件 (難易度：中)</div>
+                <div class="question-text">Q150. How can customers get a discount on the lunch set?</div>
+                <table class="options-table">
+            <tr><td>(A) By purchasing a co-working day pass</td><td class="correct-option">(B) By ordering online before July 31 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) By signing a long-term corporate contract</td><td>(D) By referring another business client</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在 7 月 31 日之前在線上訂購。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節理解。定位末段 "Order by July 31 to receive a 15% discount on your first online purchase"。<br>
+                        <strong>2. 核心判定：</strong>「7/31前線上購買」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 買一日通票、(C) 簽長期合約、(D) 推薦客戶。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">nutritious</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">有營養的，營養豐富的</td></tr><tr><td class="vocab-word">organic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">有機的，器官的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 151-152 refer to the following letter. (151-152 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="text-right">July 10</p>
+  <p class="mb-2">Customer Service Department<br>Velo Logistics Inc.<br>400 Industrial Parkway<br>Chicago, IL</p>
+  <p class="mb-2">Dear Customer Service,</p>
+  <p class="mb-2">I recently contacted your sales office regarding the shipping fees for transporting four server racks (Model APX-200) from our facility at Apex Tech Solutions to our branch in Toronto. While we are satisfied with your basic rates, one of the routes quote seems to exceed our budget guidelines.</p>
+  <p class="mb-2">Since Velo Logistics is our primary logistics provider, I would like to inquire if we qualify for a corporate discount or if we can establish a customized rate contract for our monthly shipments. I have attached the original rate quote to this letter.</p>
+  <p class="mb-2">Thank you for your assistance with this matter.</p>
+  <p class="text-xs">Sincerely,<br>Elena Rostova<br>IT Director, Apex Tech Solutions</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="text-right">7 月 10 日</p>
+  <p class="mb-2">客戶服務部<br>Velo Logistics 公司<br>400 號工業園區路<br>芝加哥，伊利諾州</p>
+  <p class="mb-2">親愛的客服部門：</p>
+  <p class="mb-2">我最近聯絡了貴公司的銷售辦公室，諮詢將四個伺服器機櫃（型號 APX-200）從 Apex Tech Solutions 的設施運送到我們多倫多分部的運費。雖然我們對你們的基本費率感到滿意，但其中一條路線的報價似乎超出了我們的預算指南。</p>
+  <p class="mb-2">由於 Velo Logistics 是我們的主要物流供應商，我想詢問我們是否符合企業折扣的資格，或者我們是否可以為我們的月度發貨建立定製費率合約。我已將原始費率報價隨信附上。</p>
+  <p class="mb-2">感謝您對此事的協助。</p>
+  <p class="text-xs">謹啟，<br>Elena Rostova<br>Apex Tech Solutions 資訊總監</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 151 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q151. What is the main purpose of the letter?</div>
+                <table class="options-table">
+            <tr><td>(A) To request a pricing quote for custom office furniture</td><td class="correct-option">(B) To inquire about shipping discounts or custom rates <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To cancel a database hosting contract</td><td>(D) To apply for a customer service job at Velo</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">詢問運送費用與折扣。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主旨理解。Elena 寫信說明目前的物流報價超出了預算，並詢問是否有 corporate discount 或建立 customized rate contract。<br>
+                        <strong>2. 核心判定：</strong>「詢問運費折扣或定製費率」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 家具詢價、(C) 取消合約、(D) 應徵客服。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 152 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q152. What has Ms. Rostova enclosed with the letter?</div>
+                <table class="options-table">
+            <tr><td>(A) A copy of the warranty terms</td><td>(B) The broken server rack parts</td></tr>
+            <tr><td class="correct-option">(C) The original rate quote <span class="badge-correct">正確答案</span></td><td>(D) A blueprint of her server room layout</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">原始報價單。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節理解。定位信件倒數第二句 "I have attached the original rate quote to this letter."。<br>
+                        <strong>2. 核心判定：</strong>「隨信附上原始報價單」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 保固條款、(B) 損壞零件、(D) 機房佈局圖。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">transport</td><td class="vocab-pos">v.</td><td class="vocab-meaning">運送，運輸</td></tr><tr><td class="vocab-word">qualify</td><td class="vocab-pos">v.</td><td class="vocab-meaning">有資格，使合格</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 153-154 refer to the following notice. (153-154 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Luminary Co-working - Building Notice</h4>
+  <p class="mb-2">Dear Tenants,</p>
+  <p class="mb-2">Please be informed that local electrical contractors will conduct a mandatory power grid maintenance audit of our facility on Saturday, July 25, between 9:00 p.m. and 11:30 p.m.</p>
+  <p class="mb-2">During the maintenance window, all power in the building will be shut down periodically. Please ensure that all your electronic hardware is turned off beforehand. Additionally, wireless internet service will be temporarily unavailable during these hours.</p>
+  <p>We apologize for this temporary disruption and thank you for your cooperation. If you have any concerns, please contact the community manager beforehand.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Luminary 共享辦公空間 - 大樓通知</h4>
+  <p class="mb-2">親愛的租戶們：</p>
+  <p class="mb-2">請注意，當地電力承包商將於 7 月 25 日星期六晚上 9:00 至 11:30 之間對我們的設施進行強制性電網維護審計。</p>
+  <p class="mb-2">在維護窗口期間，大樓內的所有電源都將定期關閉。請確保事先關閉您所有的電子硬體。此外，在這些時段內，無線網路服務將暫時無法使用。</p>
+  <p>我們對這項臨時干擾表示歉意，並感謝您的配合。如果您有任何疑慮，請事先與社區經理聯絡。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 153 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q153. When will the power grid maintenance audit take place?</div>
+                <table class="options-table">
+            <tr><td>(A) Wednesday, July 22 morning</td><td class="correct-option">(B) Saturday, July 25 evening <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Saturday, July 25 morning</td><td>(D) Sunday, July 26 afternoon</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">7 月 25 日星期六晚上。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>時間定位。定位 notice 第一段 "on Saturday, July 25, between 9:00 p.m. and 11:30 p.m."。<br>
+                        <strong>2. 核心判定：</strong>晚上 9:00 至 11:30 為 evening。選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 7/22 上午、(C) 7/25 上午、(D) 7/26 下午。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 154 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q154. What service will be temporarily unavailable during the audit?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Wireless internet access <span class="badge-correct">正確答案</span></td><td>(B) Elevator service</td></tr>
+            <tr><td>(C) Hot water supply</td><td>(D) Central HVAC ventilation</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">無線網路服務。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節理解。定位第二段最後一句 "Additionally, wireless internet service will be temporarily unavailable..."。<br>
+                        <strong>2. 核心判定：</strong>「無線網路服務」對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 電梯服務、(C) 熱水供應、(D) 空調通風。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">mandatory</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">強制的，義務的</td></tr><tr><td class="vocab-word">periodically</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">定期地，週期性地</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 5 | Questions 155-157 refer to the following memo. (155-157 題參照以下備忘錄。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-2">
+    <b>To:</b> Department Managers<br>
+    <b>From:</b> Julian Vance, Finance Department<br>
+    <b>Date:</b> August 25<br>
+    <b>Subject:</b> Dining and Meeting Catering Expense Reimbursement Policy Changes
+  </p>
+  <p class="mb-2">This memo serves to notify all department managers of key changes to our Dining and Meeting Catering Expense Reimbursement Policy, effective September 1. Please ensure that all staff members in your department are informed of these updates beforehand.</p>
+  <p class="mb-2">Under the new guidelines, original receipts are now strictly required for any dining or meeting catering expense item exceeding $50. Any claims that do not include the original receipt will be rejected without exception.</p>
+  <p class="mb-2">Additionally, the submission window for reimbursement claims has been shortened. All claims must now be submitted to the finance portal within 15 days of the purchase date. Thank you for your cooperation in implementing these measures.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-2">
+    <b>收件者：</b>部門經理<br>
+    <b>寄件者：</b>財務部 Julian Vance<br>
+    <b>日期：</b>8 月 25 日<br>
+    <b>主旨：</b>用餐與會議餐飲費用報銷政策變更
+  </p>
+  <p class="mb-2">本備忘錄旨在通知所有部門經理，我們的用餐與會議餐飲費用報銷政策將於 9 月 1 日起進行關鍵變更。請確保您部門內的所有員工在事前都知悉這些更新。</p>
+  <p class="mb-2">根據新指南，現在任何超過 50 美元的用餐或會議餐飲支出項目都嚴格要求提供原始收據。任何未包含原始收據的申請都將被無例外地退回。</p>
+  <p class="mb-2">此外，費用報銷申請的提交窗口已縮短。所有申請現在必須在購買日期後 15 天內提交至財務入口網站。感謝您在實施這些措施方面的配合。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 155 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q155. When will the new reimbursement policy take effect?</div>
+                <table class="options-table">
+            <tr><td>(A) August 25</td><td class="correct-option">(B) September 1 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) September 15</td><td>(D) October 12</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">9 月 1 日。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>生效日期定位。第一段第一句寫道 "effective September 1"。<br>
+                        <strong>2. 核心判定：</strong>「9 月 1 日」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 發信日、(C) 15天窗口期、(D) 維護日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 156 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q156. According to the memo, what happens to dining claims exceeding $50 that missing receipts?</div>
+                <table class="options-table">
+            <tr><td>(A) They are subject to a $15 late fee.</td><td class="correct-option">(B) They will be automatically rejected. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) They require the CFO's special signature.</td><td>(D) They will be processed after a 30-day delay.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">它們將被退回。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。第二段第二句 "Any claims that do not include the original receipt will be rejected..."。<br>
+                        <strong>2. 核心判定：</strong>「將被自動退回」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 遲交費、(C) 財務長簽名、(D) 延遲處理。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 157 題 | 核心考點：細節定位 - 報銷憑證條件 (難易度：高)</div>
+                <div class="question-text">Q157. What is the maximum dining claim amount that does NOT strictly require a receipt?</div>
+                <table class="options-table">
+            <tr><td>(A) $12</td><td>(B) $18</td></tr>
+            <tr><td class="correct-option">(C) $50 <span class="badge-correct">正確答案</span></td><td>(D) $100</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">50 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節與邏輯推論。第二段第一句 "original receipts are now strictly required for any dining ... exceeding $50"。<br>
+                        <strong>2. 核心判定：</strong>超過 $50 才需要收據，也就是不高於 $50 不需要。因此不嚴格要求收據的最大金額為 $50。故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 基本沙拉套餐費、(B) 健康套餐費、(D) 其他舊政策額度。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">catering</td><td class="vocab-pos">n.</td><td class="vocab-meaning">餐飲承辦，餐飲服務</td></tr><tr><td class="vocab-word">shorten</td><td class="vocab-pos">v.</td><td class="vocab-meaning">變短，縮短</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 6 | Questions 158-160 refer to the following webpage. (158-160 題參照以下網頁。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-1"><b>URL:</b> www.apextech.com/support/biometric</p>
+  <h4 class="font-bold text-base mb-1">Apex Tech Support - Resetting Biometric Security Settings</h4>
+  <p class="mb-2">To maintain facility security, employees are required to update their security access profiles every 90 days. If your scanner access is suspended or you need to update your registered fingerprint profile, follow these steps:</p>
+  <ol class="list-decimal pl-5 mb-2">
+    <li>Navigate to the employee portal and select "Security Profile".</li>
+    <li>Enter your corporate email and click "Request Access Reset".</li>
+    <li>Click on the secure reset link sent to your inbox. The link is valid for 15 minutes.</li>
+    <li>Create a secure PIN that includes at least 6 digits and a special character, then visit the ground floor security desk for fingerprint scanning.</li>
+  </ol>
+  <p>If you do not receive the email within 5 minutes, check your spam folder or contact the IT Help Desk at extension 4088.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-1"><b>網址：</b> www.apextech.com/support/biometric</p>
+  <h4 class="font-bold text-base mb-1">Apex IT 服務台 - 重設生物辨識安全設定</h4>
+  <p class="mb-2">為了維護設施安全，員工必須每 90 天更新一次其安全存取檔案。如果您的掃描器存取權被暫停，或您需要更新註冊的指紋檔案，請按照以下步驟操作：</p>
+  <ol class="list-decimal pl-5 mb-2">
+    <li>進入員工入口網站並選擇「安全設定」。</li>
+    <li>輸入您的公司電子郵件，然後點擊「要求重設存取權」。</li>
+    <li>點擊發送到您收件匣的安全重設連結。該連結在 15 分鐘內有效。</li>
+    <li>創建一個包含至少 6 位數字和一個特殊字元的安全 PIN 碼，然後前往一樓安全服務台進行指紋掃描。</li>
+  </ol>
+  <p>如果您在 5 分鐘內未收到電子郵件，請檢查垃圾郵件資料夾，或撥打分機 4088 聯絡 IT 服務台。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 158 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q158. How often must employees update their security access profiles?</div>
+                <table class="options-table">
+            <tr><td>(A) Every 15 days</td><td>(B) Every 30 days</td></tr>
+            <tr><td class="correct-option">(C) Every 90 days <span class="badge-correct">正確答案</span></td><td>(D) Every year</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">每 90 天。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。定位首段第一句 "required to update their security access profiles every 90 days"。<br>
+                        <strong>2. 核心判定：</strong>「每 90 天」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 15分鐘（連結時效）、(B) 30天、(D) 每年。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 159 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q159. How long is the secure reset link valid?</div>
+                <table class="options-table">
+            <tr><td>(A) For 5 minutes</td><td class="correct-option">(B) For 15 minutes <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) For 1 hour</td><td>(D) For 24 hours</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">15 分鐘。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。定位第三步 "The link is valid for 15 minutes."。<br>
+                        <strong>2. 核心判定：</strong>「15 分鐘」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 郵件等待時間、(C) 一小時、(D) 24小時。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 160 題 | 核心考點：推論題 (難易度：中)</div>
+                <div class="question-text">Q160. What should an employee do if the reset email does not arrive after 5 minutes?</div>
+                <table class="options-table">
+            <tr><td>(A) Submit a paper reimbursement claim form</td><td class="correct-option">(B) Check their spam folder or call extension 4088 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Register for a new corporate email address</td><td>(D) Visit the ground floor security desk directly</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">檢查垃圾郵件資料夾或撥打分機 4088。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節理解。定位網頁最後一句 "check your spam folder or contact the IT Help Desk at extension 4088."。<br>
+                        <strong>2. 核心判定：</strong>對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 報銷表、(C) 註冊新郵件、(D) 直接去一樓（這在收到信重設後才去，不是收不到信時的做法）。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">suspend</td><td class="vocab-pos">v.</td><td class="vocab-meaning">暫停，中止</td></tr><tr><td class="vocab-word">profile</td><td class="vocab-pos">n.</td><td class="vocab-meaning">檔案，簡介，概況</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 7 | Questions 161-163 refer to the following letter. (161-163 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="text-right">July 18</p>
+  <p class="mb-2">Elena Rostova<br>IT Director<br>Apex Tech Solutions Inc.<br>700 Broadway Avenue<br>New York, NY</p>
+  <p class="mb-2">Dear Ms. Rostova,</p>
+  <p class="mb-2">On behalf of Velo Logistics, I am writing to invite you to be the guest keynote speaker at our annual Security and Logistics Seminar, which will be held at Luminary Co-working space on Friday, September 10. Your extensive experience in network database encryption and cloud safety would be highly valuable to our team.</p>
+  <p class="mb-2">We would request a 45-minute presentation on "Future Trends in Database Security" on the morning of September 10, followed by a Q&A session. Velo Logistics will cover all your travel expenses and provide an honorarium of $1,000.</p>
+  <p class="mb-2">Please let us know if you are available by August 10 so we can finalize the schedule. We sincerely hope you will accept our invitation.</p>
+  <p class="text-xs">Sincerely,<br>Marcus Thorne<br>Operations Director, Velo Logistics</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="text-right">7 月 18 日</p>
+  <p class="mb-2">Elena Rostova<br>資訊總監<br>Apex Tech Solutions 公司<br>700 號百老匯大道<br>紐約市，紐約州</p>
+  <p class="mb-2">親愛的 Rostova 女士：</p>
+  <p class="mb-2">我代表 Velo Logistics，寫信邀請您擔任我們年度安全與物流研討會的客座主題演講嘉賓，該研討會將於 9 月 10 日星期五在 Luminary 共享辦公空間舉行。您在網絡資料庫加密和雲端安全方面的廣泛經驗對我們的團隊來說將非常有價值。</p>
+  <p class="mb-2">我們希望您能在 9 月 10 日上午進行一場為期 45 分鐘、主題為「資料庫安全未來趨勢」的簡報，隨後是問答環節。Velo Logistics 將支付您的所有差旅費用，並提供 1,000 美元的演講酬勞。</p>
+  <p class="mb-2">請在 8 月 10 日前讓我們知道您是否有空，以便我們敲定日程表。我們真誠地希望您能接受我們的邀請。</p>
+  <p class="text-xs">謹啟，<br>Marcus Thorne<br>Velo Logistics 營運總監</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 161 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q161. What is the purpose of the letter?</div>
+                <table class="options-table">
+            <tr><td>(A) To submit a bid for a server access contract</td><td class="correct-option">(B) To invite Ms. Rostova to speak at a seminar <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To request a reimbursement for hotel expenses</td><td>(D) To complain about a delay in server shipments</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">邀請 Ms. Rostova 在研討會上演講。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主旨理解。信件開頭 "invite you to be the guest keynote speaker at our annual Security and Logistics Seminar"。<br>
+                        <strong>2. 核心判定：</strong>「邀請 Ms. Rostova 演講」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 競標、(C) 費用報銷、(D) 物流延誤投訴。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 162 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q162. What topic is Ms. Rostova asked to present on?</div>
+                <table class="options-table">
+            <tr><td>(A) Ergonomic Office Furniture Design</td><td>(B) Network Security and PIN Resets</td></tr>
+            <tr><td class="correct-option">(C) Future Trends in Database Security <span class="badge-correct">正確答案</span></td><td>(D) Fire Safety and Emergency Audits</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">資料庫安全的未來趨勢。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。定位第二段第一句 "presentation on 'Future Trends in Database Security'"。<br>
+                        <strong>2. 核心判定：</strong>對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 辦公家具、(B) 重設 PIN、(D) 消防安全。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 163 題 | 核心考點：同義字替換 (難易度：高)</div>
+                <div class="question-text">Q163. In the letter, the word "finalize" in paragraph 3 is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td>(A) cancel</td><td class="correct-option">(B) complete <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) postpone</td><td>(D) extend</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">完成，決定。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>詞彙代換。"finalize the schedule" 意為敲定或完成時程。<br>
+                        <strong>2. 核心判定：</strong>complete 在此語境下與 finalize 最接近。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 取消、(C) 延期、(D) 延長。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">seminar</td><td class="vocab-pos">n.</td><td class="vocab-meaning">研討會，座談會</td></tr><tr><td class="vocab-word">finalize</td><td class="vocab-pos">v.</td><td class="vocab-meaning">完成，敲定</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 8 | Questions 164-167 refer to the following notice. (164-167 題參照以下通知。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Prism Marketing - Seattle Office Grand Opening</h4>
+  <p class="mb-2">Prism Marketing is proud to announce the grand opening of our new regional branch in Seattle. [1]. To mark this special occasion, we are holding a community consulting day on Friday, September 10, from 10:00 a.m. to 3:00 p.m.</p>
+  <p class="mb-2">During this event, local business owners are invited to visit the branch to tour our state-of-the-art marketing studio and meet our senior consultants. [2]. In addition, the first 50 visitors who register for a new promotional analysis will receive a complimentary $100 service credit. [3].</p>
+  <p class="mb-2">Free refreshments and organic beverages will be served throughout the day. [4]. We look forward to strengthening our presence in Seattle and serving the local business community.</p>
+  <p class="text-xs">Seattle Branch Management</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Prism Marketing - 西雅圖辦公室盛大開幕</h4>
+  <p class="mb-2">Prism Marketing 很榮幸宣布我們在西雅圖的新區域分部盛大開幕。【[1]】。為了紀念這個特別的時刻，我們將於 9 月 10 日星期五上午 10:00 至下午 3:00 舉行社區諮詢日。</p>
+  <p class="mb-2">在此活動期間，誠摯邀請當地企業主參觀分部，參觀我們最先進的行銷工作室並與我們的資深顧問會面。【[2]】。此外，前 50 名註冊新促銷分析的訪客將獲得免費的 100 美元服務額度。【[3]】。</p>
+  <p class="mb-2">全天將提供免費茶點和有機飲料。【[4]】。我們期待增強我們在西雅圖的地位並服務當地企業社區。</p>
+  <p class="text-xs">西雅圖分部管理層</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 164 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q164. When is the welcome event scheduled to occur?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Friday, September 10 <span class="badge-correct">正確答案</span></td><td>(B) Wednesday, July 22</td></tr>
+            <tr><td>(C) Saturday, July 25</td><td>(D) Friday, July 31</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">9 月 10 日星期五。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>日期定位。定位第一段最後一句 "Friday, September 10"。<br>
+                        <strong>2. 核心判定：</strong>選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 家具送達日、(C) 電網維護日、(D) 優惠截止日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 165 題 | 核心考點：細節定位 - 優惠條件 (難易度：中)</div>
+                <div class="question-text">Q165. What will the first 50 visitors who register receive?</div>
+                <table class="options-table">
+            <tr><td>(A) An organic salad bowl</td><td>(B) A VIP access keycard</td></tr>
+            <tr><td class="correct-option">(C) A $100 service credit <span class="badge-correct">正確答案</span></td><td>(D) A complimentary business auditing textbook</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">100 美元的服務額度。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>優惠細節定位。定位第二段第二句 "the first 50 visitors who register for a new promotional analysis will receive a complimentary $100 service credit."。<br>
+                        <strong>2. 核心判定：</strong>「100 美元服務額度」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 沙拉碗、(B) 感應卡、(D) 審計教科書。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 166 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q166. What is NOT mentioned as being available at the event?</div>
+                <table class="options-table">
+            <tr><td>(A) Free refreshments and organic beverages</td><td>(B) A tour of the new studio</td></tr>
+            <tr><td>(C) Meetings with senior consultants</td><td class="correct-option">(D) Free wireless internet routers <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">免費的無線網絡設備（未提及）。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>排除題。比對文中提及的項目。<br>
+                        <strong>2. 核心判定：</strong>(A) 茶點飲料有提到、(B) 工作室參觀有提到、(C) 會面顧問有提到。(D) 路由器並未提及，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>其他選項均在 notice 中有明確記載。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 167 題 | 核心考點：插句位置判定 (難易度：高)</div>
+                <div class="question-text">Q167. In which of the positions [1], [2], [3], or [4] does the following sentence best belong?
+"This credit will be automatically applied to your project invoice within 24 hours."</div>
+                <table class="options-table">
+            <tr><td>(A) [1]</td><td>(B) [2]</td></tr>
+            <tr><td class="correct-option">(C) [3] <span class="badge-correct">正確答案</span></td><td>(D) [4]</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">位置 [3]。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>插句定位。句子提到 "This credit..."（此額度）。前文必須有關於額度（credit）的描述。<br>
+                        <strong>2. 核心判定：</strong>位置 [3] 之前的一句話為 "receive a complimentary $100 service credit."，正好引入了 credit。因此插句放在 [3] 最符合代名詞指代邏輯。選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>[1] 介紹開幕，無關 credit、[2] 講參觀與會面，無關 credit、[4] 講茶點，無關 credit。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">complimentary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">免費贈送的，讚賞的</td></tr><tr><td class="vocab-word">credit</td><td class="vocab-pos">n.</td><td class="vocab-meaning">信用，服務額度，學分</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 9 | Questions 168-171 refer to the following webpage. (168-171 題參照以下網頁。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-1"><b>URL:</b> www.velologistics.com/tenders/security</p>
+  <h4 class="font-bold text-base mb-1">Velo Logistics - Call for Security Access System Installation Proposals</h4>
+  <p class="mb-2">Velo Logistics is seeking comprehensive proposals from established technology integration firms to upgrade and manage our facility access control security systems. [1]. The selected partner will be responsible for installing biometric scanning equipment and secure entrance gates at our Chicago logistics center.</p>
+  <p class="mb-2">Proposals must meet the following baseline requirements to be considered: [2].</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li>Have at least 3 years of experience in corporate security integration services.</li>
+    <li>Provide 24/7 technical support and maintenance response.</li>
+    <li>Submit detailed monthly billing rate projections by the deadline.</li>
+  </ul>
+  <p class="mb-2">The deadline for submitting all bidding documents is Friday, October 15, at 5:00 p.m. [3]. Late submissions will be rejected without review. Detailed templates and security specifications can be downloaded from our portal. [4].</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-1"><b>網址：</b> www.velologistics.com/tenders/security</p>
+  <h4 class="font-bold text-base mb-1">Velo Logistics - 安全存取系統安裝提案招標公告</h4>
+  <p class="mb-2">Velo Logistics 正在尋求信譽良好的技術整合公司的完整提案，以升級和管理我們的設施門禁安全系統。【[1]】。入選的合作夥伴將負責在我們的芝加哥物流中心安裝生物辨識掃描設備和安全入口大門。</p>
+  <p class="mb-2">提案必須滿足以下基準要求才能被納入考慮：【[2]】。</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li>在企業安全整合服務方面擁有至少 3 年的經驗。</li>
+    <li>提供 24/7 的技術支援與維護響應。</li>
+    <li>在截止日期前提交詳細的月費預估。</li>
+  </ul>
+  <p class="mb-2">提交所有投標文件的截止日期是 10 月 15 日星期五下午 5:00。【[3]】。逾期提交的申請將不予審查。詳細的模板與安全規格可從我們的入口網站下載。【[4]】。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 168 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q168. What is Velo Logistics seeking in the tender notice?</div>
+                <table class="options-table">
+            <tr><td>(A) An internal travel expense software developer</td><td class="correct-option">(B) Proposals for installing security access systems <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Ergonomic boardroom tables for executive staff</td><td>(D) A new advertising agency for social media campaigns</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">門禁安全系統安裝提案。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>主旨理解。定位網頁標題及第一句 "seeking comprehensive proposals ... to upgrade and manage our facility access control security systems"。<br>
+                        <strong>2. 核心判定：</strong>「尋求門禁安全系統的安裝與升級」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 軟體開發商、(C) 辦公桌、(D) 行銷代理商。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 169 題 | 核心考點：細節定位 - 資格要求 (難易度：中)</div>
+                <div class="question-text">Q169. What is one of the requirements for candidate firms?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) At least 3 years of security integration experience <span class="badge-correct">正確答案</span></td><td>(B) An office location based in Seattle</td></tr>
+            <tr><td>(C) Familiarity with organic coffee bean sourcing</td><td>(D) A database registry under 50 square feet</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">至少 3 年的企業安全整合經驗。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索。定位列表第一項 "Have at least 3 years of experience in corporate security integration services"。<br>
+                        <strong>2. 核心判定：</strong>對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 辦公室在西雅圖、(C) 有機咖啡豆、(D) 資料庫大小。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 170 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q170. When is the deadline for submitting bidding documents?</div>
+                <table class="options-table">
+            <tr><td>(A) Wednesday, July 22 at 9:00 a.m.</td><td class="correct-option">(B) Friday, October 15 at 5:00 p.m. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Saturday, July 25 at 11:30 p.m.</td><td>(D) Friday, September 10 at 3:00 p.m.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">10 月 15 日星期五下午 5:00。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>截止時間定位。定位第三段第一句 "Friday, October 15, at 5:00 p.m."。<br>
+                        <strong>2. 核心判定：</strong>選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 家具送達時間、(C) 電力維護結束時間、(D) 諮詢日結束時間。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 171 題 | 核心考點：插句位置判定 (難易度：高)</div>
+                <div class="question-text">Q171. In which of the positions [1], [2], [3], or [4] does the following sentence best belong?
+"Please note that the portal registration requires an active corporate technology account."</div>
+                <table class="options-table">
+            <tr><td>(A) [1]</td><td>(B) [2]</td></tr>
+            <tr><td>(C) [3]</td><td class="correct-option">(D) [4] <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">位置 [4]。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>插句定位。句子提到 "the portal registration..."（入口網站註冊）。前句應有關於入口網站（portal）下載的說明。<br>
+                        <strong>2. 核心判定：</strong>第四段最後一句提到 "can be downloaded from our portal."（可從入口網站下載模板），之後放置位置 [4] 正好說明了該 portal 的註冊要求。選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>[1] 在講系統升級、[2] 在講基準要求、[3] 在講投標截止。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">integration</td><td class="vocab-pos">n.</td><td class="vocab-meaning">整合，一體化</td></tr><tr><td class="vocab-word">specification</td><td class="vocab-pos">n.</td><td class="vocab-meaning">規格，說明書，詳情</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 10 | Questions 172-175 refer to the following letter. (172-175 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="text-right">September 12</p>
+  <p class="mb-2">Elena Rostova<br>IT Department<br>Apex Tech Solutions Inc.<br>Chicago, IL</p>
+  <p class="mb-2">Dear Ms. Rostova,</p>
+  <p class="mb-2">I am writing on behalf of the Finance Department regarding your travel expense claim OPT-9082 for $120, which you submitted on September 10. [1]. While your claim form was signed by Marketing Director Julian Vance and submitted within the 15-day window, we are currently unable to process it. [2].</p>
+  <p class="mb-2">Our review indicated that the receipt for your client dinner with Velo Tech on September 1 is missing. Under company policy, any individual travel expense item exceeding $50 strictly requires an original receipt. [3]. Your train ticket on August 31 for $45 does not require a receipt, but the dinner item of $75 does. [4].</p>
+  <p class="mb-2">Please upload the missing receipt to the finance portal at your earliest convenience so we can approve and process your reimbursement. Thank you.</p>
+  <p class="text-xs">Sincerely,<br>Julian Vance<br>Finance Director, Prism Marketing</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="text-right">9 月 12 日</p>
+  <p class="mb-2">Elena Rostova<br>資訊部<br>Apex Tech Solutions 公司<br>芝加哥，伊利諾州</p>
+  <p class="mb-2">親愛的 Rostova 女士：</p>
+  <p class="mb-2">我代表財務部寫信，關於您於 9 月 10 日提交的 120 美元差旅費報銷申請 OPT-9082。【[1]】。雖然您的報銷單已由行銷總監 Julian Vance 簽名且在 15 天的窗口期內提交，但我們目前無法處理它。【[2]】。</p>
+  <p class="mb-2">我們的審查指出，您 9 月 1 日與 Velo Tech 的客戶晚宴收據遺失了。根據公司政策，任何超過 50 美元的單項差旅支出項目都嚴格要求提供原始收據。【[3]】。您 8 月 31 日 45 美元的火車票不需要收據，但 75 美元的晚宴項目需要。【[4]】。</p>
+  <p class="mb-2">請儘快將遺失的收據上傳至財務入口網站，以便我們核准並處理您的報銷。謝謝。</p>
+  <p class="text-xs">謹啟，<br>Julian Vance<br>Prism Marketing 財務總監</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 172 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q172. What is the amount of the travel claim submitted by Ms. Rostova?</div>
+                <table class="options-table">
+            <tr><td>(A) $45</td><td>(B) $75</td></tr>
+            <tr><td class="correct-option">(C) $120 <span class="badge-correct">正確答案</span></td><td>(D) $210</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">120 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>金額定位。第一段第一句 "travel expense claim OPT-9082 for $120"。<br>
+                        <strong>2. 核心判定：</strong>「120 美元」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 火車票價、(B) 晚餐金額、(D) 舊報銷金額。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 173 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q173. Who approved Ms. Rostova's claim form before it was submitted?</div>
+                <table class="options-table">
+            <tr><td>(A) Marcus Thorne</td><td class="correct-option">(B) Julian Vance <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Sarah Jenkins</td><td>(D) Elena Rostova</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Julian Vance。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>人物定位。第一段第二句 "signed by Marketing Director Julian Vance"。<br>
+                        <strong>2. 核心判定：</strong>「Julian Vance」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 營運總監 Marcus、(C) 社區經理 Sarah、(D) 申請人 Elena。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 174 題 | 核心考點：推論與邏輯分析 (難易度：高)</div>
+                <div class="question-text">Q174. According to the letter, why does the train ticket NOT require a receipt?</div>
+                <table class="options-table">
+            <tr><td>(A) Because it was booked under the Basic Plan</td><td class="correct-option">(B) Because its amount does not exceed the $50 threshold <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Because it was approved by the IT Director</td><td>(D) Because the travel occurred on a weekend</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為金額低於 50 美元的門檻。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>政策邏輯推論。第二段提到「超過 $50 需提供收據」且「$45 的火車票不需要收據，但 $75 的晚宴需要」。<br>
+                        <strong>2. 核心判定：</strong>因為 $45 低於 $50 政策限額。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 雲端基本方案、(C) IT 總監核准、(D) 週末旅行。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 175 題 | 核心考點：插句位置判定 (難易度：高)</div>
+                <div class="question-text">Q175. In which of the positions [1], [2], [3], or [4] does the following sentence best belong?
+"This receipt must show the date, food items purchased, and tax breakdown."</div>
+                <table class="options-table">
+            <tr><td>(A) [1]</td><td>(B) [2]</td></tr>
+            <tr><td class="correct-option">(C) [3] <span class="badge-correct">正確答案</span></td><td>(D) [4]</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">位置 [3]。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>插句定位。句子提到 "This receipt..."（此收據）。前文必須有提及收據（receipt）要求。<br>
+                        <strong>2. 核心判定：</strong>第二段第二句提到 "strictly requires an original receipt."（嚴格要求原始收據），之後放置位置 [3] 說明了收據的格式要求（This receipt must show...）。選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>[1] 在講報銷總額、[2] 在講申請被卡住、[4] 在比對火車票與晚宴金額。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">expenditure</td><td class="vocab-pos">n.</td><td class="vocab-meaning">支出，開支，消費</td></tr><tr><td class="vocab-word">breakdown</td><td class="vocab-pos">n.</td><td class="vocab-meaning">明細，分析，故障</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 11 | Questions 176-180 refer to the following advertisement and e-mail. (176-180 題參照以下廣告與電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-1">Apex Tech Solutions - Cloud Security Upgrade Services</h4>
+  <p class="mb-2">Are you looking to secure your corporate database? Apex Tech Solutions provides state-of-the-art server encryption and cloud security support. Our monthly service plans are designed to meet any business scale:</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>Standard Cloud Plan:</b> 500 GB storage. Includes 24/5 support. Rate: $150/month.</li>
+    <li><b>Advanced Cloud Plan:</b> 2 TB storage. Includes 24/7 support. Rate: $300/month.</li>
+    <li><b>Enterprise Databank Plan:</b> 10 TB storage. Includes full system auditing. Rate: $500/month.</li>
+  </ul>
+  <p>Sign a one-year agreement by October 31 to receive a 10% discount on monthly bills. Contact us at 555-0199 or visit www.apextech.com.</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded text-xs">
+  <p class="meta mb-2">
+    <b>To:</b> Sales Department &lt;sales@apextech.com&gt;<br>
+    <b>From:</b> Marcus Thorne &lt;mthorne@velologistics.com&gt;<br>
+    <b>Date:</b> October 12<br>
+    <b>Subject:</b> Inquiry about Cloud Security Upgrade
+  </p>
+  <p class="mb-2">Dear Sales Department,</p>
+  <p class="mb-2">I am writing to inquire about your Cloud Security Upgrade Services. Velo Logistics is interested in securing its main client database. We require a minimum of 2 TB of cloud storage. Because we handle global logistics operations in both North America and Europe, 24/7 technical support is an absolute necessity for our team.</p>
+  <p class="mb-2">We would like to sign a one-year service agreement to take advantage of the discount mentioned in your advertisement. Please send us a draft contract and instructions on how to proceed. Thank you.</p>
+  <p>Sincerely,<br>Marcus Thorne<br>Operations Director, Velo Logistics</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-1">Apex Tech Solutions - 雲端安全升級服務</h4>
+  <p class="mb-2">您想保護您的企業資料庫嗎？Apex Tech Solutions 提供最先進的伺服器加密與雲端安全支援。我們的月費服務方案旨在滿足任何業務規模：</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>標準雲端方案：</b>500 GB 儲存空間。包含 24/5 支援。費用：每月 150 美元。</li>
+    <li><b>進階雲端方案：</b>2 TB 儲存空間。包含 24/7 支援。費用：每月 300 美元。</li>
+    <li><b>企業數據庫方案：</b>10 TB 儲存空間。包含全系統審計。費用：每月 500 美元。</li>
+  </ul>
+  <p>於 10 月 31 日前簽署一年期合約，即可享有月帳單 10% 的折扣。請致電 555-0199 聯絡我們，或造訪 www.apextech.com。</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded text-xs">
+  <p class="meta mb-2">
+    <b>收件者：</b>銷售部門 &lt;sales@apextech.com&gt;<br>
+    <b>寄件者：</b>Marcus Thorne &lt;mthorne@velologistics.com&gt;<br>
+    <b>日期：</b>10 月 12 日<br>
+    <b>主旨：</b>關於雲端安全升級的詢問
+  </p>
+  <p class="mb-2">親愛的銷售部門：</p>
+  <p class="mb-2">我寫這封信是為了詢問貴公司的雲端安全升級服務。Velo Logistics 有意保護我們的主要客戶資料庫。我們需要至少 2 TB 的雲端儲存空間。因為我們在北美和歐洲處理全球物流業務，所以 24/7 的技術支援對我們的團隊來說是絕對必要的。</p>
+  <p class="mb-2">我們希望簽署一份為期一年的服務協議，以享受您廣告中提到的折扣。請向我們發送一份合約草案以及如何進行的說明。謝謝。</p>
+  <p>謹啟，<br>Marcus Thorne<br>Velo Logistics 營運總監</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 176 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q176. According to the advertisement, what is included in the Enterprise Databank Plan?</div>
+                <table class="options-table">
+            <tr><td>(A) 24/5 technical support</td><td class="correct-option">(B) Full system auditing <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Free database hardware setup</td><td>(D) A complimentary office furniture upgrade</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">全系統審計。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。定位廣告中 "Enterprise Databank Plan" 描述 "Includes full system auditing"。<br>
+                        <strong>2. 核心判定：</strong>「全系統審計」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 24/5 支援是標準方案、(C) 硬件設定、(D) 家具升級。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 177 題 | 核心考點：跨篇章比對 (難易度：中)</div>
+                <div class="question-text">Q177. Which service plan is most suitable for Velo Logistics?</div>
+                <table class="options-table">
+            <tr><td>(A) Standard Cloud Plan</td><td class="correct-option">(B) Advanced Cloud Plan <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Enterprise Databank Plan</td><td>(D) VIP Database Plan</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">進階雲端方案。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇比對。第二篇提到需要至少 2 TB 儲存空間，且必須有 24/7 支援。<br>
+                        <strong>2. 核心判定：</strong>對照第一篇廣告，符合「2 TB 儲存空間且含 24/7 支援」的方案是 (B) Advanced Cloud Plan。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 標準方案僅 500 GB 與 24/5 支援、(C) 企業方案雖然容量大但未註明 24/7 支援且費用較高、(D) 干擾項。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 178 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q178. Why does Velo Logistics require 24/7 technical support?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Because they handle global logistics operations <span class="badge-correct">正確答案</span></td><td>(B) Because their server rooms are in Seattle</td></tr>
+            <tr><td>(C) Because they experienced a database encryption failure</td><td>(D) Because their staff works only on weekends</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為他們處理全球物流業務。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索。定位第二篇中段 "Because we handle global logistics operations in both North America and Europe, 24/7 technical support is..."。<br>
+                        <strong>2. 核心判定：</strong>「處理全球物流」對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 辦公室在西雅圖、(C) 加密失敗、(D) 員工僅週末工作。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 179 題 | 核心考點：跨篇章比對 (難易度：高)</div>
+                <div class="question-text">Q179. How much will Velo Logistics save on its monthly bill with the discount?</div>
+                <table class="options-table">
+            <tr><td>(A) $15</td><td class="correct-option">(B) $30 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) $50</td><td>(D) $100</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">每月 30 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇計算。Velo 適用的 Advanced Cloud Plan 月費為 $300。廣告提到 10 月 31 日前簽約可享 10% 折扣。<br>
+                        <strong>2. 核心判定：</strong>計算 $300 * 10% = $30。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 標準方案折扣額、(C) 企業方案折扣額、(D) VIP 折扣額。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 180 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q180. What does Mr. Thorne request the sales department to send?</div>
+                <table class="options-table">
+            <tr><td>(A) A detailed billing statement</td><td class="correct-option">(B) A draft contract <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A list of corporate consultants</td><td>(D) A new server room blueprint</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">合約草案。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索。定位第二篇末尾 "Please send us a draft contract..."。<br>
+                        <strong>2. 核心判定：</strong>「合約草案」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 帳單、(C) 顧問名單、(D) 伺服器室藍圖。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">necessity</td><td class="vocab-pos">n.</td><td class="vocab-meaning">必要，必需品</td></tr><tr><td class="vocab-word">databank</td><td class="vocab-pos">n.</td><td class="vocab-meaning">數據庫，資料庫</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 12 | Questions 181-185 refer to the following announcement and order form. (181-185 題參照以下公告與訂購單。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-1">Luminary Co-working - Autumn Workspace Setup Sale</h4>
+  <p class="mb-2">Refresh your workspace! Luminary Co-working is offering special discounts on our bestselling office room setup services from September 1 to October 15:</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>Boardroom A Rental:</b> $800/day (Regular: $1,000)</li>
+    <li><b>Premium Chair Setup:</b> $200 (Regular: $250)</li>
+    <li><b>Projector Rental:</b> $400/day (Regular: $500)</li>
+  </ul>
+  <p>Enter promo code <b>AUTUMN15</b> at checkout to save an additional 15% on orders exceeding $1,000. Free delivery and setup are included for all corporate tenants.</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded text-xs">
+  <h4 class="text-center font-bold mb-2">Luminary Co-working - Corporate Reservation Form</h4>
+  <p class="mb-2"><b>Reservation ID:</b> OPT-9082<br><b>Customer:</b> Marcus Thorne (Velo Logistics Inc.)<br><b>Date:</b> September 22</p>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">Item Description</th>
+        <th class="border border-gray-300 p-1">Unit Price</th>
+        <th class="border border-gray-300 p-1">Qty</th>
+        <th class="border border-gray-300 p-1">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">Boardroom A Rental (1 Day)</td>
+        <td class="border border-gray-300 p-1">$800</td>
+        <td class="border border-gray-300 p-1">1</td>
+        <td class="border border-gray-300 p-1">$800</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">Projector Rental (1 Day)</td>
+        <td class="border border-gray-300 p-1">$400</td>
+        <td class="border border-gray-300 p-1">1</td>
+        <td class="border border-gray-300 p-1">$400</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="mb-1"><b>Subtotal:</b> $1,200</p>
+  <p class="mb-1"><b>Discount Applied:</b> AUTUMN15 (15% off)</p>
+  <p class="mb-1"><b>Setup Fee:</b> $0 (Free Corporate Setup)</p>
+  <p class="font-bold text-blue-700"><b>Total Paid:</b> $1,020</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-base mb-1">Luminary 共享辦公空間 - 秋季工作空間配置特賣</h4>
+  <p class="mb-2">更新您的工作空間！Luminary Co-working 將於 9 月 1 日至 10 月 15 日期間，為我們最暢銷的辦公室空間配置服務提供特別折扣：</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>會議室 A 租借：</b>每日 800 美元（原價：1,000 美元）</li>
+    <li><b>進階座椅配置：</b>200 美元（原價：250 美元）</li>
+    <li><b>投影機租借：</b>每日 400 美元（原價：500 美元）</li>
+  </ul>
+  <p>結帳時輸入促銷代碼 <b>AUTUMN15</b>，訂單金額超過 1,000 美元即可額外節省 15%。所有企業租戶均包含免費運送與安裝服務。</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded text-xs">
+  <h4 class="text-center font-bold mb-2">Luminary 共享辦公空間 - 企業預約單</h4>
+  <p class="mb-2"><b>預約編號：</b>OPT-9082<br><b>客戶：</b>Marcus Thorne (Velo 物流公司)<br><b>日期：</b>9 月 22 日</p>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">商品描述</th>
+        <th class="border border-gray-300 p-1">單價</th>
+        <th class="border border-gray-300 p-1">數量</th>
+        <th class="border border-gray-300 p-1">總計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">會議室 A 租借（1 天）</td>
+        <td class="border border-gray-300 p-1">800 美元</td>
+        <td class="border border-gray-300 p-1">1</td>
+        <td class="border border-gray-300 p-1">800 美元</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">投影機租借（1 天）</td>
+        <td class="border border-gray-300 p-1">400 美元</td>
+        <td class="border border-gray-300 p-1">1</td>
+        <td class="border border-gray-300 p-1">400 美元</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="mb-1"><b>小計：</b>1,200 美元</p>
+  <p class="mb-1"><b>套用折扣：</b>AUTUMN15（15% 折扣）</p>
+  <p class="mb-1"><b>安裝費：</b>0 美元（免費企業安裝）</p>
+  <p class="font-bold text-blue-700"><b>實際付款總額：</b>1,020 美元</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 181 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q181. What is the regular price of the Projector Rental?</div>
+                <table class="options-table">
+            <tr><td>(A) $250</td><td>(B) $400</td></tr>
+            <tr><td class="correct-option">(C) $500 <span class="badge-correct">正確答案</span></td><td>(D) $1,000</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">500 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索。第一篇公告中 "Projector Rental: $400/day (Regular: $500)"。<br>
+                        <strong>2. 核心判定：</strong>「原價 500 美元」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 椅子原價、(B) 投影機特惠價、(D) 會議室原價。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 182 題 | 核心考點：折扣條件比對 (難易度：中)</div>
+                <div class="question-text">Q182. Why was the discount code AUTUMN15 applied to Marcus Thorne's reservation?</div>
+                <table class="options-table">
+            <tr><td>(A) Because he reserved more than five items</td><td class="correct-option">(B) Because the reservation subtotal exceeded $1,000 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Because he registered for a VIP support portal</td><td>(D) Because the rental was scheduled for October 15</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為訂單小計超過了 1,000 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇條件比對。第一篇說明 "exceeding $1,000" 可享有 15% 折扣。<br>
+                        <strong>2. 核心判定：</strong>第二篇顯示預約單 Subtotal 為 $1,200，超過 $1,000 門檻。選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 租五個項目、(C) 註冊入口網站、(D) 10/15租用。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 183 題 | 核心考點：跨篇章比對 - 折扣計算 (難易度：高)</div>
+                <div class="question-text">Q183. How much did Velo Logistics save in total compared to the regular prices of the services?</div>
+                <table class="options-table">
+            <tr><td>(A) $180</td><td>(B) $300</td></tr>
+            <tr><td>(C) $380</td><td class="correct-option">(D) $480 <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">480 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇計算。預約服務的原價總額：會議室 A（原價 $1,000）+ 投影機（原價 $500）= $1,500。實際付款總額為 $1,020。<br>
+                        <strong>2. 核心判定：</strong>計算 $1,500 - $1,020 = $480。故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 折抵券省下金額 ($1,200 * 15% = $180)、(B) 單純特價省下金額 ($1,500 - $1,200 = $300)、(C) 干擾項。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 184 題 | 核心考點：細節比對 (難易度：低)</div>
+                <div class="question-text">Q184. According to the reservation form, when was the booking made?</div>
+                <table class="options-table">
+            <tr><td>(A) September 1</td><td class="correct-option">(B) September 22 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) October 12</td><td>(D) October 15</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">9 月 22 日。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>日期檢索。定位第二篇表頭 "Date: September 22"。<br>
+                        <strong>2. 核心判定：</strong>選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 特賣開始日、(C) 信件日期、(D) 特賣結束日。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 185 題 | 核心考點：跨篇章比對 (難易度：中)</div>
+                <div class="question-text">Q185. Why was the setup fee listed as $0?</div>
+                <table class="options-table">
+            <tr><td>(A) Because he entered a special free shipping promo code</td><td class="correct-option">(B) Because it was a corporate tenant reservation <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Because he reserved boardroom tables</td><td>(D) Because the items were shipped to Seattle</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為這是一筆企業租戶預約。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇邏輯。第一篇註明 "Free delivery and setup are included for all corporate tenants."。第二篇為 Corporate Reservation Form，客戶為 Velo Logistics。<br>
+                        <strong>2. 核心判定：</strong>「因為是企業租戶預約」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 免安裝代碼、(C) 會議室、(D) 運送到西雅圖。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">workspace</td><td class="vocab-pos">n.</td><td class="vocab-meaning">工作空間</td></tr><tr><td class="vocab-word">promo code</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">促銷代碼</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 13 | Questions 186-190 refer to the following schedule, e-mail, and feedback form. (186-190 題參照以下日程表、電子郵件與反饋表。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Prism Marketing - Annual Staff Development retreat Schedule</h4>
+  <p class="mb-2 text-center">Location: Luminary Co-working space | Dates: October 12–14</p>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">Time</th>
+        <th class="border border-gray-300 p-1">October 12 (Day 1)</th>
+        <th class="border border-gray-300 p-1">October 13 (Day 2)</th>
+        <th class="border border-gray-300 p-1">October 14 (Day 3)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">9:00 a.m. - 11:30 a.m.</td>
+        <td class="border border-gray-300 p-1">Opening Keynote</td>
+        <td class="border border-gray-300 p-1">Session A: Marketing Strategy</td>
+        <td class="border border-gray-300 p-1">Session C: Budget Management</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">1:00 p.m. - 3:30 p.m.</td>
+        <td class="border border-gray-300 p-1">Team Building Activity</td>
+        <td class="border border-gray-300 p-1">Session B: Digital Advertising</td>
+        <td class="border border-gray-300 p-1">Closing Panel</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>To:</b> Sarah Jenkins &lt;sjenkins@prismmarketing.com&gt;<br>
+    <b>From:</b> Julian Vance &lt;jvance@prismmarketing.com&gt;<br>
+    <b>Date:</b> October 8<br>
+    <b>Subject:</b> Retreat Schedule Modification
+  </p>
+  <p class="mb-2">Hi Sarah,</p>
+  <p class="mb-2">Due to a sudden scheduling conflict for our speaker, we must swap the times for <b>Session B (Digital Advertising)</b> and <b>Session C (Budget Management)</b>. All other sessions, including the opening and closing panels, will remain as originally scheduled. Please ensure that the updated digital schedule is uploaded to the portal today. Thanks!</p>
+  <p>Julian Vance</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded text-xs">
+  <h4 class="font-bold text-center mb-1">Staff Development Retreat - Participant Feedback Form</h4>
+  <p class="mb-1"><b>Participant Name:</b> Clara Rossi<br><b>Department:</b> Creative Department</p>
+  <p class="mb-2"><b>Feedback comments:</b> The retreat was highly beneficial. However, because of the scheduling change, I was unable to attend the session on Budget Management on the final day because I had to check out of my hotel early. The Team Building Activity on the first afternoon was fantastic!</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Prism Marketing - 年度員工發展研習營日程表</h4>
+  <p class="mb-2 text-center">地點：Luminary 共享空間 | 日期：10 月 12 日– 14 日</p>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">時間</th>
+        <th class="border border-gray-300 p-1">10 月 12 日 (第一天)</th>
+        <th class="border border-gray-300 p-1">10 月 13 日 (第二天)</th>
+        <th class="border border-gray-300 p-1">10 月 14 日 (第三天)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">上午 9:00 - 上午 11:30</td>
+        <td class="border border-gray-300 p-1">開幕主題演講</td>
+        <td class="border border-gray-300 p-1">單元 A：行銷策略</td>
+        <td class="border border-gray-300 p-1">單元 C：預算管理</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">下午 1:00 - 下午 3:30</td>
+        <td class="border border-gray-300 p-1">團隊建設活動</td>
+        <td class="border border-gray-300 p-1">單元 B：數位廣告</td>
+        <td class="border border-gray-300 p-1">閉幕小組討論</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>收件者：</b>Sarah Jenkins &lt;sjenkins@prismmarketing.com&gt;<br>
+    <b>寄件者：</b>Julian Vance &lt;jvance@prismmarketing.com&gt;<br>
+    <b>日期：</b>10 月 8 日<br>
+    <b>主旨：</b>研習營時程修改
+  </p>
+  <p class="mb-2">嗨 Sarah：</p>
+  <p class="mb-2">由於我們講者的日程突然發生衝突，我們必須將 <b>單元 B（數位廣告）</b> 和 <b>單元 C（預算管理）</b> 的時間對調。所有其他單元，包括開幕和閉幕小組，都將保持原定計劃。請確保今天將更新後的數位時程表上傳到入口網站。謝謝！</p>
+  <p>Julian Vance</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded text-xs">
+  <h4 class="font-bold text-center mb-1">員工發展研習營 - 參與者反饋表</h4>
+  <p class="mb-1"><b>參與者姓名：</b>Clara Rossi<br><b>部門：</b>創意部</p>
+  <p class="mb-2"><b>反饋意見：</b>這次研習營非常有益。然而，由於時程變更，我無法參加最後一天的預算管理單元，因為我必須提早辦理退房。第一天下午的團隊建設活動棒極了！</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 186 題 | 核心考點：細節理解 (難易度：低)</div>
+                <div class="question-text">Q186. According to the original schedule, when was Session B scheduled to take place?</div>
+                <table class="options-table">
+            <tr><td>(A) October 12 afternoon</td><td>(B) October 13 morning</td></tr>
+            <tr><td class="correct-option">(C) October 13 afternoon <span class="badge-correct">正確答案</span></td><td>(D) October 14 morning</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">10 月 13 日下午。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。對照第一篇表格，Session B 在 10 月 13 日 (Day 2) 下午 1:00 - 3:30。<br>
+                        <strong>2. 核心判定：</strong>「10 月 13 日下午」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 第一天下午、(B) 第二天上午、(D) 第三天上午。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 187 題 | 核心考點：跨篇章比對 (難易度：高)</div>
+                <div class="question-text">Q187. When did the Session on Budget Management actually take place?</div>
+                <table class="options-table">
+            <tr><td>(A) October 12 morning</td><td class="correct-option">(B) October 13 afternoon <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) October 14 morning</td><td>(D) October 14 afternoon</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">10 月 13 日下午。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇比對。第一篇顯示 Session C (Budget Management) 原定於 10月14日上午舉行，Session B (Digital Advertising) 在 10月13日下午舉行。<br>
+                        <strong>2. 核心判定：</strong>第二篇指出將 Session B 與 Session C 的時間「對調（swap）」。因此，Session C 實際在原 Session B 的時間舉行，即 October 13 afternoon。選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 第一天上午、(C) 第三天上午、(D) 第三天下午。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 188 題 | 核心考點：跨篇章比對 (難易度：高)</div>
+                <div class="question-text">Q188. Why did Clara Rossi miss the Session on Budget Management?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Because she had to check out of the hotel early on the final day <span class="badge-correct">正確答案</span></td><td>(B) Because she had to present a logistics audit report</td></tr>
+            <tr><td>(C) Because the session was cancelled due to safety tests</td><td>(D) Because she had to return to Chicago beforehand</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為她在最後一天必須提早辦理飯店退房。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節檢索。定位第三篇 "unable to attend the session on Budget Management on the final day because I had to check out of my hotel early"。<br>
+                        <strong>2. 核心判定：</strong>「提早辦退房」對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 報告、(C) 安全測試取消、(D) 提早回芝加哥。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 189 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q189. What activity did Ms. Rossi enjoy on October 12?</div>
+                <table class="options-table">
+            <tr><td>(A) Opening Keynote</td><td class="correct-option">(B) Team Building Activity <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Session A: Marketing Strategy</td><td>(D) Session B: Digital Advertising</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">團隊建設活動。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇比對。第三篇提到 "The Team Building Activity on the first afternoon was fantastic!"。<br>
+                        <strong>2. 核心判定：</strong>第一天（October 12）下午的活動在日程表上對應 "Team Building Activity"。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 上午的開幕演講、(C) 10/13上午的 Session A、(D) 10/13下午的 Session B。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 190 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q190. Who was instructed to upload the updated schedule?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Sarah Jenkins <span class="badge-correct">正確答案</span></td><td>(B) Julian Vance</td></tr>
+            <tr><td>(C) Clara Rossi</td><td>(D) Elena Rostova</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Sarah Jenkins。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>指令檢索。第二篇信件寫道 "Please ensure that the updated digital schedule is uploaded to the portal today. Thanks!"。信件的收件人是 Sarah Jenkins。<br>
+                        <strong>2. 核心判定：</strong>選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 寄信人 Julian、(C) 填反饋的 Clara、(D) 資訊總監 Elena。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">swap</td><td class="vocab-pos">v.</td><td class="vocab-meaning">交換</td></tr><tr><td class="vocab-word">conflict</td><td class="vocab-pos">n./v.</td><td class="vocab-meaning">衝突，爭執</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 14 | Questions 191-195 refer to the following policy guidelines, expense report, and e-mail. (191-195 題參照以下報銷政策、報銷單與電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Prism Marketing - Travel Expense Reimbursement Policy</h4>
+  <p class="mb-2">Employees must follow these guidelines to request reimbursement for business travel expenses:</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>Submission Window:</b> All claims must be submitted to the finance portal within 15 days of returning from travel.</li>
+    <li><b>Receipt Requirements:</b> Original receipts are strictly required for any individual expense item exceeding $50.</li>
+    <li><b>Approvals:</b> Claims must be signed by the department director before submission to the Finance department.</li>
+  </ul>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-2">Prism Marketing - Travel Expense Claim Form</h4>
+  <p class="mb-1"><b>Claimant:</b> Clara Rossi (Creative Department)<br><b>Date of Return:</b> September 2<br><b>Submission Date:</b> September 10</p>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">Expense Item</th>
+        <th class="border border-gray-300 p-1">Date</th>
+        <th class="border border-gray-300 p-1">Description</th>
+        <th class="border border-gray-300 p-1">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">Train Ticket</td>
+        <td class="border border-gray-300 p-1">Aug 31</td>
+        <td class="border border-gray-300 p-1">Travel to retreat</td>
+        <td class="border border-gray-300 p-1">$45</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">Client Dinner</td>
+        <td class="border border-gray-300 p-1">Sept 1</td>
+        <td class="border border-gray-300 p-1">Dinner with Velo Tech</td>
+        <td class="border border-gray-300 p-1">$75</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="mb-1"><b>Department Director Approval:</b> <i>Approved by Julian Vance (Marketing Director)</i></p>
+  <p class="font-bold text-blue-700"><b>Total Claimed:</b> $120</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded text-xs">
+  <p class="meta mb-2">
+    <b>To:</b> Clara Rossi &lt;crossi@prismmarketing.com&gt;<br>
+    <b>From:</b> Finance Department &lt;finance@prismmarketing.com&gt;<br>
+    <b>Date:</b> September 12<br>
+    <b>Subject:</b> Expense Claim OPT-9082 Rejected
+  </p>
+  <p class="mb-2">Dear Ms. Rossi,</p>
+  <p class="mb-2">We have reviewed your travel expense claim for $120 submitted on September 10. Unfortunately, we are unable to process this claim at this time because we did not receive the required receipt for the dinner on September 1.</p>
+  <p class="mb-2">Please upload the missing receipt to the finance portal so we can approve your claim. Thank you.</p>
+  <p>Finance Department</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Prism Marketing - 差旅費報銷政策</h4>
+  <p class="mb-2">員工必須遵守以下指南以申請商務差旅費的報銷：</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li><b>提交窗口：</b>所有報銷申請必須在差旅歸國後 15 天內提交至財務入口網站。</li>
+    <li><b>收據要求：</b>任何超過 50 美元的單項支出，必須提供原始收據。</li>
+    <li><b>核准：</b>報銷單在提交給財務部之前，必須由部門主管簽字。</li>
+  </ul>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-2">Prism Marketing - 差旅費報銷申請單</h4>
+  <p class="mb-1"><b>報銷人：</b>Clara Rossi (創意部)<br><b>返回日期：</b>9 月 2 日<br><b>提交日期：</b>9 月 10 日</p>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">支出項目</th>
+        <th class="border border-gray-300 p-1">日期</th>
+        <th class="border border-gray-300 p-1">描述</th>
+        <th class="border border-gray-300 p-1">金額</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">火車票</td>
+        <td class="border border-gray-300 p-1">8 月 31 日</td>
+        <td class="border border-gray-300 p-1">前往研習營</td>
+        <td class="border border-gray-300 p-1">45 美元</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">客戶晚宴</td>
+        <td class="border border-gray-300 p-1">9 月 1 日</td>
+        <td class="border border-gray-300 p-1">與 Velo Tech 的晚宴</td>
+        <td class="border border-gray-300 p-1">75 美元</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="mb-1"><b>部門主管核准：</b> <i>由 Julian Vance (行銷總監) 核准</i></p>
+  <p class="font-bold text-blue-700"><b>申請總額：</b>120 美元</p>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded text-xs">
+  <p class="meta mb-2">
+    <b>收件者：</b>Clara Rossi &lt;crossi@prismmarketing.com&gt;<br>
+    <b>寄件者：</b>財務部 &lt;finance@prismmarketing.com&gt;<br>
+    <b>日期：</b>9 月 12 日<br>
+    <b>主旨：</b>報銷申請 OPT-9082 被退回
+  </p>
+  <p class="mb-2">親愛的 Rossi 女士：</p>
+  <p class="mb-2">我們已審查了您於 9 月 10 日提交的 120 美元差旅費報銷申請。不幸的是，由於我們沒有收到 9 月 1 日晚宴所需的收據，我們目前無法處理此報銷。</p>
+  <p class="mb-2">請將缺失的收據上傳到財務入口網站，以便我們批准您的申請。謝謝。</p>
+  <p>財務部</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 191 題 | 核心考點：細節比對 (難易度：低)</div>
+                <div class="question-text">Q191. How many days after returning from travel must claims be submitted?</div>
+                <table class="options-table">
+            <tr><td>(A) Within 5 days</td><td>(B) Within 10 days</td></tr>
+            <tr><td class="correct-option">(C) Within 15 days <span class="badge-correct">正確答案</span></td><td>(D) Within 30 days</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">15 天內。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節定位。第一篇報銷政策中提到 "within 15 days of returning from travel"。<br>
+                        <strong>2. 核心判定：</strong>「15 天內」對意 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 5天、(B) 10天（這是 Clara 實際提交的時間差，並不是限制）、(D) 30天。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 192 題 | 核心考點：跨篇章比對 - 政策與實施 (難易度：高)</div>
+                <div class="question-text">Q192. Why did Clara Rossi's claim comply with the submission window policy?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Because she submitted the form 8 days after returning <span class="badge-correct">正確答案</span></td><td>(B) Because the total claimed amount was under $50</td></tr>
+            <tr><td>(C) Because she attached all required original receipts</td><td>(D) Because it was approved by the IT Director</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為她在返回後 8 天就提交了。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇邏輯與日期計算。第二篇報銷單顯示，返回日期為 September 2，提交日期為 September 10，相差 8 天。第一篇政策規定必須在返回後 15 天內提交。<br>
+                        <strong>2. 核心判定：</strong>「在返回 8 天後提交」符合 15 天內的政策。故選 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 總額為 $120 大於 $50、(C) 他漏了收據、(D) 由行銷總監 Julian 簽署。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 193 題 | 核心考點：跨篇章比對 (難易度：高)</div>
+                <div class="question-text">Q193. According to the policy, why was the receipt for the dinner on September 1 required?</div>
+                <table class="options-table">
+            <tr><td>(A) Because the subtotal exceeded $1,000</td><td>(B) Because the dinner occurred on a weekend</td></tr>
+            <tr><td class="correct-option">(C) Because the expense amount was $75 <span class="badge-correct">正確答案</span></td><td>(D) Because the dinner was with Velo Tech</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為金額超過了 50 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇邏輯與計算。第一篇政策規定「單項支出超過 50 美元需提供原始收據」。第二篇報銷單顯示，9 月 1 日的 Client Dinner 金額為 $75。<br>
+                        <strong>2. 核心判定：</strong>$75 超過了 $50，因此必須提供收據。故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 滿千折扣、(B) 週末支出、(D) 晚宴對象。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 194 題 | 核心考點：細節理解 (難易度：中)</div>
+                <div class="question-text">Q194. Who approved Ms. Rossi's claim form before submission to the Finance department?</div>
+                <table class="options-table">
+            <tr><td>(A) Marcus Thorne</td><td class="correct-option">(B) Julian Vance <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Sarah Jenkins</td><td>(D) Elena Rostova</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Julian Vance。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>核准人檢索。第二篇報銷單下方顯示 "Approved by Julian Vance (Marketing Director)"。<br>
+                        <strong>2. 核心判定：</strong>「Julian Vance」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 營運總監 Marcus、(C) 社區經理 Sarah、(D) 資訊總監 Elena。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 195 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q195. What is Ms. Rossi instructed to do in the e-mail?</div>
+                <table class="options-table">
+            <tr><td>(A) Reschedule her business trip to Toronto</td><td class="correct-option">(B) Upload the missing receipt to the portal <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Pay a $25 administrative registration fee</td><td>(D) Nominate a senior representative</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">上傳缺失的收據。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>指令檢索。第三篇信件寫道 "Please upload the missing receipt to the finance portal..."。<br>
+                        <strong>2. 核心判定：</strong>「上傳缺少的收據」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 重新安排出差、(C) 繳費、(D) 指定代表。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">reimbursement</td><td class="vocab-pos">n.</td><td class="vocab-meaning">報銷，補償</td></tr><tr><td class="vocab-word">claimant</td><td class="vocab-pos">n.</td><td class="vocab-meaning">申請報銷者</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 15 | Questions 196-200 refer to the following webpage, e-mail, and survey. (196-200 題參照以下網頁、電子郵件與調查。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-1"><b>URL:</b> www.velologistics.com/tenders/support</p>
+  <h4 class="font-bold text-base mb-1">Velo Logistics - Call for Customer Support Tenders</h4>
+  <p class="mb-2">Velo Logistics is seeking proposals from external service providers to manage our customer support operations. The selected provider must meet the following criteria:</p>
+  <ul class="list-disc pl-5 mb-2 text-xs">
+    <li>Provide 24/7 live chat and email support for global users.</li>
+    <li>Have at least 3 years of experience in corporate IT support services.</li>
+    <li>Submit proposals including monthly rates by October 15.</li>
+  </ul>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>To:</b> Tenders Committee &lt;tenders@velologistics.com&gt;<br>
+    <b>From:</b> Apex Tech Solutions &lt;bids@apextech.com&gt;<br>
+    <b>Date:</b> October 10<br>
+    <b>Subject:</b> Tender Proposal for Customer IT Support
+  </p>
+  <p class="mb-2">Dear Tenders Committee,</p>
+  <p class="mb-2">Apex Tech Solutions is pleased to submit our proposal for your customer support operations. We have 5 years of experience providing IT help desk services to corporate clients globally. Our team is fully equipped to deliver 24/7 support. Our proposed rate for managing your live chat and email support is $400/month.</p>
+  <p class="mb-2">We hope to collaborate with you. Please review our attached detailed business credentials.</p>
+  <p>Sincerely,<br>Elena Rostova<br>IT Director, Apex Tech Solutions</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded text-xs">
+  <h4 class="font-bold text-center mb-1">Velo Logistics - Internal Tender Evaluation</h4>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">Provider Name</th>
+        <th class="border border-gray-300 p-1">Meets 24/7 Support</th>
+        <th class="border border-gray-300 p-1">Years of Exp.</th>
+        <th class="border border-gray-300 p-1">Monthly Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">Apex Tech Solutions</td>
+        <td class="border border-gray-300 p-1">Yes</td>
+        <td class="border border-gray-300 p-1">5 years</td>
+        <td class="border border-gray-300 p-1">$400</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">Luminary Co-working</td>
+        <td class="border border-gray-300 p-1">No (24/5 only)</td>
+        <td class="border border-gray-300 p-1">4 years</td>
+        <td class="border border-gray-300 p-1">$350</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="font-bold text-blue-700">Evaluation Decision: Apex Tech Solutions is selected because it meets all critical criteria, especially the 24/7 global support availability requirement.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="webpage-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta text-xs mb-1"><b>網址：</b> www.velologistics.com/tenders/support</p>
+  <h4 class="font-bold text-base mb-1">Velo Logistics - 客服外包招標公告</h4>
+  <p class="mb-2">Velo Logistics 正在尋求外部服務提供商的提案，以管理我們的客戶支援業務。入選的提供商必須滿足以下標準：</p>
+  <ul class="list-disc pl-5 mb-2">
+    <li>為全球用戶提供 24/7 的即時對話和電子郵件支援。</li>
+    <li>在企業 IT 支援服務方面擁有至少 3 年的經驗。</li>
+    <li>在 10 月 15 日之前提交包含月費的提案。</li>
+  </ul>
+</div>
+<div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>收件者：</b>招標委員會 &lt;tenders@velologistics.com&gt;<br>
+    <b>寄件者：</b>Apex Tech Solutions &lt;bids@apextech.com&gt;<br>
+    <b>日期：</b>10 月 10 日<br>
+    <b>主旨：</b>客戶 IT 支援的投標提案
+  </p>
+  <p class="mb-2">親愛的招標委員會：</p>
+  <p class="mb-2">Apex Tech Solutions 很高興能為貴公司的客戶支援業務提交我們的提案。我們在為全球企業客戶提供 IT 服務台支援方面擁有 5 年的經驗。我們的團隊配備齊全，可提供 24/7 支援。我們提議的管理您即時對話和電郵支援的月費是每月 400 美元。</p>
+  <p class="mb-2">我們希望與您合作。請審查我們隨附的詳細業務憑證。</p>
+  <p>誠摯的，<br>Elena Rostova<br>IT 總監，Apex Tech Solutions</p>
+</div>
+<div class="form-box border p-4 bg-slate-50 rounded text-xs">
+  <h4 class="font-bold text-center mb-1">Velo Logistics - 內部招標評估表</h4>
+  <table class="w-full text-left border-collapse border border-gray-300 mb-2">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 p-1">提供商名稱</th>
+        <th class="border border-gray-300 p-1">符合 24/7 支援</th>
+        <th class="border border-gray-300 p-1">經驗年資</th>
+        <th class="border border-gray-300 p-1">月費</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 p-1">Apex Tech Solutions</td>
+        <td class="border border-gray-300 p-1">是</td>
+        <td class="border border-gray-300 p-1">5 年</td>
+        <td class="border border-gray-300 p-1">400 美元</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 p-1">Luminary Co-working</td>
+        <td class="border border-gray-300 p-1">否 (僅 24/5)</td>
+        <td class="border border-gray-300 p-1">4 年</td>
+        <td class="border border-gray-300 p-1">350 美元</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="font-bold text-blue-700">評估決定：選擇了 Apex Tech Solutions，因為它符合所有關鍵標準，特別是 24/7 全球支援可用性要求。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 196 題 | 核心考點：細節定位 (難易度：低)</div>
+                <div class="question-text">Q196. What experience is required for candidates in the tender notice?</div>
+                <table class="options-table">
+            <tr><td>(A) At least 1 year</td><td class="correct-option">(B) At least 3 years <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) At least 4 years</td><td>(D) At least 5 years</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">至少 3 年。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>年資定位。第一篇公告提到 "At least 3 years of experience"。<br>
+                        <strong>2. 核心判定：</strong>「至少 3 年」對應 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 1年、(C) 4年是 Luminary 的年資、(D) 5年是 Apex 的實際年資。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 197 題 | 核心考點：細節定位 (難易度：中)</div>
+                <div class="question-text">Q197. What monthly rate did Apex Tech Solutions propose in its e-mail?</div>
+                <table class="options-table">
+            <tr><td>(A) $150</td><td>(B) $300</td></tr>
+            <tr><td>(C) $350</td><td class="correct-option">(D) $400 <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">每月 400 美元。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>費用檢索。第二篇信件寫道 "Our proposed rate ... is $400/month"。<br>
+                        <strong>2. 核心判定：</strong>「400 美元」對意 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 標準方案費用、(B) 進階方案費用、(C) Luminary 的投標費用。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 198 題 | 核心考點：跨篇章比對 - 招標合規比對 (難易度：高)</div>
+                <div class="question-text">Q198. Why was Luminary Co-working rejected by Velo Logistics?</div>
+                <table class="options-table">
+            <tr><td>(A) Because their monthly rate exceeded $400</td><td class="correct-option">(B) Because they do not provide 24/7 support services <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Because they have less than 3 years of experience</td><td>(D) Because their proposal was submitted after October 15</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">因為他們不提供 24/7 支援服務。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>跨篇比對。第一篇招標需求是 "Provide 24/7 live chat and email support"。第三篇評估表顯示 Luminary Co-working 不符合該項要求（標示為 No (24/5 only)）。<br>
+                        <strong>2. 核心判定：</strong>「因為他們不能提供 24/7 支援」對意 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 價格（其價格為 $350，反而更便宜）、(C) 經驗（其年資為 4 年，大於要求的 3 年）、(D) 逾期提交。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 199 題 | 核心考點：細節比對 (難易度：中)</div>
+                <div class="question-text">Q199. According to the evaluation form, which company was selected by the Tenders Committee?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Apex Tech Solutions <span class="badge-correct">正確答案</span></td><td>(B) Luminary Co-working</td></tr>
+            <tr><td>(C) Velo Logistics</td><td>(D) Prism Marketing</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Apex Tech Solutions。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>決策定位。第三篇中指出 "Apex Tech Solutions is selected..."。<br>
+                        <strong>2. 核心判定：</strong>選取商為 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) Luminary 未獲選、(C) Velo 是招標主、(D) Prism 是干擾項。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 200 題 | 核心考點：跨篇章比對 - 人物與關係 (難易度：高)</div>
+                <div class="question-text">Q200. Who is the IT Director at Apex Tech Solutions?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Elena Rostova <span class="badge-correct">正確答案</span></td><td>(B) Sarah Jenkins</td></tr>
+            <tr><td>(C) Clara Rossi</td><td>(D) Marcus Thorne</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Elena Rostova。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>人物身分跨篇檢索。第二篇信件末尾簽名為 "Elena Rostova, IT Director, Apex Tech Solutions"。<br>
+                        <strong>2. 核心判定：</strong>「Elena Rostova」對意 (A)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 社區經理 Sarah、(C) 創意部 Clara、(D) Velo 營運總監 Marcus。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">tender</td><td class="vocab-pos">n.</td><td class="vocab-meaning">投標</td></tr><tr><td class="vocab-word">evaluation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">評估，評價</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 TEST 8 PART 7 核心考點</div>
+        <ul class="expert-list">
+            <li><strong>多篇章跨文資訊整合與交叉比對：</strong>這類題目在雙篇和三篇閱讀中是必考的。例如，必須將第一篇的產品/服務規格（如 Apex Tech 的 Standard/Advanced 方案能力）與第二篇信件中的實際需求（如 2 TB 且需要 24/7 支援）結合，推論出最適合 Velo 的方案是 Advanced Cloud Plan。</li><li><strong>跨文折扣與特惠的複合計算：</strong>考生需要辨識特惠代碼的使用條件（如 AUTUMN15 代碼需訂單超過 $1,000），然後結合預約單上的小計金額（如會議室 $800 + 投影機 $400 = $1,200）進行打折與免安裝費用的計算，算出最終實際付款金額或總計節省金額。</li><li><strong>同義詞改寫與細節精準定位：</strong>多益常使用同義詞替換原文關鍵字來設計考題（例如將 original receipts 替換為 proof of purchase）。因此，快速在文段中定位相關條款或數值是拿分的關鍵。</li><li><strong>人物角色與所屬企業關係的釐清：</strong>三篇閱讀中通常涉及多個發信人、收信人與核准人（例如 Elena, Marcus, Sarah, Julian）。理清這些人各自代表哪家公司，以及他們在各流程中的職責（如誰負責審核報銷、誰投標），是正確回答細節題與推論題的基石。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

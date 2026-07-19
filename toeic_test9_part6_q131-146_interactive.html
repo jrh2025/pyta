@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新多益 TEST 9 - PART 6 短文填空互動特訓 (Q131-Q146)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body {
+  font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+  background-color: #f8fafc;
+}
+.custom-shadow {
+  box-shadow: 0 4px 20px -2px rgba(26, 54, 93, 0.08), 0 2px 8px -1px rgba(26, 54, 93, 0.04);
+}
+.blank-badge {
+  display: inline-block;
+  background-color: #f1f5f9;
+  color: #1e3a8a;
+  border: 1px solid #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 2px;
+  transition: all 0.2s;
+}
+.blank-badge:hover {
+  background-color: #dbeafe;
+  border-color: #3b82f6;
+}
+.blank-badge-active {
+  background-color: #fef3c7;
+  color: #b45309;
+  border-color: #f59e0b;
+}
+.blank-badge-correct {
+  background-color: #d1fae5;
+  color: #065f46;
+  border-color: #34d399;
+}
+.blank-badge-incorrect {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border-color: #f87171;
+}
+.flashcard {
+  perspective: 1000px;
+}
+.flashcard-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard-flipped {
+  transform: rotateY(180deg);
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+</style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+
+<!-- 頂部導覽列 -->
+<nav class="bg-[#1a365d] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <a href="index.html" class="hover:text-amber-400 transition flex items-center gap-1.5">
+        <i class="fa-solid fa-house-chimney text-lg"></i>
+      </a>
+      <div class="h-4 w-px bg-slate-555 mx-1 bg-slate-500"></div>
+      <span class="font-black text-sm sm:text-base tracking-wide uppercase">TOEIC TEST 9 - PART 6</span>
+    </div>
+    <div class="flex gap-2">
+      <button id="btn-quiz" onclick="switchTab('quiz')" class="px-4 py-1.5 rounded-full text-xs font-black bg-amber-500 text-[#1a365d] shadow transition">
+        <i class="fa-solid fa-gamepad mr-1"></i> 互動測驗
+      </button>
+      <button id="btn-cards" onclick="switchTab('cards')" class="px-4 py-1.5 rounded-full text-xs font-black text-slate-300 hover:text-white transition">
+        <i class="fa-solid fa-cube mr-1"></i> 記憶閃卡
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- 頂部進度條 -->
+<div id="progress-bar-container" class="bg-white border-b border-slate-200 py-3 shadow-sm relative z-40">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex justify-between items-center gap-3">
+    <div class="flex items-center gap-3 w-full sm:w-auto">
+      <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Progress</span>
+      <div class="w-full sm:w-48 bg-slate-100 rounded-full h-2.5 overflow-hidden">
+        <div id="quiz-progress-bar" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+      <span id="quiz-progress-text" class="text-xs font-black text-emerald-600 whitespace-nowrap">已完成 0 / 16 題</span>
+    </div>
+    <div id="passage-nav-badges" class="flex gap-1.5">
+      <!-- JS -->
+    </div>
+  </div>
+</div>
+
+<!-- 主內容區 -->
+<main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 flex-grow">
+
+  <!-- 1. 互動測驗分頁 -->
+  <div id="tab-quiz" class="space-y-6">
+    <div id="questions-container" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- 左側：短文面板 -->
+      <div class="lg:col-span-6 bg-white rounded-2xl p-6 border border-slate-100 custom-shadow space-y-6">
+        <div class="flex items-center justify-between border-b pb-3.5">
+          <h2 id="passage-title" class="text-[#1a365d] font-extrabold text-sm sm:text-base font-serif">
+            <!-- JS -->
+          </h2>
+          <button onclick="togglePassageZh()" class="py-1 px-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-language"></i> 顯示/隱藏 中譯
+          </button>
+        </div>
+        
+        <!-- 英文短文內容 -->
+        <div id="passage-en-content" class="text-slate-800 leading-relaxed font-serif text-sm sm:text-base space-y-4 select-text">
+          <!-- JS -->
+        </div>
+        
+        <!-- 中文對照翻譯 (預設隱藏) -->
+        <div id="passage-zh-content" class="hidden bg-slate-50 border border-slate-100 p-4.5 rounded-xl text-slate-600 text-xs sm:text-sm space-y-3 leading-relaxed text-justify select-text">
+          <!-- JS -->
+        </div>
+        
+        <!-- 篇章導覽控制按鈕 -->
+        <div class="flex justify-between items-center pt-4 border-t">
+          <button id="btn-prev-p" onclick="changePassage(-1)" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-black transition flex items-center gap-1.5">
+            <i class="fa-solid fa-chevron-left"></i> 上一篇
+          </button>
+          <button id="btn-next-p" onclick="changePassage(1)" class="py-2.5 px-5 bg-amber-500 hover:bg-amber-600 text-[#1a365d] rounded-xl text-xs font-black transition flex items-center gap-1.5">
+            下一篇 <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- 右側：題目卡片面板 -->
+      <div class="lg:col-span-6 space-y-6" id="questions-list-container">
+        <!-- JS -->
+      </div>
+      
+    </div>
+    
+    <!-- 答題結束後得分報告卡片 -->
+    <div id="score-card" class="hidden max-w-xl mx-auto bg-white rounded-3xl p-8 border border-slate-150 custom-shadow text-center space-y-6">
+      <div class="space-y-2">
+        <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full border border-emerald-100">
+          👑 Test Complete
+        </span>
+        <h2 class="text-2xl font-black text-[#1a365d] font-serif">您的特訓得分報告</h2>
+      </div>
+      
+      <div class="py-4">
+        <span id="score-correct-num" class="text-6xl font-black text-emerald-600">0</span>
+        <span class="text-slate-400 text-lg font-bold mx-1">/ 16 題答對</span>
+      </div>
+      
+      <p id="score-comment" class="text-sm font-semibold text-slate-650 leading-relaxed text-left bg-slate-50 border p-4 rounded-2xl"></p>
+      
+      <button onclick="resetQuiz()" class="w-full py-3.5 bg-[#1a365d] hover:bg-blue-800 text-white rounded-xl text-sm font-black shadow-md transition-all">
+        <i class="fa-solid fa-rotate-left mr-1.5"></i> 重新測驗特訓
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. 記憶閃卡分頁 -->
+  <div id="tab-cards" class="hidden space-y-6">
+    <div class="bg-white rounded-2xl border border-slate-100 p-6 custom-shadow flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div class="space-y-1 text-center sm:text-left">
+        <h2 class="text-xl font-extrabold text-[#1a365d] flex items-center justify-center sm:justify-start gap-2">
+          <i class="fa-solid fa-cube"></i> Part 6 篇章核心字彙記憶閃卡
+        </h2>
+        <p class="text-xs text-slate-455">
+          單擊閃卡即可翻面查看中文釋義與詞性。
+        </p>
+      </div>
+      <div class="flex gap-2 w-full sm:w-auto">
+        <button onclick="maskAllMeanings(true)" class="flex-grow sm:flex-initial px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-eye-slash mr-1"></i> 全部遮罩
+        </button>
+        <button onclick="maskAllMeanings(false)" class="flex-grow sm:flex-initial px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-xl text-xs font-bold transition">
+          <i class="fa-solid fa-eye mr-1"></i> 全部顯示
+        </button>
+      </div>
+    </div>
+    <div id="flashcards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <!-- JS -->
+    </div>
+  </div>
+
+</main>
+
+<section class="max-w-6xl w-full mx-auto px-4 sm:px-6 pb-12 mt-6">
+  <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-6 custom-shadow space-y-4">
+    <h3 class="text-[#1a365d] font-extrabold text-base flex items-center gap-2">
+      <i class="fa-solid fa-lightbulb"></i> TEST 9 PART 6 核心考點
+    </h3>
+    <ul class="space-y-2 text-xs sm:text-sm text-slate-650 leading-relaxed pl-5 list-decimal">
+      <li><strong>主被動態與完成式被動的判定：</strong>例如新系統「將被安裝」（will be installed），核准流程「已被修改」（has been modified），作答時需藉助上下文的時間與主被動結構來推導。</li><li><strong>上下文邏輯與因果連接副詞：</strong>例如 Consequently（因此）。理清前後句的邏輯關係，在引導結論句時，往往需要選取適當的轉折或因果副詞。</li><li><strong>介系詞與固定搭配結構：</strong>例如 necessary for doing sth（對於做某事是必要的），between A and B（在 A 與 B 之間），以及 compliance with（對...的遵守）。</li><li><strong>篇章插句的脈絡衔接與指代詞：</strong>插句需要使段落邏輯完整。答題時應注意插句與前後文的銜接。</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-center text-xs">
+  <p>© 2026. All rights reserved.</p>
+</footer>
+
+<script>
+const PASSAGES = [{"id": "p1", "type": "E-mail", "start": 131, "end": 134, "title_en": "Questions 131-134 refer to the following e-mail.", "title_zh": "131-134 題參照以下電子郵件。", "passage_en_template": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>To:</b> All Staff &lt;staff@zephyraviation.com&gt;<br>\n    <b>From:</b> Alistair Vance &lt;avance@zephyraviation.com&gt;<br>\n    <b>Date:</b> July 18<br>\n    <b>Subject:</b> Boarding Access System Upgrade\n  </p>\n  <p class=\"mb-2\">Dear Colleagues,</p>\n  <p class=\"mb-2\">Please be informed that Zephyr Aviation is upgrading its facility entrance security. A new biometric scan system will be <b>131. (_______)</b> at all entry points next week. This upgrade is necessary <b>132. (_______)</b> enhancing our physical security measures and protecting sensitive corporate databanks. <b>133. (_______)</b>. <b>134. (_______)</b>, employees must register their fingerprints at the security office on the ground floor beforehand.</p>\n  <p class=\"mb-2\">Thank you for your cooperation in making our workplace safer.</p>\n  <p>Sincerely,<br>Alistair Vance<br>Operations Director, Zephyr Aviation</p>\n</div>", "passage_zh": "<div class=\"email-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta mb-2\">\n    <b>收件者：</b>全體員工 &lt;staff@zephyraviation.com&gt;<br>\n    <b>寄件者：</b>Alistair Vance &lt;avance@zephyraviation.com&gt;<br>\n    <b>日期：</b>7 月 18 日<br>\n    <b>主旨：</b>登機安全門禁系統升級\n  </p>\n  <p class=\"mb-2\">親愛的同仁：</p>\n  <p class=\"mb-2\">請注意，Zephyr Aviation 正在升級其設施入口安全性。下週將在所有入口處安裝全新的生物辨識掃描系統。這次升級對於增強我們的物理安全措施並保護敏感的公司數據庫是必要的。<b>[133]</b>。<b>[134]</b>，員工必須事先在大樓一樓的安全辦公室登記指紋。</p>\n  <p class=\"mb-2\">感謝您在使我們的工作場所更安全方面的配合。</p>\n  <p>謹啟，<br>Alistair Vance<br>Zephyr Aviation 營運總監</p>\n</div>", "questions": [{"num": 131, "difficulty": "中", "point": "詞性判定 - 被動態動詞", "options": {"A": "install", "B": "installed", "C": "installation", "D": "installer"}, "correct": "B", "translation": "下週將在所有入口處安裝全新的生物辨識掃描系統。", "explanation": {"structure": "will be (助動詞被動標記) + _______ (過去分詞作主要動詞)。", "core": "句子表示被動動作（系統「被安裝」），因此應選擇過去分詞 installed。選 (B)。", "distractors": "(A) install 原形動詞，(C) installation 名詞，(D) installer 安裝人。"}}, {"num": 132, "difficulty": "中", "point": "介系詞 - 語意搭配", "options": {"A": "for", "B": "with", "C": "to", "D": "in"}, "correct": "A", "translation": "這次升級對於增強我們的物理安全措施是必要的。", "explanation": {"structure": "necessary (形容詞) + _______ (介系詞) + enhancing (動名詞)。", "core": "「對於...是必要的」通常搭配介系詞 for，即 necessary for doing something。故選 (A)。", "distractors": "(B) necessary with 不合搭配，(C) to 與 (D) in 亦不能與 necessary 搭配表達此意。"}}, {"num": 133, "difficulty": "高", "point": "篇章插句題", "options": {"A": "The old keycards will no longer function after Friday.", "B": "Zephyr Aviation has reported high-volume logistics revenue.", "C": "A detailed blueprint of the hangar is attached.", "D": "All office desks must be rearranged beforehand."}, "correct": "A", "translation": "舊的感應卡在週五之後將不再起作用。", "explanation": {"structure": "前句提到「新生物辨識系統將被安裝」，後句提到「員工必須登記指紋」。中間插入關於舊系統淘汰的說明最順暢。", "core": "「舊的感應卡將不再起作用（no longer function）」正好銜接了新系統的安裝，說明更換門禁的緊迫性。選 (A)。", "distractors": "(B) 航空收入無關、(C) 機庫藍圖無關、(D) 重新排列辦公桌無關。"}}, {"num": 134, "difficulty": "高", "point": "連接詞 - 連接副詞的因果邏輯", "options": {"A": "Consequently", "B": "However", "C": "Although", "D": "Otherwise"}, "correct": "A", "translation": "因此，員工必須事先在安全辦公室登記指紋。", "explanation": {"structure": "_______ (副詞) + 逗號 (,) + employees must register... (結果子句)。", "core": "前文說明了舊卡即將失效並改用新指紋掃描，此句是「因此，員工必須登記指紋」的結論。適合的因果連接副詞為 Consequently (因此/結果)。選 (A)。", "distractors": "(B) However 表示轉折，(C) Although 為從屬連接詞，(D) Otherwise 否則。"}}], "vocabulary": [{"word": "biometric", "pos": "adj.", "meaning": "生物辨識的"}, {"word": "consequently", "pos": "adv.", "meaning": "因此，結果"}]}, {"id": "p2", "type": "Notice", "start": 135, "end": 138, "title_en": "Questions 135-138 refer to the following notice.", "title_zh": "135-138 題參照以下通知。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Helios Solar Energy - Maintenance Advisory</h4>\n  <p class=\"mb-2\">To maintain the highest level of network stability, Helios Solar Energy <b>135. (_______)</b> routine server database backup maintenance on Saturday, July 25. The maintenance window is scheduled from 10:00 p.m. to 2:00 a.m. the following morning.</p>\n  <p class=\"mb-2\">We anticipate minimal <b>136. (_______)</b> to your solar monitoring operations during this process. However, to prevent any potential data loss, we strongly recommend that you save all active files and log out of <b>137. (_______)</b> portals before the maintenance begins. <b>138. (_______)</b>.</p>\n  <p class=\"text-xs\">IT Support Team</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-base mb-1\">Helios Solar Energy - 維護公告</h4>\n  <p class=\"mb-2\">為維持最高水準的網路穩定性，Helios Solar Energy 將於 7 月 25 日星期六 <b>[135]</b> 例行伺服器資料庫備份維護。維護窗口時間定於晚上 10:00至次日凌晨 2:00。</p>\n  <p class=\"mb-2\">在此過程中，我們預計對您的太陽能監測作業干擾最小 <b>[136]</b>。然而，為了防止任何潛在的數據遺失，我們強烈建議您在維護開始前保存所有使用中的檔案，並登出 <b>[137]</b> 的入口網站。<b>[138]</b>。</p>\n  <p class=\"text-xs\">IT 支援團隊</p>\n</div>", "questions": [{"num": 135, "difficulty": "中", "point": "時態與語態 - 未來式動詞", "options": {"A": "conduct", "B": "will conduct", "C": "conducted", "D": "conducting"}, "correct": "B", "translation": "Helios Solar Energy 將於 7 月 25 日星期六進行例行伺服器資料庫備份維護。", "explanation": {"structure": "Helios Solar (單數主詞) + _______ (未來式動詞) + routine maintenance + on Saturday, July 25 (未來時間點)。", "core": "該維護安排在未來的 July 25，應選未來式 (B) will conduct。", "distractors": "(A) conduct 原形動詞，(C) conducted 過去式，(D) conducting 現在分詞。"}}, {"num": 136, "difficulty": "Ref.", "point": "商務字彙 - 名詞語意搭配", "options": {"A": "disruption", "B": "compliance", "C": "threshold", "D": "appreciation"}, "correct": "A", "translation": "在此過程中，我們預計對您的太陽能監測作業干擾最小。", "explanation": {"structure": "minimal (形容詞) + _______ (受詞名詞) + to your operations.", "core": "在伺服器維修公告中，常指對客戶業務帶來「干擾/中斷（disruption）」。minimal disruption 為固定說法。選 (A)。", "distractors": "(B) compliance 遵守，(C) threshold 門檻，(D) appreciation 感激。"}}, {"num": 137, "difficulty": "低", "point": "代名詞 - 所有格修飾名詞", "options": {"A": "you", "B": "your", "C": "yours", "D": "yourself"}, "correct": "B", "translation": "登出您的入口網站。", "explanation": {"structure": "log out of (及物動詞片語) + _______ (所有格修飾名詞) + portals (複數名詞)。", "core": "修飾後方名詞 portals，應使用所有格代名詞 your (您的)。故選 (B)。", "distractors": "(A) you 受格，(C) yours 所有格代名詞，(D) yourself 反身代名詞。"}}, {"num": 138, "difficulty": "中", "point": "篇章插句題", "options": {"A": "Thank you for your patience and cooperation as we upgrade our systems.", "B": "Please purchase four ergonomic chairs for the tech office.", "C": "The billing statement must be reviewed by the operations director.", "D": "A new menu has been added to the organic café."}, "correct": "A", "translation": "感謝您在我們升級系統時的耐心與配合。", "explanation": {"structure": "置於維修通知的結尾，適合作為結尾客套話。", "core": "「感謝耐心與配合（patience and cooperation）」是典型的系統升級通知結尾。對意 (A)。", "distractors": "(B) 買人體工學椅無關、(C) 審閱帳單報表無關、(D) 咖啡館新菜單無關。"}}], "vocabulary": [{"word": "stability", "pos": "n.", "meaning": "穩定性"}, {"word": "anticipate", "pos": "v.", "meaning": "預期，期望"}]}, {"id": "p3", "type": "Notice", "start": 139, "end": 142, "title_en": "Questions 139-142 refer to the following notice.", "title_zh": "139-142 題參照以下通知。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Pinnacle Coworking Hub - Building Announcement</h4>\n  <p class=\"mb-2\">Dear Tenants,</p>\n  <p class=\"mb-2\">We are pleased to announce that new office furniture is arriving this week. The <b>139. (_______)</b> of the new boardroom tables will begin on Wednesday morning. Please expect some <b>140. (_______)</b> noise in the shared workspace during the installation process.</p>\n  <p class=\"mb-2\">The technicians are scheduled to work <b>141. (_______)</b> 9:00 a.m. and 12:00 p.m. to complete the setup. We apologize for this temporary inconvenience. <b>142. (_______)</b>. Thank you for your cooperation.</p>\n  <p class=\"text-xs\">David Vance<br>Community Manager, Pinnacle Coworking Hub</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <h4 class=\"font-bold text-center mb-1\">Pinnacle 共享辦公中心 - 大樓公告</h4>\n  <p class=\"mb-2\">親愛的租戶們：</p>\n  <p class=\"mb-2\">我們很高興地宣布，本週將有新的辦公家具送達。新會議桌的 <b>[139]</b> 將於週三上午開始。在安裝過程中，請預期共享工作空間中會有一些 <b>[140]</b> 的噪音。</p>\n  <p class=\"mb-2\">技術人員安排在上午 9:00 <b>[141]</b> 中午 12:00 之間工作，以完成安裝設定。對於這次臨時帶來的不便，我們深表歉意。<b>[142]</b>。感謝您的配合。</p>\n  <p class=\"text-xs\">David Vance<br>Pinnacle 共享辦公社區經理</p>\n</div>", "questions": [{"num": 139, "difficulty": "低", "point": "詞性判定 - 名詞作主詞", "options": {"A": "assemble", "B": "assembly", "C": "assembled", "D": "assembler"}, "correct": "B", "translation": "新會議桌的組裝將於週三上午開始。", "explanation": {"structure": "The (定冠詞) + _______ (名詞主詞) + of the new boardroom tables will begin...", "core": "空格處為名詞作主詞，表示組裝的動作，應選 (B) assembly。", "distractors": "(A) assemble 為動詞，(C) assembled 為過去式/分詞，(D) assembler 裝配工（不合語意）。"}}, {"num": 140, "difficulty": "中", "point": "詞性判定 - 形容詞修飾名詞", "options": {"A": "temporary", "B": "temporarily", "C": "temporaryness", "D": "temporariness"}, "correct": "A", "translation": "在安裝過程中，請預期共享工作空間中會有一些臨時的噪音。", "explanation": {"structure": "some + _______ (形容詞修飾名詞) + noise (名詞) + in the shared workspace.", "core": "空格修飾名詞 noise，應為形容詞。故選 (A) temporary (臨時的/暫時的)。", "distractors": "(B) temporarily 副詞，(C) 與 (D) 為拼寫錯誤的名詞。"}}, {"num": 141, "difficulty": "低", "point": "介系詞 - 時間介系詞搭配", "options": {"A": "from", "B": "between", "C": "among", "D": "through"}, "correct": "B", "translation": "技術人員安排在上午 9:00 到中午 12:00 之間工作。", "explanation": {"structure": "work + _______ (介系詞) + 9:00 a.m. and 12:00 p.m. (兩個時間點並列)。", "core": "後接 A and B，對應的介系詞為 between ... and ... (在...與...之間)。故選 (B)。", "distractors": "(A) from 常用搭配為 from A to B，(C) among 用於三者（以上）之中，(D) through 直到。"}}, {"num": 142, "difficulty": "中", "point": "篇章插句題", "options": {"A": "We advise using the quiet zones on the third floor if you require silence.", "B": "Our sales department is offering a 10% discount this month.", "C": "Bidding documents must be uploaded to the portal by Friday.", "D": "Please sign a one-year database hosting agreement."}, "correct": "A", "translation": "如果您需要安靜，我們建議使用三樓的安靜區域。", "explanation": {"structure": "前文提到「會有臨時噪音，表示歉意」，此句提供租戶應對噪音的解決方案。", "core": "「建議使用三樓的安靜區域（quiet zones）」與前面噪音公告邏輯上完美呼應。選 (A)。", "distractors": "(B) 折扣無關、(C) 招標文件無關、(D) 資料庫協議無關。"}}], "vocabulary": [{"word": "assembly", "pos": "n.", "meaning": "組裝，集會"}, {"word": "temporary", "pos": "adj.", "meaning": "臨時的，暫時的"}]}, {"id": "p4", "type": "Memo", "start": 143, "end": 146, "title_en": "Questions 143-146 refer to the following memo.", "title_zh": "143-146 題參照以下備忘錄。", "passage_en_template": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-2\">\n    <b>To:</b> Department Directors<br>\n    <b>From:</b> Sarah Thorne, Finance Department<br>\n    <b>Date:</b> August 25<br>\n    <b>Subject:</b> Travel Expense Approval Changes\n  </p>\n  <p class=\"mb-2\">This memo is to notify you that the travel expense reimbursement approval process <b>143. (_______)</b> to improve efficiency. Under the updated policy, all individual dining claims that <b>144. (_______)</b> $50 require an original receipt. <b>145. (_______)</b>. Your strict <b>146. (_______)</b> with these new measures is highly appreciated.</p>\n  <p>Thank you for your cooperation in implementing this system transition.</p>\n</div>", "passage_zh": "<div class=\"ad-box border p-4 bg-slate-50 rounded mb-4 text-xs\">\n  <p class=\"meta text-xs mb-2\">\n    <b>收件者：</b>部門主管<br>\n    <b>寄件者：</b>Sarah Thorne，財務部<br>\n    <b>日期：</b>8 月 25 日<br>\n    <b>主旨：</b>差旅費核准變更\n  </p>\n  <p class=\"mb-2\">本備忘錄旨在通知您，差旅費報銷核准流程 <b>[143]</b> 以提高效率。根據更新後的政策，所有超過 50 美元的個人用餐報銷申請 <b>[144]</b> 都需要原始收據。<b>[145]</b>。非常感謝您嚴格 <b>[146]</b> 這些新措施。</p>\n  <p>感謝您在實施此系統過渡時的配合。</p>\n</div>", "questions": [{"num": 143, "difficulty": "中", "point": "時態與語態 - 現在完成式被動態", "options": {"A": "modify", "B": "modifies", "C": "was modified", "D": "has been modified"}, "correct": "D", "translation": "差旅費報銷核准流程已被修改以提高效率。", "explanation": {"structure": "the travel expense... process (主詞) + _______ (動詞) + to improve (不定詞目的)。", "core": "流程「被修改」是從過去持續到現在的影響，表示目前政策已被改動，應使用現在完成式被動態 has been modified。選 (D)。", "distractors": "(A) modify 為複數動詞，(B) modifies 為主動單三，(C) was modified 過去被動。"}}, {"num": 144, "difficulty": "中", "point": "商務字彙 - 動詞語意搭配", "options": {"A": "exceed", "B": "audit", "C": "comply", "D": "transition"}, "correct": "A", "translation": "所有超過 50 美元的個人用餐報銷申請都需要原始收據。", "explanation": {"structure": "dining claims that (關係子句主格) + _______ (動詞) + $50 (受詞金額)。", "core": "「金額超過 50 美元」，選及物動詞 exceed (超過/多於)。選 (A)。", "distractors": "(B) audit 審計，(C) comply 遵守，(D) transition 轉渡。"}}, {"num": 145, "difficulty": "高", "point": "篇章插句題", "options": {"A": "Furthermore, department directors must sign all claim forms beforehand.", "B": "Technicians are currently resolving database connection issues.", "C": "All saving accounts will receive a deposit credit of $50.", "D": "A community welcome event is scheduled for Wednesday."}, "correct": "A", "translation": "此外，部門主管必須事先在所有報銷表上簽名。", "explanation": {"structure": "接在「報銷收據要求政策」之後，說明主管的審核職責。", "core": "「此外，部門主管必須事先簽核（Furthermore, department directors must sign...）」是報銷流程政策的進一步說明。選 (A)。", "distractors": "(B) 資料庫連線無關、(C) 存款額度無關、(D) 歡迎活動無關。"}}, {"num": 146, "difficulty": "中", "point": "商務字彙 - 名詞語意搭配與介系詞", "options": {"A": "compliance", "B": "threshold", "C": "breakdown", "D": "constraint"}, "correct": "A", "translation": "非常感謝您嚴格遵守這些新措施。", "explanation": {"structure": "Your strict + _______ (名詞) + with these new measures (介系詞搭配)。", "core": "名詞與介系詞 with 搭配，且表示「遵守」，應選 compliance。選 (A)。", "distractors": "(B) threshold 門檻，(C) breakdown 明細，(D) constraint 限制。"}}], "vocabulary": [{"word": "exceed", "pos": "v.", "meaning": "超過，多於"}, {"word": "compliance", "pos": "n.", "meaning": "遵守，符合"}]}];
+const FLASHCARDS = [{"word": "biometric", "pos": "adj.", "meaning": "生物辨識的"}, {"word": "consequently", "pos": "adv.", "meaning": "因此，結果"}, {"word": "stability", "pos": "n.", "meaning": "穩定性"}, {"word": "anticipate", "pos": "v.", "meaning": "預期，期望"}, {"word": "assembly", "pos": "n.", "meaning": "組裝，集會"}, {"word": "temporary", "pos": "adj.", "meaning": "臨時的，暫時的"}, {"word": "exceed", "pos": "v.", "meaning": "超過，多於"}, {"word": "compliance", "pos": "n.", "meaning": "遵守，符合"}];
+
+const userAnswers = {};
+const confirmedAnswers = {};
+let currentPassageIndex = 0;
+
+function switchTab(tab) {
+  if (tab === 'quiz') {
+    document.getElementById('tab-quiz').classList.remove('hidden');
+    document.getElementById('tab-cards').classList.add('hidden');
+    document.getElementById('progress-bar-container').classList.remove('hidden');
+    document.getElementById('btn-quiz').className = "px-4 py-1.5 rounded-full text-xs font-black bg-amber-500 text-[#1a365d] shadow transition";
+    document.getElementById('btn-cards').className = "px-4 py-1.5 rounded-full text-xs font-black text-slate-300 hover:text-white transition";
+  } else {
+    document.getElementById('tab-quiz').classList.add('hidden');
+    document.getElementById('tab-cards').classList.remove('hidden');
+    document.getElementById('progress-bar-container').classList.add('hidden');
+    document.getElementById('btn-quiz').className = "px-4 py-1.5 rounded-full text-xs font-black text-slate-300 hover:text-white transition";
+    document.getElementById('btn-cards').className = "px-4 py-1.5 rounded-full text-xs font-black bg-amber-500 text-[#1a365d] shadow transition";
+    renderFlashcards();
+  }
+}
+
+// 渲染進度條上方的篇章分頁 Badge
+function renderPassageNav() {
+  const container = document.getElementById('passage-nav-badges');
+  container.innerHTML = '';
+  PASSAGES.forEach((p, idx) => {
+    let btnClass = "px-2.5 py-1 rounded-md text-xs font-bold transition ";
+    if (idx === currentPassageIndex) {
+      btnClass += "bg-[#1a365d] text-white";
+    } else {
+      btnClass += "bg-slate-100 text-slate-600 hover:bg-slate-200";
+    }
+    container.insertAdjacentHTML('beforeend', `<button onclick="jumpToPassage(${idx})" class="${btnClass}">篇章 ${idx + 1}</button>`);
+  });
+}
+
+function renderPassage() {
+  renderPassageNav();
+  
+  const p = PASSAGES[currentPassageIndex];
+  
+  // 更新標題與內容
+  document.getElementById('passage-title').innerText = `篇章 ${currentPassageIndex + 1} | ${p.title_en}`;
+  document.getElementById('passage-en-content').innerHTML = p.passage_en_template;
+  document.getElementById('passage-zh-content').innerHTML = p.passage_zh;
+  
+  // 檢查中文中譯的按鈕狀態 (預設隱藏)
+  document.getElementById('passage-zh-content').classList.add('hidden');
+  
+  // 渲染右側題目
+  const qContainer = document.getElementById('questions-list-container');
+  qContainer.innerHTML = '';
+  
+  p.questions.forEach(q => {
+    const qNum = q.num;
+    const isConfirmed = confirmedAnswers[qNum] || false;
+    const selected = userAnswers[qNum] || null;
+    
+    let optionsHtml = '';
+    const optionKeys = ['A', 'B', 'C', 'D'];
+    
+    optionKeys.forEach(key => {
+      const text = q.options[key];
+      let btnClass = "border border-slate-200 hover:bg-slate-50 text-slate-700";
+      let icon = "";
+      
+      if (selected === key) {
+        btnClass = "border-2 border-blue-500 bg-blue-50/50 text-blue-700 font-bold";
+      }
+      
+      if (isConfirmed) {
+        if (key === q.correct) {
+          btnClass = "border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-bold";
+          icon = '<i class="fa-solid fa-circle-check text-emerald-500 text-base"></i>';
+        } else if (selected === key) {
+          btnClass = "border-2 border-red-500 bg-red-50 text-red-800 font-bold";
+          icon = '<i class="fa-solid fa-circle-xmark text-red-500 text-base"></i>';
+        } else {
+          btnClass = "border border-slate-200 text-slate-400 opacity-60";
+        }
+      }
+      
+      const clickAction = isConfirmed ? '' : `onclick="selectOption(${qNum}, '${key}')"`;
+      optionsHtml += `<button ${clickAction} class="w-full text-left p-3 rounded-xl text-xs sm:text-sm font-medium transition flex items-center justify-between gap-3 ${btnClass}"><span><strong class="mr-1 text-[#1a365d]">${key}</strong> ${text}</span>${icon}</button>`;
+    });
+    
+    let analysisHtml = '';
+    if (isConfirmed) {
+      const isCorrect = selected === q.correct;
+      const statusBadge = isCorrect 
+        ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2.5 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> 答對</span>'
+        : `<span class="bg-red-100 text-red-800 text-[10px] font-black px-2.5 py-0.5 rounded flex items-center gap-1"><i class="fa-solid fa-circle-xmark"></i> 答錯 (正確: ${q.correct})</span>`;
+        
+      analysisHtml = `
+        <div class="border-t border-slate-105 pt-3 mt-3 space-y-3">
+          <div class="flex items-center justify-between">${statusBadge}</div>
+          <div class="space-y-2 text-xs sm:text-sm text-slate-650">
+            <div>
+              <h4 class="font-bold text-[#1a365d]">【單題翻譯】</h4>
+              <p class="bg-slate-50 border p-2 rounded-xl text-slate-500 font-medium">${q.translation}</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-[#1a365d]">【解題深度邏輯】</h4>
+              <div class="space-y-1 leading-relaxed">
+                <p><strong>1. 結構：</strong>${q.explanation.structure}</p>
+                <p><strong>2. 核心：</strong>${q.explanation.core}</p>
+                <p><strong>3. 排除：</strong>${q.explanation.distractors}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    let submitBtn = '';
+    if (!isConfirmed) {
+      const disabledAttr = selected ? '' : 'disabled';
+      submitBtn = `<button id="btn-submit-${qNum}" onclick="confirmAnswer(${qNum})" ${disabledAttr} class="w-full mt-3 py-2.5 bg-[#1a365d] hover:bg-blue-800 disabled:opacity-40 text-white rounded-xl text-xs font-black shadow transition">確認答案</button>`;
+    }
+    
+    const cardHtml = `
+      <div id="q-card-${qNum}" class="bg-white rounded-2xl border p-5 custom-shadow">
+        <h3 class="text-slate-805 font-extrabold text-xs mb-1.5 flex items-center gap-1.5">
+          <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-xs">${qNum}</span>
+          考點：${q.point}
+        </h3>
+        <div class="space-y-2">${optionsHtml}</div>
+        ${submitBtn}
+        ${analysisHtml}
+      </div>
+    `;
+    qContainer.insertAdjacentHTML('beforeend', cardHtml);
+  });
+  
+  // 同步更新左側短文中已作答/已確認的空格狀態
+  p.questions.forEach(q => {
+    updateBlankElement(q.num);
+  });
+  
+  // 更新上下篇按鈕文字
+  const btnPrev = document.getElementById('btn-prev-p');
+  const btnNext = document.getElementById('btn-next-p');
+  
+  if (currentPassageIndex === 0) {
+    btnPrev.disabled = true;
+    btnPrev.classList.add('opacity-40');
+  } else {
+    btnPrev.disabled = false;
+    btnPrev.classList.remove('opacity-40');
+  }
+  
+  if (currentPassageIndex === PASSAGES.length - 1) {
+    btnNext.innerHTML = '結算特訓分數 <i class="fa-solid fa-flag-checkered"></i>';
+    btnNext.className = "py-2.5 px-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black transition flex items-center gap-1.5";
+  } else {
+    btnNext.innerHTML = '下一篇 <i class="fa-solid fa-chevron-right"></i>';
+    btnNext.className = "py-2.5 px-5 bg-amber-500 hover:bg-amber-600 text-[#1a365d] rounded-xl text-xs font-black transition flex items-center gap-1.5";
+  }
+}
+
+function selectOption(qNum, optionKey) {
+  userAnswers[qNum] = optionKey;
+  
+  // 渲染對應題目卡片選項狀態
+  renderPassage();
+}
+
+function updateBlankElement(qNum) {
+  const blankEl = document.getElementById(`blank-${qNum}`);
+  if (!blankEl) return;
+  
+  const pIndex = Math.floor((qNum - 131) / 4);
+  const p = PASSAGES[pIndex];
+  const q = p.questions.find(item => item.num === qNum);
+  
+  const isConfirmed = confirmedAnswers[qNum] || false;
+  const selected = userAnswers[qNum] || null;
+  
+  blankEl.className = "blank-badge";
+  
+  if (isConfirmed) {
+    const isCorrect = selected === q.correct;
+    if (isCorrect) {
+      blankEl.className = "blank-badge blank-badge-correct";
+      blankEl.innerHTML = `[${qNum}] ${q.options[selected]} <i class="fa-solid fa-check ml-0.5 text-[10px]"></i>`;
+    } else {
+      blankEl.className = "blank-badge blank-badge-incorrect";
+      blankEl.innerHTML = `[${qNum}] <s>${selected ? q.options[selected] : '未答'}</s> (正確: ${q.options[q.correct]}) <i class="fa-solid fa-xmark ml-0.5 text-[10px]"></i>`;
+    }
+  } else {
+    if (selected) {
+      blankEl.className = "blank-badge blank-badge-active";
+      blankEl.innerHTML = `[${qNum}] ${q.options[selected]}`;
+    } else {
+      blankEl.innerHTML = `[${qNum}] _______`;
+    }
+  }
+}
+
+function focusQuestion(qNum) {
+  const cardEl = document.getElementById(`q-card-${qNum}`);
+  if (cardEl) {
+    cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    cardEl.classList.add('ring-2', 'ring-blue-400');
+    setTimeout(() => {
+      cardEl.classList.remove('ring-2', 'ring-blue-400');
+    }, 1500);
+  }
+}
+
+function confirmAnswer(qNum) {
+  confirmedAnswers[qNum] = true;
+  updateProgress();
+  renderPassage();
+  setTimeout(() => {
+    focusQuestion(qNum);
+  }, 100);
+}
+
+function togglePassageZh() {
+  const zhEl = document.getElementById('passage-zh-content');
+  zhEl.classList.toggle('hidden');
+}
+
+function updateProgress() {
+  const totalQuestions = PASSAGES.length * 4;
+  let answeredCount = 0;
+  
+  // 動態判定已確認題數
+  PASSAGES.forEach(p => {
+    p.questions.forEach(q => {
+      if (confirmedAnswers[q.num]) answeredCount++;
+    });
+  });
+  
+  const percentage = (answeredCount / totalQuestions) * 100;
+  document.getElementById('quiz-progress-bar').style.width = `${percentage}%`;
+  document.getElementById('quiz-progress-text').innerText = `已完成 ${answeredCount} / ${totalQuestions} 題`;
+}
+
+function changePassage(direction) {
+  if (direction === 1 && currentPassageIndex === PASSAGES.length - 1) {
+    checkFinalScore();
+    return;
+  }
+  
+  currentPassageIndex += direction;
+  if (currentPassageIndex < 0) currentPassageIndex = 0;
+  if (currentPassageIndex >= PASSAGES.length) currentPassageIndex = PASSAGES.length - 1;
+  
+  renderPassage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function jumpToPassage(index) {
+  currentPassageIndex = index;
+  renderPassage();
+}
+
+function checkFinalScore() {
+  let score = 0;
+  let answeredAll = true;
+  const totalQuestions = PASSAGES.length * 4;
+  
+  PASSAGES.forEach(p => {
+    p.questions.forEach(q => {
+      if (!confirmedAnswers[q.num]) {
+        answeredAll = false;
+      } else {
+        if (userAnswers[q.num] === q.correct) score++;
+      }
+    });
+  });
+  
+  if (!answeredAll) {
+    alert(`您還有題目尚未點擊「確認答案」！請確認所有 ${totalQuestions} 道題目皆已確認後再結算。`);
+    return;
+  }
+  
+  document.getElementById('questions-container').classList.add('hidden');
+  document.getElementById('score-card').classList.remove('hidden');
+  
+  document.getElementById('score-correct-num').innerText = score;
+  
+  let comment = '';
+  const correctRatio = score / totalQuestions;
+  
+  if (correctRatio === 1.0) {
+    comment = '👑 卓越非凡！您答對了所有目前的題目！這證明您對篇章邏輯、時間軸邏輯以及多益插句題的理解已臻完美，具備金卡實力！';
+  } else if (correctRatio >= 0.75) {
+    comment = '🌟 表現優異！您具備極佳的上下文閱讀理解能力。只要再對錯題進行複習，釐清干擾項的排除邏輯，多益高分唾手可得！';
+  } else if (correctRatio >= 0.5) {
+    comment = '👍 穩紮穩打！您已答對半數以上的題目，在單字與詞彙題上表現不錯。建議加強篇章插句題的邏輯關聯，並多透過 3D 閃卡複習核心字彙！';
+  } else {
+    comment = '📚 繼續加油！多益 Part 6 更看重整篇短文的上下文脈絡與時態一致性。不要氣餒，點擊重新特訓再試一次，並仔細閱讀專家的解題深度邏輯！';
+  }
+  
+  document.getElementById('score-comment').innerText = comment;
+  document.getElementById('score-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetQuiz() {
+  PASSAGES.forEach(p => {
+    p.questions.forEach(q => {
+      delete userAnswers[q.num];
+      delete confirmedAnswers[q.num];
+    });
+  });
+  
+  document.getElementById('questions-container').classList.remove('hidden');
+  document.getElementById('score-card').classList.add('hidden');
+  
+  currentPassageIndex = 0;
+  updateProgress();
+  renderPassage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function flipCard(cardEl) {
+  cardEl.classList.toggle('flashcard-flipped');
+}
+
+function maskAllMeanings(shouldMask) {
+  const meanings = document.querySelectorAll('#flashcards-container .flashcard-back .meaning-text');
+  meanings.forEach(el => {
+    if (shouldMask) {
+      el.classList.add('text-transparent', 'bg-slate-200/80');
+    } else {
+      el.classList.remove('text-transparent', 'bg-slate-200/80');
+    }
+  });
+}
+
+function renderFlashcards() {
+  const container = document.getElementById('flashcards-container');
+  container.innerHTML = '';
+  
+  FLASHCARDS.forEach(item => {
+    const cardHtml = `
+      <div class="flashcard w-full h-44 cursor-pointer" onclick="flipCard(this.querySelector('.flashcard-inner'))">
+        <div class="flashcard-inner relative w-full h-full [transform-style:preserve-3d] shadow-sm hover:shadow-md border border-slate-100 rounded-2xl transition duration-300">
+          
+          <div class="flashcard-front absolute inset-0 w-full h-full [backface-visibility:hidden] bg-white rounded-2xl p-5 flex flex-col justify-between items-center">
+            <span class="self-start text-[9px] font-black text-slate-400 uppercase tracking-widest">Vocabulary Card</span>
+            <span class="text-xl font-serif font-black text-[#1a365d] select-all">${item.word}</span>
+            <span class="text-[10px] text-slate-400 font-medium flex items-center gap-1"><i class="fa-solid fa-rotate"></i> 點擊卡片翻面</span>
+          </div>
+
+          <div class="flashcard-back absolute inset-0 w-full h-full [backface-visibility:hidden] bg-amber-50/90 border border-amber-100 rounded-2xl p-5 flex flex-col justify-between items-center rotate-y-180">
+            <span class="self-start text-[9px] font-bold text-amber-700 tracking-widest uppercase">Chinese Translation</span>
+            <div class="text-center py-1">
+              <span class="text-xs text-amber-600 font-bold italic mr-1.5">${item.pos}</span>
+              <span class="meaning-text text-base text-slate-800 font-extrabold select-text">${item.meaning}</span>
+            </div>
+            <span class="text-[9px] text-amber-600 font-medium flex items-center gap-1"><i class="fa-solid fa-rotate-left"></i> 再次點擊翻回</span>
+          </div>
+
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', cardHtml);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderPassage();
+});
+</script>
+</body>
+</html>
