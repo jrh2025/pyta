@@ -1,0 +1,2747 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Part 7 閱讀理解";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-after: always; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-block:last-of-type {
+    page-break-after: avoid;
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 10px 15px;
+    font-weight: bold; 
+    font-size: 11pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 15px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 15px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    tracking-wider: 0.05em;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 11pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    text-align: justify;
+    padding-right: 15px !important;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    text-align: justify;
+    padding-left: 15px !important;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px;
+}
+.section-main-title {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 11pt;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 4px;
+}
+.question-item {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #2c5282;
+    font-size: 9.5pt;
+    margin-bottom: 8px;
+    background-color: #ebf8ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.question-text {
+    font-weight: bold;
+    font-size: 11pt;
+    color: #1a202c;
+    margin-bottom: 8px;
+    font-family: "Times New Roman", Times, serif;
+}
+.options-table { 
+    width: 100%; 
+    margin-bottom: 10px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 5px 8px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 8pt; 
+    padding: 1px 5px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 6px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #f7fafc;
+    border-left: 3px solid #cbd5e1;
+    padding: 8px 12px;
+    margin-top: 8px;
+    font-size: 9pt;
+}
+.exp-title {
+    font-weight: bold;
+    color: #4a5568;
+    margin-top: 4px;
+    margin-bottom: 3px;
+    text-decoration: underline;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    background-color: #edf2f7;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 15px;
+    border-top: 1px solid #e2e8f0;
+    page-break-inside: avoid;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 5px; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 9pt;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 5px 8px; 
+    font-size: 9pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 25px; 
+    padding: 15px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 11pt; 
+    margin-top: 0;
+    margin-bottom: 8px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 18px; 
+    font-size: 9pt; 
+    color: #2d3748; 
+    line-height: 1.5;
+}
+.expert-list li { 
+    margin-bottom: 6px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 11 - PART 7 閱讀理解精選解析 (第 147 – 200 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 147 and 148 concern an online chat conversation regarding a graphic design project deadline. (第 147-148 題與關於平面設計專案截止日期的線上聊天對話有關。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+<p><strong>[10:15 AM] Sarah Jenkins (Marketing Director):</strong> Hi David, are you at your desk right now? I just got off a call with the printing vendor, and we have a major issue with the final packaging design for the "Lumina" smartwatch series. They said the current color profile we submitted (CMYK format) isn't aligning with their new eco-friendly matte finish printers. We need to adjust the contrast levels on all the side panels immediately before they start the mass production run at 1:00 PM today.</p>
+<p><strong>[10:18 AM] David Cho (Lead Designer):</strong> Yes, I'm here. That's frustrating, they should have warned us about the new printer specifications last week! I can certainly adjust the contrast, but doing it for all four box sizes (S, M, L, XL) will take me at least an hour and a half. Which specific color elements are they concerned about? Is it the deep blue background or the silver foil lettering on the front?</p>
+<p><strong>[10:22 AM] Sarah Jenkins:</strong> It's primarily the deep blue background. The vendor mentioned it might come out looking slightly purplish on the matte cardboard. Please focus strictly on the medium and large box sizes first, as those represent 80% of our initial retail orders. We can submit the small and extra-large files by tomorrow morning.</p>
+<p><strong>[10:25 AM] David Cho:</strong> Understood. I will recalibrate the blue hues and increase the brightness by 15% to compensate for the matte absorption. I'll send you the revised proofs for the M and L sizes by 11:45 AM for your final approval.</p>
+<p><strong>[10:28 AM] Sarah Jenkins:</strong> Perfect. Once you send them over, I'll forward them directly to the vendor's production manager. Thanks for handling this on such short notice.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="passage-content">
+<p><strong>[上午10:15] Sarah Jenkins (行銷總監)：</strong>嗨 David，你現在在座位上嗎？我剛和印刷供應商通完電話，我們在「Lumina」智慧手錶系列的最終包裝設計上遇到了大問題。他們說我們提交的目前色彩設定檔（CMYK格式）與他們新的環保霧面印表機不相容。我們必須在今天下午1:00開始大量生產前，立即調整所有側面板的對比度。</p>
+<p><strong>[上午10:18] David Cho (首席設計師)：</strong>是的，我在。這真令人沮喪，他們上週就應該警告我們有關新印表機規格的事！我當然可以調整對比度，但要為所有四種尺寸的盒子（S、M、L、XL）進行調整，至少需要一個半小時。他們具體擔心哪些顏色元素？是深藍色背景還是正面的銀箔字體？</p>
+<p><strong>[上午10:22] Sarah Jenkins：</strong>主要是深藍色背景。供應商提到在霧面紙板上印出來可能會有點偏紫。請先專注於中型和大型盒子的尺寸，因為這佔了我們初步零售訂單的80%。我們可以在明天早上提交小型和特大型的檔案。</p>
+<p><strong>[上午10:25] David Cho：</strong>了解。我會重新校準藍色色調，並將亮度提高15%以補償霧面材質的吸收率。我會在上午11:45前將M和L尺寸的修改後校對稿寄給你做最終確認。</p>
+<p><strong>[上午10:28] Sarah Jenkins：</strong>完美。一旦你寄過來，我會直接轉寄給供應商的生產經理。謝謝你在這麼短的時間內處理這件事。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 147 題 | 核心考點：Detail (難易度：Medium)</div>
+                <div class="question-text">Q147. What is the main problem discussed in the chat?</div>
+                <table class="options-table">
+            <tr><td>(A) A vendor went out of business unexpectedly.</td><td class="correct-option">(B) A packaging color may not print correctly on a specific material. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) The dimensions of the smartwatches have changed.</td><td>(D) A designer missed a crucial deadline for a retail client.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">對話中討論的主要問題是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>找出明確提及問題核心的句子。<br>
+                        <strong>2. 核心判定：</strong>Sarah 提到「the current color profile... isn't aligning with their new eco-friendly matte finish printers」(目前的色彩設定檔...與他們新的環保霧面印表機不相容)，以及「deep blue background... might come out looking slightly purplish on the matte cardboard」(深藍色背景在霧面紙板上印出來可能會有點偏紫)，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 未提及倒閉。(C) 改變的是包裝設計而非手錶本身尺寸。(D) 期限很趕，但沒有人錯過期限。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 148 題 | 核心考點：Inference (難易度：Medium)</div>
+                <div class="question-text">Q148. At 10:22 AM, what does Ms. Jenkins imply when she writes, "Please focus strictly on the medium and large box sizes first"?</div>
+                <table class="options-table">
+            <tr><td>(A) The company has decided to discontinue the small and extra-large boxes.</td><td class="correct-option">(B) They need to prioritize the items that make up the majority of their sales. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Mr. Cho lacks the expertise to redesign all four sizes.</td><td>(D) The printing vendor only has materials for medium and large boxes.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在上午10:22，Jenkins 女士寫道「請先專注於中型和大型盒子的尺寸」，她暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>根據上下文推論說話者的意圖。<br>
+                        <strong>2. 核心判定：</strong>Jenkins 要求先處理 M 和 L 尺寸，原因是「those represent 80% of our initial retail orders」(這佔了我們初步零售訂單的80%)，這意味著要優先處理銷售佔比最大的項目，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 她說明天早上再交 S 和 XL 檔案，並非停產。(C) 原因是時間不夠，而非缺乏專業。(D) 供應商的問題在於顏色，而非缺乏尺寸材料。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">vendor</td><td class="vocab-pos">n.</td><td class="vocab-meaning">供應商，賣主</td></tr><tr><td class="vocab-word">profile</td><td class="vocab-pos">n.</td><td class="vocab-meaning">設定檔，輪廓</td></tr><tr><td class="vocab-word">align with</td><td class="vocab-pos">phr.</td><td class="vocab-meaning">與...一致，符合</td></tr><tr><td class="vocab-word">frustrating</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">令人沮喪的</td></tr><tr><td class="vocab-word">compensate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">補償，彌補</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 149 and 150 refer to an advertisement for a major sporting goods retailer's seasonal sale. (第149與150題是關於一家大型運動用品零售商的季節性促銷廣告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+<h2 style="text-align: center;">Horizon Peak Outdoors: Massive Winter Clearance & Product Launch!</h2>
+<p>Get ready for the upcoming winter season with Horizon Peak Outdoors! From <strong>November 15 through November 30</strong>, we are hosting our biggest clearance event of the decade at all our flagship locations across the Pacific Northwest, including our Seattle, Portland, and Denver stores. Shoppers can expect unbelievable discounts of up to <strong>60% off</strong> on last season's ski and snowboard equipment, thermal base layers, and heavy-duty winter boots.</p>
+<p>In addition to our clearance event, we are thrilled to officially launch the highly anticipated <em>EcoTrek</em> Alpine Jacket. Engineered with 100% recycled synthetic down and a proprietary waterproof shell, the EcoTrek jacket offers unparalleled warmth without the environmental footprint. It comes with a lifetime warranty against any manufacturing defects and is available in five distinct colorways.</p>
+<p><strong>Exclusive Member Benefits:</strong><br>
+Are you a Horizon Peak Rewards member? Present your membership card at checkout to receive an additional 10% off all clearance items and earn double points on any purchase from the new <em>EcoTrek</em> line. Not a member yet? Sign up in-store for an annual fee of just $15 and instantly receive a $20 gift voucher for your next visit.</p>
+<p>Don't miss out on these incredible savings! Visit our website at www.horizonpeakoutdoors.com to check store hours and view the complete clearance catalog online. Note: Clearance items are final sale and cannot be returned or exchanged.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="passage-content">
+<h2 style="text-align: center;">Horizon Peak Outdoors：盛大冬季出清與新產品發表！</h2>
+<p>與 Horizon Peak Outdoors 一起為即將到來的冬季做好準備！從<strong>11月15日至11月30日</strong>，我們將在整個太平洋西北地區的所有旗艦店（包括西雅圖、波特蘭和丹佛分店）舉辦十年來最大規模的出清活動。購物者可以期待令人難以置信的折扣，上一季的滑雪板設備、保暖內衣和重型冬季靴子最高可享<strong>4折(60% off)</strong>優惠。</p>
+<p>除了我們的出清活動外，我們還很高興能正式推出備受期待的 <em>EcoTrek</em> 高山夾克。這款 EcoTrek 夾克採用 100% 回收的合成羽絨和專利的防水外殼設計，提供無與倫比的保暖效果，同時減少對環境的影響。它提供針對任何製造缺陷的終身保固，並有五種獨特的配色可供選擇。</p>
+<p><strong>會員獨家禮遇：</strong><br>
+您是 Horizon Peak Rewards 的會員嗎？結帳時出示您的會員卡，即可獲得所有出清商品額外9折(10% off)的優惠，並在購買任何新 <em>EcoTrek</em> 系列產品時獲得雙倍積分。還不是會員？在店內註冊，年費只需15美元，即可立即獲得一張20美元的禮券供您下次光臨時使用。</p>
+<p>千萬別錯過這些不可思議的優惠！請造訪我們的網站 www.horizonpeakoutdoors.com 查詢營業時間並線上瀏覽完整的出清目錄。請注意：出清商品售出後恕不退換。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 149 題 | 核心考點：Detail (難易度：Easy)</div>
+                <div class="question-text">Q149. What is mentioned as a feature of the EcoTrek Alpine Jacket?</div>
+                <table class="options-table">
+            <tr><td>(A) It is currently discounted by 60%.</td><td class="correct-option">(B) It is made from recycled materials. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It includes a detachable hood.</td><td>(D) It is only available in stores in Denver.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 EcoTrek 高山夾克，文中提到了什麼特點？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位關鍵字「EcoTrek Alpine Jacket」並找出其特徵描述。<br>
+                        <strong>2. 核心判定：</strong>文中提到「Engineered with 100% recycled synthetic down...」(採用100%回收的合成羽絨設計)，因此選項 (B) 正確。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 60%折扣適用於上一季的出清商品，而非新款的EcoTrek。(C) 文中未提及可拆卸的兜帽。(D) 它是新品發表，並未限制只在丹佛販售。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 150 題 | 核心考點：Detail (難易度：Medium)</div>
+                <div class="question-text">Q150. What is stated about the Horizon Peak Rewards program?</div>
+                <table class="options-table">
+            <tr><td>(A) Membership is completely free for returning customers.</td><td>(B) Members can return clearance items within 30 days.</td></tr>
+            <tr><td class="correct-option">(C) New enrollees receive a voucher for future use. <span class="badge-correct">正確答案</span></td><td>(D) Members get early access to the clearance sale before November 15.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 Horizon Peak Rewards 計畫，文中陳述了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>尋找關於 Rewards program 註冊或福利的具體規則。<br>
+                        <strong>2. 核心判定：</strong>文中提到「Sign up in-store for an annual fee of just $15 and instantly receive a $20 gift voucher for your next visit.」(在店內註冊...即可立即獲得一張20美元的禮券供您下次光臨時使用)，這符合選項 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 註冊需要15美元的年費。(B) 文章最後強調「Clearance items are final sale and cannot be returned or exchanged」，無關會員身分。(D) 沒有提及會員享有提早入場的權利。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">clearance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">清倉拍賣</td></tr><tr><td class="vocab-word">flagship</td><td class="vocab-pos">n.</td><td class="vocab-meaning">旗艦(店)</td></tr><tr><td class="vocab-word">synthetic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">合成的，人造的</td></tr><tr><td class="vocab-word">proprietary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">專利的，專有的</td></tr><tr><td class="vocab-word">voucher</td><td class="vocab-pos">n.</td><td class="vocab-meaning">禮券，憑證</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 151 and 152 are based on a letter sent by a technology company to a customer regarding a delayed order. (第151與152題是根據一家科技公司寄給客戶關於訂單延遲的一封信。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+<p><strong>Sender:</strong> Elena Rostova, Customer Relations Manager, TechNova Solutions<br>
+<strong>Recipient:</strong> Arthur Pendelton<br>
+<strong>Date:</strong> August 12<br>
+<strong>Subject:</strong> Update on Order #TN-99382</p>
+
+<p>Dear Mr. Pendelton,</p>
+
+<p>I am writing to you on behalf of TechNova Solutions regarding your recent purchase of the custom-built Pro-Series Workstation (Order #TN-99382) placed on August 1. First and foremost, I would like to express my sincere apologies for the unexpected delay in fulfilling your order.</p>
+
+<p>As you may be aware, there is currently a global shortage of the specific high-end graphics cards required for your customized build (the Apex RTX-900). Our procurement team had originally assured us that a shipment would arrive at our assembly facility by August 5, which would have allowed us to meet your original delivery date of August 15. Unfortunately, that shipment was held up in customs, and we have only just received the components this morning.</p>
+
+<p>Our technicians will begin assembling and extensively stress-testing your workstation immediately. We expect the rigorous testing phase to take approximately 48 hours to ensure all custom cooling mechanisms and performance benchmarks are functioning perfectly. Therefore, we have updated your estimated delivery date to <strong>August 18</strong>. We will upgrade your shipping method to overnight courier service at no additional cost to you.</p>
+
+<p>We deeply value your business and understand that this delay may have caused inconvenience. As a gesture of our goodwill, we have attached a $50 digital store credit to your TechNova account, which can be applied to any future purchases of software or accessories. Furthermore, we are extending your complimentary technical support from one year to two years.</p>
+
+<p>If you have any questions, please do not hesitate to contact our priority support line at 1-800-555-0199 or reply directly to this email.</p>
+
+<p>Sincerely,</p>
+<p>Elena Rostova<br>Customer Relations Manager<br>TechNova Solutions</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="passage-content">
+<p><strong>寄件者：</strong>Elena Rostova，TechNova Solutions 客戶關係經理<br>
+<strong>收件者：</strong>Arthur Pendelton<br>
+<strong>日期：</strong>8月12日<br>
+<strong>主旨：</strong>訂單 #TN-99382 最新進度</p>
+
+<p>親愛的 Pendelton 先生：</p>
+
+<p>我代表 TechNova Solutions 寫信給您，關於您在8月1日購買的客製化 Pro-Series 工作站（訂單 #TN-99382）。首先，對於未能如期完成您的訂單，我致上最誠摯的歉意。</p>
+
+<p>您可能知道，目前全球正短缺您客製化電腦所需的高階顯示卡（Apex RTX-900）。我們的採購團隊原本向我們保證，一批貨物將在8月5日抵達我們的組裝廠，這原本能讓我們趕上您最初預定的8月15日交貨日期。不幸的是，那批貨物被海關扣留，我們直到今天早上才收到這些零件。</p>
+
+<p>我們的技術人員將立即開始組裝並進行廣泛的壓力測試。我們預計嚴格的測試階段將花費大約48小時，以確保所有客製化的散熱機制和效能基準都能完美運作。因此，我們已將您預計的交貨日期更新為<strong>8月18日</strong>。我們將免費為您的配送方式升級為隔夜快遞服務。</p>
+
+<p>我們非常重視您的業務，也了解這次延遲可能造成了不便。為了表達我們的善意，我們已在您的 TechNova 帳戶中存入50美元的數位商店抵用金，可適用於未來購買任何軟體或配件。此外，我們將您獲得的免費技術支援從一年延長至兩年。</p>
+
+<p>如果您有任何問題，請隨時撥打我們的優先支援專線 1-800-555-0199，或直接回覆此電子郵件與我們聯繫。</p>
+
+<p>誠摯地，</p>
+<p>Elena Rostova<br>客戶關係經理<br>TechNova Solutions</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 151 題 | 核心考點：Detail (難易度：Medium)</div>
+                <div class="question-text">Q151. Why was the customer's order delayed?</div>
+                <table class="options-table">
+            <tr><td>(A) A payment failed to process completely.</td><td>(B) The delivery truck broke down in transit.</td></tr>
+            <tr><td class="correct-option">(C) A necessary component was held by customs. <span class="badge-correct">正確答案</span></td><td>(D) The customer requested additional software to be installed.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼客戶的訂單延遲了？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>定位解釋延遲原因的段落。<br>
+                        <strong>2. 核心判定：</strong>第二段明確指出「Unfortunately, that shipment was held up in customs...」(不幸的是，那批貨物被海關扣留...)，這裡的 shipment 指的是用來組裝的顯示卡，故選項 (C) 正確。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(B)、(D) 在文章中均未提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 152 題 | 核心考點：Detail (難易度：Medium)</div>
+                <div class="question-text">Q152. What is NOT offered to Mr. Pendelton as compensation?</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) A discount on his current workstation order. <span class="badge-correct">正確答案</span></td><td>(B) Faster shipping at no extra charge.</td></tr>
+            <tr><td>(C) Store credit for future purchases.</td><td>(D) An extension on a technical support plan.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">下列何者並非提供給 Pendelton 先生作為補償？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>找出文中列出的補償措施，並透過消去法作答。<br>
+                        <strong>2. 核心判定：</strong>文章提到的補償包含：升級為隔夜快遞(B)、50美元的商店抵用金(C)，以及將免費技術支援延長為兩年(D)。並未提供該筆訂單的直接折扣，因此選項 (A) 為正解。<br>
+                        <strong>3. 干擾項排除：</strong>(B)、(C)、(D) 皆為信件中明確提出的補償方案。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">custom-built</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">客製化的，訂製的</td></tr><tr><td class="vocab-word">procurement</td><td class="vocab-pos">n.</td><td class="vocab-meaning">採購</td></tr><tr><td class="vocab-word">rigorous</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">嚴格的，縝密的</td></tr><tr><td class="vocab-word">goodwill</td><td class="vocab-pos">n.</td><td class="vocab-meaning">善意，友好</td></tr><tr><td class="vocab-word">complimentary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">免費贈送的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 153 and 154 refer to a building management notice about upcoming maintenance work. (第153與154題是關於一則物業管理部門發布即將進行維護工程的公告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+<h2 style="text-align: center;">Notice to All Tenants: Scheduled Infrastructure Upgrades</h2>
+<p><strong>To:</strong> All Tenants of the Grandview Corporate Center<br>
+<strong>From:</strong> Grandview Facility Management<br>
+<strong>Date:</strong> October 3</p>
+
+<p>Please be advised that comprehensive infrastructure upgrades are scheduled to take place throughout the building starting next weekend. We are modernizing both the main elevator shafts and the central HVAC (Heating, Ventilation, and Air Conditioning) systems to improve energy efficiency and overall comfort.</p>
+
+<p><strong>Elevator Maintenance:</strong><br>
+Starting on Friday, October 10 at 8:00 PM, Passenger Elevators A and B will be taken offline for cable replacements and software updates. They will remain out of service until Sunday, October 12 at 6:00 PM. During this period, all tenants and weekend personnel must use Passenger Elevator C or the freight elevator located at the rear loading dock. The east stairwell will also be kept unlocked for access between floors 1 through 10.</p>
+
+<p><strong>HVAC System Overhaul:</strong><br>
+The HVAC upgrade will be conducted floor-by-floor during regular business hours from October 13 to October 17. While technicians are working on your respective floors, you may experience minor temperature fluctuations and temporary airflow stoppages lasting up to 30 minutes. We recommend dressing in layers during this week to remain comfortable.</p>
+
+<p>We apologize for any disruption this essential maintenance may cause to your daily operations. If any employees in your office require special mobility assistance during the elevator downtime, please contact our front desk coordinator, Marcus Reed, at ext. 402 by Wednesday, October 8, so we can make the necessary accommodations.</p>
+
+<p>Thank you for your cooperation in helping us maintain a world-class facility.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="passage-content">
+<h2 style="text-align: center;">致所有租戶的公告：預定的基礎設施升級</h2>
+<p><strong>致：</strong>Grandview 企業中心的所有租戶<br>
+<strong>寄件者：</strong>Grandview 設施管理部<br>
+<strong>日期：</strong>10月3日</p>
+
+<p>請注意，大樓將於下週末開始進行全面的基礎設施升級。我們將對主電梯井和中央 HVAC（暖通空調）系統進行現代化改造，以提高能源效率和整體舒適度。</p>
+
+<p><strong>電梯維護：</strong><br>
+從10月10日（星期五）晚上8:00開始，客運電梯A和B將暫停服務，進行纜線更換和軟體更新。它們將停止運作直到10月12日（星期日）下午6:00。在此期間，所有租戶和週末工作人員必須使用客運電梯C或位於後方裝卸區的貨運電梯。東側樓梯間也將保持不鎖門的狀態，以便在1至10樓之間通行。</p>
+
+<p><strong>HVAC 系統全面檢修：</strong><br>
+HVAC 的升級將於10月13日至10月17日的正常營業時間內逐層進行。當技術人員在您的樓層工作時，您可能會經歷輕微的溫度波動，以及長達30分鐘的短暫氣流停止。我們建議您在這週內採用洋蔥式穿搭，以保持舒適。</p>
+
+<p>對於這項必要的維護可能對您的日常營運造成的任何干擾，我們深表歉意。如果您辦公室中有任何員工在電梯停用期間需要特殊的行動協助，請在10月8日（星期三）前聯絡我們的前台協調員 Marcus Reed（分機402），以便我們做出必要的安排。</p>
+
+<p>感謝您的合作，幫助我們維持世界級的設施。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 153 題 | 核心考點：Detail (難易度：Easy)</div>
+                <div class="question-text">Q153. What are tenants advised to do regarding the HVAC maintenance?</div>
+                <table class="options-table">
+            <tr><td>(A) Work from home during the maintenance week.</td><td>(B) Bring portable fans to the office.</td></tr>
+            <tr><td class="correct-option">(C) Wear layers of clothing. <span class="badge-correct">正確答案</span></td><td>(D) Keep their office doors open for ventilation.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於 HVAC 維護，建議租戶怎麼做？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>在 HVAC 部分尋找具體的建議 (recommend)。<br>
+                        <strong>2. 核心判定：</strong>文中提到「We recommend dressing in layers during this week to remain comfortable.」(我們建議您在這週內採用洋蔥式穿搭，以保持舒適)，對應選項 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(B)、(D) 都是合理推測，但文章並未提出這些具體建議。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 154 題 | 核心考點：Detail (難易度：Medium)</div>
+                <div class="question-text">Q154. Why would a tenant contact Marcus Reed?</div>
+                <table class="options-table">
+            <tr><td>(A) To request a key to the east stairwell.</td><td class="correct-option">(B) To arrange help for someone with movement difficulties. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To complain about the building's temperature.</td><td>(D) To reserve the freight elevator for a delivery.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">租戶為什麼需要聯絡 Marcus Reed？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>找出文中提及 Marcus Reed 名字的段落及其職責。<br>
+                        <strong>2. 核心判定：</strong>最後一段指出，如果員工「require special mobility assistance during the elevator downtime」(在電梯停用期間需要特殊的行動協助)，應聯絡前台協調員 Marcus Reed，故選項 (B) 正確。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 樓梯間會保持不鎖門(unlocked)，不需鑰匙。(C) 他負責安排特殊協助，並非處理空調客訴。(D) 電梯期間貨運電梯是開放共用的，未提需要向他預留。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">infrastructure</td><td class="vocab-pos">n.</td><td class="vocab-meaning">基礎建設，基礎設施</td></tr><tr><td class="vocab-word">shaft</td><td class="vocab-pos">n.</td><td class="vocab-meaning">井，通道 (電梯等)</td></tr><tr><td class="vocab-word">overhaul</td><td class="vocab-pos">n.</td><td class="vocab-meaning">徹底檢修</td></tr><tr><td class="vocab-word">fluctuation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">波動，起伏</td></tr><tr><td class="vocab-word">accommodation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">適應，安排 (尤指為弱勢者提供的便利措施)</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 5 | Questions 155-157 are based on an internal memo detailing a new company policy for remote work and expense claims. (第155至157題是根據一份詳細說明公司關於遠距工作及費用報銷新政策的內部備忘錄。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+<p><strong>MEMORANDUM</strong></p>
+<p><strong>To:</strong> All Employees, Global Operations<br>
+<strong>From:</strong> Marcus Thorne, VP of Human Resources<br>
+<strong>Date:</strong> November 20<br>
+<strong>Subject:</strong> Rollout of Permanent Flexible Work Policy and Expense Guidelines</p>
+
+<p>Following the tremendous success of our six-month remote work pilot program, the executive board has officially approved a permanent Flexible Work Policy. We believe this shift will promote better work-life balance while maintaining our high standards of productivity.</p>
+
+<p><strong>New Work Structure:</strong><br>
+Effective January 1, all full-time employees whose roles do not require physical onsite presence may choose to work remotely for up to three (3) days per week. To ensure team collaboration is not hindered, all employees must be available online during our "Core Collaboration Hours" from 10:00 AM to 3:00 PM (local time), regardless of their working location. Your specific remote days must be coordinated and approved by your direct supervisor by December 15.</p>
+
+<p><strong>Home Office Expense Reimbursement:</strong><br>
+To support this transition, the company is introducing a one-time Home Office Setup Stipend of $500 for all eligible employees. This stipend can be used to purchase ergonomic chairs, additional monitors, or upgraded desks. Receipts must be submitted through the Expensify portal under the category "Remote Setup" within 30 days of purchase.</p>
+
+<p>Furthermore, our policy regarding internet and mobile phone reimbursements is changing. Previously, we offered a flat $50 monthly allowance. Under the new policy, employees will receive an $80 monthly allowance to cover the increased bandwidth requirements of video conferencing. This will be automatically added to your monthly paycheck starting in January; no separate claims are necessary.</p>
+
+<p><strong>Manager Training:</strong><br>
+Managing hybrid teams requires a different approach. We are hosting two mandatory training sessions for all department managers on December 5 and December 7 to discuss performance tracking and team engagement in a hybrid environment.</p>
+
+<p>Please direct any questions regarding eligibility or these new guidelines to the HR Helpdesk at hr-support@company.com.</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="passage-content">
+<p><strong>備忘錄</strong></p>
+<p><strong>致：</strong>全球營運部所有員工<br>
+<strong>寄件者：</strong>Marcus Thorne，人力資源副總裁<br>
+<strong>日期：</strong>11月20日<br>
+<strong>主旨：</strong>永久彈性工作政策與費用報銷指南的推出</p>
+
+<p>在我們為期六個月的遠距工作試驗計畫取得巨大成功之後，執行董事會已正式批准了一項永久的彈性工作政策。我們相信這種轉變將促進更好的工作與生活平衡，同時維持我們高標準的生產力。</p>
+
+<p><strong>新工作結構：</strong><br>
+自1月1日起，所有其職責不需要親自在場的全職員工，每週可選擇最多三(3)天遠距工作。為了確保團隊合作不受阻礙，無論工作地點在哪裡，所有員工都必須在我們上午10:00至下午3:00（當地時間）的「核心合作時間」內保持在線。您具體的遠距工作日必須在12月15日前由您的直屬主管協調並核准。</p>
+
+<p><strong>家庭辦公室費用報銷：</strong><br>
+為了支援這項過渡，公司將為所有符合資格的員工提供一次性500美元的家庭辦公室設置津貼。此津貼可用於購買人體工學椅、額外的顯示器或升級辦公桌。收據必須在購買後30天內透過 Expensify 入口網站以「遠距設置 (Remote Setup)」類別提交。</p>
+
+<p>此外，我們關於網路和手機費用報銷的政策也將改變。以前，我們提供固定的每月50美元津貼。在新政策下，員工將獲得每月80美元的津貼，以涵蓋視訊會議增加的頻寬需求。從1月開始，這筆款項將自動加到您的每月薪資單中；無需另行申請報銷。</p>
+
+<p><strong>主管培訓：</strong><br>
+管理混合團隊需要不同的方法。我們將在12月5日和12月7日為所有部門經理舉辦兩場強制性培訓課程，討論在混合環境中的績效追蹤和團隊參與。</p>
+
+<p>若對資格或這些新指南有任何疑問，請透過 hr-support@company.com 聯絡人資服務台。</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 155 題 | 核心考點：Detail (難易度：Easy)</div>
+                <div class="question-text">Q155. What must employees do to participate in the remote work policy?</div>
+                <table class="options-table">
+            <tr><td>(A) Complete a six-month trial period.</td><td>(B) Work at the office for at least three days a week.</td></tr>
+            <tr><td class="correct-option">(C) Get approval for their schedule from a supervisor. <span class="badge-correct">正確答案</span></td><td>(D) Purchase their own office equipment first.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">員工必須做什麼才能參與遠距工作政策？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>找出申請或參與該計畫的條件。<br>
+                        <strong>2. 核心判定：</strong>文中提及「Your specific remote days must be coordinated and approved by your direct supervisor」(您具體的遠距工作日必須由您的直屬主管協調並核准)，對應選項 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 六個月是之前公司舉辦的試驗計畫，並非個別員工的試用期。(B) 政策是「最多三天遠距」，表示至少有兩天要在辦公室，而非三天。(D) 設備津貼是支援性質，並非參與遠距的前提。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 156 題 | 核心考點：Detail (難易度：Medium)</div>
+                <div class="question-text">Q156. How has the internet and phone allowance changed?</div>
+                <table class="options-table">
+            <tr><td>(A) It has been replaced by the $500 setup stipend.</td><td>(B) It has increased to $80 and requires monthly receipt submissions.</td></tr>
+            <tr><td class="correct-option">(C) It is now paid automatically at a higher rate. <span class="badge-correct">正確答案</span></td><td>(D) It is only available to managers of hybrid teams.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">網路和電話津貼有什麼改變？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>比較網路與電話津貼的前後差異及申請方式。<br>
+                        <strong>2. 核心判定：</strong>文章提到津貼從50美元增加到80美元，並且「will be automatically added to your monthly paycheck... no separate claims are necessary」(將自動加到您的每月薪資單中...無需另行申請)，完全符合選項 (C) 的「automatically(自動)」與「higher rate(較高費率)」。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 500美元是辦公設備的津貼，與每月通訊費不同。(B) 雖然金額是80美元，但不需要提交收據(no separate claims are necessary)。(D) 適用於參與遠距計畫的員工，不僅限於經理。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 157 題 | 核心考點：Detail (難易度：Easy)</div>
+                <div class="question-text">Q157. Who is required to attend a training session in December?</div>
+                <table class="options-table">
+            <tr><td>(A) All newly hired employees.</td><td>(B) Employees who purchase new office furniture.</td></tr>
+            <tr><td class="correct-option">(C) Department managers. <span class="badge-correct">正確答案</span></td><td>(D) Human Resources personnel.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">誰被要求參加12月的培訓課程？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>找出 Manager Training 段落中的目標對象。<br>
+                        <strong>2. 核心判定：</strong>文中明確寫到「We are hosting two mandatory training sessions for all department managers...」(我們將為所有部門經理舉辦兩場強制性培訓課程)，故選項 (C) 為正解。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(B)、(D) 皆非該強制性培訓指定的參與對象。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">pilot program</td><td class="vocab-pos">n.</td><td class="vocab-meaning">試驗計畫，前導計畫</td></tr><tr><td class="vocab-word">hinder</td><td class="vocab-pos">v.</td><td class="vocab-meaning">阻礙，妨礙</td></tr><tr><td class="vocab-word">stipend</td><td class="vocab-pos">n.</td><td class="vocab-meaning">津貼，薪俸</td></tr><tr><td class="vocab-word">ergonomic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">人體工學的</td></tr><tr><td class="vocab-word">mandatory</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">強制的，義務的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 6 | Questions 158-160 are based on the following comprehensive corporate training program webpage. (第158至160題為基於以下全面的企業培訓計畫網頁。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        
+        <div class="passage">
+            <h2>Welcome to NexaCorp Global Leadership Academy</h2>
+            <p>At NexaCorp, we believe that investing in our employees is the key to our sustainable growth and global competitiveness. The NexaCorp Global Leadership Academy (NGLA) offers a comprehensive suite of professional development programs tailored specifically for mid-level managers and aspiring executives. Our programs are designed in collaboration with top-tier business schools and industry experts to provide you with cutting-edge leadership skills, strategic thinking frameworks, and cross-cultural management techniques necessary to thrive in today's dynamic global marketplace.</p>
+            
+            <h3>Available Programs for 2026-2027</h3>
+            <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left; margin-top: 15px; margin-bottom: 15px;">
+                <tr>
+                    <th>Program Name</th>
+                    <th>Target Audience</th>
+                    <th>Duration</th>
+                    <th>Key Outcomes</th>
+                </tr>
+                <tr>
+                    <td>Strategic Visionary Track (SVT)</td>
+                    <td>Senior Managers (5+ years exp.)</td>
+                    <td>6 Months (Part-time)</td>
+                    <td>Mastery in market forecasting, disruptive innovation, and long-term business strategy formulation.</td>
+                </tr>
+                <tr>
+                    <td>Global Operations Mastery (GOM)</td>
+                    <td>Operations/Supply Chain Heads</td>
+                    <td>4 Months (Intensive)</td>
+                    <td>Optimization of international supply chains, risk mitigation, and sustainable logistics practices.</td>
+                </tr>
+                <tr>
+                    <td>Digital Transformation Leadership (DTL)</td>
+                    <td>IT and Product Managers</td>
+                    <td>8 Weeks (Online)</td>
+                    <td>Leading agile teams, AI integration strategies, and navigating organizational change in the digital era.</td>
+                </tr>
+            </table>
+
+            <h3>Application Guidelines & Terms of Enrollment</h3>
+            <p>To ensure a diverse and highly motivated cohort, admission to the NGLA programs is highly competitive. Prospective candidates must submit a formal application portfolio, which includes a comprehensive resume, a letter of recommendation from their immediate department director, and a 1000-word statement of purpose outlining their career trajectory and how the selected program aligns with their professional goals. Please note that all applications must be submitted via the internal HR portal no later than November 15th.</p>
+            
+            <p><strong>Financial Sponsorship:</strong> Full tuition coverage is available for employees who commit to remaining with NexaCorp for a minimum of two years post-graduation. Early termination of employment will result in a prorated reimbursement requirement. For more detailed information regarding the syllabus, faculty profiles, and alumni success stories, please navigate to the respective program tabs on the sidebar.</p>
+        </div>
+        
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        歡迎來到 NexaCorp 全球領導力學院
+
+在 NexaCorp，我們深信投資員工是實現可持續增長和維持全球競爭力的關鍵。NexaCorp 全球領導力學院 (NGLA) 為中階主管及有抱負的準高階主管，量身打造了一套全面的專業發展計畫。我們的計畫是與頂尖商學院及業界專家合作設計，旨在為您提供在現今動態全球市場中蓬勃發展所必需的尖端領導技能、戰略思維框架和跨文化管理技巧。
+
+2026-2027 年度可用計畫
+表格包含：
+- 戰略遠見軌道 (SVT)：針對資深經理 (5年以上經驗)，為期 6 個月 (兼職)，主要成果：精通市場預測、顛覆性創新及長期商業戰略制定。
+- 全球營運精通 (GOM)：針對營運/供應鏈主管，為期 4 個月 (密集)，主要成果：國際供應鏈優化、風險緩解及可持續物流實踐。
+- 數位轉型領導力 (DTL)：針對資訊科技與產品經理，為期 8 週 (線上)，主要成果：領導敏捷團隊、人工智慧整合策略，以及在數位時代引導組織變革。
+
+申請指南與註冊條款
+為確保學員陣容多元且具備高度積極性，NGLA 計畫的入學競爭非常激烈。潛在候選人必須提交一份正式的申請資料夾，其中包含一份詳盡的履歷、一封來自直屬部門總監的推薦信，以及一份 1000 字的目的聲明，概述其職涯軌跡以及所選計畫如何與其專業目標相符。請注意，所有申請必須在 11 月 15 日前透過內部人資入口網站提交。
+
+財務贊助：承諾在畢業後繼續在 NexaCorp 留任至少兩年的員工，可獲得全額學費補助。若提前終止僱傭關係，將需按比例退還學費。有關教學大綱、師資簡介和校友成功案例的更詳細資訊，請瀏覽側邊欄上的個別計畫分頁。
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 158 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q158. For whom is the Strategic Visionary Track primarily designed?</div>
+                <table class="options-table">
+            <tr><td>(A) Newly hired entry-level employees</td><td>(B) IT professionals seeking technical certifications</td></tr>
+            <tr><td class="correct-option">(C) Senior managers with at least five years of experience <span class="badge-correct">正確答案</span></td><td>(D) Department directors planning to retire soon</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">「戰略遠見軌道」計畫主要是為誰設計的？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail fact question requiring lookup in the table.<br>
+                        <strong>2. 核心判定：</strong>The table explicitly states under 'Target Audience' for the Strategic Visionary Track (SVT) that it is for 'Senior Managers (5+ years exp.)'.<br>
+                        <strong>3. 干擾項排除：</strong>A is incorrect as it targets mid-level to senior managers, not entry-level. B refers to DTL target audience. D is not mentioned.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 159 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q159. What is required as part of the application portfolio?</div>
+                <table class="options-table">
+            <tr><td>(A) A personal interview with the academy dean</td><td class="correct-option">(B) A letter of recommendation from a department director <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A certificate of previous leadership training</td><td>(D) A proof of residence and citizenship</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">申請資料夾中需要包含什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Specific detail question scanning for application requirements.<br>
+                        <strong>2. 核心判定：</strong>The text states: 'Prospective candidates must submit a formal application portfolio, which includes... a letter of recommendation from their immediate department director'.<br>
+                        <strong>3. 干擾項排除：</strong>A, C, and D are not listed in the application guidelines paragraph.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 160 題 | 核心考點：Inference (難易度：Hard)</div>
+                <div class="question-text">Q160. What can be inferred about the financial sponsorship?</div>
+                <table class="options-table">
+            <tr><td>(A) It is only available to those enrolled in the 8-week online program.</td><td>(B) Employees must pay upfront and get reimbursed upon graduation.</td></tr>
+            <tr><td class="correct-option">(C) It is conditional upon the employee's continued tenure with the company. <span class="badge-correct">正確答案</span></td><td>(D) It covers travel expenses for the duration of the program.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於財務贊助可以推論出什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Inference question based on conditions attached to sponsorship.<br>
+                        <strong>2. 核心判定：</strong>The text states 'Full tuition coverage is available for employees who commit to remaining with NexaCorp for a minimum of two years post-graduation.' Thus, the financial support is conditional on them staying at the company.<br>
+                        <strong>3. 干擾項排除：</strong>A is incorrect as it applies generally to NGLA programs. B is not mentioned (it says full coverage, not reimbursement after paying, except if they leave early). D is not mentioned.
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">competitive</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">競爭激烈的；具競爭力的</td></tr><tr><td class="vocab-word">prospective</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">預期的；潛在的</td></tr><tr><td class="vocab-word">trajectory</td><td class="vocab-pos">n.</td><td class="vocab-meaning">軌跡；發展途徑</td></tr><tr><td class="vocab-word">reimbursement</td><td class="vocab-pos">n.</td><td class="vocab-meaning">退還；報銷</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 7 | Questions 161-163 are based on the following formal correspondence regarding a commercial lease renewal. (第161至163題為基於以下關於商業租賃續約的正式信函。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        
+        <div class="passage">
+            <p><strong>From:</strong> Julian Vance, Property Manager, Crestview Commercial Real Estate<br>
+            <strong>To:</strong> Ms. Eleanor Vance, CEO, Vanguard Tech Solutions<br>
+            <strong>Date:</strong> October 12, 2026<br>
+            <strong>Subject:</strong> Notice of Commercial Lease Expiration and Renewal Options</p>
+            
+            <p>Dear Ms. Vance,</p>
+            
+            <p>I hope this letter finds you well. As the Property Manager representing Crestview Commercial Real Estate, I am writing to officially notify you that your current commercial lease agreement for Suite 405 at the Horizon Business Tower is scheduled to expire on December 31, 2026. We have thoroughly enjoyed having Vanguard Tech Solutions as a prominent tenant over the past three years, and we sincerely hope that you will consider renewing your lease with us for another term.</p>
+            
+            <p>Given the recent extensive renovations to the building's lobby, the upgrading of the HVAC systems to state-of-the-art energy-efficient models, and the expansion of the underground parking facilities, there will be a nominal adjustment to the rental rates for all tenants effective January 1, 2027. We believe these enhancements significantly improve the working environment and overall value of the property.</p>
+            
+            <p>Below, you will find the three renewal options we have tailored specifically for your firm:</p>
+            <ul>
+                <li><strong>Option A: One-Year Extension.</strong> A short-term renewal with a 5% increase over your current base rent. This option provides maximum flexibility but does not include any complimentary maintenance upgrades.</li>
+                <li><strong>Option B: Three-Year Lease.</strong> A medium-term commitment featuring a fixed 3% annual increase. This option includes two complimentary deep-cleaning services per year and priority access to the newly renovated conference center on the ground floor.</li>
+                <li><strong>Option C: Five-Year Lease (Recommended).</strong> A long-term commitment that locks in your current base rent for the first two years, followed by a flat 2.5% increase annually thereafter. This premium package includes custom repainting of your office suite, upgraded fiber-optic internet connectivity, and four dedicated VIP parking spaces at no additional cost.</li>
+            </ul>
+            
+            <p>Please review these options with your executive board and advise us of your decision in writing no later than November 30, 2026. If we do not receive a formal response by this deadline, the lease will automatically transition to a month-to-month agreement at a premium rate 15% higher than your current rent, as stipulated in Section 8 of your original contract.</p>
+            
+            <p>Should you wish to schedule a walkthrough to inspect the recent building improvements, or if you need to negotiate specific terms, please do not hesitate to contact my office directly at (555) 019-8822 or via email at j.vance@crestviewCRE.com.</p>
+            
+            <p>Sincerely,</p>
+            <p>Julian Vance<br>Property Manager, Crestview Commercial Real Estate</p>
+        </div>
+        
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        寄件者：Julian Vance，Crestview 商業地產物業經理
+收件者：Eleanor Vance 女士，Vanguard Tech Solutions 執行長
+日期：2026 年 10 月 12 日
+主旨：商業租賃到期及續約選項通知
+
+親愛的 Vance 女士，
+
+希望您一切安好。作為代表 Crestview 商業地產的物業經理，我寫信正式通知您，您目前在 Horizon 商業大樓 405 室的商業租賃協議預計將於 2026 年 12 月 31 日到期。過去三年來，我們非常榮幸能有 Vanguard Tech Solutions 成為我們的重要租戶，我們真誠地希望您能考慮與我們續約下一個租期。
+
+鑑於近期大樓大廳進行了大規模翻新、暖通空調(HVAC)系統升級為最先進的節能型號，以及地下停車設施的擴建，自 2027 年 1 月 1 日起，所有租戶的租金費率將會有小幅度的調整。我們相信這些提升顯著改善了工作環境以及物業的整體價值。
+
+以下是我們為貴公司量身定制的三個續約選項：
+- 選項 A：一年延期。短期續約，基本租金比目前增加 5%。此選項提供最大的靈活性，但不包含任何免費維護升級。
+- 選項 B：三年租約。中期承諾，固定每年調漲 3%。此選項包含每年兩次免費深層清潔服務，以及優先使用一樓全新翻修的會議中心。
+- 選項 C：五年租約 (強烈推薦)。長期承諾，前兩年鎖定目前的基礎租金，之後每年固定調漲 2.5%。這個超值方案包含您的辦公套房客製化重新粉刷、升級的光纖網路連線，以及四個免費專屬 VIP 停車位。
+
+請與您的董事會檢視這些選項，並於 2026 年 11 月 30 日前以書面形式告知我們您的決定。如果我們在此截止日期前未收到正式回覆，如您原合約第 8 節所規定，租約將自動轉換為按月租賃協議，且租金將比目前高出 15%。
+
+如果您希望安排一次巡視以檢查大樓最近的改善工程，或者如果您需要協商特定條款，請隨時直接致電我的辦公室 (555) 019-8822 或透過電子郵件 j.vance@crestviewCRE.com 與我聯繫。
+
+誠摯地，
+Julian Vance
+Crestview 商業地產物業經理
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 161 題 | 核心考點：Detail/Fact (難易度：Easy)</div>
+                <div class="question-text">Q161. What is the primary purpose of the letter?</div>
+                <table class="options-table">
+            <tr><td>(A) To complain about a tenant's behavior</td><td class="correct-option">(B) To notify a tenant about an expiring lease and offer renewal choices <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To announce the relocation of the property management office</td><td>(D) To advertise a new commercial building opening soon</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">這封信的主要目的是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Main idea question.<br>
+                        <strong>2. 核心判定：</strong>The subject line and first paragraph clearly state the intent: to notify the tenant of lease expiration and provide options for renewal.<br>
+                        <strong>3. 干擾項排除：</strong>A, C, and D do not align with the content of the letter.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 162 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q162. What benefit is included exclusively in Option C?</div>
+                <table class="options-table">
+            <tr><td>(A) Two complimentary deep-cleaning services per year</td><td>(B) Priority access to the conference center</td></tr>
+            <tr><td class="correct-option">(C) Custom repainting of the office suite <span class="badge-correct">正確答案</span></td><td>(D) A maximum flexibility short-term commitment</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">選項 C 中獨家包含了什麼好處？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail fact question finding the exclusive feature of Option C.<br>
+                        <strong>2. 核心判定：</strong>Option C includes 'custom repainting of your office suite, upgraded fiber-optic internet connectivity, and four dedicated VIP parking spaces'.<br>
+                        <strong>3. 干擾項排除：</strong>A and B are in Option B. D describes Option A.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 163 題 | 核心考點：Inference (難易度：Medium)</div>
+                <div class="question-text">Q163. What will happen if Ms. Vance does not respond by November 30?</div>
+                <table class="options-table">
+            <tr><td>(A) The lease will be terminated immediately on December 1.</td><td>(B) She will be forced to accept Option C automatically.</td></tr>
+            <tr><td class="correct-option">(C) Her rent will increase by 15% under a month-to-month agreement. <span class="badge-correct">正確答案</span></td><td>(D) She will lose access to the underground parking facilities.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果 Vance 女士未能在 11 月 30 日前回覆，將會發生什麼事？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail / Inference question on conditional consequence.<br>
+                        <strong>2. 核心判定：</strong>The letter states explicitly: 'If we do not receive a formal response by this deadline, the lease will automatically transition to a month-to-month agreement at a premium rate 15% higher than your current rent'.<br>
+                        <strong>3. 干擾項排除：</strong>A, B, and D contradict the stated consequences.
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">expiration</td><td class="vocab-pos">n.</td><td class="vocab-meaning">到期；期滿</td></tr><tr><td class="vocab-word">renovation</td><td class="vocab-pos">n.</td><td class="vocab-meaning">翻新；整修</td></tr><tr><td class="vocab-word">stipulate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">規定；約定</td></tr><tr><td class="vocab-word">transition</td><td class="vocab-pos">v.</td><td class="vocab-meaning">過渡；轉換</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 8 | Questions 164-167 are based on the following comprehensive workplace policy notice. (第164至167題為基於以下全面的職場政策公告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        
+        <div class="passage">
+            <h2>IMPORTANT NOTICE: Updated Cybersecurity and Data Privacy Protocols</h2>
+            <p><strong>To:</strong> All Employees, Contractors, and Third-Party Vendors at Zenith Financial Group<br>
+            <strong>From:</strong> Chief Information Security Officer (CISO) and Human Resources Department<br>
+            <strong>Effective Date:</strong> Monday, September 4</p>
+            
+            <p>In response to recent global cyber threats and to ensure full compliance with the newly enacted International Data Protection Regulations (IDPR), Zenith Financial Group is implementing a comprehensive overhaul of our cybersecurity protocols. The protection of our clients' sensitive financial data and our proprietary corporate information remains our utmost priority. All personnel must review and adhere to the following mandatory guidelines effective immediately.</p>
+            
+            <h3>1. Multi-Factor Authentication (MFA) Implementation</h3>
+            <p>Starting September 4, accessing any corporate network, cloud storage, or internal communication platform will require Multi-Factor Authentication (MFA). You will no longer be able to log in using just a password. Please download the Zenith Authenticator App on your registered mobile device before the effective date. Step-by-step installation guides have been emailed to your corporate accounts. Failure to set up MFA by the deadline will result in a temporary suspension of network access until IT assistance is rendered.</p>
+            
+            <h3>2. Device Usage and Remote Work Policies</h3>
+            <p>Employees are strictly prohibited from transferring corporate data to personal, unencrypted USB drives or external hard drives. Any necessary data transfer must occur through our secure, encrypted cloud server (ZenithCloud). Furthermore, when working remotely or traveling, employees must connect to the corporate network solely via the approved Virtual Private Network (VPN). Accessing sensitive client data over public, unsecured Wi-Fi networks (such as in cafes, airports, or hotels) is a direct violation of our security policy and may result in disciplinary action.</p>
+            
+            <h3>3. Phishing Awareness Training</h3>
+            <p>Because social engineering attacks are becoming increasingly sophisticated, mandatory cybersecurity training will be conducted quarterly. The first session, focusing on identifying advanced phishing emails and malicious attachments, is scheduled for September 15 at 2:00 PM EST. All staff must attend this one-hour virtual workshop. A makeup session will be available on September 18 for those with pre-approved scheduling conflicts.</p>
+            
+            <h3>4. Incident Reporting Procedure</h3>
+            <p>If you suspect that your device has been compromised, or if you receive a suspicious email, do not click on any links or forward the message. Immediately isolate the device by disconnecting it from the internet and contact the IT Security Helpdesk at extension 4499 or via the emergency hotline at 1-800-555-4499. Prompt reporting is critical to containing potential breaches.</p>
+            
+            <p>Your cooperation is essential in maintaining the integrity and security of Zenith Financial Group's infrastructure. Please sign the digital acknowledgment form in the HR portal by Friday to confirm your understanding of these updated protocols.</p>
+        </div>
+        
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        重要公告：更新版網路安全與資料隱私協議
+
+致：Zenith 金融集團所有員工、承包商及第三方供應商
+來自：資訊安全長 (CISO) 及人力資源部
+生效日期：9 月 4 日（星期一）
+
+為因應近期全球網路威脅，並確保完全符合新頒布的國際資料保護法規 (IDPR)，Zenith 金融集團正在實施網路安全協議的全面改革。保護客戶敏感的金融資料及我們專屬的企業資訊，始終是我們的首要任務。所有人員必須審閱並遵守以下立即生效的強制性準則。
+
+1. 多因素驗證 (MFA) 實施
+自 9 月 4 日起，存取任何企業網路、雲端儲存或內部通訊平台皆需要多因素驗證 (MFA)。您將無法僅憑密碼登入。請在生效日期前，於您註冊的行動裝置上下載 Zenith Authenticator 應用程式。逐步安裝指南已發送至您的公司電子郵件帳戶。未能在截止日期前設定 MFA 者，將導致網路存取權限被暫時中止，直到獲得 IT 協助為止。
+
+2. 裝置使用與遠距工作政策
+嚴禁員工將企業資料傳輸至個人未加密的 USB 隨身碟或外接硬碟。任何必要的資料傳輸必須透過我們安全、加密的雲端伺服器 (ZenithCloud) 進行。此外，在遠距工作或出差時，員工必須僅透過核准的虛擬私人網路 (VPN) 連線至企業網路。在公共、不安全的 Wi-Fi 網路（如咖啡廳、機場或飯店）上存取敏感的客戶資料，直接違反我們的安全政策，並可能導致紀律處分。
+
+3. 網路釣魚意識培訓
+由於社交工程攻擊變得日益複雜，每季將舉行強制性的網路安全培訓。第一場會議重點在於識別進階的網路釣魚電子郵件及惡意附件，安排於美國東部時間 9 月 15 日下午 2:00 舉行。所有員工必須參加這場一小時的虛擬工作坊。針對有事先核准日程衝突的員工，將於 9 月 18 日提供補課。
+
+4. 事件回報程序
+如果您懷疑您的裝置已被入侵，或者如果您收到可疑的電子郵件，請勿點擊任何連結或轉發該訊息。請立即將裝置斷開網路連線以進行隔離，並撥打分機 4499 或透過緊急熱線 1-800-555-4499 聯繫 IT 安全服務台。迅速回報對於控制潛在的資料外洩至關重要。
+
+您的合作對於維護 Zenith 金融集團基礎設施的完整性與安全性不可或缺。請於星期五前在人力資源入口網站簽署數位確認表，以確認您已了解這些更新的協議。
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 164 題 | 核心考點：Detail/Fact (難易度：Easy)</div>
+                <div class="question-text">Q164. What is the primary reason for updating the cybersecurity protocols?</div>
+                <table class="options-table">
+            <tr><td>(A) To prepare for a merger with another financial institution</td><td class="correct-option">(B) To respond to global cyber threats and comply with new IDPR regulations <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) To introduce a newly hired Chief Information Security Officer</td><td>(D) To reduce the company's annual IT infrastructure budget</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">更新網路安全協議的主要原因是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail question asking for the cause/reason.<br>
+                        <strong>2. 核心判定：</strong>The first paragraph states: 'In response to recent global cyber threats and to ensure full compliance with the newly enacted International Data Protection Regulations (IDPR)...'<br>
+                        <strong>3. 干擾項排除：</strong>A, C, and D are not mentioned as reasons for the update.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 165 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q165. What consequence will employees face if they do not set up MFA by September 4?</div>
+                <table class="options-table">
+            <tr><td>(A) They will have their mobile devices confiscated.</td><td>(B) They will face immediate disciplinary action.</td></tr>
+            <tr><td class="correct-option">(C) They will lose network access temporarily until they get IT help. <span class="badge-correct">正確答案</span></td><td>(D) They will have to pay a fine to the HR department.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果員工未在 9 月 4 日前設定 MFA，將面臨什麼後果？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail fact question looking for consequences.<br>
+                        <strong>2. 核心判定：</strong>Section 1 states: 'Failure to set up MFA by the deadline will result in a temporary suspension of network access until IT assistance is rendered.'<br>
+                        <strong>3. 干擾項排除：</strong>A, B, and D are incorrect. Disciplinary action (B) is mentioned for using public Wi-Fi without VPN, not for missing the MFA deadline.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 166 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q166. When is the makeup session for the cybersecurity training scheduled?</div>
+                <table class="options-table">
+            <tr><td>(A) September 4</td><td>(B) September 15</td></tr>
+            <tr><td class="correct-option">(C) September 18 <span class="badge-correct">正確答案</span></td><td>(D) By Friday</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">網路安全培訓的補課安排在什麼時候？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Specific detail scan.<br>
+                        <strong>2. 核心判定：</strong>Section 3 states: 'A makeup session will be available on September 18 for those with pre-approved scheduling conflicts.'<br>
+                        <strong>3. 干擾項排除：</strong>September 15 is the primary session date. September 4 is the MFA deadline. Friday is the deadline for signing the digital form.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 167 題 | 核心考點：Inference (難易度：Hard)</div>
+                <div class="question-text">Q167. What should an employee do first if they receive an email that looks like a phishing attempt?</div>
+                <table class="options-table">
+            <tr><td>(A) Forward it to the HR department for investigation</td><td class="correct-option">(B) Disconnect their device from the internet <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Reply to the sender to verify their identity</td><td>(D) Download the Zenith Authenticator App</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果員工收到看起來像是網路釣魚嘗試的電子郵件，他們首先應該做什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail question scanning for procedural steps.<br>
+                        <strong>2. 核心判定：</strong>Section 4 states: 'If you... receive a suspicious email, do not click on any links or forward the message. Immediately isolate the device by disconnecting it from the internet...'<br>
+                        <strong>3. 干擾項排除：</strong>A and C are explicitly against the instructions (do not forward or interact). D is unrelated to incident reporting.
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">compliance</td><td class="vocab-pos">n.</td><td class="vocab-meaning">遵守；符合</td></tr><tr><td class="vocab-word">proprietary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">專有的；專利的</td></tr><tr><td class="vocab-word">suspension</td><td class="vocab-pos">n.</td><td class="vocab-meaning">暫停；中止</td></tr><tr><td class="vocab-word">phishing</td><td class="vocab-pos">n.</td><td class="vocab-meaning">網路釣魚</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 9 | Questions 168-171 are based on the following detailed event registration webpage. (第168至171題為基於以下詳細的活動註冊網頁。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        
+        <div class="passage">
+            <h2>Welcome to the 12th Annual Global E-Commerce Innovators Summit</h2>
+            <p><strong>Dates:</strong> March 10 - March 12, 2027<br>
+            <strong>Location:</strong> The Sapphire Convention Center, Seattle, WA<br>
+            <strong>Theme:</strong> Navigating the Next Wave: AI, Automation, and the Future of Retail</p>
+            
+            <p>Join over 3,000 industry leaders, technology developers, and retail entrepreneurs for three days of intensive networking, insightful keynote addresses, and hands-on workshops. The Global E-Commerce Innovators Summit (GEIS) has established itself as the premier gathering for those looking to stay ahead of rapidly evolving digital market trends. This year, our focus is heavily placed on the integration of artificial intelligence in customer service, automated warehousing solutions, and omni-channel retail strategies.</p>
+            
+            <h3>Registration Packages and Pricing</h3>
+            <p>We offer a tiered registration system designed to accommodate different professional needs and budgets. Please review the options below carefully before proceeding to the checkout portal.</p>
+            
+            <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; text-align: left; margin-top: 15px; margin-bottom: 15px;">
+                <tr>
+                    <th>Package Type</th>
+                    <th>Price (Early Bird)</th>
+                    <th>Price (Standard)</th>
+                    <th>Access Privileges Included</th>
+                </tr>
+                <tr>
+                    <td>Expo Pass</td>
+                    <td>$299</td>
+                    <td>$399</td>
+                    <td>Access to the main exhibition floor, vendor booths, and open-stage product demonstrations.</td>
+                </tr>
+                <tr>
+                    <td>Pro Delegate Pass</td>
+                    <td>$699</td>
+                    <td>$849</td>
+                    <td>All Expo Pass benefits PLUS access to all breakout sessions, panel discussions, and daily buffet lunches.</td>
+                </tr>
+                <tr>
+                    <td>VIP Executive Pass</td>
+                    <td>$1,299</td>
+                    <td>$1,599</td>
+                    <td>All Pro Delegate benefits PLUS exclusive keynote speaker meet-and-greets, access to the VIP lounge, and an invitation to the Gala Dinner on March 11.</td>
+                </tr>
+            </table>
+            <p><em>* Early Bird pricing expires strictly on January 15, 2027. All Standard pricing applies from January 16 onwards. Student discounts (50% off Expo Pass only) are available with a valid university ID.</em></p>
+
+            <h3>Cancellation & Refund Policy</h3>
+            <p>We understand that schedules can change unexpectedly. Cancellations made prior to February 10 will receive a full refund, minus a $50 administrative processing fee. Cancellations submitted between February 11 and March 1 will be eligible for a 50% refund. Unfortunately, no refunds will be issued for cancellations requested after March 1, regardless of the reason. However, ticket transfers to a colleague within the same organization are permitted at no extra charge up until 48 hours before the event commencement.</p>
+            
+            <p><strong>Accommodation:</strong> GEIS has partnered with several nearby hotels, including The Grand Seattle Hotel and Harbor Suites, to offer discounted room blocks for attendees. Please use the promo code GEIS2027 when booking directly on their websites. Note that shuttle services between these partner hotels and the convention center will run every 30 minutes during summit hours.</p>
+        </div>
+        
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        歡迎來到第 12 屆年度全球電子商務創新者高峰會
+
+日期：2027 年 3 月 10 日 - 3 月 12 日
+地點：華盛頓州西雅圖藍寶石會議中心
+主題：引領下一波浪潮：人工智慧、自動化與零售的未來
+
+與超過 3,000 名業界領袖、技術開發人員及零售企業家齊聚一堂，參加為期三天的密集建立人脈、極具洞察力的主題演講以及實作工作坊。全球電子商務創新者高峰會 (GEIS) 已確立其作為期望在快速演變的數位市場趨勢中保持領先者之首選盛會的地位。今年，我們的重點大量放在人工智慧在客戶服務中的整合、自動化倉儲解決方案，以及全通路零售策略。
+
+註冊方案與定價
+我們提供分級註冊系統，旨在滿足不同的專業需求與預算。在前往結帳入口網站之前，請仔細審閱以下選項。
+
+表格包含：
+- 展覽通行證：早鳥價 $299，標準價 $399，權限包含：進入主展覽場地、供應商攤位及開放式舞台產品演示。
+- 專業代表通行證：早鳥價 $699，標準價 $849，權限包含：所有展覽通行證福利，加上參與所有分組會議、小組討論及每日自助午餐。
+- VIP 行政通行證：早鳥價 $1,299，標準價 $1,599，權限包含：所有專業代表福利，加上獨家的主題演講嘉賓見面會、進入 VIP 休息室，以及 3 月 11 日晚宴的邀請函。
+* 早鳥價格嚴格於 2027 年 1 月 15 日失效。自 1 月 16 日起適用所有標準價格。憑有效的學生證可享有學生折扣（僅限展覽通行證 5 折）。
+
+取消與退款政策
+我們理解日程安排可能會發生意外改變。在 2 月 10 日前取消將獲得全額退款，但需扣除 50 美元的行政處理費。在 2 月 11 日至 3 月 1 日期間提交的取消申請將符合 50% 退款資格。遺憾的是，在 3 月 1 日之後提出的取消請求將不予退款，無論原因為何。然而，在活動開始前 48 小時，允許免費將門票轉讓給同一組織內的同事。
+
+住宿：GEIS 已與附近幾家飯店合作，包括西雅圖大飯店和海港套房飯店，為與會者提供折扣客房保留區。在他們的網站上直接預訂時，請使用促銷代碼 GEIS2027。請注意，這些合作飯店與會議中心之間的接駁車服務在高峰會期間每 30 分鐘運行一班。
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 168 題 | 核心考點：Main Idea (難易度：Easy)</div>
+                <div class="question-text">Q168. What is the main focus of this year's summit?</div>
+                <table class="options-table">
+            <tr><td>(A) Expanding physical retail storefronts in rural areas</td><td class="correct-option">(B) Integrating AI, automation, and omni-channel strategies <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Training entry-level employees for customer support roles</td><td>(D) Reviewing past decades of e-commerce history</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">今年高峰會的主要重點是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Main idea / Detail question.<br>
+                        <strong>2. 核心判定：</strong>Paragraph 1 clearly outlines the theme and focus: 'Navigating the Next Wave: AI, Automation, and the Future of Retail... focus is heavily placed on the integration of artificial intelligence... automated warehousing solutions, and omni-channel retail strategies.'<br>
+                        <strong>3. 干擾項排除：</strong>A, C, and D are off-topic based on the text.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 169 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q169. How much does a VIP Executive Pass cost if purchased on January 20?</div>
+                <table class="options-table">
+            <tr><td>(A) $849</td><td>(B) $1,299</td></tr>
+            <tr><td class="correct-option">(C) $1,599 <span class="badge-correct">正確答案</span></td><td>(D) $699</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果在 1 月 20 日購買，VIP 行政通行證的價格是多少？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail fact with conditional logic (date parsing).<br>
+                        <strong>2. 核心判定：</strong>Early bird pricing ends on January 15. Since the purchase is on January 20, the Standard price applies. The Standard price for the VIP Executive Pass is $1,599.<br>
+                        <strong>3. 干擾項排除：</strong>B is the early bird price. A and D are prices for the Pro Delegate Pass.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 170 題 | 核心考點：Detail/Fact (難易度：Hard)</div>
+                <div class="question-text">Q170. What happens if a registrant cancels their attendance on February 20?</div>
+                <table class="options-table">
+            <tr><td>(A) They will receive a full refund minus a $50 fee.</td><td class="correct-option">(B) They will receive a 50% refund of their registration cost. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) They will not receive any refund whatsoever.</td><td>(D) They can only transfer their ticket to a colleague.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">如果註冊者在 2 月 20 日取消出席，會發生什麼事？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail question involving date ranges.<br>
+                        <strong>2. 核心判定：</strong>The policy states: 'Cancellations submitted between February 11 and March 1 will be eligible for a 50% refund.' February 20 falls exactly in this period.<br>
+                        <strong>3. 干擾項排除：</strong>A is for before Feb 10. C is for after March 1. D is an alternative option, but not the only outcome, and the question asks what happens to the refund status.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 171 題 | 核心考點：Inference (難易度：Medium)</div>
+                <div class="question-text">Q171. How can attendees travel between the partner hotels and the convention center?</div>
+                <table class="options-table">
+            <tr><td>(A) By walking across a pedestrian bridge</td><td>(B) By utilizing a free public city bus</td></tr>
+            <tr><td class="correct-option">(C) By taking a shuttle service provided every half hour <span class="badge-correct">正確答案</span></td><td>(D) By renting cars using a special discount code</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">與會者如何在合作飯店和會議中心之間往返？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail scanning.<br>
+                        <strong>2. 核心判定：</strong>The text states: 'shuttle services between these partner hotels and the convention center will run every 30 minutes during summit hours.'<br>
+                        <strong>3. 干擾項排除：</strong>A, B, and D are not mentioned in the text.
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">premier</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">首要的；頂尖的</td></tr><tr><td class="vocab-word">integration</td><td class="vocab-pos">n.</td><td class="vocab-meaning">整合；結合</td></tr><tr><td class="vocab-word">commencement</td><td class="vocab-pos">n.</td><td class="vocab-meaning">開始；開端</td></tr><tr><td class="vocab-word">accommodate</td><td class="vocab-pos">v.</td><td class="vocab-meaning">容納；迎合需求</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 10 | Questions 172-175 are based on the following comprehensive business response letter. (第172至175題為基於以下全面的商業回覆信函。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        
+        <div class="passage">
+            <p><strong>Brighton Manufacturing Solutions</strong><br>
+            400 Industrial Parkway, Suite 200, Detroit, MI 48201<br>
+            www.brightonmfg.com | (313) 555-8900</p>
+            
+            <p>May 18, 2026</p>
+            
+            <p>Mr. Thomas Langdon<br>
+            Director of Procurement<br>
+            Stellar Auto Parts Inc.<br>
+            1500 Assembly Way, Toledo, OH 43612</p>
+            
+            <p><strong>Subject: Response to Inquiry and Price Quotation Request #88-2B</strong></p>
+            
+            <p>Dear Mr. Langdon,</p>
+            
+            <p>Thank you for reaching out to Brighton Manufacturing Solutions regarding your upcoming supply needs for the Q3 production cycle. We greatly appreciate the opportunity to bid on providing precision-engineered aluminum alloy brackets for Stellar Auto Parts Inc. After a thorough review of the technical blueprints and material specifications you provided in your May 12 email, our engineering and cost-estimation teams have formulated a comprehensive proposal.</p>
+            
+            <p>We are pleased to inform you that our facilities are fully equipped to handle the high-volume production you require. The components you specified require our advanced CNC machining process to ensure the exact tolerances needed for your automotive assemblies. Below is the preliminary pricing breakdown based on your requested quantity tiers:</p>
+            
+            <ul>
+                <li><strong>Tier 1 (5,000 - 9,999 units):</strong> $12.50 per unit</li>
+                <li><strong>Tier 2 (10,000 - 24,999 units):</strong> $11.20 per unit (Volume discount applied)</li>
+                <li><strong>Tier 3 (25,000+ units):</strong> $9.85 per unit (Maximum volume discount applied)</li>
+            </ul>
+            
+            <p>Please note that the prices quoted above do not include shipping costs, which will be calculated based on your preferred logistics provider. We currently partner with FreightMasters Logistics, who offer us a corporate rate that we can pass directly on to you. Additionally, there is a one-time tooling fee of $2,500 required to customize our machinery for your specific bracket design. This fee is completely waived if your initial purchase order falls within Tier 3.</p>
+            
+            <p>Our standard production lead time for orders up to 20,000 units is approximately four weeks from the date of deposit receipt. However, because you emphasized a tight deadline for the Q3 launch, we can offer an expedited manufacturing track that reduces lead time to 18 days for an additional 10% surcharge on the total order value.</p>
+            
+            <p>This quotation is valid for 30 days from the date of this letter. If you find these terms acceptable, please sign the attached preliminary agreement and return it along with your formal Purchase Order. Should you have any technical questions regarding the machining process or wish to request a physical prototype before committing to a full production run, please contact our lead engineer, Ms. Sarah Jenkins, directly at s.jenkins@brightonmfg.com.</p>
+            
+            <p>We look forward to the possibility of establishing a long and mutually beneficial partnership with Stellar Auto Parts Inc.</p>
+            
+            <p>Sincerely,</p>
+            
+            <p>Marcus Wellington<br>
+            Senior Sales Executive<br>
+            Brighton Manufacturing Solutions</p>
+        </div>
+        
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        Brighton 製造解決方案
+密西根州底特律市工業園林大道 400 號 200 室 48201
+www.brightonmfg.com | (313) 555-8900
+
+2026 年 5 月 18 日
+
+Thomas Langdon 先生
+採購總監
+Stellar 汽車零件公司
+俄亥俄州托萊多市裝配路 1500 號 43612
+
+主旨：對詢問及第 88-2B 號報價請求的回覆
+
+親愛的 Langdon 先生，
+
+感謝您就第三季度生產週期的近期供應需求，與 Brighton 製造解決方案聯繫。我們非常感激能有機會競標，為 Stellar 汽車零件公司提供精密設計的鋁合金支架。在徹底審查您 5 月 12 日電子郵件中提供的技術藍圖與材料規格後，我們的工程與成本估算團隊制定了一份全面的提案。
+
+我們很高興地通知您，我們的設施完全具備處理您所需的高產量生產能力。您指定的組件需要我們先進的 CNC 加工程序，以確保符合您汽車組裝所需的精確公差。以下是根據您要求的數量級別所做出的初步定價明細：
+
+- 第 1 級 (5,000 - 9,999 件)：每件 $12.50
+- 第 2 級 (10,000 - 24,999 件)：每件 $11.20 (已適用大量折扣)
+- 第 3 級 (25,000 件以上)：每件 $9.85 (已適用最高大量折扣)
+
+請注意，上述報價不含運費，運費將根據您偏好的物流供應商進行計算。我們目前與 FreightMasters 物流合作，他們為我們提供企業費率，我們可以將此費率直接轉讓給您。此外，為了將我們的機器客製化以符合您特定的支架設計，需要收取 $2,500 的一次性模具費。如果您最初的採購訂單屬於第 3 級，此費用將完全免除。
+
+對於數量在 20,000 件以內的訂單，我們的標準生產前置時間大約是收到訂金日期的四週。然而，由於您強調了第三季度發布的緊迫期限，我們可以提供加急製造通道，將前置時間縮短至 18 天，但需在訂單總值上額外收取 10% 的附加費。
+
+此報價自本信函日期起 30 天內有效。如果您認為這些條款可以接受，請簽署隨附的初步協議，並連同您的正式採購訂單一併退回。如果您對加工程序有任何技術問題，或希望在承諾全面生產前要求提供實體原型，請直接透過電子郵件 s.jenkins@brightonmfg.com 聯繫我們的首席工程師 Sarah Jenkins 女士。
+
+我們期待能與 Stellar 汽車零件公司建立長久互惠的合作關係。
+
+誠摯地，
+
+Marcus Wellington
+資深業務主管
+Brighton 製造解決方案
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 172 題 | 核心考點：Detail/Fact (難易度：Easy)</div>
+                <div class="question-text">Q172. What product is Stellar Auto Parts Inc. interested in purchasing?</div>
+                <table class="options-table">
+            <tr><td>(A) Advanced CNC machinery</td><td>(B) Logistics and shipping services</td></tr>
+            <tr><td class="correct-option">(C) Precision-engineered aluminum alloy brackets <span class="badge-correct">正確答案</span></td><td>(D) Automotive engine assemblies</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Stellar 汽車零件公司有興趣購買什麼產品？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail scanning for the product.<br>
+                        <strong>2. 核心判定：</strong>The first paragraph explicitly states: 'opportunity to bid on providing precision-engineered aluminum alloy brackets for Stellar Auto Parts Inc.'<br>
+                        <strong>3. 干擾項排除：</strong>A is the process used to make it. B is a side topic. D is related to their industry, but not the specific product requested.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 173 題 | 核心考點：Inference (難易度：Medium)</div>
+                <div class="question-text">Q173. Under what condition can the buyer avoid paying the $2,500 tooling fee?</div>
+                <table class="options-table">
+            <tr><td>(A) If they select FreightMasters Logistics as their carrier</td><td class="correct-option">(B) If their initial order is 25,000 units or more <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) If they request the expedited manufacturing track</td><td>(D) If they sign the agreement within 30 days</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在什麼條件下買方可以避免支付 $2,500 的模具費？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail / Inference on conditional fees.<br>
+                        <strong>2. 核心判定：</strong>The letter states: 'This fee is completely waived if your initial purchase order falls within Tier 3.' Tier 3 is defined as '25,000+ units'.<br>
+                        <strong>3. 干擾項排除：</strong>A, C, and D are mentioned in the text but do not trigger the fee waiver.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 174 題 | 核心考點：Detail/Fact (難易度：Medium)</div>
+                <div class="question-text">Q174. What is the cost of shortening the production lead time to 18 days?</div>
+                <table class="options-table">
+            <tr><td>(A) A flat fee of $2,500</td><td>(B) An extra $12.50 per unit</td></tr>
+            <tr><td class="correct-option">(C) A 10% surcharge on the total order value <span class="badge-correct">正確答案</span></td><td>(D) Double the standard shipping rates</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">將生產前置時間縮短至 18 天的成本是多少？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Specific detail scanning.<br>
+                        <strong>2. 核心判定：</strong>The text states: 'we can offer an expedited manufacturing track that reduces lead time to 18 days for an additional 10% surcharge on the total order value.'<br>
+                        <strong>3. 干擾項排除：</strong>A is the tooling fee. B is the Tier 1 unit price. D is not mentioned.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 175 題 | 核心考點：Inference (難易度：Hard)</div>
+                <div class="question-text">Q175. Who should Mr. Langdon contact to ask about getting a physical sample of the product?</div>
+                <table class="options-table">
+            <tr><td>(A) Marcus Wellington</td><td class="correct-option">(B) Sarah Jenkins <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) The Director of Procurement</td><td>(D) FreightMasters Logistics</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Langdon 先生應該聯繫誰來詢問獲取產品實體樣品的事宜？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail lookup with inference.<br>
+                        <strong>2. 核心判定：</strong>The letter states: 'wish to request a physical prototype before committing... please contact our lead engineer, Ms. Sarah Jenkins...'<br>
+                        <strong>3. 干擾項排除：</strong>A is the writer of the letter. C is Langdon himself. D is the shipping partner.
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">procurement</td><td class="vocab-pos">n.</td><td class="vocab-meaning">採購</td></tr><tr><td class="vocab-word">blueprint</td><td class="vocab-pos">n.</td><td class="vocab-meaning">藍圖；設計圖</td></tr><tr><td class="vocab-word">expedited</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">加急的；快速的</td></tr><tr><td class="vocab-word">prototype</td><td class="vocab-pos">n.</td><td class="vocab-meaning">原型；樣品</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 11 | Questions 176 through 180 relate to a promotional flyer for shipping services and a subsequent delivery tracking email message. (第 176-180 題與航運服務宣傳傳單及隨後的送貨追蹤電子郵件訊息有關。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+  <div class="document-header">
+    <h2>SwiftShip Logistics: Business Shipping Solutions</h2>
+    <p>Are you looking for a reliable partner to handle your company's growing shipping needs? SwiftShip Logistics provides comprehensive, end-to-end delivery services tailored specifically for modern businesses. Whether you are shipping documents across the city or sending heavy equipment across the country, we have a solution that fits your timeline and budget.</p>
+  </div>
+  
+  <div class="document-body">
+    <h3>Our Standard Business Rates (Domestic)</h3>
+    <ul>
+      <li><strong>Standard Ground Shipping:</strong> $15.00 flat rate for packages up to 10 lbs. Delivery within 3-5 business days.</li>
+      <li><strong>Express Air Shipping:</strong> $25.00 flat rate for packages up to 10 lbs. Delivery within 2 business days. Guaranteed tracking included.</li>
+      <li><strong>Priority Overnight:</strong> $40.00 flat rate for packages up to 10 lbs. Guaranteed next-morning delivery by 10:30 AM.</li>
+    </ul>
+    
+    <h3>Special Spring Promotion!</h3>
+    <p>We value our corporate partners. For the entire month of May, any registered corporate account holder can receive a 20% discount on all Express Air Shipping orders! Simply enter the promotional code <strong>CORP20</strong> at checkout to apply the discount. Please note that this offer cannot be combined with other ongoing promotions or volume discounts. Furthermore, the discount applies only to the base shipping rate, not to any fuel surcharges or insurance fees.</p>
+    <p>To register for a corporate account, please visit our website at www.swiftshiplogistics.com or call our business support line at 1-800-555-0199. Our representatives are available 24/7 to assist you in setting up your account profile.</p>
+  </div>
+  
+  <hr style="margin: 20px 0;">
+  
+  <div class="document-header" style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
+    <p><strong>To:</strong> Sarah Jenkins &lt;s.jenkins@jenkinstech.com&gt;</p>
+    <p><strong>From:</strong> Notifications &lt;tracking@swiftshiplogistics.com&gt;</p>
+    <p><strong>Date:</strong> May 12</p>
+    <p><strong>Subject:</strong> Shipping Update: Tracking #9988776655</p>
+  </div>
+  
+  <div class="document-body" style="padding-top: 15px;">
+    <p>Dear Ms. Jenkins,</p>
+    <p>Thank you for choosing SwiftShip Logistics. We are writing to provide you with an important update regarding your recent shipment.</p>
+    
+    <h4>Order Summary:</h4>
+    <ul>
+      <li><strong>Tracking Number:</strong> 9988776655</li>
+      <li><strong>Shipping Method:</strong> Express Air Shipping</li>
+      <li><strong>Base Rate Applied:</strong> $20.00</li>
+      <li><strong>Destination:</strong> 450 Innovation Drive, Chicago, IL</li>
+    </ul>
+    
+    <p>Your package was dispatched from our Seattle distribution center on May 11 and was originally scheduled to arrive at your Chicago destination on May 13. However, due to severe unexpected thunderstorms in the greater Chicago area, flights into O'Hare International Airport have been temporarily grounded. </p>
+    <p>As a result of these adverse weather conditions, your package's delivery has been delayed. The new estimated delivery date is <strong>May 14</strong> by the end of the business day. We apologize for any inconvenience this delay may cause to your business operations. Our dispatchers are monitoring the situation closely and will ensure your package is placed on the first available cargo flight once the weather clears.</p>
+    <p>If you have any urgent concerns or if you need to reroute the package, please contact our customer service team immediately and reference your tracking number.</p>
+    <p>Sincerely,</p>
+    <p>The SwiftShip Logistics Team</p>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        （第一篇為物流公司提供的企業貨運服務廣告與五月促銷方案；第二篇為寄給客戶Sarah Jenkins的包裹追蹤更新郵件，說明因氣候因素導致航班延遲。）
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 176 題 | 核心考點：5 (難易度：Medium)</div>
+                <div class="question-text">Q176. What is indicated about the Priority Overnight shipping option?</div>
+                <table class="options-table">
+            <tr><td>(A) It is the only method that includes tracking.</td><td class="correct-option">(B) It costs $40.00 for packages up to 10 lbs. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It delivers packages within two business days.</td><td>(D) It is eligible for the May corporate discount.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於優先隔夜送達選項，暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第一篇)<br>
+                        <strong>2. 核心判定：</strong>廣告中提到「Priority Overnight: $40.00 flat rate for packages up to 10 lbs.」，因此選項 (B) 正確。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 追蹤服務在Express Air Shipping中也有提及。(C) 這是Express Air Shipping的運送時間。(D) 五月折扣僅適用於Express Air Shipping。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 177 題 | 核心考點：5 (難易度：Easy)</div>
+                <div class="question-text">Q177. When does the promotional offer expire?</div>
+                <table class="options-table">
+            <tr><td>(A) At the beginning of May</td><td class="correct-option">(B) At the end of May <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) On May 11</td><td>(D) On May 14</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">促銷優惠何時到期？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第一篇)<br>
+                        <strong>2. 核心判定：</strong>廣告提及「For the entire month of May...」，表示優惠在五月底結束，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 優惠持續整個五月，並非五月初結束。(C)、(D) 分別是包裹寄出與延後送達的日期。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 178 題 | 核心考點：5 (難易度：Hard)</div>
+                <div class="question-text">Q178. Why was Ms. Jenkins charged a base rate of $20.00?</div>
+                <table class="options-table">
+            <tr><td>(A) Her package weighed more than 10 lbs.</td><td>(B) She selected the Standard Ground Shipping method.</td></tr>
+            <tr><td class="correct-option">(C) She applied a promotional code using her corporate account. <span class="badge-correct">正確答案</span></td><td>(D) She paid an additional insurance fee for her shipment.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼 Jenkins 女士被收取的基準費率為20美元？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>推論題 (雙篇關聯)<br>
+                        <strong>2. 核心判定：</strong>第二封郵件中顯示她的貨運方式是「Express Air Shipping」，第一篇廣告提到原價為$25，並且企業客戶在五月使用代碼 CORP20 可享 20% 折扣。$25 的 20% 折扣後恰好為 $20，因此可推知她使用了該促銷優惠，選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 廣告中提到超過10磅的情況未特別說明，且不會導致降價。(B) 標準陸運的價格是$15。(D) 折扣不包含保險費，且郵件中明確顯示「Base Rate Applied: $20.00」。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 179 題 | 核心考點：5 (難易度：Medium)</div>
+                <div class="question-text">Q179. What is the reason for the delay of the package?</div>
+                <table class="options-table">
+            <tr><td>(A) The delivery address was entered incorrectly.</td><td>(B) A mechanical issue grounded the cargo flight.</td></tr>
+            <tr><td class="correct-option">(C) Severe weather conditions affected airport operations. <span class="badge-correct">正確答案</span></td><td>(D) There was a backlog at the Seattle distribution center.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">包裹延遲送達的原因是什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第二篇)<br>
+                        <strong>2. 核心判定：</strong>郵件中提到「due to severe unexpected thunderstorms... flights into O'Hare International Airport have been temporarily grounded」，表示惡劣天氣影響了航班營運，故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(B)、(D) 皆未在信件中提及，為錯誤資訊。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 180 題 | 核心考點：5 (難易度：Easy)</div>
+                <div class="question-text">Q180. When is the package currently expected to be delivered?</div>
+                <table class="options-table">
+            <tr><td>(A) May 11</td><td>(B) May 12</td></tr>
+            <tr><td>(C) May 13</td><td class="correct-option">(D) May 14 <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">包裹目前預計何時送達？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第二篇)<br>
+                        <strong>2. 核心判定：</strong>信中提到包裹原本預計5月13日抵達，但因延誤，「The new estimated delivery date is May 14」，因此目前預計5月14日抵達，選項 (D) 正確。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 為包裹寄出日。(B) 為郵件發送日。(C) 為原定抵達日。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">comprehensive</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">全面的；廣泛的</td></tr><tr><td class="vocab-word">tailored</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">量身定制的</td></tr><tr><td class="vocab-word">surcharge</td><td class="vocab-pos">n.</td><td class="vocab-meaning">附加費</td></tr><tr><td class="vocab-word">dispatch</td><td class="vocab-pos">v.</td><td class="vocab-meaning">發送；派遣</td></tr><tr><td class="vocab-word">grounded</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">停飛的</td></tr><tr><td class="vocab-word">adverse</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">不利的；有害的</td></tr><tr><td class="vocab-word">reroute</td><td class="vocab-pos">v.</td><td class="vocab-meaning">變更路線</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 12 | Questions 181 through 185 concern a digital marketing summit announcement paired with a conference registration invoice. (第 181-185 題與數位行銷高峰會公告及研討會報名發票有關。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="passage-content">
+  <div class="document-header">
+    <h2>3rd Annual Digital Marketing Summit</h2>
+    <p>Join the brightest minds in the industry for three days of intensive learning, networking, and innovation! The 3rd Annual Digital Marketing Summit is the premier event for marketing professionals seeking to elevate their brand's online presence.</p>
+  </div>
+  
+  <div class="document-body">
+    <h3>Event Details</h3>
+    <ul>
+      <li><strong>Dates:</strong> October 10 - 12</li>
+      <li><strong>Venue:</strong> Grand Plaza Hotel & Convention Center, Seattle, WA</li>
+      <li><strong>Target Audience:</strong> Marketing Directors, Content Creators, Data Analysts, and SEO Specialists.</li>
+    </ul>
+    
+    <h3>Conference Tracks</h3>
+    <p>Attendees can choose to participate in one of four specialized tracks, allowing for a deep dive into specific disciplines:</p>
+    <ol>
+      <li><strong>Search Engine Optimization (SEO):</strong> Mastering algorithms and organic growth.</li>
+      <li><strong>Social Media Engagement:</strong> Building loyal communities across platforms.</li>
+      <li><strong>Content Marketing Strategy:</strong> Storytelling that converts.</li>
+      <li><strong>Data & Analytics:</strong> Measuring success and optimizing ROI.</li>
+    </ol>
+    
+    <h3>Keynote Highlights</h3>
+    <p>We are thrilled to announce that <strong>Dr. Emily Chen</strong>, author of <em>"The Algorithmic Consumer,"</em> will deliver the opening keynote address titled "The Future of AI in Marketing" on Day 1 (October 10) at 9:00 AM. On Day 2, <strong>Mr. Marcus Thorne</strong> will discuss "Ethical Data Collection in the 2020s."</p>
+    
+    <h3>Registration Rates</h3>
+    <ul>
+      <li><strong>Early Bird (Register before September 1):</strong> $300.00 per person</li>
+      <li><strong>Standard (September 1 to October 5):</strong> $400.00 per person</li>
+    </ul>
+    <p><em>*Group Discount: Organizations registering three or more employees at the same time will automatically receive an additional 10% discount off their total registration fee.</em></p>
+  </div>
+  
+  <hr style="margin: 20px 0;">
+  
+  <div class="document-header" style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
+    <h2>Summit Registration Confirmation</h2>
+    <p><strong>Order Reference:</strong> #DMS-88492</p>
+    <p><strong>Date Submitted:</strong> August 15</p>
+  </div>
+  
+  <div class="document-body" style="padding-top: 15px;">
+    <h3>Organization Details</h3>
+    <p><strong>Company Name:</strong> Horizon Marketing Solutions</p>
+    <p><strong>Billing Contact:</strong> Greg Larson, Finance Manager</p>
+    <p><strong>Contact Email:</strong> glarson@horizonmarketing.com</p>
+    
+    <h3>Attendee Information</h3>
+    <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; text-align: left;">
+      <tr style="background-color: #eaeaea;">
+        <th>Name</th>
+        <th>Job Title</th>
+        <th>Selected Track</th>
+      </tr>
+      <tr>
+        <td>Mark Johnson</td>
+        <td>Senior Data Analyst</td>
+        <td>Data & Analytics</td>
+      </tr>
+      <tr>
+        <td>Laura Smith</td>
+        <td>Performance Marketer</td>
+        <td>Data & Analytics</td>
+      </tr>
+      <tr>
+        <td>David Lee</td>
+        <td>Community Manager</td>
+        <td>Social Media Engagement</td>
+      </tr>
+      <tr>
+        <td>Susan Kim</td>
+        <td>Social Media Strategist</td>
+        <td>Social Media Engagement</td>
+      </tr>
+    </table>
+    
+    <h3>Payment Summary</h3>
+    <p><strong>Subtotal (4 Attendees):</strong> $1,200.00</p>
+    <p><strong>Group Discount Applied (10%):</strong> -$120.00</p>
+    <p><strong>Total Amount Charged to Corporate Card ending in 4421:</strong> $1,080.00</p>
+    
+    <p><em>Note: Badges and registration materials can be picked up at the main lobby of the Grand Plaza Hotel starting at 7:00 AM on October 10. Please bring a valid photo ID.</em></p>
+  </div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        （第一篇為第三屆年度數位行銷高峰會的公告與議程介紹；第二篇為 Horizon Marketing Solutions 公司的團體報名確認表單與繳費明細。）
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 181 題 | 核心考點：5 (難易度：Easy)</div>
+                <div class="question-text">Q181. Where will the summit be held?</div>
+                <table class="options-table">
+            <tr><td>(A) In Chicago</td><td class="correct-option">(B) In Seattle <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) In New York</td><td>(D) In San Francisco</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">高峰會將在哪裡舉行？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第一篇)<br>
+                        <strong>2. 核心判定：</strong>第一篇公告中 Venue (地點) 標示為「Grand Plaza Hotel & Convention Center, Seattle, WA」，因此選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>其他城市皆未在文章中提及。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 182 題 | 核心考點：5 (難易度：Easy)</div>
+                <div class="question-text">Q182. Who is scheduled to speak on the first day of the event?</div>
+                <table class="options-table">
+            <tr><td>(A) Marcus Thorne</td><td>(B) Greg Larson</td></tr>
+            <tr><td class="correct-option">(C) Emily Chen <span class="badge-correct">正確答案</span></td><td>(D) Laura Smith</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">誰預定在活動第一天發言？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第一篇)<br>
+                        <strong>2. 核心判定：</strong>公告中 Keynote Highlights 提到「Dr. Emily Chen... will deliver the opening keynote address... on Day 1」，故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 預定在第二天(Day 2)演講。(B) 是報名公司的財務經理。(D) 是一名參加者。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 183 題 | 核心考點：5 (難易度：Hard)</div>
+                <div class="question-text">Q183. Why did Horizon Marketing Solutions pay a subtotal of $1,200.00?</div>
+                <table class="options-table">
+            <tr><td>(A) They purchased the standard registration for three employees.</td><td class="correct-option">(B) They registered four employees during the early bird period. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) They paid for an extra VIP session on Day 1.</td><td>(D) They failed to meet the requirements for a group discount.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼 Horizon Marketing Solutions 的小計為1,200美元？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>推論題 (雙篇關聯)<br>
+                        <strong>2. 核心判定：</strong>根據第二篇，表單提交日為 8月15日(早於9月1日)，符合 Early Bird 費率(每人$300)。由於報名了 4 位員工，小計為 4 x $300 = $1,200。因此選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 標準報名費是$400，三人為$1,200，但與表單中四名員工不符。(C) 未提及VIP議程。(D) 報名表單明細顯示他們確實獲得了10%的團體折扣(Group Discount Applied)，且四名員工符合團報條件。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 184 題 | 核心考點：5 (難易度：Medium)</div>
+                <div class="question-text">Q184. Which conference track will Laura Smith attend?</div>
+                <table class="options-table">
+            <tr><td>(A) Search Engine Optimization</td><td>(B) Social Media Engagement</td></tr>
+            <tr><td>(C) Content Marketing Strategy</td><td class="correct-option">(D) Data & Analytics <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">蘿拉·史密斯將參加哪一個議程？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第二篇)<br>
+                        <strong>2. 核心判定：</strong>報名表單中的與會者資訊(Attendee Information)顯示 Laura Smith 選擇的議程(Selected Track)為「Data & Analytics」，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 是 David Lee 與 Susan Kim 參加的議程。(A) 和 (C) 這次沒有員工報名。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 185 題 | 核心考點：5 (難易度：Medium)</div>
+                <div class="question-text">Q185. What is indicated about the group discount?</div>
+                <table class="options-table">
+            <tr><td>(A) It is only available to employees of the Grand Plaza Hotel.</td><td class="correct-option">(B) It requires organizations to register at least three people at once. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It is not applicable during the early bird period.</td><td>(D) It gives attendees a 20 percent reduction on ticket prices.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於團體折扣有什麼說明？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>細節題 (第一篇)<br>
+                        <strong>2. 核心判定：</strong>第一篇底部註明：「Organizations registering three or more employees at the same time will automatically receive an additional 10% discount」，因此必須同時報名三人或以上才能享有折扣，選項 (B) 正確。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 完全未提及。(C) 表單中他們在早鳥期間獲得了折扣，故適用。(D) 折扣為 10% 而非 20%。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">intensive</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">密集的；強化的</td></tr><tr><td class="vocab-word">premier</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">首要的；最著名的</td></tr><tr><td class="vocab-word">discipline</td><td class="vocab-pos">n.</td><td class="vocab-meaning">專業領域；學科</td></tr><tr><td class="vocab-word">optimize</td><td class="vocab-pos">v.</td><td class="vocab-meaning">最佳化</td></tr><tr><td class="vocab-word">ethical</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">道德的；倫理的</td></tr><tr><td class="vocab-word">subtotal</td><td class="vocab-pos">n.</td><td class="vocab-meaning">小計</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 13 | Questions 186 through 190 refer to three documents related to a staff training program, including an itinerary, a message, and a feedback sheet. (第 186-190 題與員工培訓計劃相關的三份文件（包含行程表、訊息及回饋表）有關。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="reading-passage-container">
+<p class="passage-header"><strong>Passage 1: Training Schedule</strong></p>
+<div class="passage-content">
+<h2 style="text-align:center;">Global Horizon Corporation - Annual Leadership Summit & Management Training</h2>
+<p><strong>Date:</strong> October 12 – October 14</p>
+<p><strong>Location:</strong> The Grand Azure Conference Center, 450 Blue Mountain Road, Denver, CO 80202</p>
+<p><strong>Objective:</strong> To equip mid-level and senior managers with advanced strategic thinking, cross-cultural communication skills, and innovative conflict resolution techniques essential for navigating today’s dynamic global market.</p>
+<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <tr style="background-color: #f2f2f2;">
+    <th>Time</th>
+    <th>Session Topic</th>
+    <th>Facilitator / Speaker</th>
+    <th>Room Assignment</th>
+  </tr>
+  <tr>
+    <td>09:00 AM - 10:30 AM</td>
+    <td>Keynote: The Future of Global Workspaces</td>
+    <td>Dr. Evelyn Vance, CEO</td>
+    <td>Grand Hall A</td>
+  </tr>
+  <tr>
+    <td>10:45 AM - 12:15 PM</td>
+    <td>Interactive Workshop: Agile Decision Making under Pressure</td>
+    <td>Marcus Thorne, VP of Operations</td>
+    <td>Meeting Room 102</td>
+  </tr>
+  <tr>
+    <td>12:15 PM - 01:30 PM</td>
+    <td>Networking Luncheon & Mentorship Matching</td>
+    <td>Catered by Azure Dining Services</td>
+    <td>Terrace Dining Area</td>
+  </tr>
+  <tr>
+    <td>01:30 PM - 03:00 PM</td>
+    <td>Seminar: Cross-Cultural Communication in Diverse Teams</td>
+    <td>Elena Rodriguez, Head of Global HR</td>
+    <td>Meeting Room 104</td>
+  </tr>
+  <tr>
+    <td>03:15 PM - 04:45 PM</td>
+    <td>Case Study Analysis: Resolving Internal Conflicts</td>
+    <td>Julian Bates, Chief Legal Officer</td>
+    <td>Meeting Room 102</td>
+  </tr>
+</table>
+<p><em>Note: All attendees are required to bring their company-issued laptops. Wi-Fi access codes will be provided at the registration desk upon check-in. Materials for the case study analysis will be distributed electronically 24 hours prior to the session.</em></p>
+</div>
+
+<hr style="margin: 20px 0;">
+
+<p class="passage-header"><strong>Passage 2: Confirmation Email</strong></p>
+<div class="passage-content">
+<p><strong>To:</strong> All Registered Participants &lt;participants@globalhorizon.com&gt;</p>
+<p><strong>From:</strong> Training Coordination Office &lt;training_coord@globalhorizon.com&gt;</p>
+<p><strong>Date:</strong> October 5</p>
+<p><strong>Subject:</strong> Final Confirmation and Pre-Summit Instructions: Global Horizon Leadership Summit</p>
+<p>Dear Participants,</p>
+<p>We are thrilled to confirm your registration for the upcoming Annual Leadership Summit and Management Training scheduled for October 12-14 at The Grand Azure Conference Center. This year’s curriculum has been meticulously designed based on the feedback from last year’s leadership competency surveys, ensuring that the topics are highly relevant to your professional development and our company’s strategic goals.</p>
+<p>Please review the attached updated schedule carefully. Due to an unforeseen scheduling conflict, the room assignment for the "Case Study Analysis: Resolving Internal Conflicts" session has been moved from Meeting Room 102 to the Executive Boardroom on the 3rd floor. The timing remains unchanged. All other sessions will proceed as originally scheduled.</p>
+<p>Additionally, for the "Agile Decision Making under Pressure" workshop led by Mr. Thorne, participants are requested to download the 'AgileMinds' interactive application on their company laptops prior to arrival, as the venue's bandwidth may be strained if everyone attempts to download it simultaneously during the session.</p>
+<p>Should you have any dietary restrictions that you have not yet communicated to us, please reply to this email by October 8 so we can accommodate your needs during the networking luncheon.</p>
+<p>We look forward to an engaging and productive summit.</p>
+<p>Warm regards,</p>
+<p>Samantha Higgins<br>Senior Training Coordinator<br>Global Horizon Corporation</p>
+</div>
+
+<hr style="margin: 20px 0;">
+
+<p class="passage-header"><strong>Passage 3: Feedback Form</strong></p>
+<div class="passage-content">
+<h2 style="text-align:center;">Global Horizon Leadership Summit - Participant Feedback Form</h2>
+<p><strong>Participant Name (Optional):</strong> Daniel Cho, Regional Sales Manager</p>
+<p><strong>Department:</strong> Sales & Marketing</p>
+<p><strong>Date Completed:</strong> October 15</p>
+<p><strong>Instructions:</strong> Please rate your experience for the sessions you attended. 1 = Poor, 5 = Excellent.</p>
+<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <tr style="background-color: #f2f2f2;">
+    <th>Session</th>
+    <th>Relevance (1-5)</th>
+    <th>Speaker Effectiveness (1-5)</th>
+    <th>Overall Satisfaction (1-5)</th>
+  </tr>
+  <tr>
+    <td>Keynote: The Future of Global Workspaces</td>
+    <td>4</td>
+    <td>5</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Agile Decision Making under Pressure</td>
+    <td>5</td>
+    <td>5</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>Cross-Cultural Communication in Diverse Teams</td>
+    <td>5</td>
+    <td>4</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Case Study Analysis: Resolving Internal Conflicts</td>
+    <td>3</td>
+    <td>4</td>
+    <td>3</td>
+  </tr>
+</table>
+<p><strong>Additional Comments:</strong><br>The summit was incredibly insightful and well-organized. The keynote address by Dr. Vance set a great tone for the event. I found Mr. Thorne's interactive workshop particularly valuable; the 'AgileMinds' software was intuitive and the scenarios were highly applicable to my daily responsibilities.</p>
+<p>My only minor critique involves the afternoon session led by the Chief Legal Officer. While the content was theoretically sound, the new venue for that specific session felt a bit cramped for the interactive group work required, and the acoustics made it difficult to hear participants from the back of the room. Perhaps a larger space, like the one originally planned, would have been better suited for that type of activity.</p>
+<p>Overall, it was a fantastic learning experience. The networking luncheon was also top-notch. I look forward to next year's summit!</p>
+</div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        【第一篇：培訓日程】全球視野公司年度領導力高峰會與管理培訓。日期：10月12日至14日。地點：大蔚藍會議中心。目的：為中高階管理者配備進階戰略思維、跨文化溝通技巧與創新衝突解決技術。日程表列出了從早上9:00到下午4:45的多場會議、研討會與午餐，並註明各場次的主講人與會議室。備註要求參加者攜帶公司筆電，並將提早提供案例分析資料。
+
+【第二篇：確認郵件】培訓協調辦公室發給所有註冊參與者的電子郵件，確認他們已報名高峰會。信中提到，基於去年的回饋，今年的課程經過精心設計。信件特別指出一個變更：由Julian Bates帶領的「案例分析：解決內部衝突」課程，因為排程衝突，其會議室從原定的102會議室更改至三樓的行政會議室，時間不變。同時要求參與者在抵達前，先在筆電下載『AgileMinds』互動應用程式，以供Marcus Thorne的研討會使用，避免現場頻寬不足。
+
+【第三篇：回饋表】參與者Daniel Cho填寫的回饋表。他對多數課程給予高分，並在額外評論中稱讚了高峰會的組織與Marcus Thorne的互動研討會（使用軟體很直觀）。但他提到下午由法務長（Julian Bates）帶領的課程雖然內容紮實，但新更換的場地對於需要小組互動的活動來說顯得有些擁擠，且音響效果不佳，認為原本計畫的場地可能會更合適。
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 186 題 | 核心考點：Information Retrieval (難易度：Medium)</div>
+                <div class="question-text">Q186. According to the schedule, what will participants be doing between 12:15 PM and 1:30 PM?</div>
+                <table class="options-table">
+            <tr><td>(A) Listening to a keynote speech</td><td class="correct-option">(B) Having a meal and networking <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Analyzing legal case studies</td><td>(D) Downloading a software application</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">根據日程表，參與者在下午12:15到1:30之間會做什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail Question<br>
+                        <strong>2. 核心判定：</strong>根據日程表（Passage 1），12:15 PM - 01:30 PM 的活動是「Networking Luncheon & Mentorship Matching (交流午餐與導師配對)」，這對應選項 (B) 的 having a meal and networking。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 發生在 09:00 AM；(C) 發生在 03:15 PM；(D) 郵件要求在抵達前完成下載。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 187 題 | 核心考點：Cross-Referencing (難易度：Hard)</div>
+                <div class="question-text">Q187. In the email, what is indicated about the 'Agile Decision Making under Pressure' workshop?</div>
+                <table class="options-table">
+            <tr><td>(A) It has been moved to the Executive Boardroom.</td><td>(B) It will be facilitated by Dr. Evelyn Vance.</td></tr>
+            <tr><td>(C) Participants must prepare a presentation for it.</td><td class="correct-option">(D) It requires the use of a specific digital tool. <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在電子郵件中，關於「壓力下的敏捷決策」研討會提到了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail/Cross-referencing Question<br>
+                        <strong>2. 核心判定：</strong>信件（Passage 2）提到「for the 'Agile Decision Making under Pressure' workshop... participants are requested to download the 'AgileMinds' interactive application...」，表示該研討會需要使用特定的數位工具（應用程式），故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 移到行政會議室的是下午的案例分析課程，而非此研討會；(B) 由日程表可知該研討會由 Marcus Thorne 主持，而非 Dr. Vance；(C) 信件並未要求參與者準備簡報。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 188 題 | 核心考點：Cross-Referencing (難易度：Hard)</div>
+                <div class="question-text">Q188. Which session did Daniel Cho feel was negatively impacted by a room change?</div>
+                <table class="options-table">
+            <tr><td>(A) The Future of Global Workspaces</td><td>(B) Cross-Cultural Communication in Diverse Teams</td></tr>
+            <tr><td>(C) Agile Decision Making under Pressure</td><td class="correct-option">(D) Case Study Analysis: Resolving Internal Conflicts <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Daniel Cho 認為哪一場會議受到房間更改的負面影響？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Cross-referencing Question<br>
+                        <strong>2. 核心判定：</strong>在回饋表（Passage 3）中，Daniel 提到由 Chief Legal Officer 帶領的下午課程，其「new venue (新場地)」顯得有些擁擠。比對日程表（Passage 1）和信件（Passage 2），由 Chief Legal Officer (Julian Bates) 帶領且更換房間的課程是「Case Study Analysis: Resolving Internal Conflicts」，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(B)、(C) 皆未更換房間，且他在回饋表中對 (C) 的評價極高。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 189 題 | 核心考點：Vocabulary In Context (難易度：Medium)</div>
+                <div class="question-text">Q189. In the email, the word 'strained' in paragraph 3, is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td>(A) filtered</td><td class="correct-option">(B) overloaded <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) injured</td><td>(D) expanded</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在電子郵件第三段中，單字「strained」最接近的意思是</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Vocabulary Question<br>
+                        <strong>2. 核心判定：</strong>信件提到「the venue's bandwidth may be strained if everyone attempts to download it simultaneously (如果每個人同時嘗試下載，會場的頻寬可能會變得 strained)」。此處的 strained 意指（系統、資源等）不堪負荷、吃緊，最接近的同義詞是 overloaded（超載的）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) filter(過濾)與網路頻寬負荷無關；(C) injured 常用於生物的受傷；(D) expand(擴張)意義相反。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 190 題 | 核心考點：Inference (難易度：Hard)</div>
+                <div class="question-text">Q190. What is suggested about the 'Case Study Analysis' session?</div>
+                <table class="options-table">
+            <tr><td>(A) It was added to the schedule at the last minute.</td><td class="correct-option">(B) It involved interactive group activities. <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) It was the most highly rated session of the summit.</td><td>(D) It required participants to bring printed documents.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於「案例分析」課程，暗示了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Inference Question<br>
+                        <strong>2. 核心判定：</strong>在回饋表（Passage 3）的評論中，Daniel 提到新場地對於「the interactive group work required (所需的互動小組工作)」來說有點擁擠，這暗示了該案例分析課程包含小組互動活動，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 信件中只提到因排程衝突而換房間，並未說它是最後一刻才加入的；(C) 從回饋表中可看出，該課程的評分(3分)相對較低；(D) 日程表註記資料會以「電子方式(electronically)」發送，並非紙本列印文件。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">Facilitator</td><td class="vocab-pos">n.</td><td class="vocab-meaning">引導者；主持人</td></tr><tr><td class="vocab-word">Mentorship</td><td class="vocab-pos">n.</td><td class="vocab-meaning">導師制度</td></tr><tr><td class="vocab-word">Meticulously</td><td class="vocab-pos">adv.</td><td class="vocab-meaning">一絲不苟地；精心</td></tr><tr><td class="vocab-word">Unforeseen</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">無法預見的；意料之外的</td></tr><tr><td class="vocab-word">Bandwidth</td><td class="vocab-pos">n.</td><td class="vocab-meaning">頻寬</td></tr><tr><td class="vocab-word">Acoustics</td><td class="vocab-pos">n.</td><td class="vocab-meaning">音響效果；聲學</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 14 | Questions 191 through 195 are based on several files concerning an employee's business trip, such as travel guidelines, a lodging receipt, and an email. (第 191-195 題與關於員工出差的數份文件（如出差指南、住宿收據及電子郵件）有關。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="reading-passage-container">
+<p class="passage-header"><strong>Passage 1: Company Corporate Travel Policy</strong></p>
+<div class="passage-content">
+<h2 style="text-align:center;">Vanguard Logistics Inc. - Corporate Travel & Expense Policy</h2>
+<p><strong>Effective Date:</strong> January 1, 2024</p>
+<p><strong>Section 4: Accommodation and Lodging</strong></p>
+<p>Employees traveling on official company business are expected to secure accommodations that are both comfortable and cost-effective. The company has negotiated corporate rates with several major hotel chains. Employees must use the company’s internal travel portal to book rooms to ensure these rates are applied.</p>
+<ul>
+  <li><strong>Maximum Nightly Rate:</strong> The maximum allowable rate for lodging is $180 per night, excluding applicable local and state taxes. Exceptions to this cap must be pre-approved by a department director and are typically only granted for high-cost metropolitan areas (e.g., New York, San Francisco, London).</li>
+  <li><strong>Incidental Expenses:</strong> The company covers standard room charges, internet access fees necessary for work, and a daily breakfast allowance up to $25.</li>
+  <li><strong>Non-Reimbursable Expenses:</strong> Expenses such as minibar purchases, in-room movies, gym/spa fees, and room service (beyond the breakfast allowance) are considered personal expenses and will not be reimbursed.</li>
+  <li><strong>Submission Process:</strong> All expense reports must be submitted via the Vanguard Expense Management System within 14 days of returning from the business trip. Original itemized receipts must be attached for all expenses exceeding $15.</li>
+</ul>
+<p>Failure to comply with these guidelines may result in delays in reimbursement or denial of the claim.</p>
+</div>
+
+<hr style="margin: 20px 0;">
+
+<p class="passage-header"><strong>Passage 2: Hotel Receipt</strong></p>
+<div class="passage-content">
+<h2 style="text-align:center;">The Wellington Hotel - Chicago Downtown</h2>
+<p><strong>Guest Name:</strong> Sarah Jenkins, Vanguard Logistics</p>
+<p><strong>Room Number:</strong> 412</p>
+<p><strong>Check-In Date:</strong> March 10, 2024</p>
+<p><strong>Check-Out Date:</strong> March 13, 2024</p>
+<table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <tr style="background-color: #f2f2f2;">
+    <th>Date</th>
+    <th>Description</th>
+    <th>Charge ($)</th>
+  </tr>
+  <tr>
+    <td>Mar 10</td>
+    <td>Room Charge (Corporate Rate)</td>
+    <td>165.00</td>
+  </tr>
+  <tr>
+    <td>Mar 10</td>
+    <td>State & Occupancy Tax</td>
+    <td>28.05</td>
+  </tr>
+  <tr>
+    <td>Mar 11</td>
+    <td>Room Charge (Corporate Rate)</td>
+    <td>165.00</td>
+  </tr>
+  <tr>
+    <td>Mar 11</td>
+    <td>State & Occupancy Tax</td>
+    <td>28.05</td>
+  </tr>
+  <tr>
+    <td>Mar 11</td>
+    <td>In-Room Minibar - Bottled Water & Snacks</td>
+    <td>18.50</td>
+  </tr>
+  <tr>
+    <td>Mar 12</td>
+    <td>Room Charge (Corporate Rate)</td>
+    <td>165.00</td>
+  </tr>
+  <tr>
+    <td>Mar 12</td>
+    <td>State & Occupancy Tax</td>
+    <td>28.05</td>
+  </tr>
+  <tr>
+    <td>Mar 12</td>
+    <td>Business Center - Printing Services</td>
+    <td>12.00</td>
+  </tr>
+  <tr>
+    <td>Mar 13</td>
+    <td>Breakfast Buffet - Cafe Wellington</td>
+    <td>22.00</td>
+  </tr>
+  <tr style="font-weight: bold; background-color: #e6e6e6;">
+    <td colspan="2" style="text-align: right;">Total Amount Due:</td>
+    <td>$631.65</td>
+  </tr>
+</table>
+<p><strong>Payment Method:</strong> Corporate Credit Card ending in 4492</p>
+<p><em>Thank you for staying with us. We hope to welcome you back soon.</em></p>
+</div>
+
+<hr style="margin: 20px 0;">
+
+<p class="passage-header"><strong>Passage 3: Email</strong></p>
+<div class="passage-content">
+<p><strong>To:</strong> Accounting Department &lt;reimbursements@vanguardlogistics.com&gt;</p>
+<p><strong>From:</strong> Sarah Jenkins &lt;s.jenkins@vanguardlogistics.com&gt;</p>
+<p><strong>Date:</strong> March 18, 2024</p>
+<p><strong>Subject:</strong> Clarification on Expense Report #TRV-8824 - Chicago Trip</p>
+<p>Dear Accounting Team,</p>
+<p>I submitted my expense report (#TRV-8824) earlier today for my recent business trip to Chicago to attend the Supply Chain Innovations Expo. I have attached all the necessary itemized receipts, including the final folio from The Wellington Hotel.</p>
+<p>I noticed that a charge was placed on my room on March 11 for minibar items. I would like to clarify that I did not consume any items from the minibar during my stay. I believe the sensors in the refrigerator may have been triggered accidentally when I was storing a beverage I purchased externally. Because my flight back was scheduled very early on the 13th, I did not have time to dispute this minor charge at the front desk before checking out.</p>
+<p>I understand our company policy regarding non-reimbursable expenses, so I have already deducted the $18.50 from my total requested reimbursement amount in the system. The rest of the charges, including the printing services which were necessary for the client presentation on March 12, comply with the company guidelines.</p>
+<p>Please let me know if you require any further documentation to process this report.</p>
+<p>Best regards,</p>
+<p>Sarah Jenkins<br>Senior Logistics Analyst</p>
+</div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        【第一篇：公司政策】Vanguard Logistics Inc. 的公司差旅與費用政策。生效日期：2024年1月1日。政策規定員工需預訂舒適且具成本效益的住宿，且每晚住宿費上限為$180（不含稅）。例外情況需獲主管預先批准。公司給付標準房費、工作所需的網路費，以及每日最高$25的早餐津貼。迷你吧、電影、水療等費用為個人費用，不予報銷。所有報銷需在出差後14天內提交，超過$15的費用需附上明細收據。
+
+【第二篇：飯店收據】惠靈頓飯店（芝加哥市中心）開給 Sarah Jenkins 的收據。入住日期為3月10日至13日，共三晚。每晚房費為$165，加上稅金。3月11日有一筆$18.50的迷你吧飲料與零食費用。3月12日有$12的商務中心列印服務費。3月13日有$22的自助早餐費。總金額為$631.65，以公司信用卡支付。
+
+【第三篇：電子郵件】Sarah Jenkins 發給會計部門的信件。她說明已提交芝加哥出差的報銷申請。她特別指出3月11日收據上有一筆迷你吧費用，澄清她並未消費，可能是存放自行購買的飲料時誤觸感測器。因班機太早，她來不及向櫃檯爭議此費用。她了解公司政策，因此在申請報銷時已主動扣除該筆$18.50的費用。她也說明列印費是為了客戶簡報所需，符合政策。
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 191 題 | 核心考點：Information Retrieval (難易度：Easy)</div>
+                <div class="question-text">Q191. What is the maximum amount the company will pay for a hotel room per night before taxes?</div>
+                <table class="options-table">
+            <tr><td>(A) $15</td><td>(B) $25</td></tr>
+            <tr><td>(C) $165</td><td class="correct-option">(D) $180 <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">公司每晚支付的飯店房費最高限額（稅前）是多少？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail Question<br>
+                        <strong>2. 核心判定：</strong>根據公司政策（Passage 1），「The maximum allowable rate for lodging is $180 per night, excluding applicable local and state taxes (住宿的最高允許費率為每晚 180 美元，不包括適用的地方和州稅)」，故選 (D)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 是需要附收據的最低門檻；(B) 是早餐津貼上限；(C) 是 Sarah 實際住宿的房價。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 192 題 | 核心考點：Cross-Referencing (難易度：Hard)</div>
+                <div class="question-text">Q192. Which charge on the hotel receipt violates the Vanguard Logistics Inc. travel policy?</div>
+                <table class="options-table">
+            <tr><td>(A) Room Charge (Corporate Rate)</td><td class="correct-option">(B) In-Room Minibar - Bottled Water & Snacks <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) Business Center - Printing Services</td><td>(D) Breakfast Buffet - Cafe Wellington</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">飯店收據上的哪一筆費用違反了 Vanguard Logistics Inc. 的差旅政策？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Cross-referencing Question<br>
+                        <strong>2. 核心判定：</strong>根據公司政策（Passage 1），「Expenses such as minibar purchases... are considered personal expenses and will not be reimbursed (迷你吧消費等費用被視為個人費用，不予報銷)」。收據（Passage 2）上有一筆 3月11日的「In-Room Minibar (客房迷你吧)」費用，這違反了報銷政策，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 房費$165低於$180上限；(C) 政策未明文禁止，且信件中說明是工作所需；(D) 早餐費$22低於津貼上限$25。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 193 題 | 核心考點：Inference (難易度：Medium)</div>
+                <div class="question-text">Q193. Why didn't Ms. Jenkins resolve the billing error at the hotel?</div>
+                <table class="options-table">
+            <tr><td>(A) She was unaware of the company's reimbursement rules.</td><td>(B) She did not receive a physical copy of her receipt.</td></tr>
+            <tr><td class="correct-option">(C) She had an early morning departure flight. <span class="badge-correct">正確答案</span></td><td>(D) She could not find a staff member at the front desk.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">為什麼 Jenkins 女士沒有在飯店解決帳單錯誤？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail/Inference Question<br>
+                        <strong>2. 核心判定：</strong>在電子郵件（Passage 3）中，Sarah 解釋「Because my flight back was scheduled very early on the 13th, I did not have time to dispute this minor charge at the front desk before checking out (因為我13日的返程班機排得很早，所以我沒有時間在退房前在櫃檯爭議這筆小費用)」，這對應選項 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 信中明確表示她了解公司政策；(B) 她有附上詳細的 folio (明細收據)；(D) 文章未提及櫃檯無人。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 194 題 | 核心考點：Vocabulary In Context (難易度：Medium)</div>
+                <div class="question-text">Q194. In the email, the word 'dispute' in paragraph 2, is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) contest <span class="badge-correct">正確答案</span></td><td>(B) approve</td></tr>
+            <tr><td>(C) calculate</td><td>(D) pay</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在電子郵件第二段中，單字「dispute」最接近的意思是</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Vocabulary Question<br>
+                        <strong>2. 核心判定：</strong>信件中的 dispute this minor charge 意思是「對這筆小額費用提出異議 / 爭論」。contest 在此也是「質疑、提出異議」的意思，為最佳同義詞。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 批准、(C) 計算、(D) 支付，皆不符合語境，因為她是不認同這筆費用的。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 195 題 | 核心考點：Cross-Referencing (難易度：Hard)</div>
+                <div class="question-text">Q195. What is the total amount that Ms. Jenkins is likely requesting for reimbursement?</div>
+                <table class="options-table">
+            <tr><td>(A) $631.65</td><td class="correct-option">(B) $613.15 <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) $609.65</td><td>(D) $601.15</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Jenkins 女士可能會要求報銷的總金額是多少？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Cross-referencing/Math Question<br>
+                        <strong>2. 核心判定：</strong>收據（Passage 2）的總金額為 $631.65。在電子郵件（Passage 3）中，Sarah 說明因為迷你吧是誤觸且不符公司政策，所以「I have already deducted the $18.50 from my total requested reimbursement amount (我已經從要求的報銷總額中扣除了$18.50)」。計算：631.65 - 18.50 = 613.15。故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 是未扣除的原始總額；(C)、(D) 是計算錯誤的數字。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">Lodging</td><td class="vocab-pos">n.</td><td class="vocab-meaning">住宿</td></tr><tr><td class="vocab-word">Incidental</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">附帶的；次要的</td></tr><tr><td class="vocab-word">Reimburse</td><td class="vocab-pos">v.</td><td class="vocab-meaning">報銷；償還</td></tr><tr><td class="vocab-word">Itemized</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">詳細列出的；逐項的</td></tr><tr><td class="vocab-word">Folio</td><td class="vocab-pos">n.</td><td class="vocab-meaning">（飯店的）對帳單；明細表</td></tr><tr><td class="vocab-word">Dispute</td><td class="vocab-pos">v.</td><td class="vocab-meaning">爭論；對...提出異議</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 15 | Questions 196 through 200 refer to the following art gallery webpage, invitation email, and questionnaire. (第196至200題與下列畫廊網頁、邀請電子郵件以及問卷有關。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="reading-passage-container">
+<p class="passage-header"><strong>Passage 1: Art Gallery Webpage</strong></p>
+<div class="passage-content">
+<h2 style="text-align:center;">Lumina Contemporary Arts Gallery</h2>
+<h3 style="text-align:center; color: #555;">Upcoming Exhibition: <em>"Urban Echoes"</em></h3>
+<p><strong>Exhibition Dates:</strong> May 5 – June 20</p>
+<p><strong>Featured Artist:</strong> Marcus Vane</p>
+<p>Lumina Contemporary is proud to present <em>"Urban Echoes,"</em> the highly anticipated solo exhibition by award-winning sculptor and multimedia artist Marcus Vane. Vane’s latest collection explores the intersection of industrial architecture and organic forms, utilizing reclaimed steel, blown glass, and interactive light projections to create immersive environments.</p>
+<p><strong>Exhibition Highlights:</strong></p>
+<ul>
+  <li><strong>The Steel Canopy:</strong> A massive kinetic sculpture that responds to ambient room noise, slowly shifting its form as visitors move through the space.</li>
+  <li><strong>Refracted Cityscapes:</strong> A series of 15 glass installations that manipulate light to project silhouettes of global city skylines against the gallery walls.</li>
+  <li><strong>Artist Talk & Demonstration:</strong> Join us on May 15 at 2:00 PM in the gallery auditorium. Marcus Vane will discuss his creative process and demonstrate his metal-welding techniques. (Free with standard gallery admission; limited seating available).</li>
+</ul>
+<p><strong>General Admission:</strong> $15 for adults, $10 for seniors/students. Gallery Members enter for free. <br>
+<strong>Operating Hours:</strong> Tuesday – Sunday, 10:00 AM to 6:00 PM. Closed Mondays.</p>
+<p><em>To purchase tickets or inquire about group tours, please click the link below or contact our box office at 555-0192.</em></p>
+</div>
+
+<hr style="margin: 20px 0;">
+
+<p class="passage-header"><strong>Passage 2: Invitation Email</strong></p>
+<div class="passage-content">
+<p><strong>To:</strong> Eleanor Vance &lt;e.vance_art@mail.com&gt;</p>
+<p><strong>From:</strong> Lumina Gallery Membership Team &lt;members@luminacontemporary.org&gt;</p>
+<p><strong>Date:</strong> April 25</p>
+<p><strong>Subject:</strong> Exclusive VIP Preview - "Urban Echoes" by Marcus Vane</p>
+<p>Dear Ms. Vance,</p>
+<p>As a valued Platinum Member of the Lumina Contemporary Arts Gallery, you have been a cornerstone of our artistic community for over five years. As a token of our appreciation, we are thrilled to invite you to an exclusive VIP Preview of our upcoming exhibition, <em>"Urban Echoes"</em> by Marcus Vane, before it opens to the general public.</p>
+<p><strong>VIP Preview Event Details:</strong></p>
+<ul>
+  <li><strong>Date:</strong> Thursday, May 3</li>
+  <li><strong>Time:</strong> 6:30 PM to 9:00 PM</li>
+  <li><strong>Location:</strong> Main Exhibition Hall, Lumina Gallery</li>
+</ul>
+<p>During this private evening, you will have the opportunity to view the installations in an intimate setting, enjoy complimentary hors d'oeuvres and wine, and converse personally with Marcus Vane. Furthermore, VIP attendees will have priority access to purchase selected smaller glass pieces from the "Refracted Cityscapes" series before they are made available to the public.</p>
+<p>Please RSVP by April 30 by replying to this email or calling our membership concierge desk. You are welcome to bring one guest.</p>
+<p>We look forward to sharing this spectacular evening with you.</p>
+<p>Sincerely,</p>
+<p>Julian Rossi<br>Director of Membership and Patronage<br>Lumina Contemporary Arts Gallery</p>
+</div>
+
+<hr style="margin: 20px 0;">
+
+<p class="passage-header"><strong>Passage 3: Questionnaire</strong></p>
+<div class="passage-content">
+<h2 style="text-align:center;">Lumina VIP Event Questionnaire</h2>
+<p>Thank you for attending the VIP Preview of <em>"Urban Echoes"</em> on May 3. Your feedback helps us curate better experiences for our top patrons.</p>
+<p><strong>Name:</strong> Eleanor Vance</p>
+<p><strong>1. How would you rate the overall atmosphere of the preview event? (1-5)</strong><br>
+<em>Rating: 5</em> - The lighting was superb, and the catering was exceptional.</p>
+<p><strong>2. Which artwork or installation was the highlight of your evening?</strong><br>
+<em>Response:</em> I was absolutely mesmerized by the large kinetic piece that changed shape based on the sound in the room. It was fascinating to see how the collective conversations of the guests physically altered the artwork in real-time. I spent almost half an hour just watching it.</p>
+<p><strong>3. Did you interact with the featured artist?</strong><br>
+<em>Response:</em> Yes, very briefly. Mr. Vane was incredibly gracious, though there was quite a crowd around him most of the night. I do plan to return in mid-May to hear him speak more formally about his methods, as I am very interested in metalwork.</p>
+<p><strong>4. Did you purchase any artwork during the event?</strong><br>
+<em>Response:</em> Yes, I took advantage of the early access and purchased a stunning piece featuring the skyline of Tokyo from the glass installation series. I'm excited to have it delivered to my home.</p>
+<p><strong>5. Any suggestions for future VIP events?</strong><br>
+<em>Response:</em> Perhaps spacing out the catering stations. They were all clustered near the entrance, which created a bottleneck early in the evening. Otherwise, it was a flawless event.</p>
+</div>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        【第一篇：畫廊網頁】Lumina 當代藝術畫廊的即將展出資訊：「Urban Echoes（城市迴聲）」。展期：5月5日至6月20日。特色藝術家為得獎雕塑家與多媒體藝術家 Marcus Vane。展出亮點包含「The Steel Canopy（鋼鐵天篷）」（會根據環境噪音改變形狀的動力雕塑）、「Refracted Cityscapes（折射的城市景觀）」（投影城市天際線的玻璃裝置），以及5月15日的藝術家講座與金屬焊接示範。
+
+【第二篇：邀請函電子郵件】畫廊會員團隊發給白金會員 Eleanor Vance 的信件。邀請她參加5月3日晚上的「Urban Echoes」專屬 VIP 預覽活動，這是在對公眾開放前舉辦的。活動提供酒水點心，並有機會與藝術家親自交談，還能優先購買「折射的城市景觀」系列的特定玻璃作品。要求在4月30日前回覆。
+
+【第三篇：問卷】Eleanor Vance 填寫的 VIP 活動問卷。她給整體氣氛打了最高分。她提到最讓她著迷的是會根據聲音改變形狀的大型動力裝置（對應 The Steel Canopy）。她表示有短暫與藝術家交流，並計畫在五月中旬回去聽他更正式地講解金屬工藝方法。她也利用優先購買權，買了一件呈現東京天際線的玻璃作品。最後建議未來可以分散餐飲區的位置以避免擁擠。
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                <div class="section-main-title">📝 題型練習與深度解析</div>
+                
+            <div class="question-item">
+                <div class="question-item-header">第 196 題 | 核心考點：Information Retrieval (難易度：Easy)</div>
+                <div class="question-text">Q196. What is indicated about the exhibition "Urban Echoes" on the webpage?</div>
+                <table class="options-table">
+            <tr><td>(A) It features historical oil paintings.</td><td>(B) It runs from May 3 to June 20.</td></tr>
+            <tr><td class="correct-option">(C) It includes interactive and multimedia elements. <span class="badge-correct">正確答案</span></td><td>(D) It is open every day of the week.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">關於網頁上的「城市迴聲」展覽，提到了什麼？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail Question<br>
+                        <strong>2. 核心判定：</strong>網頁（Passage 1）提到 Marcus Vane 是一位 multimedia artist，且展覽包含 interactive light projections 以及 kinetic sculpture 等元素，故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 展出的是雕塑、玻璃與燈光，非油畫；(B) 展期是 5月5日至6月20日（5月3日是VIP活動）；(D) 畫廊週一休館 (Closed Mondays)。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 197 題 | 核心考點：Information Retrieval (難易度：Medium)</div>
+                <div class="question-text">Q197. According to the email, what benefit is offered exclusively to VIP attendees at the preview?</div>
+                <table class="options-table">
+            <tr><td>(A) Free standard gallery admission for a year</td><td class="correct-option">(B) Priority access to buy certain glass sculptures <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) A complimentary metal-welding class</td><td>(D) A private tour guided by the gallery director</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">根據電子郵件，VIP 參加者在預覽會上獨享什麼好處？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Detail Question<br>
+                        <strong>2. 核心判定：</strong>信件（Passage 2）第二段明確指出：「VIP attendees will have priority access to purchase selected smaller glass pieces... before they are made available to the public (VIP 出席者將有優先購買權，能搶在公眾前購買特定的玻璃作品)」，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) VIP 本來就是會員，已有免票權益；(C) 只有提到金屬焊接的示範(demonstration)，不是課程；(D) 信件未提及總監私人導覽。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 198 題 | 核心考點：Cross-Referencing (難易度：Hard)</div>
+                <div class="question-text">Q198. In the questionnaire, which artwork does Ms. Vance say she was mesmerized by?</div>
+                <table class="options-table">
+            <tr><td>(A) Refracted Cityscapes</td><td class="correct-option">(B) The Steel Canopy <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) The Tokyo Skyline</td><td>(D) The Ambient Room</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在問卷中，Vance 女士說她對哪一件藝術品著迷？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Cross-referencing Question<br>
+                        <strong>2. 核心判定：</strong>在問卷（Passage 3）中，Vance 提到她最著迷的是「the large kinetic piece that changed shape based on the sound in the room (根據房間聲音改變形狀的大型動力裝置)」。對照網頁（Passage 1）的介紹，這件作品的名稱是「The Steel Canopy」，故選 (B)。<br>
+                        <strong>3. 干擾項排除：</strong>(A)、(C) 是她購買的玻璃作品系列名稱或主題，並非讓她看了半小時著迷的動力裝置；(D) ambient room noise 是裝置感應的對象，不是作品名稱。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 199 題 | 核心考點：Vocabulary In Context (難易度：Medium)</div>
+                <div class="question-text">Q199. In the email, the word 'cornerstone' in paragraph 1, is closest in meaning to</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) foundation <span class="badge-correct">正確答案</span></td><td>(B) observer</td></tr>
+            <tr><td>(C) critic</td><td>(D) obstacle</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在電子郵件第一段中，單字「cornerstone」最接近的意思是</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Vocabulary Question<br>
+                        <strong>2. 核心判定：</strong>信件中寫道：「you have been a cornerstone of our artistic community (您一直是我們藝術社群的 cornerstone)」。cornerstone 原意為基石，引申為重要基礎、核心支柱，最接近的詞是 foundation（基礎）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 觀察者、(C) 評論家、(D) 障礙，皆不符合讚美會員重要性的語境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 200 題 | 核心考點：Cross-Referencing (難易度：Hard)</div>
+                <div class="question-text">Q200. When does Ms. Vance most likely plan to return to the Lumina Gallery?</div>
+                <table class="options-table">
+            <tr><td>(A) On April 30</td><td>(B) On May 3</td></tr>
+            <tr><td class="correct-option">(C) On May 15 <span class="badge-correct">正確答案</span></td><td>(D) On June 20</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Vance 女士最有可能計畫在什麼時候回到 Lumina 畫廊？</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Cross-referencing/Inference Question<br>
+                        <strong>2. 核心判定：</strong>在問卷（Passage 3）的第3題中，Vance 回覆說她計畫在五月中旬回去「to hear him speak more formally about his methods (聽他更正式地講解他的方法)」。對照網頁（Passage 1）的活動資訊，Marcus Vane 的「Artist Talk & Demonstration (藝術家講座與示範)」舉辦日期是 May 15，故選 (C)。<br>
+                        <strong>3. 干擾項排除：</strong>(A) 是 RSVP(回覆參加) 的截止日；(B) 是 VIP 預覽會當天，她已經參加過了；(D) 是展覽結束日。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                <div class="section-main-title">📚 本篇核心單字彙整</div>
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">Anticipated</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">備受期待的</td></tr><tr><td class="vocab-word">Intersection</td><td class="vocab-pos">n.</td><td class="vocab-meaning">交集；交叉點</td></tr><tr><td class="vocab-word">Kinetic</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">動態的；運動的</td></tr><tr><td class="vocab-word">Complimentary</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">免費贈送的</td></tr><tr><td class="vocab-word">Mesmerized</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">入迷的；被催眠的</td></tr><tr><td class="vocab-word">Bottleneck</td><td class="vocab-pos">n.</td><td class="vocab-meaning">瓶頸；擁擠堵塞處</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 TEST 11 PART 7 核心考點</div>
+        <ul class="expert-list">
+            <li><strong>多重文本交叉比對能力：</strong>本回測驗要求考生在 Triple Passage 中進行高強度的資訊整合。例如必須在問卷中找出主觀描述（如「會因為聲音改變的裝置」），再回頭去網頁介紹中對應出該作品的確切名稱；或是根據信件中提到的政策例外情況（自行購買飲料被感應器誤判），推算出最終正確的報銷金額。</li><li><strong>同義詞替換與語境推敲（Vocabulary in Context）：</strong>考驗考生在特定語境中理解單字的意思。例如「strained」在此處並非指受傷，而是指系統頻寬「超載 (overloaded)」；「dispute」在此非指激烈的爭吵，而是對帳單「提出異議 (contest)」。</li><li><strong>時間與事件的邏輯推演：</strong>考生需能透過信件或問卷中的時間線索（如「五月中旬回去聽演講」、「我的班機在13號很早」），對照日程表或收據上的具體日期與時間點，推斷出人物的確切行程或未完成某些行為的原因。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

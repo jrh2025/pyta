@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-right {
+        content: counter(page);
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+    @bottom-left {
+        content: "新多益 (NEW TOEIC) 閱讀精準複習筆記 - Test 11 Part 6 短文填空";
+        font-family: Arial, "Microsoft JhengHei", sans-serif;
+        font-size: 8.5pt;
+        color: #718096;
+    }
+}
+body {
+    margin: 0; padding: 0;
+    font-family: Arial, "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+    color: #2d3748; line-height: 1.5; font-size: 10pt;
+    background-color: #ffffff;
+}
+.header-container { 
+    border-bottom: 3px solid #1a365d; 
+    padding-bottom: 8px;
+    margin-bottom: 20px; 
+}
+h1 { color: #1a365d; font-size: 18pt; margin: 0 0 4px 0; font-weight: bold; }
+.subtitle { color: #4a5568; font-size: 10pt; margin: 0; font-style: italic; }
+
+.passage-block { 
+    page-break-inside: avoid; 
+    margin-bottom: 30px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    background-color: #ffffff; 
+    overflow: hidden; 
+}
+.passage-header { 
+    background-color: #1a365d; 
+    color: #ffffff; 
+    padding: 8px 12px;
+    font-weight: bold; 
+    font-size: 10pt; 
+}
+
+.passage-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 10px 0; 
+}
+.passage-table td { 
+    vertical-align: top; 
+    width: 50%; 
+    padding: 0 12px; 
+}
+.column-title {
+    font-weight: bold;
+    color: #2c5282;
+    border-bottom: 1.5px solid #2c5282;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    font-size: 9pt;
+    text-transform: uppercase;
+}
+.passage-en { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 10.5pt; 
+    line-height: 1.5; 
+    color: #1a202c; 
+    border-right: 1.5px dashed #e2e8f0;
+    padding-right: 12px !important;
+    text-align: justify;
+}
+.blank-line {
+    font-weight: bold;
+    color: #2b6cb0;
+    text-decoration: underline;
+}
+.passage-zh { 
+    font-family: Arial, "Microsoft JhengHei", sans-serif; 
+    font-size: 9.5pt; 
+    line-height: 1.55; 
+    color: #4a5568; 
+    padding-left: 12px !important;
+    text-align: justify;
+}
+
+.questions-section {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding: 12px;
+}
+.question-item {
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #cbd5e1;
+    padding-bottom: 12px;
+}
+.question-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.question-item-header {
+    font-weight: bold;
+    color: #1a365d;
+    font-size: 9pt;
+    margin-bottom: 6px;
+}
+
+.options-table { 
+    width: 100%; 
+    margin-bottom: 6px; 
+    border-collapse: collapse; 
+}
+.options-table td { 
+    width: 50%; 
+    padding: 4px 6px; 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 9.5pt; 
+    color: #4a5568; 
+}
+.correct-option { 
+    font-weight: bold; 
+    color: #2f855a !important; 
+}
+.badge-correct { 
+    display: inline-block; 
+    background-color: #c6f6d5; 
+    color: #22543d;
+    font-size: 7.5pt; 
+    padding: 1px 4px; 
+    border-radius: 3px; 
+    font-family: "Microsoft JhengHei", sans-serif; 
+    margin-left: 4px; 
+    vertical-align: middle; 
+}
+
+.explanation-box {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-left: 3px solid #1a365d;
+    padding: 8px 10px;
+    margin-top: 6px;
+    font-size: 8.5pt;
+    border-radius: 4px;
+}
+.exp-title {
+    font-weight: bold;
+    color: #2c5282;
+    margin-bottom: 3px;
+}
+.exp-translation {
+    color: #4a5568;
+    margin-bottom: 6px;
+    font-style: italic;
+}
+.exp-detail {
+    color: #2d3748;
+    line-height: 1.45;
+}
+
+.passage-vocab-section {
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
+    background-color: #ffffff;
+}
+.vocab-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.vocab-table th {
+    background-color: #f1f5f9;
+    color: #475569;
+    font-weight: bold;
+    font-size: 8.5pt;
+    padding: 5px 6px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.vocab-table tr:nth-child(even) { 
+    background-color: #f8fafc; 
+}
+.vocab-table td { 
+    padding: 4px 6px; 
+    font-size: 8.5pt; 
+    border: 1px solid #e2e8f0; 
+}
+.vocab-word { 
+    font-weight: bold; 
+    font-family: "Times New Roman", Times, serif; 
+    color: #1a365d; 
+}
+.vocab-pos { 
+    font-style: italic; 
+    color: #64748b; 
+}
+.vocab-meaning { 
+    color: #334155; 
+}
+
+.expert-summary { 
+    page-break-inside: avoid; 
+    margin-top: 20px; 
+    padding: 12px;
+    background-color: #ebf8ff; 
+    border: 1px solid #bee3f8; 
+    border-radius: 8px; 
+}
+.expert-title { 
+    color: #2b6cb0; 
+    font-weight: bold; 
+    font-size: 10pt; 
+    margin-bottom: 6px; 
+}
+.expert-list { 
+    margin: 0; 
+    padding-left: 15px; 
+    font-size: 8.5pt; 
+    color: #2d3748; 
+    line-height: 1.45;
+}
+.expert-list li { 
+    margin-bottom: 5px; 
+}
+</style>
+</head>
+<body>
+<div class="header-container">
+    <h1>新多益 (NEW TOEIC) 閱讀特訓</h1>
+    <div class="subtitle">單元：TEST 11 - PART 6 短文填空精選解析 (第 131 – 146 題)</div>
+</div>
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 1 | Questions 131-134 refer to the following e-mail. (131-134 題參照以下電子郵件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>To:</b> Creative Department &lt;creative@zenitharts.com&gt;<br>
+    <b>From:</b> Human Resources &lt;hr@zenitharts.com&gt;<br>
+    <b>Date:</b> March 12<br>
+    <b>Subject:</b> Welcoming Liam Kinsley
+  </p>
+  <p class="mb-2">Dear Team,</p>
+  <p class="mb-2">I am thrilled to announce that Liam Kinsley <b>131. (_______)</b> our team as the new Graphic Design Lead starting next Monday. Liam comes to us with over ten years of experience in digital media. He <b>132. (_______)</b> worked at a major advertising firm, where he spearheaded several award-winning campaigns.</p>
+  <p class="mb-2"><b>133. (_______)</b>. Please make sure to <b>134. (_______)</b> to introduce yourselves and make him feel welcome.</p>
+  <p class="mb-2">Best regards,</p>
+  <p>Jessica Sterling<br>HR Director</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="email-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="meta mb-2">
+    <b>收件者：</b>創意部 &lt;creative@zenitharts.com&gt;<br>
+    <b>寄件者：</b>人力資源部 &lt;hr@zenitharts.com&gt;<br>
+    <b>日期：</b>3 月 12 日<br>
+    <b>主旨：</b>歡迎 Liam Kinsley
+  </p>
+  <p class="mb-2">親愛的團隊：</p>
+  <p class="mb-2">我很高興地宣布，Liam Kinsley 從下週一開始 <b>[131]</b> 我們的團隊，擔任新的平面設計主管。Liam 帶著超過十年的數位媒體經驗來到我們這裡。他 <b>[132]</b> 曾在一家大型廣告公司工作，在那裡他領導了幾個屢獲殊榮的活動。</p>
+  <p class="mb-2"><b>[133]</b>。請務必 <b>[134]</b> 來介紹你們自己，讓他感到賓至如歸。</p>
+  <p class="mb-2">致上最誠摯的問候，</p>
+  <p>Jessica Sterling<br>人力資源總監</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 131 題 | 核心考點：時態判定 - 未來式 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) joined</td><td>(B) has joined</td></tr>
+            <tr><td class="correct-option">(C) will join <span class="badge-correct">正確答案</span></td><td>(D) was joining</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">Liam Kinsley 從下週一開始將加入我們的團隊。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>Liam Kinsley (主詞) + _______ (動詞) + our team... + starting next Monday (未來時間)。<br>
+                        <strong>2. 核心判定：</strong>句子後半部有 starting next Monday（從下週一開始），表示未來的動作，因此應選擇未來式 will join。<br>
+                        <strong>3. 干擾項排除：</strong>(A) joined 為過去式，(B) has joined 為現在完成式，(D) was joining 為過去進行式，均不符合未來時間的語境。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 132 題 | 核心考點：詞性判定 - 副詞修飾動詞 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td>(A) previous</td><td class="correct-option">(B) previously <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) preview</td><td>(D) previse</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">他先前曾在一家大型廣告公司工作。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>He (主詞) + _______ (副詞) + worked (動詞)。<br>
+                        <strong>2. 核心判定：</strong>空格處修飾過去式動詞 worked，需要使用副詞 previously（先前地）。<br>
+                        <strong>3. 干擾項排除：</strong>(A) previous 為形容詞，(C) preview 為名詞/動詞（預覽），(D) previse 為動詞（預見）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 133 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) A welcome luncheon will be held in the main breakroom at noon on Monday. <span class="badge-correct">正確答案</span></td><td>(B) All computers must be updated by the IT department tomorrow.</td></tr>
+            <tr><td>(C) The advertising budget for the next quarter has been approved.</td><td>(D) Please submit your timesheets before the end of the week.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">週一中午將在主休息室舉行歡迎午餐會。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>前文介紹新員工的背景，後文請大家去自我介紹，中間插入歡迎活動最為合適。<br>
+                        <strong>2. 核心判定：</strong>選項 (A) 提到為新員工舉辦「歡迎午餐會 (welcome luncheon)」，與上下文的迎新主題完美契合。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 電腦更新、(C) 廣告預算、(D) 提交工時表，皆與歡迎新進員工的情境無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 134 題 | 核心考點：片語動詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) drop out</td><td>(B) drop off</td></tr>
+            <tr><td class="correct-option">(C) drop by <span class="badge-correct">正確答案</span></td><td>(D) drop down</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">請務必順道過來介紹你們自己。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>make sure to + _______ (片語動詞) + to introduce yourselves.<br>
+                        <strong>2. 核心判定：</strong>drop by 是慣用片語，意指「順道拜訪、過去一下」，符合請同事過去打招呼的語境。<br>
+                        <strong>3. 干擾項排除：</strong>(A) drop out 退出/輟學，(B) drop off 卸下/減少，(D) drop down 落下。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">spearhead</td><td class="vocab-pos">v.</td><td class="vocab-meaning">擔任先鋒，領導</td></tr><tr><td class="vocab-word">luncheon</td><td class="vocab-pos">n.</td><td class="vocab-meaning">午餐會</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 2 | Questions 135-138 refer to the following notice. (135-138 題參照以下公告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Horizon Towers - Facade Renovation</h4>
+  <p class="mb-2">To all residents of Horizon Towers:</p>
+  <p class="mb-2">Please be advised that the building management <b>135. (_______)</b> Alpine Services to clean the exterior windows. The cleaning process is scheduled to take place from October 10 to October 15.</p>
+  <p class="mb-2"><b>136. (_______)</b>. For your privacy, we strongly recommend keeping your blinds <b>137. (_______)</b> while the workers are operating on your floor. We appreciate your <b>138. (_______)</b> as we maintain the building’s pristine appearance.</p>
+  <p class="text-xs">Building Management Team</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-1">Horizon Towers - 外牆翻新公告</h4>
+  <p class="mb-2">致 Horizon Towers 的所有住戶：</p>
+  <p class="mb-2">請注意，大樓管理處 <b>[135]</b> Alpine Services 公司來清潔外牆窗戶。清潔過程預計於 10 月 10 日至 10 月 15 日進行。</p>
+  <p class="mb-2"><b>[136]</b>。為了您的隱私，我們強烈建議當工人在您所在的樓層作業時，保持您的百葉窗 <b>[137]</b>。在我們維護大樓整潔外觀的同時，感謝您的 <b>[138]</b>。</p>
+  <p class="text-xs">大樓管理團隊</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 135 題 | 核心考點：時態與語態 - 現在完成式 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) contract</td><td>(B) contractor</td></tr>
+            <tr><td class="correct-option">(C) has contracted <span class="badge-correct">正確答案</span></td><td>(D) is contracted</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">大樓管理處已聘約 Alpine Services 公司來清潔外牆窗戶。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>the building management (主詞) + _______ (主動動詞) + Alpine Services (受詞)。<br>
+                        <strong>2. 核心判定：</strong>「管理處已經簽約」是主動動作，且動作對現在有影響（即將進行清潔），使用現在完成式 has contracted。<br>
+                        <strong>3. 干擾項排除：</strong>(A) contract 主詞是單數不一致，(B) contractor 為名詞，(D) is contracted 為被動態，此處管理處是主動簽約。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 136 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) During this time, workers will be suspended from the roof using scaffolding. <span class="badge-correct">正確答案</span></td><td>(B) The fitness center will be closed for routine equipment checks.</td></tr>
+            <tr><td>(C) Please ensure your parking fees are paid by the fifth of the month.</td><td>(D) Residents can vote for the new lobby furniture design online.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在此期間，工人將使用鷹架從屋頂懸吊下來。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>前文提到外窗清潔的日期，後文提到建議拉上百葉窗以保隱私，中間應解釋為什麼會有隱私問題。<br>
+                        <strong>2. 核心判定：</strong>選項 (A) 提到工人會懸吊在窗外作業，完美解釋了後文「為了您的隱私，建議拉上百葉窗」的原因。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 健身房關閉、(C) 繳納停車費、(D) 投票選大廳傢俱，皆與洗窗工程無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 137 題 | 核心考點：分詞當受詞補語 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) draw</td><td>(B) drew</td></tr>
+            <tr><td>(C) drawing</td><td class="correct-option">(D) drawn <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們強烈建議保持您的百葉窗拉上。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>keep (動詞) + your blinds (受詞) + _______ (過去分詞作受詞補語)。<br>
+                        <strong>2. 核心判定：</strong>keep + O. + O.C. 的句型中，百葉窗 (blinds) 是「被拉上」，因此使用過去分詞 drawn 充當形容詞使用。<br>
+                        <strong>3. 干擾項排除：</strong>(A) draw 原形動詞，(B) drew 過去式，(C) drawing 現在分詞（表主動）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 138 題 | 核心考點：商務字彙 - 名詞語意 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) cooperation <span class="badge-correct">正確答案</span></td><td>(B) compliant</td></tr>
+            <tr><td>(C) operations</td><td>(D) cooperative</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">在我們維護大樓整潔外觀的同時，感謝您的配合。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>appreciate + your (所有格) + _______ (名詞)。<br>
+                        <strong>2. 核心判定：</strong>「感謝您的配合」是商業與公告信件的標準客套用語，對應的名詞為 cooperation。<br>
+                        <strong>3. 干擾項排除：</strong>(B) compliant 為形容詞（順從的），(C) operations 為營運/操作，(D) cooperative 為形容詞或名詞（合作社）。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">scaffolding</td><td class="vocab-pos">n.</td><td class="vocab-meaning">鷹架，施工架</td></tr><tr><td class="vocab-word">pristine</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">原始的，嶄新的，未受破壞的</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 3 | Questions 139-142 refer to the following letter. (139-142 題參照以下信件。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="mb-2">Dear Ms. Aris,</p>
+  <p class="mb-2">I am writing to sincerely apologize for the delay in fulfilling your order of custom ceramic vases. Due to an unexpected <b>139. (_______)</b> of the specific clay required for your design, our production schedule was temporarily disrupted.</p>
+  <p class="mb-2"><b>140. (_______)</b>, we have now received the necessary materials from our supplier. <b>141. (_______)</b>. We will ship your order via express courier at no additional <b>142. (_______)</b> to you to make up for the wait.</p>
+  <p class="mb-2">Thank you for your patience and understanding.</p>
+  <p>Sincerely,<br>Marcus Dunn<br>Artisan Ceramics</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <p class="mb-2">親愛的 Aris 女士：</p>
+  <p class="mb-2">我寫信是為了對延遲完成您的客製化陶瓷花瓶訂單表達誠摯的歉意。由於您的設計所需的特定黏土出現意外的 <b>[139]</b>，我們的生產進度暫時被中斷。</p>
+  <p class="mb-2"><b>[140]</b>，我們現在已經從供應商那裡收到了必要的材料。<b>[141]</b>。我們將透過快遞寄送您的訂單，不會向您收取額外的 <b>[142]</b>，以彌補您的等待。</p>
+  <p class="mb-2">感謝您的耐心與體諒。</p>
+  <p>謹啟，<br>Marcus Dunn<br>Artisan Ceramics</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 139 題 | 核心考點：詞性判定 - 名詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) short</td><td class="correct-option">(B) shortage <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) shortly</td><td>(D) shorten</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">由於您的設計所需的特定黏土出現意外的短缺。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>an unexpected (形容詞) + _______ (名詞) + of the specific clay.<br>
+                        <strong>2. 核心判定：</strong>空格前為形容詞 unexpected，空格應填入名詞。表示「原物料短缺」的名詞為 shortage。<br>
+                        <strong>3. 干擾項排除：</strong>(A) short 形容詞，(C) shortly 副詞，(D) shorten 動詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 140 題 | 核心考點：連接副詞 - 語氣轉折 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Fortunately <span class="badge-correct">正確答案</span></td><td>(B) Furthermore</td></tr>
+            <tr><td>(C) Instead</td><td>(D) Similarly</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">幸運的是，我們現在已經收到了必要的材料。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>_______ (轉折副詞), we have now received...<br>
+                        <strong>2. 核心判定：</strong>前一段提到面臨材料短缺的困境，這一段提到「已經收到材料」解決了問題，帶有慶幸的語氣，應選 Fortunately（幸運地）。<br>
+                        <strong>3. 干擾項排除：</strong>(B) Furthermore 此外，(C) Instead 反而，(D) Similarly 相似地。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 141 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) Our craftsmen are working overtime to ensure your pieces are completed by Friday. <span class="badge-correct">正確答案</span></td><td>(B) The invoice for the additional clay will be sent to your billing address.</td></tr>
+            <tr><td>(C) We have decided to discontinue this particular line of ceramic vases.</td><td>(D) You can choose to cancel your subscription at any time online.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們的工匠正在加班加點，確保您的作品在週五前完成。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>前句說材料已到，後句說會免費升級快遞寄出，中間應描述產品的趕工進度。<br>
+                        <strong>2. 核心判定：</strong>選項 (A) 提到工匠正在加班以確保週五完工，銜接了材料到達與即將發貨的邏輯。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 寄送額外材料的帳單給客戶（不合道歉與補償的語境），(C) 停產產品無關，(D) 取消訂閱無關。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 142 題 | 核心考點：商務字彙 - 名詞語意搭配 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td>(A) value</td><td>(B) price</td></tr>
+            <tr><td class="correct-option">(C) cost <span class="badge-correct">正確答案</span></td><td>(D) money</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">不會向您收取額外的費用。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>at no additional + _______ (名詞)<br>
+                        <strong>2. 核心判定：</strong>「不收取額外費用」的商務慣用語為 at no additional cost。<br>
+                        <strong>3. 干擾項排除：</strong>(A) value 價值，(B) price 價格（較少搭配 at no additional price），(D) money 錢（不正式）。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">disrupt</td><td class="vocab-pos">v.</td><td class="vocab-meaning">使中斷，擾亂</td></tr><tr><td class="vocab-word">craftsman</td><td class="vocab-pos">n.</td><td class="vocab-meaning">工匠，手藝人</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+        <div class="passage-block">
+            <div class="passage-header">篇章 4 | Questions 143-146 refer to the following advertisement. (143-146 題參照以下廣告。)</div>
+            
+            <table class="passage-table">
+                <tr>
+                    <td class="passage-en">
+                        <div class="column-title">English Passage</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-2">Transform Your Workflow with NimbusSync</h4>
+  <p class="mb-2">Are you tired of disorganized files and scattered communication? NimbusSync is a revolutionary cloud storage platform designed for modern businesses. Our new software suite will <b>143. (_______)</b> your team's efficiency by centralizing all documents in one secure location.</p>
+  <p class="mb-2">It is uniquely engineered to integrate <b>144. (_______)</b> with the daily applications you already use. <b>145. (_______)</b>. <b>146. (_______)</b> its core synchronization features, NimbusSync provides round-the-clock technical support for all premium subscribers.</p>
+  <p>Visit www.nimbussync.com to start your 30-day free trial today!</p>
+</div>
+                    </td>
+                    <td class="passage-zh">
+                        <div class="column-title">中文對照翻譯</div>
+                        <div class="ad-box border p-4 bg-slate-50 rounded mb-4 text-xs">
+  <h4 class="font-bold text-center mb-2">用 NimbusSync 改變您的工作流程</h4>
+  <p class="mb-2">您是否厭倦了雜亂無章的檔案和分散的溝通？NimbusSync 是一個專為現代企業設計的革命性雲端儲存平台。我們新的軟體套件將藉由在一個安全的位置集中所有文件，來 <b>[143]</b> 您團隊的效率。</p>
+  <p class="mb-2">它的獨特設計能與您已經在使用的日常應用程式 <b>[144]</b> 整合。<b>[145]</b>。<b>[146]</b> 其核心同步功能，NimbusSync 為所有高級訂閱者提供全天候的技術支援。</p>
+  <p>立即造訪 www.nimbussync.com 開始您的 30 天免費試用！</p>
+</div>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="questions-section">
+                
+            <div class="question-item">
+                <div class="question-item-header">第 143 題 | 核心考點：時態判定 - 助動詞後接原形 (難易度：低)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) transform <span class="badge-correct">正確答案</span></td><td>(B) transforms</td></tr>
+            <tr><td>(C) transformed</td><td>(D) transforming</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">我們新的軟體套件將改變您團隊的效率。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>will (助動詞) + _______ (原形動詞) + your team's efficiency.<br>
+                        <strong>2. 核心判定：</strong>在助動詞 will 之後，必須接上原形動詞。因此選 (A) transform。<br>
+                        <strong>3. 干擾項排除：</strong>(B) transforms 單三形式，(C) transformed 過去式/過去分詞，(D) transforming 現在分詞。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 144 題 | 核心考點：詞性判定 - 副詞修飾動詞 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) seamless</td><td class="correct-option">(B) seamlessly <span class="badge-correct">正確答案</span></td></tr>
+            <tr><td>(C) seamlessness</td><td>(D) more seamless</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">能與您已經在使用的日常應用程式無縫整合。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>integrate (動詞) + _______ (副詞) + with...<br>
+                        <strong>2. 核心判定：</strong>修飾動詞 integrate 需要使用副詞。seamlessly 意為「無縫地」，是常見的商業軟體廣告詞彙。<br>
+                        <strong>3. 干擾項排除：</strong>(A) seamless 形容詞，(C) seamlessness 名詞，(D) more seamless 形容詞比較級。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 145 題 | 核心考點：篇章插句題 (難易度：高)</div>
+                <table class="options-table">
+            <tr><td class="correct-option">(A) You can access your files from any mobile device or desktop computer. <span class="badge-correct">正確答案</span></td><td>(B) The hardware store will restock its supplies next Tuesday.</td></tr>
+            <tr><td>(C) Please remember to wear your ID badge at all times in the building.</td><td>(D) Unfortunately, the software is only compatible with outdated systems.</td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">您可以從任何行動裝置或桌上型電腦存取您的檔案。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>前句講述軟體能與日常應用程式無縫整合，後句講述提供全天候技術支援，此處應繼續補充產品的便利性與功能。<br>
+                        <strong>2. 核心判定：</strong>選項 (A) 提到跨裝置存取檔案，符合雲端軟體平台（NimbusSync）的產品特性。<br>
+                        <strong>3. 干擾項排除：</strong>(B) 五金行補貨無關、(C) 戴識別證無關、(D) 僅與過時系統相容（與廣告訴求矛盾）。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-item">
+                <div class="question-item-header">第 146 題 | 核心考點：介系詞 - 附加語氣 (難易度：中)</div>
+                <table class="options-table">
+            <tr><td>(A) Because of</td><td>(B) Instead of</td></tr>
+            <tr><td>(C) Regardless of</td><td class="correct-option">(D) In addition to <span class="badge-correct">正確答案</span></td></tr>
+            </table>
+                <div class="explanation-box">
+                    <div class="exp-title">單題中文翻譯</div>
+                    <div class="exp-translation">除了其核心同步功能外，NimbusSync 還提供全天候技術支援。</div>
+                    <div class="exp-title">解題深度邏輯</div>
+                    <div class="exp-detail">
+                        <strong>1. 結構分析：</strong>_______ (介系詞片語) + its core features, NimbusSync provides...<br>
+                        <strong>2. 核心判定：</strong>前文講述產品基本特點，後文補充額外的福利（全天候支援），表示「除了...之外，還有...」，應選 In addition to。<br>
+                        <strong>3. 干擾項排除：</strong>(A) Because of 因為，(B) Instead of 代替/而非，(C) Regardless of 不管。
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            
+            <div class="passage-vocab-section">
+                
+        <table class="vocab-table">
+            <thead>
+                <tr>
+                    <th style="width:25%">核心單字</th>
+                    <th style="width:10%">詞性</th>
+                    <th style="width:65%">中文釋義</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="vocab-word">scattered</td><td class="vocab-pos">adj.</td><td class="vocab-meaning">分散的，散亂的</td></tr><tr><td class="vocab-word">synchronization</td><td class="vocab-pos">n.</td><td class="vocab-meaning">同步</td></tr>
+            </tbody>
+        </table>
+        
+            </div>
+        </div>
+        
+
+    <div class="expert-summary">
+        <div class="expert-title">💡 TEST 11 PART 6 核心考點</div>
+        <ul class="expert-list">
+            <li><strong>時態與語態的精準判定：</strong>例如從時間副詞 starting next Monday 推導未來式 (will join)；從影響延續到現在判斷現在完成式 (has contracted)。</li><li><strong>副詞修飾動詞的應用：</strong>在商業文章中經常出現以副詞修飾動作的結構，例如 previously worked（先前工作）、integrate seamlessly（無縫整合）。</li><li><strong>商業情境必備字彙與固定搭配：</strong>如 at no additional cost（不收額外費用）、cooperation（配合）、shortage（短缺）。這些詞彙在書信與公告中極為高頻。</li><li><strong>篇章插句的邏輯連貫：</strong>作答插句題需抓住上下文的主題句與邏輯發展，例如歡迎新人的午餐會 (welcome luncheon) 或描述施工細節以解釋隱私問題。</li>
+        </ul>
+    </div>
+    
+</body>
+</html>
